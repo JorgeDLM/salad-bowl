@@ -1,12 +1,40 @@
 "use client";
 
+import { useState } from "react";
+import Image from "next/image";
+import WhatsAppModal from "../components/WhatsAppModal";
+
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPackage, setSelectedPackage] = useState<{
+    name: string;
+    price: string;
+    description: string;
+  } | undefined>(undefined);
+
+  const openModal = (packageInfo?: { name: string; price: string; description: string }) => {
+    setSelectedPackage(packageInfo);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedPackage(undefined);
+  };
+
   return (
     <>
       <header className="fixed top-0 w-full z-50 bg-slate-900/95 backdrop-blur-sm border-b border-purple-500/20">
         <div className="flex items-center justify-between max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center gap-2">
-            <a href="/" className="focus:outline-none">
+          <div className="flex items-center gap-3">
+            <a href="/" className="focus:outline-none flex items-center gap-3">
+              <Image 
+                src="/icono-welovecode.webp" 
+                alt="WeLoveCode Logo" 
+                width={40} 
+                height={40} 
+                className="rounded-lg"
+              />
               <div className="text-2xl font-black bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                 WeLoveCode
               </div>
@@ -62,9 +90,8 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             <div>
               <h4 className="font-bold mb-4">Contacto</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="mailto:hola@welovecode.dev" className="hover:text-white transition">hola@welovecode.dev</a></li>
-                <li><a href="https://wa.me/1234567890" className="hover:text-white transition">WhatsApp</a></li>
-                <li><a href="#" className="hover:text-white transition">LinkedIn</a></li>
+                <li><a href="mailto:hola@welovecode.mx" className="hover:text-white transition">hola@welovecode.mx</a></li>
+                <li><button onClick={() => openModal()} className="hover:text-white transition text-left">WhatsApp</button></li>
               </ul>
             </div>
           </div>
@@ -73,6 +100,13 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
           </div>
         </div>
       </footer>
+      
+      {/* WhatsApp Modal */}
+      <WhatsAppModal 
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        selectedPackage={selectedPackage}
+      />
     </>
   );
 }

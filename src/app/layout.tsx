@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     description: "Convertimos tu idea en un negocio de $1M+. Somos arquitectos de ingresos digitales con más de $50M recaudados por nuestros clientes.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/icono-welovecode.png",
         width: 1200,
         height: 630,
         alt: "WeLoveCode - Desarrollo de Software Profesional"
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "WeLoveCode | Desarrollo de Software que Genera Millones",
     description: "Convertimos tu idea en un negocio de $1M+. Somos arquitectos de ingresos digitales con más de $50M recaudados por nuestros clientes.",
-    images: ["/og-image.jpg"]
+    images: ["/icono-welovecode.png"]
   },
   viewport: "width=device-width, initial-scale=1",
   themeColor: "#7c3aed"

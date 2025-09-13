@@ -132,16 +132,16 @@ export default function WhatsAppModal({ isOpen, onClose, selectedPackage }: What
                 name="interest"
                 value={formData.interest}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20"
+                className="w-full px-4 py-3 bg-slate-800 border border-white/20 rounded-lg text-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20"
                 required
               >
-                <option value="">Selecciona una opción</option>
-                <option value="Páginas Web">Páginas Web</option>
-                <option value="Sistemas Administrativos">Sistemas Administrativos</option>
-                <option value="Apps Móviles">Apps Móviles</option>
-                <option value="CRMs Personalizados">CRMs Personalizados</option>
-                <option value="Consultoría General">Consultoría General</option>
-                <option value="Otro">Otro</option>
+                <option value="" className="bg-slate-800 text-white">Selecciona una opción</option>
+                <option value="Páginas Web" className="bg-slate-800 text-white">Páginas Web</option>
+                <option value="Sistemas Administrativos" className="bg-slate-800 text-white">Sistemas Administrativos</option>
+                <option value="Apps Móviles" className="bg-slate-800 text-white">Apps Móviles</option>
+                <option value="CRMs Personalizados" className="bg-slate-800 text-white">CRMs Personalizados</option>
+                <option value="Consultoría General" className="bg-slate-800 text-white">Consultoría General</option>
+                <option value="Otro" className="bg-slate-800 text-white">Otro</option>
               </select>
             </div>
           )}

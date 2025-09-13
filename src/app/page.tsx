@@ -246,8 +246,8 @@ export default function Home() {
           
           <div className="bg-gradient-to-br from-purple-900/20 to-purple-800/20 border border-purple-500/30 rounded-xl p-8">
             <div className="flex items-center mb-6">
-              <div className="w-12 h-12 bg-red rounded-full flex items-center justify-center p-2">
-                <Image src="/mercado-logo.svg" alt="Mercado a la Mano Logo" width={48} height={48} className="object-contain" />
+              <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center p-2">
+                <Image src="/mercado-logo.svg" alt="Mercado a la Mano Logo" width={50} height={50} className="object-contain" />
               </div>
               <div className="ml-4">
                 <div className="font-bold">Mercado a la Mano</div>
