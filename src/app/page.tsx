@@ -41,9 +41,14 @@ export default function Home() {
           <div className="flex justify-center animate-fade-in-up animation-delay-600">
             <button 
               onClick={() => openModal()}
-              className="bg-gradient-to-r from-green-500 to-green-600 text-white px-12 py-5 rounded-lg font-bold text-xl hover:from-green-600 hover:to-green-700 transition-all transform hover:scale-105 hover:shadow-2xl shadow-lg animate-bounce-subtle"
+              className="bg-gradient-to-r from-green-500 to-green-600 text-white px-12 py-5 rounded-lg font-bold text-xl hover:from-green-600 hover:to-green-700 transition-all transform hover:scale-105 hover:shadow-2xl shadow-lg animate-bounce-subtle flex items-center gap-3"
             >
-              🚀 COTIZA TU PROYECTO GRATIS
+              <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z" />
+                <path d="M19 15L20.09 18.26L24 19L20.09 19.74L19 23L17.91 19.74L14 19L17.91 18.26L19 15Z" />
+                <path d="M5 15L6.09 18.26L10 19L6.09 19.74L5 23L3.91 19.74L0 19L3.91 18.26L5 15Z" />
+              </svg>
+              COTIZA TU PROYECTO GRATIS
             </button>
           </div>
         </div>
@@ -55,10 +60,10 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="transform hover:scale-110 transition-all duration-300 hover:bg-white/5 rounded-lg p-4">
               <CounterAnimation 
-                end={50} 
+                end={51} 
                 suffix="M+" 
                 prefix="$" 
-                duration={3000}
+                duration={30000}
                 className="text-4xl md:text-5xl font-black text-green-400 mb-2"
               />
               <div className="text-gray-300 font-semibold">Recaudado por nuestros clientes</div>
