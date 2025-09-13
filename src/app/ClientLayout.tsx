@@ -31,8 +31,8 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
               <Image 
                 src="/icono-welovecode.webp" 
                 alt="WeLoveCode Logo" 
-                width={40} 
-                height={40} 
+                width={50} 
+                height={50} 
                 className="rounded-lg"
               />
               <div className="text-2xl font-black bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
