@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <main className="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen w-full text-white">
       {/* Hero Section - Frame Control & Strong Opening */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-20 sm:mt-0 sm:pt-0">
         {/* Enhanced Background with Multiple Layers */}
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/60 via-blue-900/40 to-black/80"></div>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent"></div>
@@ -40,21 +40,23 @@ export default function Home() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
           {/* Enhanced Typography with Better Spacing */}
           <div className="space-y-8">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black leading-[0.95] bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent animate-fade-in-up">
+            <h1 className="text-3xl md:text-6xl lg:text-7xl font-black leading-[0.95] bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent animate-fade-in-up">
               <span className="block">Convertimos tus ideas en</span>
               <span className="text-green-400 animate-pulse drop-shadow-[0_0_20px_rgba(34,197,94,0.4)]">negocios de $1M+</span>
             </h1>
             
             <div className="relative">
-              <p className="text-xl md:text-2xl lg:text-3xl text-purple-200 font-semibold animate-fade-in-up animation-delay-200 tracking-tight">
-                Creamos webs, apps y sistemas que escalan contigo.
+              <p className="text-[18px] md:text-2xl lg:text-3xl text-purple-200 font-semibold animate-fade-in-up animation-delay-200 tracking-tight">
+                <span className="hidden sm:inline">Creamos webs, apps y sistemas que escalan contigo.</span>
+                <span className="sm:hidden">Creamos webs, apps y sistemas que escalan.</span>
               </p>
               <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/15 to-blue-600/15 blur-lg rounded-full opacity-40"></div>
             </div>
             
             <div className="relative inline-block">
-              <p className="text-lg md:text-xl lg:text-2xl text-gray-300 leading-relaxed animate-fade-in-up animation-delay-300 font-medium">
-                Ya generamos más de <strong className="text-green-400 drop-shadow-[0_0_15px_rgba(34,197,94,0.4)]">$50 millones</strong> para <strong className="text-white">nuestros clientes</strong>.
+              <p className="text-md md:text-xl lg:text-2xl text-gray-300 leading-relaxed animate-fade-in-up animation-delay-300 font-medium">
+                <span className="hidden sm:inline">Ya generamos <strong className="text-green-400 drop-shadow-[0_0_15px_rgba(34,197,94,0.4)]">+$50 millones</strong> para <strong className="text-white">nuestros clientes</strong>.</span>
+                <span className="sm:hidden"><strong className="text-green-400 drop-shadow-[0_0_15px_rgba(34,197,94,0.4)]">+$50 millones</strong> generados para <strong className="text-white">nuestros clientes</strong>.</span>
               </p>
               <div className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-400/40 to-transparent"></div>
             </div>
@@ -77,7 +79,10 @@ export default function Home() {
                   <div className="absolute inset-0 bg-white/20 rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
                 
-                <span className="tracking-wide">COTIZA TU PROYECTO GRATIS</span>
+                <span className="tracking-wide">
+                  <span className="hidden sm:inline">COTIZA TU PROYECTO GRATIS</span>
+                  <span className="sm:hidden">COTIZA GRATIS</span>
+                </span>
                 
                 {/* Arrow Animation */}
                 <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
