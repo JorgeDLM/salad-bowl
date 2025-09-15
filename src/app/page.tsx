@@ -30,13 +30,13 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/50 via-blue-900/30 to-black/70"></div>
         <div className="relative z-10 max-w-6xl mx-auto px-4 text-center">
           <h1 className="text-5xl md:text-7xl font-black mb-6 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent leading-tight animate-fade-in-up">
-            Convertimos tu idea en un <span className="text-green-400 animate-pulse">negocio de $1M+</span>
+            Convertimos tus ideas en <span className="text-green-400 animate-pulse">negocios de $1M+</span>
           </h1>
-          <p className="text-2xl md:text-3xl text-purple-200 mb-4 font-semibold animate-fade-in-up animation-delay-200">
-            Servicios comprobados. Proyectos entregados. Soporte real.
+          <p className="text-2xl md:text-3xl text-purple-200 mb-7 font-semibold animate-fade-in-up animation-delay-200">
+           Creamos webs, apps y sistemas que escalan contigo.
           </p>
           <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in-up animation-delay-300">
-            Somos <strong className="text-white">arquitectos de ecosistemas digitales</strong> que han generado más de <strong className="text-green-400">$50 millones</strong> para nuestros clientes.
+          Ya generamos más de <strong className="text-green-400">$50 millones</strong> para <strong className="text-white">nuestros clientes</strong>.
           </p>
           <div className="flex justify-center animate-fade-in-up animation-delay-600">
             <button 
@@ -366,7 +366,7 @@ export default function Home() {
                 })}
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all"
               >
-                Empezar ahora
+                Quiero mi web
               </button>
             </div>
 
@@ -439,7 +439,7 @@ export default function Home() {
                 })}
                 className="w-full bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all"
               >
-                Transformar mi negocio
+                Quiero transformar mi negocio
               </button>
             </div>
           </div>
@@ -463,8 +463,8 @@ export default function Home() {
       <section className="bg-gradient-to-r from-slate-900 to-purple-900 py-20">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black mb-8">¿Por qué confiar en nosotros?</h2>
-            <p className="text-xl text-gray-300">Conoce al equipo que transformará tu negocio</p>
+            <h2 className="text-4xl md:text-5xl font-black mb-8">Confianza que se gana</h2>
+            <p className="text-xl text-gray-300">Nuestros resultados lo demuestran</p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8 mb-12">
@@ -474,8 +474,8 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-white">Experiencia Comprobada</h3>
-              <p className="text-gray-300">+5 años desarrollando soluciones que generan millones en ingresos para nuestros clientes.</p>
+              <h3 className="text-2xl font-bold mb-4 text-white">5 Años</h3>
+              <p className="text-gray-300">Generando millones para clientes selectos.</p>
             </div>
             
             <div className="text-center">
@@ -484,8 +484,8 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-white">Equipo Especializado</h3>
-              <p className="text-gray-300">Desarrolladores full-stack, diseñadores UX/UI y especialistas en marketing digital trabajando para ti.</p>
+              <h3 className="text-2xl font-bold mb-4 text-white">Elite Team</h3>
+              <p className="text-gray-300">Full-stack + UX/UI + Growth. Todo en casa.</p>
             </div>
             
             <div className="text-center">
@@ -494,14 +494,14 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-white">Soporte 24/7</h3>
-              <p className="text-gray-300">No te dejamos solo. Soporte técnico continuo y actualizaciones constantes para mantener tu negocio funcionando.</p>
+              <h3 className="text-2xl font-bold mb-4 text-white">Sin Abandono</h3>
+              <p className="text-gray-300">Mantenimiento vitalicio incluido.</p>
             </div>
           </div>
 
           <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-purple-500/30">
             <div className="text-center">
-              <h3 className="text-3xl font-bold mb-6 text-white">Nuestra Garantía</h3>
+              <h3 className="text-3xl font-bold mb-6 text-white">¿Qué nos hace diferentes?</h3>
               <div className="grid md:grid-cols-3 gap-6">
                 <div className="bg-green-900/30 p-6 rounded-lg flex items-center gap-4">
                   <div className="w-12 h-12 rounded-lg flex items-center justify-center">
@@ -510,8 +510,8 @@ export default function Home() {
                     </svg>
                   </div>
                   <div>
-                    <div className="text-green-400 font-bold text-xl mb-2">Satisfacción 100%</div>
-                    <p className="text-gray-300 text-sm">Si no estás satisfecho en los primeros 30 días, te devolvemos tu dinero.</p>
+                    <div className="text-green-400 font-bold text-xl mb-2">Diseño</div>
+                    <p className="text-gray-300 text-sm">Diseño integral grátis</p>
                   </div>
                 </div>
                 <div className="bg-blue-900/30 p-6 rounded-lg flex items-center gap-4">
@@ -521,8 +521,8 @@ export default function Home() {
                     </svg>
                   </div>
                   <div>
-                    <div className="text-blue-400 font-bold text-xl mb-2">Entrega a Tiempo</div>
-                    <p className="text-gray-300 text-sm">Cumplimos con los plazos acordados o compensamos con servicios adicionales.</p>
+                    <div className="text-blue-400 font-bold text-xl mb-2">30 Días</div>
+                    <p className="text-gray-300 text-sm">No funciona = dinero de vuelta.</p>
                   </div>
                 </div>
                 <div className="bg-purple-900/30 p-6 rounded-lg flex items-center gap-4">
@@ -533,8 +533,8 @@ export default function Home() {
                     </svg>
                   </div>
                   <div>
-                    <div className="text-purple-400 font-bold text-xl mb-2">Soporte Vitalicio</div>
-                    <p className="text-gray-300 text-sm">Mantenimiento y actualizaciones incluidas por el tiempo de vida del proyecto.</p>
+                    <div className="text-purple-400 font-bold text-xl mb-2">De Por Vida</div>
+                    <p className="text-gray-300 text-sm">Mantenimiento incluido. Siempre.</p>
                   </div>
                 </div>
               </div>

@@ -1,17 +1,19 @@
-# WeLoveCode - Arquitectos de Ingresos Digitales
+# WeLoveCode
 
-Sitio web profesional de WeLoveCode, especialistas en convertir ideas en negocios millonarios.
+**$50M generados. 3 clientes por mes. Solo los mejores.**
 
-## 🚀 Sobre WeLoveCode
+## El Sistema
 
-Somos **arquitectos de ingresos digitales** que transformamos ideas en sistemas que generan dinero. Nuestros clientes han recaudado más de **$50M** usando nuestras soluciones.
+Convertimos tu idea en una máquina de hacer dinero en 90 días.
 
-### 💎 Servicios
+### Opciones
 
-- **MVP Landing** - Landing pages profesionales de ventas ($20K con 60% descuento)
-- **MVP Killer** - Productos mínimos viables funcionales ($50K)
-- **Scale Master** - Plataformas escalables completas ($75K)
-- **Enterprise Beast** - Soluciones enterprise robustas ($150K+)
+- **Landing** - $12K (era $20K)
+- **MVP** - $50K  
+- **Scale** - $75K
+- **Enterprise** - $150K+
+
+*Siguiente cliente disponible: Enero 2025*
 
 ## 🛠️ Tecnologías
 
