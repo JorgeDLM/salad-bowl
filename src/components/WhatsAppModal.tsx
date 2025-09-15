@@ -61,10 +61,11 @@ export default function WhatsAppModal({ isOpen, onClose, selectedPackage }: What
       return;
     }
 
-    const message = generateWhatsAppMessage();
-    const whatsappUrl = `https://wa.me/5212218414370?text=${message}`;
+    // Crear URL de tracking
+    const packageName = selectedPackage?.name || formData.interest;
+    const trackingUrl = `/whatsapp-sent?pkg=${encodeURIComponent(packageName)}&src=modal&name=${encodeURIComponent(formData.name)}`;
     
-    window.open(whatsappUrl, '_blank');
+    window.open(trackingUrl, '_blank');
     onClose();
     
     // Reset form

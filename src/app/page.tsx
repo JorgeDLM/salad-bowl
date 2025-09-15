@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <main className="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen w-full text-white">
       {/* Hero Section - Frame Control & Strong Opening */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden -mt-20 sm:mt-0 sm:pt-0">
+      <section className="relative min-h-screen flex items-start sm:items-center justify-center overflow-hidden pt-24 sm:pt-0">
         {/* Enhanced Background with Multiple Layers */}
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/60 via-blue-900/40 to-black/80"></div>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent"></div>
@@ -39,7 +39,24 @@ export default function Home() {
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
           {/* Enhanced Typography with Better Spacing */}
-          <div className="space-y-8">
+          {/* App Icon */}
+          <div className="justify-center animate-fade-in-up sm:hidden flex">
+            <div className="relative">
+              <Image 
+                src="/icono-welovecode.png" 
+                alt="WeLoveCode App Icon" 
+                width={140} 
+                height={140} 
+                className=" hover:scale-110 transition-transform duration-300 p-4"
+                priority
+              />
+              {/* Glow effect for icon */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/30 via-blue-500/30 to-green-500/30 blur-xl opacity-60 animate-pulse -z-10"></div>
+            </div>
+          </div>
+          
+          <div className="space-y-6">
+            
             <h1 className="text-3xl md:text-6xl lg:text-7xl font-black leading-[0.95] bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent animate-fade-in-up">
               <span className="block">Convertimos tus ideas en</span>
               <span className="text-green-400 animate-pulse drop-shadow-[0_0_20px_rgba(34,197,94,0.4)]">negocios de $1M+</span>
@@ -277,7 +294,10 @@ export default function Home() {
         </div>
         
         <div className="grid md:grid-cols-2 gap-8 mb-12">
-          <div className="bg-gradient-to-br from-green-900/30 to-blue-900/30 backdrop-blur-sm rounded-2xl p-8 border border-green-500/40">
+          <div 
+            onClick={() => window.open('https://www.mercadoalamano.com', '_blank')}
+            className="bg-gradient-to-br from-green-900/30 to-blue-900/30 backdrop-blur-sm rounded-2xl p-8 border border-green-500/40 cursor-pointer hover:border-green-400/60 hover:shadow-[0_10px_30px_rgba(34,197,94,0.2)] transition-all duration-300 transform hover:scale-[1.02]"
+          >
             <div className="flex items-center gap-4 mb-6">
               <Image 
                 src="/mercado-logo.svg" 
@@ -289,7 +309,7 @@ export default function Home() {
               <div>
                 <h3 className="text-xl md:text-2xl font-bold text-white">Mercado a la Mano</h3>
                 <p className="text-gray-400 text-sm md:text-base">Plataforma de comercio electrónico</p>
-                <a href="https://www.mercadoalamano.com" target="_blank" className="text-gray-200 text-sm">www.mercadoalamano.com</a>
+                <span className="text-gray-200 text-sm hover:text-green-400 transition-colors">www.mercadoalamano.com</span>
               </div>
             </div>
             <blockquote className="text-gray-300 mb-6 italic text-lg">
@@ -310,7 +330,10 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 backdrop-blur-sm rounded-2xl p-8 border border-purple-500/40">
+          <div 
+            onClick={() => window.open('https://www.rilsa.mx', '_blank')}
+            className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 backdrop-blur-sm rounded-2xl p-8 border border-purple-500/40 cursor-pointer hover:border-purple-400/60 hover:shadow-[0_10px_30px_rgba(168,85,247,0.2)] transition-all duration-300 transform hover:scale-[1.02]"
+          >
             <div className="flex items-center gap-4 mb-6">
               <Image 
                 src="/rilsa-logo.webp" 
@@ -322,7 +345,7 @@ export default function Home() {
               <div>
                 <h3 className="text-xl md:text-2xl font-bold text-white">RILSA</h3>
                 <p className="text-gray-400 text-sm md:text-base">Empresa de logística</p>
-                <a href="https://www.rilsa.mx" target="_blank" className="text-gray-200 text-sm">www.rilsa.mx</a>
+                <span className="text-gray-200 text-sm hover:text-purple-400 transition-colors">www.rilsa.mx</span>
                 </div>
             </div>
             <blockquote className="text-gray-300 mb-6 italic text-lg">
@@ -595,7 +618,7 @@ export default function Home() {
             Agenda una consulta gratuita de 30 minutos. Te mostraremos exactamente cómo convertir tu idea en un negocio de $1M+.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <a href="mailto:hola@welovecode.mx" className="bg-white text-purple-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-all transform hover:scale-105 shadow-2xl flex items-center gap-3">
+            <a href="mailto:welovecode.mx@gmail.com" className="bg-white text-purple-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-all transform hover:scale-105 shadow-2xl flex items-center gap-3">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
