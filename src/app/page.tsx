@@ -133,14 +133,14 @@ export default function Home() {
               <CounterAnimation 
                 end={24} 
                 suffix="h" 
-                duration={1200}
+                duration={1700}
                 className="text-3xl md:text-5xl font-black text-yellow-400 mb-2 inline-block"
               />
               <span className="text-3xl md:text-5xl font-black text-yellow-400 mb-2 inline-block ml-3">/</span>
               <CounterAnimation 
                 end={7} 
                 suffix="d" 
-                duration={1200}
+                duration={1700}
                 className="text-3xl md:text-5xl font-black text-yellow-400 mb-2 inline-block ml-3"
               />
               <div className="text-gray-300 font-semibold">Disponibilidad</div>
@@ -287,8 +287,8 @@ export default function Home() {
                 className="rounded-lg p-2"
               />
               <div>
-                <h3 className="text-2xl font-bold text-white">Mercado a la Mano</h3>
-                <p className="text-gray-400">Plataforma de comercio local</p>
+                <h3 className="text-xl md:text-2xl font-bold text-white">Mercado a la Mano</h3>
+                <p className="text-gray-400 text-sm md:text-base">Plataforma de comercio electrónico</p>
                 <a href="https://www.mercadoalamano.com" target="_blank" className="text-gray-200 text-sm">www.mercadoalamano.com</a>
               </div>
             </div>
@@ -320,8 +320,8 @@ export default function Home() {
                 className="rounded-lg"
               />
               <div>
-                <h3 className="text-2xl font-bold text-white">RILSA</h3>
-                <p className="text-gray-400">Empresa de logística</p>
+                <h3 className="text-xl md:text-2xl font-bold text-white">RILSA</h3>
+                <p className="text-gray-400 text-sm md:text-base">Empresa de logística</p>
                 <a href="https://www.rilsa.mx" target="_blank" className="text-gray-200 text-sm">www.rilsa.mx</a>
                 </div>
             </div>
