@@ -133,15 +133,15 @@ export default function Home() {
               <CounterAnimation 
                 end={24} 
                 suffix="h" 
-                duration={2200}
-                className="text-4xl md:text-5xl font-black text-yellow-400 mb-2 inline-block"
+                duration={1200}
+                className="text-3xl md:text-5xl font-black text-yellow-400 mb-2 inline-block"
               />
-              <span className="text-4xl md:text-5xl font-black text-yellow-400 mb-2 inline-block ml-3">/</span>
+              <span className="text-3xl md:text-5xl font-black text-yellow-400 mb-2 inline-block ml-3">/</span>
               <CounterAnimation 
                 end={7} 
                 suffix="d" 
-                duration={2200}
-                className="text-4xl md:text-5xl font-black text-yellow-400 mb-2 inline-block ml-3"
+                duration={1200}
+                className="text-3xl md:text-5xl font-black text-yellow-400 mb-2 inline-block ml-3"
               />
               <div className="text-gray-300 font-semibold">Disponibilidad</div>
             </div>
