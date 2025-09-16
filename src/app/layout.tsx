@@ -75,14 +75,14 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         
         {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17562487817"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17562407817"></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'AW-17562487817');
+              gtag('config', 'AW-17562407817');
             `,
           }}
         />
