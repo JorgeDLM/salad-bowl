@@ -1,15 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import { Package } from '../data/packages';
 
 interface WhatsAppModalProps {
   isOpen: boolean;
   onClose: () => void;
-  selectedPackage?: {
-    name: string;
-    price: string;
-    description: string;
-  };
+  selectedPackage?: Package;
 }
 
 export default function WhatsAppModal({ isOpen, onClose, selectedPackage }: WhatsAppModalProps) {

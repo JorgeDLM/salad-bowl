@@ -4,16 +4,13 @@ import Image from "next/image";
 import CounterAnimation from "../components/CounterAnimation";
 import WhatsAppModal from "../components/WhatsAppModal";
 import { useState } from "react";
+import { packages, Package } from "../data/packages";
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedPackage, setSelectedPackage] = useState<{
-    name: string;
-    price: string;
-    description: string;
-  } | undefined>(undefined);
+  const [selectedPackage, setSelectedPackage] = useState<Package | undefined>(undefined);
 
-  const openModal = (packageInfo?: { name: string; price: string; description: string }) => {
+  const openModal = (packageInfo?: Package) => {
     setSelectedPackage(packageInfo);
     setIsModalOpen(true);
   };
@@ -220,7 +217,7 @@ export default function Home() {
                 <li>✅ <strong>SEO optimizado:</strong> Aparece en Google</li>
               </ul>
               <button 
-                onClick={() => openModal({ name: 'Página Web Profesional', price: '$15,000', description: 'Sitio web completo con diseño profesional y SEO' })}
+                onClick={() => openModal(packages[0])}
                 className="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all"
               >
                 Quiero mi sitio web
@@ -242,7 +239,7 @@ export default function Home() {
                 <li>✅ <strong>Fidelización:</strong> Experiencia única</li>
               </ul>
               <button 
-                onClick={() => openModal({ name: 'App Móvil Profesional', price: '$35,000', description: 'Aplicación móvil nativa para iOS y Android' })}
+                onClick={() => openModal(packages[1])}
                 className="mt-6 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-all"
               >
                 Quiero mi app
@@ -264,7 +261,7 @@ export default function Home() {
                 <li>✅ <strong>Escalabilidad:</strong> Crece sin límites</li>
               </ul>
               <button 
-                onClick={() => openModal({ name: 'Sistema Completo', price: '$85,000', description: 'Ecosistema digital completo con automatización' })}
+                onClick={() => openModal(packages[2])}
                 className="mt-6 bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition-all"
               >
                 Quiero automatizar
@@ -426,11 +423,7 @@ export default function Home() {
                 <p className="text-gray-300">+300% más leads calificados</p>
               </div>
               <button 
-                onClick={() => openModal({
-                  name: "Starter Web",
-                  price: "$25,000",
-                  description: "Sitio web profesional completo"
-                })}
+                onClick={() => openModal(packages[0])}
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all"
               >
                 Quiero mi web
@@ -464,11 +457,7 @@ export default function Home() {
                 <p className="text-gray-300">+500% engagement con clientes</p>
               </div>
               <button 
-                onClick={() => openModal({
-                  name: "App Profesional",
-                  price: "$65,000",
-                  description: "Aplicación móvil completa con panel admin"
-                })}
+                onClick={() => openModal(packages[1])}
                 className="w-full bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all"
               >
                 Quiero mi app
@@ -499,11 +488,7 @@ export default function Home() {
                 <p className="text-gray-300">Ahorro de 80% en operaciones</p>
               </div>
               <button 
-                onClick={() => openModal({
-                  name: "Sistema Completo",
-                  price: "$150,000",
-                  description: "Ecosistema digital completo con automatización"
-                })}
+                onClick={() => openModal(packages[2])}
                 className="w-full bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all"
               >
                 Quiero transformar mi negocio

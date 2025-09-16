@@ -34,7 +34,11 @@ export const metadata: Metadata = {
     description: "Convertimos tu idea en un negocio de $1M+. Somos arquitectos de ingresos digitales con más de $50M recaudados por nuestros clientes.",
     images: ["/icono-app.png"]
   },
-  viewport: "width=device-width, initial-scale=1",
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
   themeColor: "#7c3aed"
 };
 
