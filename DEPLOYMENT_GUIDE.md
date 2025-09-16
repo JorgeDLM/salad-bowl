@@ -79,7 +79,7 @@ This creates an optimized production build in the `.next` folder.
 - ✅ Smooth animations and interactions
 
 ## Contact Information
-- WhatsApp: +5212218414370
+- WhatsApp: +522228377162
 - Email: hola@welovecode.mx
 
 ## Support

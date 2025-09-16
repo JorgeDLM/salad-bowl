@@ -19,7 +19,7 @@ function WhatsAppRedirectContent() {
     message += '\n\nEspero su respuesta para agendar una consulta. ¡Gracias!';
 
     // Redirigir a WhatsApp
-    const whatsappURL = `https://wa.me/5212218414370?text=${encodeURIComponent(message)}`;
+    const whatsappURL = `https://wa.me/522228377162?text=${encodeURIComponent(message)}`;
     
     setTimeout(() => {
       window.location.href = whatsappURL;
