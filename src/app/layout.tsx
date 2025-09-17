@@ -23,10 +23,11 @@ export const metadata: Metadata = {
     description: "Emprendedor mexicano especializado en producto y operaciones. Fundador de Mercado a la Mano (+$1,000,000 MXN/mes), WeLoveCode y Zephir Jewelry.",
     images: [
       {
-        url: "/yoFoto.webp",
+        url: "https://jorgedlm.com/yoFoto.webp",
         width: 1200,
         height: 630,
-        alt: "Jorge de la Mora Menéndez - Emprendedor y Fundador"
+        alt: "Jorge de la Mora Menéndez - Emprendedor y Fundador",
+        type: "image/webp"
       }
     ]
   },
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Jorge de la Mora Menéndez | Emprendedor • Producto & Operaciones • Tech-driven",
     description: "Emprendedor mexicano especializado en producto y operaciones. Fundador de Mercado a la Mano (+$1,000,000 MXN/mes), WeLoveCode y Zephir Jewelry.",
-    images: ["/yoFoto.webp"]
+    images: ["https://jorgedlm.com/yoFoto.webp"]
   },
 };
 
@@ -52,6 +53,14 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
+        {/* Additional Meta Tags for Social Media */}
+        <meta property="og:image" content="https://jorgedlm.com/yoFoto.webp" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/webp" />
+        <meta name="twitter:image" content="https://jorgedlm.com/yoFoto.webp" />
+        <link rel="preload" href="/yoFoto.webp" as="image" type="image/webp" />
+        
         {/* JSON-LD Schema for Person */}
         <script
           type="application/ld+json"

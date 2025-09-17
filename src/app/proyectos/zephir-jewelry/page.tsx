@@ -29,6 +29,11 @@ const HeartIcon = ({ className }: { className?: string }) => (
 export default function ZephirJewelryPage() {
   const features = [
     {
+      title: "Piedras Sintéticas Premium",
+      description: "Moissanita, zafiro, diamante lab, rubí y esmeralda sintéticos. Asequibles, calidad top y sustentables",
+      icon: <DiamondIcon className="w-8 h-8" />
+    },
+    {
       title: "300+ Modelos Diferentes",
       description: "Catálogo extenso de diseños únicos creados desde 2022",
       icon: <DiamondIcon className="w-8 h-8" />
@@ -37,11 +42,6 @@ export default function ZephirJewelryPage() {
       title: "3 Puntos de Venta Físicos",
       description: "Suargo Angelópolis, Outlet Isla y Hefestum Valquirico",
       icon: <HeartIcon className="w-8 h-8" />
-    },
-    {
-      title: "Materiales Premium",
-      description: "Plata con baño en oro, oro y platino con piedras de laboratorio",
-      icon: <DiamondIcon className="w-8 h-8" />
     },
     {
       title: "Fotografía Profesional",
@@ -158,60 +158,44 @@ export default function ZephirJewelryPage() {
       {/* Gallery Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-1">
-              <div className="sticky top-8">
-                <h2 className="text-4xl font-light text-black mb-6 tracking-wide">
-                  INFORMACIÓN
-                </h2>
-                <div className="w-16 h-0.5 bg-black mb-6"></div>
-                <p className="text-gray-600 leading-relaxed mb-8">
-                  Marca de joyería sustentable operando desde 2022. Especializada en piedras 
-                  de laboratorio con presencia física en Puebla y servicios de fotografía profesional.
-                </p>
-                <div className="space-y-6">
-                  {features.map((feature, index) => (
-                    <div key={index} className="border-l-2 border-gray-200 pl-6">
-                      <h3 className="text-lg font-medium text-black mb-2 tracking-wide">
-                        {feature.title}
-                      </h3>
-                      <p className="text-gray-500 text-sm">
-                        {feature.description}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-light text-black mb-8 tracking-wide">
+              GALERÍA
+            </h2>
+            <div className="w-20 h-0.5 bg-black mx-auto mb-8"></div>
+            <p className="text-gray-600 leading-relaxed max-w-2xl mx-auto">
+              Cada pieza es única, creada con piedras de laboratorio de la más alta calidad 
+              y diseños exclusivos que reflejan elegancia y sofisticación.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="space-y-6">
+              <Image
+                src="/zephir-2.webp"
+                alt="Zephir Jewelry Detail"
+                width={400}
+                height={500}
+                className="w-full h-auto rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+              />
             </div>
-            
-            <div className="lg:col-span-2">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-6">
-                  <Image
-                    src="/zephir-2.webp"
-                    alt="Zephir Jewelry Detail"
-                    width={400}
-                    height={500}
-                    className="w-full h-auto rounded-lg shadow-lg"
-                  />
-                  <Image
-                    src="/zephir-4.webp"
-                    alt="Zephir Jewelry Collection"
-                    width={400}
-                    height={300}
-                    className="w-full h-auto rounded-lg shadow-lg"
-                  />
-                </div>
-                <div className="space-y-6 md:mt-12">
-                  <Image
-                    src="/zephir-3.webp"
-                    alt="Zephir Jewelry Craftsmanship"
-                    width={400}
-                    height={500}
-                    className="w-full h-auto rounded-lg shadow-lg"
-                  />
-                </div>
-              </div>
+            <div className="space-y-6 md:mt-12">
+              <Image
+                src="/zephir-3.webp"
+                alt="Zephir Jewelry Craftsmanship"
+                width={400}
+                height={500}
+                className="w-full h-auto rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+              />
+            </div>
+            <div className="space-y-6">
+              <Image
+                src="/zephir-4.webp"
+                alt="Zephir Jewelry Collection"
+                width={400}
+                height={300}
+                className="w-full h-auto rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+              />
             </div>
           </div>
         </div>
