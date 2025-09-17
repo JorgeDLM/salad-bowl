@@ -1,7 +1,10 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import CounterAnimation from '@/components/CounterAnimation';
-import Header from '@/components/Header';
+import { motion } from 'framer-motion';
+import { useInView } from 'framer-motion';
 
 // Custom SVG Icons
 const ExternalLinkIcon = ({ className }: { className?: string }) => (
@@ -77,24 +80,24 @@ export default function MercadoALaManoPage() {
 
   const achievements = [
     {
-      metric: ">$1M MXN",
+      metric: "+1 millón MXN",
       label: "Facturación mensual",
       description: "Ingresos actuales de la plataforma"
     },
     {
-      metric: "60%",
-      label: "Ahorro vs supermercados",
-      description: "Precios más competitivos"
+      metric: "3",
+      label: "Distribuidores operando",
+      description: "De manera recurrente"
     },
     {
-      metric: "50%",
-      label: "Ahorro vs Justo.mx",
-      description: "En varios productos"
+      metric: "50+",
+      label: "Clientes mayoristas",
+      description: "Operando activamente"
     },
     {
-      metric: "6-7",
-      label: "Intermediarios eliminados",
-      description: "De la cadena de distribución"
+      metric: "-40%",
+      label: "Mejores precios",
+      description: "Que Justo y supermercados"
     }
   ];
 
@@ -110,19 +113,22 @@ export default function MercadoALaManoPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <Header 
-        backgroundColor="bg-[#08b0e9]" 
-        showBackButton={true} 
-        backButtonText="Volver al inicio" 
-      />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-[#e6f1fe] to-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="flex items-center mb-6">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <motion.div 
+                className="flex items-center mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
                 <Image
                   src="/logo.png"
                   alt="Mercado a la Mano"
@@ -130,50 +136,78 @@ export default function MercadoALaManoPage() {
                   height={80}
                   className="mr-4"
                 />
-              </div>
-                <div>
-                  <p className="text-xl text-[#08b0e9] font-medium">
-                    Conectando campesinos con consumidores
-                  </p>
-                </div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                <p className="text-xl text-[#08b0e9] font-medium">
+                  Conectando campesinos con consumidores
+                </p>
+              </motion.div>
               
-              <p className="text-lg text-gray-600 mb-8">
+              <motion.p 
+                className="text-lg text-gray-600 mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
                 9 años transformando la cadena de distribución agrícola en México. 
                 Pagamos justo al campesino y ofrecemos precios competitivos al cliente final, 
                 eliminando hasta 7 intermediarios innecesarios.
-              </p>
+              </motion.p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a
+              <motion.div 
+                className="flex flex-col sm:flex-row gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+              >
+                <motion.a
                   href="https://www.mercadoalamano.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center bg-[#08b0e9] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#d73527] transition-colors"
+                  className="inline-flex items-center bg-[#08b0e9] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#d73527] transition-all duration-300"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   Visitar sitio web
                   <ExternalLinkIcon className="ml-2 w-4 h-4" />
-                </a>
-                <a
+                </motion.a>
+                <motion.a
                   href="https://www.instagram.com/mercadoalamano/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center border border-[#ea4435] text-[#ea4435] px-6 py-3 rounded-lg font-medium hover:bg-[#e6f1fe] transition-colors"
+                  className="inline-flex items-center border border-[#ea4435] text-[#ea4435] px-6 py-3 rounded-lg font-medium hover:bg-[#e6f1fe] transition-all duration-300"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   Ver Instagram
                   <ExternalLinkIcon className="ml-2 w-4 h-4" />
-                </a>
-              </div>
-            </div>
+                </motion.a>
+              </motion.div>
+            </motion.div>
 
-            <div className="flex justify-center">
-              <Image
-                src="/icono-mercadoalamano-app.png"
-                alt="Mercado a la Mano App"
-                width={300}
-                height={300}
-                className="rounded-3xl shadow-2xl"
-              />
-            </div>
+            <motion.div 
+              className="flex justify-center"
+              initial={{ opacity: 0, x: 50, rotate: 5 }}
+              animate={{ opacity: 1, x: 0, rotate: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+            >
+              <motion.div
+                whileHover={{ scale: 1.05, rotate: -2 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Image
+                  src="/icono-mercadoalamano-app.png"
+                  alt="Mercado a la Mano App"
+                  width={300}
+                  height={300}
+                  className="rounded-3xl shadow-2xl"
+                />
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -264,52 +298,109 @@ export default function MercadoALaManoPage() {
       {/* Timeline */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <motion.h2 
+              className="text-3xl font-bold text-gray-900 mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
               9 Años de Evolución
-            </h2>
-            <p className="text-lg text-gray-600">
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-gray-600"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
               La historia de cómo transformamos una idea en una plataforma que factura más de $1,000,000 MXN/mes
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <div className="relative">
             {/* Timeline line - responsive */}
-            <div className="absolute left-6 md:left-1/2 md:transform md:-translate-x-px h-full w-0.5 bg-[#08b0e9]"></div>
+            <motion.div 
+              className="absolute left-6 md:left-1/2 md:transform md:-translate-x-px h-full w-0.5 bg-[#08b0e9]"
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              transition={{ duration: 1.5, delay: 0.5 }}
+              viewport={{ once: true }}
+              style={{ transformOrigin: 'top' }}
+            ></motion.div>
 
             {timeline.map((item, index) => (
-              <div key={index} className="relative mb-12">
+              <motion.div 
+                key={index} 
+                className="relative mb-12"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: true }}
+              >
                 {/* Mobile Layout */}
                 <div className="md:hidden">
                   <div className="flex items-start">
                     {/* Timeline dot */}
-                    <div className="w-4 h-4 bg-[#34a853] rounded-full border-4 border-white shadow-lg mt-2 mr-6 flex-shrink-0 relative z-10"></div>
+                    <motion.div 
+                      className="w-4 h-4 bg-[#34a853] rounded-full border-4 border-white shadow-lg mt-2 mr-6 flex-shrink-0 relative z-10"
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      transition={{ duration: 0.4, delay: index * 0.2 + 0.3 }}
+                      viewport={{ once: true }}
+                      whileHover={{ scale: 1.2 }}
+                    ></motion.div>
                     
                     {/* Content */}
-                    <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 flex-1">
+                    <motion.div 
+                      className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 flex-1"
+                      whileHover={{ y: -3, transition: { duration: 0.3 } }}
+                    >
                       <div className="text-[#08b0e9] font-bold text-lg mb-2">{item.year}</div>
                       <h3 className="text-xl font-semibold text-gray-900 mb-3">{item.title}</h3>
                       <p className="text-gray-600">{item.description}</p>
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
 
                 {/* Desktop Layout */}
                 <div className="hidden md:flex items-center">
                   <div className={`flex ${index % 2 === 0 ? 'justify-start' : 'justify-end'} w-full`}>
-                    <div className={`w-5/12 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
-                      <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                    <motion.div 
+                      className={`w-5/12 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <motion.div 
+                        className="bg-white p-6 rounded-xl shadow-lg border border-gray-200"
+                        whileHover={{ y: -5, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
+                        transition={{ duration: 0.3 }}
+                      >
                         <div className="text-[#08b0e9] font-bold text-lg mb-2">{item.year}</div>
                         <h3 className="text-xl font-semibold text-gray-900 mb-3">{item.title}</h3>
                         <p className="text-gray-600">{item.description}</p>
-                      </div>
-                    </div>
+                      </motion.div>
+                    </motion.div>
                   </div>
                   
                   {/* Timeline dot - desktop */}
-                  <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#34a853] rounded-full border-4 border-white shadow-lg z-10"></div>
+                  <motion.div 
+                    className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#34a853] rounded-full border-4 border-white shadow-lg z-10"
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ duration: 0.4, delay: index * 0.2 + 0.3 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.3 }}
+                  ></motion.div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -319,20 +410,56 @@ export default function MercadoALaManoPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">El comienzo (2015)</h3>
-              <p className="text-lg text-gray-600 mb-6">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <motion.h3 
+                className="text-2xl font-bold text-gray-900 mb-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                El comienzo (2015)
+              </motion.h3>
+              <motion.p 
+                className="text-lg text-gray-600 mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true }}
+              >
                 Así comenzó todo: una bodega completa con operación propia, camionetas de distribución 
                 y el sueño de conectar directamente campesinos con consumidores.
-              </p>
-              <div className="bg-[#e6f1fe] p-4 rounded-lg">
+              </motion.p>
+              <motion.div 
+                className="bg-[#e6f1fe] p-4 rounded-lg"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.02 }}
+              >
                 <p className="text-sm text-gray-700">
                   <strong>4 años de operación</strong> que me enseñaron todo sobre la cadena de distribución agrícola.
                 </p>
-              </div>
-            </div>
-            <div className="flex justify-center">
-              <div className="rounded-2xl overflow-hidden shadow-2xl">
+              </motion.div>
+            </motion.div>
+            <motion.div 
+              className="flex justify-center"
+              initial={{ opacity: 0, x: 50, rotateY: 15 }}
+              whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <motion.div 
+                className="rounded-2xl overflow-hidden shadow-2xl"
+                whileHover={{ scale: 1.05, rotateY: -5 }}
+                transition={{ duration: 0.4 }}
+              >
                 <Image
                   src="/foto2015.jpg"
                   alt="Bodega Mercado a la Mano 2015"
@@ -340,8 +467,8 @@ export default function MercadoALaManoPage() {
                   height={400}
                   className="object-cover"
                 />
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -349,116 +476,198 @@ export default function MercadoALaManoPage() {
       {/* Current Achievements */}
       <section className="py-16 bg-[#e6f1fe]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <motion.h2 
+              className="text-3xl font-bold text-gray-900 mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
               Resultados Actuales
-            </h2>
-            <p className="text-lg text-gray-600">
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-gray-600"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
               Métricas que demuestran el impacto de nuestro modelo
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {achievements.map((achievement, index) => (
-              <div key={index} className="bg-white p-6 rounded-xl shadow-lg text-center">
-                <div className="text-3xl font-bold text-[#34a853] mb-2">
+              <motion.div 
+                key={index} 
+                className="bg-white p-6 rounded-xl shadow-lg text-center"
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ 
+                  y: -10, 
+                  scale: 1.05,
+                  boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+                  transition: { duration: 0.3 }
+                }}
+              >
+                <motion.div 
+                  className="text-3xl font-bold text-[#34a853] mb-2"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
+                  viewport={{ once: true }}
+                >
                   {achievement.metric}
-                </div>
+                </motion.div>
                 <div className="text-lg font-medium text-gray-900 mb-2">
                   {achievement.label}
                 </div>
                 <div className="text-sm text-gray-600">
                   {achievement.description}
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Características Clave
-            </h2>
-            <p className="text-lg text-gray-600">
-              Lo que hace único a nuestro modelo de negocio
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((feature, index) => (
-              <div key={index} className="flex items-center p-4 bg-[#e2f1da] rounded-lg">
-                <CheckIcon className="w-6 h-6 text-[#34a853] mr-3 flex-shrink-0" />
-                <span className="text-gray-800 font-medium">{feature}</span>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Future Vision */}
-      <section className="py-16 bg-[#fef0cd]">
+      <section className="py-16 bg-[#fef0cd]/25">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <motion.h2 
+              className="text-3xl font-bold text-gray-900 mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
               Visión a Futuro
-            </h2>
-            <p className="text-lg text-gray-600">
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-gray-600"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
               Hacia dónde nos dirigimos
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Próximos Pasos</h3>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <motion.h3 
+                className="text-2xl font-bold text-gray-900 mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                Próximos Pasos
+              </motion.h3>
               <ul className="space-y-4">
-                <li className="flex items-start">
-                  <CheckIcon className="w-6 h-6 text-[#fdba12] mr-3 mt-1 flex-shrink-0" />
-                  <div>
-                    <div className="font-medium text-gray-900">App Móvil</div>
-                    <div className="text-gray-600">Beta estable en semanas</div>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <CheckIcon className="w-6 h-6 text-[#fdba12] mr-3 mt-1 flex-shrink-0" />
-                  <div>
-                    <div className="font-medium text-gray-900">Distribución a Casas</div>
-                    <div className="text-gray-600">Expansión del servicio residencial</div>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <CheckIcon className="w-6 h-6 text-[#fdba12] mr-3 mt-1 flex-shrink-0" />
-                  <div>
-                    <div className="font-medium text-gray-900">Compras por Volumen</div>
-                    <div className="text-gray-600">Directo con campesinos en pueblos</div>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <CheckIcon className="w-6 h-6 text-[#fdba12] mr-3 mt-1 flex-shrink-0" />
-                  <div>
-                    <div className="font-medium text-gray-900">Producción a Demanda</div>
-                    <div className="text-gray-600">Campesinos generando productos específicos</div>
-                  </div>
-                </li>
+                {[
+                  { title: "App Móvil", desc: "Beta estable en semanas" },
+                  { title: "Distribución a Casas", desc: "Expansión del servicio residencial" },
+                  { title: "Compras por Volumen", desc: "Directo con campesinos en pueblos" },
+                  { title: "Producción a Demanda", desc: "Campesinos generando productos específicos" }
+                ].map((item, index) => (
+                  <motion.li 
+                    key={index}
+                    className="flex items-start"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
+                    viewport={{ once: true }}
+                    whileHover={{ x: 5, transition: { duration: 0.3 } }}
+                  >
+                    <motion.div
+                      initial={{ scale: 0, rotate: -180 }}
+                      whileInView={{ scale: 1, rotate: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 + 0.4 }}
+                      viewport={{ once: true }}
+                    >
+                      <CheckIcon className="w-6 h-6 text-[#fdba12] mr-3 mt-1 flex-shrink-0" />
+                    </motion.div>
+                    <div>
+                      <div className="font-medium text-gray-900">{item.title}</div>
+                      <div className="text-gray-600">{item.desc}</div>
+                    </div>
+                  </motion.li>
+                ))}
               </ul>
-            </div>
+            </motion.div>
 
-            <div className="bg-white p-8 rounded-xl shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Impacto Esperado</h3>
-              <p className="text-gray-600 mb-6">
+            <motion.div 
+              className="bg-white p-8 rounded-xl shadow-lg"
+              initial={{ opacity: 0, x: 50, rotateY: 15 }}
+              whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -5, transition: { duration: 0.3 } }}
+            >
+              <motion.h3 
+                className="text-2xl font-bold text-gray-900 mb-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+              >
+                Impacto Esperado
+              </motion.h3>
+              <motion.p 
+                className="text-gray-600 mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                viewport={{ once: true }}
+              >
                 Nuestro objetivo es desintegrar completamente la cadena de suministro tradicional, 
                 creando un ecosistema donde campesinos y consumidores se beneficien mutuamente.
-              </p>
-              <div className="bg-[#e6f1fe] p-4 rounded-lg">
+              </motion.p>
+              <motion.div 
+                className="bg-[#e6f1fe] p-4 rounded-lg"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.05 }}
+              >
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-[#08b0e9] mb-1">100%</div>
+                  <motion.div 
+                    className="text-2xl font-bold text-[#08b0e9] mb-1"
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ duration: 0.5, delay: 0.7 }}
+                    viewport={{ once: true }}
+                  >
+                    100%
+                  </motion.div>
                   <div className="text-sm text-gray-600">Eliminación de intermediarios</div>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -466,33 +675,55 @@ export default function MercadoALaManoPage() {
       {/* CTA Section */}
       <section className="py-16 bg-[#08b0e9] text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">
+          <motion.h2 
+            className="text-3xl font-bold mb-4"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
             Conoce Mercado a la Mano
-          </h2>
-          <p className="text-xl text-red-100 mb-8 max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.p 
+            className="text-xl text-red-100 mb-8 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
             Descubre cómo estamos transformando la agricultura mexicana, 
             un campesino y un cliente a la vez.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <a
+          </motion.p>
+          <motion.div 
+            className="flex flex-col sm:flex-row justify-center gap-4"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            <motion.a
               href="https://www.mercadoalamano.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center bg-white text-[#08b0e9] px-8 py-4 rounded-lg font-medium hover:bg-gray-100 transition-colors"
+              className="inline-flex items-center bg-white text-[#08b0e9] px-8 py-4 rounded-lg font-medium hover:bg-gray-100 transition-all duration-300"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
             >
               Visitar Plataforma
               <ExternalLinkIcon className="ml-2 w-5 h-5" />
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href="https://www.instagram.com/mercadoalamano/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center border-2 border-white text-white px-8 py-4 rounded-lg font-medium hover:bg-white hover:text-[#34a853] transition-colors"
+              className="inline-flex items-center border-2 border-white text-white px-8 py-4 rounded-lg font-medium hover:bg-white hover:text-[#34a853] transition-all duration-300"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
             >
               Síguenos en Instagram
               <ExternalLinkIcon className="ml-2 w-5 h-5" />
-            </a>
-          </div>
+            </motion.a>
+          </motion.div>
         </div>
       </section>
     </div>

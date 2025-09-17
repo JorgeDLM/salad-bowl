@@ -24,32 +24,32 @@ const MailIcon = ({ className }: { className?: string }) => (
 export default function HomePage() {
   const kpis = [
     {
-      value: 1000000,
-      prefix: '>$',
-      suffix: ' MXN/mes',
-      label: 'Ingresos plataforma',
-      description: 'Mercado a la Mano'
+      value: 30000000,
+      prefix: '+$',
+      suffix: '',
+      label: 'Vendidos online',
+      description: 'Todos mis emprendimientos'
     },
     {
-      value: 60,
-      prefix: '~',
-      suffix: '%',
-      label: 'Debajo del súper',
-      description: 'Precios competitivos'
+      value: 3,
+      prefix: '',
+      suffix: '',
+      label: 'Emprendimientos exitosos',
+      description: 'Activos y rentables'
     },
     {
-      value: 50,
-      prefix: '~',
-      suffix: '%',
-      label: 'vs Justo.mx',
-      description: 'Varios productos'
+      value: 5,
+      prefix: '',
+      suffix: '',
+      label: 'Empleados',
+      description: 'Equipo actual'
     },
     {
-      value: 7,
-      prefix: '~',
-      suffix: ' intermediarios',
-      label: 'Desintermediados',
-      description: 'Cadena de distribución'
+      value: 9,
+      prefix: '',
+      suffix: ' años',
+      label: 'Experiencia',
+      description: 'Como emprendedor'
     }
   ];
 

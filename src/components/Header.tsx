@@ -35,12 +35,13 @@ const ArrowLeftIcon = ({ className }: { className?: string }) => (
 );
 
 export default function Header({ 
-  backgroundColor = 'bg-white', 
+  backgroundColor = 'bg-gradient-to-r from-slate-50 to-blue-50', 
   showBackButton = false, 
   backButtonText = 'Volver al inicio' 
 }: HeaderProps = {}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   const projects = [
     { name: 'Mercado a la Mano', href: '/proyectos/mercado-a-la-mano' },
@@ -50,9 +51,9 @@ export default function Header({
     { name: 'Mercado Libre', href: '/proyectos/mercado-libre' },
   ];
 
-  const textColor = backgroundColor.includes('white') ? 'text-gray-900' : 'text-white';
-  const hoverTextColor = backgroundColor.includes('white') ? 'hover:text-gray-700' : 'hover:text-gray-200';
-  const borderColor = backgroundColor.includes('white') ? 'border-gray-200' : 'border-white/20';
+  const textColor = backgroundColor.includes('white') || backgroundColor.includes('slate') || backgroundColor.includes('blue') ? 'text-gray-900' : 'text-white';
+  const hoverTextColor = backgroundColor.includes('white') || backgroundColor.includes('slate') || backgroundColor.includes('blue') ? 'hover:text-gray-700' : 'hover:text-gray-200';
+  const borderColor = backgroundColor.includes('white') || backgroundColor.includes('slate') || backgroundColor.includes('blue') ? 'border-gray-200' : 'border-white/20';
 
   return (
     <header className={`${backgroundColor} shadow-sm border-b ${borderColor} sticky top-0 z-50`}>
@@ -103,7 +104,7 @@ export default function Header({
               </button>
               
               {isProjectsOpen && (
-                <div className="absolute left-0 mt-2 w-56 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                <div className="absolute left-0 mt-2 w-56 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-[60]">
                   <div className="py-1" role="menu">
                     {projects.map((project) => (
                       <Link
@@ -121,12 +122,12 @@ export default function Header({
               )}
             </div>
 
-            <a 
-              href="mailto:hola@welovecode.mx" 
-              className={`${backgroundColor.includes('white') ? 'bg-gray-900 text-white hover:bg-gray-800' : 'bg-white text-gray-900 hover:bg-gray-100'} px-4 py-2 rounded-md text-sm font-medium transition-colors`}
+            <button 
+              onClick={() => setIsContactModalOpen(true)}
+              className={`${backgroundColor.includes('white') || backgroundColor.includes('slate') || backgroundColor.includes('blue') ? 'bg-gray-900 text-white hover:bg-gray-800' : 'bg-white text-gray-900 hover:bg-gray-100'} px-4 py-2 rounded-md text-sm font-medium transition-colors`}
             >
               Contacto
-            </a>
+            </button>
           </div>
 
           {/* Mobile menu button */}
