@@ -2,9 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import CounterAnimation from '@/components/CounterAnimation';
 import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
 
 // Custom SVG Icons
 const ExternalLinkIcon = ({ className }: { className?: string }) => (
@@ -258,7 +256,7 @@ export default function MercadoALaManoPage() {
             {/* Consumidor */}
             <div className="bg-white p-8 rounded-2xl shadow-lg">
               <div className="flex items-center mb-6">
-                <div className="bg-[#0055bb] w-20 h-20 rounded-full bg-white flex items-center justify-center mr-6 flex-shrink-0 border-2 border-gray-100">
+                <div className="w-20 h-20 rounded-full bg-[#0055bb] flex items-center justify-center mr-6 flex-shrink-0 border-2 border-gray-100">
                   <Image
                     src="/walmart-logo.png"
                     alt="Walmart"
