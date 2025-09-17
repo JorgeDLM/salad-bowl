@@ -3,6 +3,12 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
+interface HeaderProps {
+  backgroundColor?: string;
+  showBackButton?: boolean;
+  backButtonText?: string;
+}
+
 // Custom SVG Icons
 const ChevronDownIcon = ({ className }: { className?: string }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -22,7 +28,17 @@ const XMarkIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-export default function Header() {
+const ArrowLeftIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+  </svg>
+);
+
+export default function Header({ 
+  backgroundColor = 'bg-white', 
+  showBackButton = false, 
+  backButtonText = 'Volver al inicio' 
+}: HeaderProps = {}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
 
@@ -34,35 +50,51 @@ export default function Header() {
     { name: 'Mercado Libre', href: '/proyectos/mercado-libre' },
   ];
 
+  const textColor = backgroundColor.includes('white') ? 'text-gray-900' : 'text-white';
+  const hoverTextColor = backgroundColor.includes('white') ? 'hover:text-gray-700' : 'hover:text-gray-200';
+  const borderColor = backgroundColor.includes('white') ? 'border-gray-200' : 'border-white/20';
+
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+    <header className={`${backgroundColor} shadow-sm border-b ${borderColor} sticky top-0 z-50`}>
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Navegación principal">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link 
-              href="/" 
-              className="text-xl font-bold text-gray-900 hover:text-gray-700 transition-colors"
-              aria-label="Ir al inicio"
-            >
-              Jorge de la Mora
-            </Link>
+          {/* Back Button or Logo */}
+          <div className="flex-shrink-0 flex items-center">
+            {showBackButton ? (
+              <Link 
+                href="/" 
+                className={`inline-flex items-center ${textColor} ${hoverTextColor} transition-colors mr-4`}
+              >
+                <ArrowLeftIcon className="w-5 h-5 mr-2" />
+                {backButtonText}
+              </Link>
+            ) : (
+              <Link 
+                href="/" 
+                className={`text-xl font-bold ${textColor} ${hoverTextColor} transition-colors`}
+                aria-label="Ir al inicio"
+              >
+                Jorge de la Mora
+              </Link>
+            )}
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link 
-              href="/" 
-              className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-            >
-              Inicio
-            </Link>
+            {!showBackButton && (
+              <Link 
+                href="/" 
+                className={`${textColor} ${hoverTextColor} px-3 py-2 rounded-md text-sm font-medium transition-colors`}
+              >
+                Inicio
+              </Link>
+            )}
             
             {/* Projects Dropdown */}
             <div className="relative">
               <button
                 onClick={() => setIsProjectsOpen(!isProjectsOpen)}
-                className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center"
+                className={`${textColor} ${hoverTextColor} px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center`}
                 aria-expanded={isProjectsOpen}
                 aria-haspopup="true"
               >
@@ -91,7 +123,7 @@ export default function Header() {
 
             <a 
               href="mailto:hola@welovecode.mx" 
-              className="bg-gray-900 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-800 transition-colors"
+              className={`${backgroundColor.includes('white') ? 'bg-gray-900 text-white hover:bg-gray-800' : 'bg-white text-gray-900 hover:bg-gray-100'} px-4 py-2 rounded-md text-sm font-medium transition-colors`}
             >
               Contacto
             </a>
@@ -101,7 +133,7 @@ export default function Header() {
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-700 hover:text-gray-900 p-2 rounded-md"
+              className={`${textColor} ${hoverTextColor} p-2 rounded-md`}
               aria-expanded={isMenuOpen}
               aria-label="Abrir menú de navegación"
             >
@@ -116,24 +148,26 @@ export default function Header() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 py-4">
+          <div className={`md:hidden border-t ${borderColor} py-4`}>
             <div className="space-y-1">
-              <Link 
-                href="/" 
-                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Inicio
-              </Link>
+              {!showBackButton && (
+                <Link 
+                  href="/" 
+                  className={`block px-3 py-2 text-base font-medium ${textColor} ${hoverTextColor} hover:bg-gray-50 rounded-md transition-colors`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Inicio
+                </Link>
+              )}
               
               <div className="px-3 py-2">
-                <div className="text-base font-medium text-gray-900 mb-2">Proyectos</div>
+                <div className={`text-base font-medium ${textColor} mb-2`}>Proyectos</div>
                 <div className="space-y-1 ml-4">
                   {projects.map((project) => (
                     <Link
                       key={project.href}
                       href={project.href}
-                      className="block py-1 text-sm text-gray-600 hover:text-gray-900 transition-colors"
+                      className={`block py-1 text-sm ${backgroundColor.includes('white') ? 'text-gray-600 hover:text-gray-900' : 'text-gray-300 hover:text-white'} transition-colors`}
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {project.name}
@@ -144,7 +178,7 @@ export default function Header() {
               
               <a 
                 href="mailto:hola@welovecode.mx" 
-                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
+                className={`block px-3 py-2 text-base font-medium ${textColor} ${hoverTextColor} hover:bg-gray-50 rounded-md transition-colors`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contacto
