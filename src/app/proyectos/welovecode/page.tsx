@@ -78,25 +78,19 @@ export default function WeLoveCodePage() {
     <div className="min-h-screen bg-white">
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-purple-50 to-white py-10 md:py-20 overflow-hidden">
+      <section className="bg-gradient-to-br from-purple-50 to-white py-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-in-bottom">           
               <div className="flex items-center mb-6 animate-bounce-in animation-delay-200">
-                <Image
-                  src="/welovecode-logo.png"
-                  alt="WeLoveCode"
-                  width={80}
-                  height={80}
-                  className="mr-4 rounded-2xl animate-glow-pulse"
-                />
+               
                 <div>
                   <div className="relative mb-2">
-                    <div className="text-5xl font-black bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(168,85,247,0.5)] animate-fade-in-up animation-delay-400">
+                    <div className="text-4xl md:text-5xl font-black bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(168,85,247,0.5)] animate-fade-in-up animation-delay-400">
                       WeLoveCode
                     </div>
                     {/* Additional glow effect */}
-                    <div className="absolute inset-0 text-5xl font-black bg-gradient-to-r from-purple-400/20 via-blue-400/20 to-purple-400/20 bg-clip-text text-transparent blur-sm animate-pulse">
+                    <div className="absolute inset-0 text-4xl md:text-5xl font-black bg-gradient-to-r from-purple-400/20 via-blue-400/20 to-purple-400/20 bg-clip-text text-transparent blur-sm animate-pulse">
                       WeLoveCode
                     </div>
                   </div>

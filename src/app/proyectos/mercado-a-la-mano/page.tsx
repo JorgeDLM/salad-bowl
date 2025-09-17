@@ -113,7 +113,7 @@ export default function MercadoALaManoPage() {
     <div className="min-h-screen bg-white">
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[#e6f1fe] to-white py-10 md:py-20">
+      <section className="bg-gradient-to-br from-[#e6f1fe] to-white py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div

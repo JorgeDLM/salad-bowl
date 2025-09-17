@@ -104,7 +104,7 @@ export default function MercadoLibrePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-yellow-50 to-white  py-10 md:py-20 overflow-hidden">
+      <section className="bg-gradient-to-br from-yellow-50 to-white py-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-in-bottom">
@@ -112,7 +112,7 @@ export default function MercadoLibrePage() {
                 <Image
                   src="/mercadolibre-sf.png"
                   alt="Mercado Libre"
-                  width={300}
+                  width={250}
                   height={80}
                   className="mb-4"
                 />
