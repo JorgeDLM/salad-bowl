@@ -68,9 +68,13 @@ export default function CounterAnimation({
     };
   }, [isVisible, end, duration]);
 
+  const formatNumber = (num: number) => {
+    return num.toLocaleString('en-US');
+  };
+
   return (
     <div ref={counterRef} className={className}>
-      {prefix}{count}{suffix}
+      {prefix}{formatNumber(count)}{suffix}
     </div>
   );
 }

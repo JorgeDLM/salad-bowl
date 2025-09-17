@@ -119,11 +119,13 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} bg-white min-h-screen antialiased`}>
-        <Header />
-        <main className="min-h-screen">
-          {children}
-        </main>
-        <Footer />
+        <div className="select-none">
+          <Header />
+          <main className="min-h-screen">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   );
