@@ -1,48 +1,48 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "WeLoveCode | Desarrollo de Software que Genera Millones",
-  description: "Convertimos tu idea en un negocio de $1M+. Somos arquitectos de ingresos digitales con más de $50M recaudados por nuestros clientes.",
-  keywords: "desarrollo de software, páginas web, apps móviles, CRM, sistemas administrativos, programación México, desarrollo web profesional",
-  authors: [{ name: "WeLoveCode" }],
-  creator: "WeLoveCode",
-  publisher: "WeLoveCode",
+  title: "Jorge de la Mora Menéndez | Emprendedor • Producto & Operaciones • Tech-driven",
+  description: "Emprendedor mexicano especializado en producto y operaciones. Fundador de Mercado a la Mano (>$1M MXN/mes), WeLoveCode y Zephir Jewelry.",
+  keywords: "emprendedor, producto, operaciones, tecnología, marketplace, distribución, México, Puebla",
+  authors: [{ name: "Jorge de la Mora Menéndez" }],
+  creator: "Jorge de la Mora Menéndez",
+  publisher: "Jorge de la Mora Menéndez",
   robots: "index, follow",
   openGraph: {
     type: "website",
     locale: "es_MX",
-    url: "https://welovecode.mx",
-    siteName: "WeLoveCode",
-    title: "WeLoveCode | Desarrollo de Software que Genera Millones",
-    description: "Convertimos tu idea en un negocio de $1M+. Somos arquitectos de ingresos digitales con más de $50M recaudados por nuestros clientes.",
+    url: "https://jorgedlm.com",
+    siteName: "Jorge de la Mora Menéndez",
+    title: "Jorge de la Mora Menéndez | Emprendedor • Producto & Operaciones • Tech-driven",
+    description: "Emprendedor mexicano especializado en producto y operaciones. Fundador de Mercado a la Mano (>$1M MXN/mes), WeLoveCode y Zephir Jewelry.",
     images: [
       {
-        url: "/icono-app.png",
+        url: "/jorge-profile.jpg",
         width: 1200,
         height: 630,
-        alt: "WeLoveCode - Desarrollo de Software Profesional"
+        alt: "Jorge de la Mora Menéndez - Emprendedor y Fundador"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "WeLoveCode | Desarrollo de Software que Genera Millones",
-    description: "Convertimos tu idea en un negocio de $1M+. Somos arquitectos de ingresos digitales con más de $50M recaudados por nuestros clientes.",
-    images: ["/icono-app.png"]
+    title: "Jorge de la Mora Menéndez | Emprendedor • Producto & Operaciones • Tech-driven",
+    description: "Emprendedor mexicano especializado en producto y operaciones. Fundador de Mercado a la Mano (>$1M MXN/mes), WeLoveCode y Zephir Jewelry.",
+    images: ["/jorge-profile.jpg"]
   },
 };
 
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#7c3aed"
+  themeColor: "#1f2937"
 };
-
-import ClientLayout from "./ClientLayout";
 
 export default function RootLayout({
   children,
@@ -52,43 +52,78 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        <meta property="og:title" content="WeLoveCode | Desarrollo de Software que Genera Millones" />
-        <meta property="og:description" content="Convertimos tu idea en un negocio de $1M+. Somos arquitectos de ingresos digitales con más de $50M recaudados por nuestros clientes." />
-        <meta property="og:image" content="/icono-app.png" />
-        <meta property="og:url" content="https://welovecode.mx" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="WeLoveCode" />
-        <meta property="og:locale" content="es_MX" />
-        
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="WeLoveCode | Desarrollo de Software que Genera Millones" />
-        <meta name="twitter:description" content="Convertimos tu idea en un negocio de $1M+. Somos arquitectos de ingresos digitales con más de $50M recaudados por nuestros clientes." />
-        <meta name="twitter:image" content="/icono-app.png" />
-        
-        <meta name="description" content="Convertimos tu idea en un negocio de $1M+. Somos arquitectos de ingresos digitales con más de $50M recaudados por nuestros clientes." />
-        <meta name="keywords" content="desarrollo de software, páginas web, apps móviles, CRM, sistemas administrativos, programación México, desarrollo web profesional" />
-        <meta name="author" content="WeLoveCode" />
-        <meta name="robots" content="index, follow" />
-        
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="theme-color" content="#7c3aed" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        
-        {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17562407817"></script>
+        {/* JSON-LD Schema for Person */}
         <script
+          type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'AW-17562407817');
-            `,
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Jorge de la Mora Menéndez",
+              "jobTitle": "Emprendedor • Producto & Operaciones • Tech-driven",
+              "description": "Emprendedor mexicano especializado en producto y operaciones. Fundador de Mercado a la Mano, WeLoveCode y Zephir Jewelry.",
+              "url": "https://jorgedlm.com",
+              "image": "https://jorgedlm.com/jorge-profile.jpg",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Puebla",
+                "addressCountry": "México"
+              },
+              "alumniOf": {
+                "@type": "EducationalOrganization",
+                "name": "Universidad Iberoamericana Puebla",
+                "description": "Licenciatura en Economía y Finanzas"
+              },
+              "knowsLanguage": [
+                {
+                  "@type": "Language",
+                  "name": "Español",
+                  "proficiencyLevel": "Nativo"
+                },
+                {
+                  "@type": "Language", 
+                  "name": "Inglés",
+                  "proficiencyLevel": "Fluido"
+                },
+                {
+                  "@type": "Language",
+                  "name": "Francés", 
+                  "proficiencyLevel": "Fluido"
+                },
+                {
+                  "@type": "Language",
+                  "name": "Italiano",
+                  "proficiencyLevel": "Básico"
+                }
+              ],
+              "foundedOrganization": [
+                {
+                  "@type": "Organization",
+                  "name": "Mercado a la Mano",
+                  "url": "https://www.mercadoalamano.com"
+                },
+                {
+                  "@type": "Organization", 
+                  "name": "WeLoveCode",
+                  "url": "https://www.welovecode.mx"
+                },
+                {
+                  "@type": "Organization",
+                  "name": "Zephir Jewelry",
+                  "url": "https://www.zephir.mx"
+                }
+              ],
+              "email": "hola@welovecode.mx"
+            })
           }}
         />
       </head>
-      <body className={inter.className + " bg-gray-50 min-h-screen select-none"}>
-        <ClientLayout>{children}</ClientLayout>
+      <body className={`${inter.className} bg-white min-h-screen antialiased`}>
+        <Header />
+        <main className="min-h-screen">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );
