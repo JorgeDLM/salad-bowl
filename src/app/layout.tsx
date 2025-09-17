@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
+import DynamicHeader from "@/components/DynamicHeader";
 import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Jorge de la Mora Menéndez | Emprendedor • Producto & Operaciones • Tech-driven",
-  description: "Emprendedor mexicano especializado en producto y operaciones. Fundador de Mercado a la Mano (>$1M MXN/mes), WeLoveCode y Zephir Jewelry.",
+  description: "Emprendedor mexicano especializado en producto y operaciones. Fundador de Mercado a la Mano (+$1,000,000 MXN/mes), WeLoveCode y Zephir Jewelry.",
   keywords: "emprendedor, producto, operaciones, tecnología, marketplace, distribución, México, Puebla",
   authors: [{ name: "Jorge de la Mora Menéndez" }],
   creator: "Jorge de la Mora Menéndez",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     url: "https://jorgedlm.com",
     siteName: "Jorge de la Mora Menéndez",
     title: "Jorge de la Mora Menéndez | Emprendedor • Producto & Operaciones • Tech-driven",
-    description: "Emprendedor mexicano especializado en producto y operaciones. Fundador de Mercado a la Mano (>$1M MXN/mes), WeLoveCode y Zephir Jewelry.",
+    description: "Emprendedor mexicano especializado en producto y operaciones. Fundador de Mercado a la Mano (+$1,000,000 MXN/mes), WeLoveCode y Zephir Jewelry.",
     images: [
       {
         url: "/jorge-profile.jpg",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Jorge de la Mora Menéndez | Emprendedor • Producto & Operaciones • Tech-driven",
-    description: "Emprendedor mexicano especializado en producto y operaciones. Fundador de Mercado a la Mano (>$1M MXN/mes), WeLoveCode y Zephir Jewelry.",
+    description: "Emprendedor mexicano especializado en producto y operaciones. Fundador de Mercado a la Mano (+$1,000,000 MXN/mes), WeLoveCode y Zephir Jewelry.",
     images: ["/jorge-profile.jpg"]
   },
 };
@@ -120,7 +120,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} bg-white min-h-screen antialiased`}>
         <div className="select-none">
-          <Header />
+          <DynamicHeader />
           <main className="min-h-screen">
             {children}
           </main>

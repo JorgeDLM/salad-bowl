@@ -1,5 +1,9 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
+import ContactModal from '@/components/ContactModal';
 
 // Custom SVG Icons
 const ArrowLeftIcon = ({ className }: { className?: string }) => (
@@ -27,6 +31,8 @@ const RocketIcon = ({ className }: { className?: string }) => (
 );
 
 export default function WeLoveCodePage() {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
   const services = [
     {
       title: "Desarrollo Web",
@@ -54,56 +60,41 @@ export default function WeLoveCodePage() {
     {
       name: "Mercado a la Mano",
       description: "Marketplace que conecta productores con consumidores",
-      result: "+$1M MXN/mes en facturación"
+      link: "/proyectos/mercado-a-la-mano"
     },
     {
       name: "Zephir Jewelry",
       description: "E-commerce de joyería premium",
-      result: "Incremento 300% en ventas online"
+      link: "/proyectos/zephir-jewelry"
     },
     {
       name: "Client MX",
       description: "Plataforma de gestión inmobiliaria",
-      result: "Automatización completa de procesos"
+      link: "/proyectos/client-mx"
     }
   ];
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="bg-purple-600 text-white py-4 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link 
-            href="/" 
-            className="inline-flex items-center text-white hover:text-purple-200 transition-colors"
-          >
-            <ArrowLeftIcon className="w-5 h-5 mr-2" />
-            Volver al inicio
-          </Link>
-        </div>
-      </nav>
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-purple-50 to-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="flex items-center mb-6">
-                <Image
-                  src="/welovecode-logo.png"
-                  alt="WeLoveCode"
-                  width={80}
-                  height={80}
-                  className="mr-4"
-                />
-                <div>
-                  <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-2">
-                    WeLoveCode
-                  </h1>
-                  <p className="text-xl text-purple-600 font-medium">
-                    Agencia de Desarrollo de Software
-                  </p>
+            <div>           
+              <div className="relative mb-4">
+                <div className="text-5xl font-black bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]">
+                  WeLoveCode
                 </div>
+                {/* Additional glow effect */}
+                <div className="absolute inset-0 text-5xl font-black bg-gradient-to-r from-purple-400/20 via-blue-400/20 to-purple-400/20 bg-clip-text text-transparent blur-sm">
+                  WeLoveCode
+                </div>
+              </div>
+              <div>
+                <p className="text-xl text-purple-600 font-medium">
+                  Agencia de Desarrollo de Software
+                </p>
               </div>
               
               <p className="text-lg text-gray-600 mb-8">
@@ -111,28 +102,25 @@ export default function WeLoveCodePage() {
                 Transformamos ideas en aplicaciones web y móviles que impulsan el crecimiento de tu negocio.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  href="https://www.welovecode.mx"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors"
-                >
-                  Visitar sitio web
-                  <ExternalLinkIcon className="ml-2 w-4 h-4" />
-                </a>
-                <a
-                  href="mailto:hola@welovecode.mx"
-                  className="inline-flex items-center border border-purple-600 text-purple-600 px-6 py-3 rounded-lg font-medium hover:bg-purple-50 transition-colors"
+              <div className="flex justify-center sm:justify-start">
+                <button
+                  onClick={() => setIsContactModalOpen(true)}
+                  className="inline-flex items-center bg-purple-600 text-white px-8 py-4 rounded-lg font-medium hover:bg-purple-700 transition-colors text-lg"
                 >
                   Contactar
-                </a>
+                </button>
               </div>
             </div>
 
             <div className="flex justify-center">
-              <div className="relative w-80 h-80 bg-gradient-to-br from-purple-400 to-purple-600 rounded-3xl shadow-2xl flex items-center justify-center">
-                <CodeIcon className="w-32 h-32 text-white" />
+              <div className="relative w-80 h-80 bg-gradient-to-br from-purple-500 to-purple-600 rounded-3xl shadow-2xl flex items-center justify-center">
+
+                                <Image
+                                  src="/icono-welovecode.webp"
+                                  alt="Mercado a la Mano App"
+                                  width={250}
+                                  height={250}
+                                />
               </div>
             </div>
           </div>
@@ -183,15 +171,20 @@ export default function WeLoveCodePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {projects.map((project, index) => (
-              <div key={index} className="bg-purple-50 p-6 rounded-xl border border-purple-200">
+              <div key={index} className="bg-purple-50 p-6 rounded-xl border border-purple-200 flex flex-col h-full">
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">
                   {project.name}
                 </h3>
-                <p className="text-gray-600 mb-4">
+                <p className="text-gray-600 mb-4 flex-grow">
                   {project.description}
                 </p>
-                <div className="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium">
-                  {project.result}
+                <div className="mt-auto">
+                  <Link
+                    href={project.link}
+                    className="block w-full text-center bg-white border-2 border-purple-600 text-purple-600 px-4 py-2 rounded-lg font-medium hover:bg-purple-600 hover:text-white transition-colors"
+                  >
+                    Ver proyecto
+                  </Link>
                 </div>
               </div>
             ))}
@@ -257,6 +250,12 @@ export default function WeLoveCodePage() {
           </div>
         </div>
       </section>
+
+      {/* Contact Modal */}
+      <ContactModal 
+        isOpen={isContactModalOpen} 
+        onClose={() => setIsContactModalOpen(false)} 
+      />
     </div>
   );
 }
