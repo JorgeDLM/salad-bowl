@@ -1,5 +1,9 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
+import ContactModal from '@/components/ContactModal';
 
 // Custom SVG Icons
 const ArrowLeftIcon = ({ className }: { className?: string }) => (
@@ -26,17 +30,32 @@ const TargetIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
+const InventoryIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M9 9h.01M15 9h.01" />
+  </svg>
+);
+
+const CameraIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+  </svg>
+);
+
 export default function MercadoLibrePage() {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  
   const achievements = [
     {
-      metric: "Top 1%",
-      label: "Vendedor en categoría",
-      description: "Posicionamiento en el marketplace"
+      metric: "$3M",
+      label: "Pico de ventas mensuales",
+      description: "Máximo alcanzado en un mes"
     },
     {
-      metric: "500+",
-      label: "Ventas mensuales",
-      description: "Volumen constante de transacciones"
+      metric: "$100K+",
+      label: "Ventas mensuales actuales",
+      description: "Ingresos constantes y sostenibles"
     },
     {
       metric: "4.9★",
@@ -44,9 +63,9 @@ export default function MercadoLibrePage() {
       description: "Excelencia en servicio al cliente"
     },
     {
-      metric: "98%",
-      label: "Satisfacción del cliente",
-      description: "Comentarios positivos"
+      metric: "Top 1%",
+      label: "Vendedor en categoría",
+      description: "Posicionamiento en el marketplace"
     }
   ];
 
@@ -57,19 +76,19 @@ export default function MercadoLibrePage() {
       icon: <TargetIcon className="w-8 h-8" />
     },
     {
+      title: "Fotografía Superior",
+      description: "Toma de fotos profesionales que superan a la competencia y aumentan conversiones",
+      icon: <CameraIcon className="w-8 h-8" />
+    },
+    {
       title: "Gestión de Inventario",
       description: "Control preciso de stock y automatización de procesos de venta",
-      icon: <ShoppingCartIcon className="w-8 h-8" />
+      icon: <InventoryIcon className="w-8 h-8" />
     },
     {
       title: "Análisis de Mercado",
       description: "Investigación continua de tendencias y oportunidades de crecimiento",
       icon: <TrendingUpIcon className="w-8 h-8" />
-    },
-    {
-      title: "Servicio Premium",
-      description: "Atención al cliente excepcional que genera lealtad y recompras",
-      icon: <TargetIcon className="w-8 h-8" />
     }
   ];
 
@@ -84,67 +103,55 @@ export default function MercadoLibrePage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="bg-yellow-500 text-white py-4 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link 
-            href="/" 
-            className="inline-flex items-center text-white hover:text-yellow-200 transition-colors"
-          >
-            <ArrowLeftIcon className="w-5 h-5 mr-2" />
-            Volver al inicio
-          </Link>
-        </div>
-      </nav>
-
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-yellow-50 to-white py-20">
+      <section className="bg-gradient-to-br from-yellow-50 to-white py-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="flex items-center mb-6">
+            <div className="animate-slide-in-bottom">
+              <div className="mb-6 animate-fade-in-up">
                 <Image
-                  src="/mercadolibre-logo.png"
+                  src="/mercadolibre-sf.png"
                   alt="Mercado Libre"
-                  width={80}
+                  width={300}
                   height={80}
-                  className="mr-4"
+                  className="mb-4"
                 />
-                <div>
-                  <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-2">
-                    Mercado Libre
-                  </h1>
-                  <p className="text-xl text-yellow-600 font-medium">
-                    E-commerce & Marketplace Strategy
-                  </p>
-                </div>
+                <p className="text-xl text-yellow-600 font-medium animate-fade-in-up animation-delay-200">
+                  E-commerce & Marketplace Strategy
+                </p>
               </div>
               
-              <p className="text-lg text-gray-600 mb-8">
+              <p className="text-lg text-gray-600 mb-6 animate-fade-in-up animation-delay-400">
                 Experiencia desarrollando y escalando operaciones de e-commerce en Mercado Libre. 
-                Logré posicionarme como Top 1% de vendedores en mi categoría, 
+                <strong>Alcancé ventas de hasta $3 millones de pesos en un mes</strong>, actualmente mantengo 
+                ingresos constantes de <strong>$100,000+ mensuales</strong>.
+              </p>
+              
+              <p className="text-lg text-gray-600 mb-8 animate-fade-in-up animation-delay-600">
+                Posicionado como <strong>Top 1% de vendedores</strong> en algunas categorías, 
                 generando aprendizajes valiosos sobre marketplace optimization y customer experience.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  href="mailto:hola@welovecode.mx"
-                  className="inline-flex items-center bg-yellow-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-yellow-600 transition-colors"
+              <div className="flex justify-center sm:justify-start animate-bounce-in animation-delay-800">
+                <button
+                  onClick={() => setIsContactModalOpen(true)}
+                  className="inline-flex items-center bg-yellow-500 text-white px-8 py-4 rounded-lg font-medium hover:bg-yellow-600 transition-all duration-300 text-lg hover:scale-105 hover:shadow-xl animate-glow-pulse"
                 >
-                  Consultoría E-commerce
-                </a>
-                <a
-                  href="mailto:hola@welovecode.mx"
-                  className="inline-flex items-center border border-yellow-500 text-yellow-600 px-6 py-3 rounded-lg font-medium hover:bg-yellow-50 transition-colors"
-                >
-                  Más información
-                </a>
+                  Consultoría Personalizada
+                </button>
               </div>
             </div>
 
-            <div className="flex justify-center">
-              <div className="relative w-80 h-80 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-2xl shadow-2xl flex items-center justify-center">
-                <ShoppingCartIcon className="w-32 h-32 text-white" />
+            <div className="flex justify-center animate-bounce-in animation-delay-400">
+              <div className="relative w-80 h-80 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-2xl shadow-2xl flex items-center justify-center p-8 group hover:scale-105 transition-transform duration-500 animate-float">
+                <div className="absolute -inset-1 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000 animate-pulse"></div>
+                <Image
+                  src="/logo-mercado-libre.webp"
+                  alt="Mercado Libre App"
+                  width={400}
+                  height={400}
+                  className="relative z-10 rounded-xl shadow-lg transition-transform group-hover:scale-110 duration-500"
+                />
               </div>
             </div>
           </div>
@@ -154,7 +161,7 @@ export default function MercadoLibrePage() {
       {/* Achievements */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 animate-fade-in-up">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
               Resultados Alcanzados
             </h2>
@@ -165,14 +172,14 @@ export default function MercadoLibrePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {achievements.map((achievement, index) => (
-              <div key={index} className="bg-white p-6 rounded-xl shadow-lg text-center">
-                <div className="text-3xl font-bold text-yellow-600 mb-2">
+              <div key={index} className={`bg-white p-6 rounded-xl shadow-lg text-center group hover:shadow-xl transition-all duration-500 hover:scale-105 animate-bounce-in animation-delay-${(index + 2) * 200}`}>
+                <div className="text-3xl font-bold text-yellow-600 mb-2 group-hover:text-yellow-700 transition-colors animate-pulse-gentle">
                   {achievement.metric}
                 </div>
-                <div className="text-lg font-medium text-gray-900 mb-2">
+                <div className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors">
                   {achievement.label}
                 </div>
-                <div className="text-sm text-gray-600">
+                <div className="text-gray-600 group-hover:text-gray-500 transition-colors">
                   {achievement.description}
                 </div>
               </div>
@@ -184,7 +191,7 @@ export default function MercadoLibrePage() {
       {/* Strategies */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 animate-fade-in-up">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
               Estrategias Implementadas
             </h2>
@@ -195,14 +202,14 @@ export default function MercadoLibrePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {strategies.map((strategy, index) => (
-              <div key={index} className="bg-yellow-50 p-6 rounded-xl border border-yellow-200 hover:shadow-lg transition-shadow">
-                <div className="text-yellow-600 mb-4">
+              <div key={index} className={`bg-yellow-50 p-6 rounded-xl border border-yellow-200 group hover:shadow-xl transition-all duration-500 hover:scale-105 hover:bg-yellow-100 animate-slide-in-bottom animation-delay-${(index + 2) * 200}`}>
+                <div className="text-yellow-600 mb-4 group-hover:text-yellow-700 transition-colors group-hover:scale-110 transform duration-300">
                   {strategy.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-gray-700 transition-colors">
                   {strategy.title}
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-600 group-hover:text-gray-500 transition-colors">
                   {strategy.description}
                 </p>
               </div>
@@ -275,7 +282,7 @@ export default function MercadoLibrePage() {
       {/* Learnings */}
       <section className="py-16 bg-yellow-500 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 animate-fade-in-up">
             <h2 className="text-3xl font-bold mb-4">
               Aprendizajes Clave
             </h2>
@@ -286,9 +293,9 @@ export default function MercadoLibrePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {learnings.map((learning, index) => (
-              <div key={index} className="flex items-start p-4 bg-yellow-400 bg-opacity-20 rounded-lg">
-                <div className="w-2 h-2 bg-white rounded-full mt-2 mr-4 flex-shrink-0"></div>
-                <span className="text-yellow-50 font-medium">{learning}</span>
+              <div key={index} className={`flex items-start p-6 bg-white bg-opacity-90 rounded-lg shadow-md group hover:shadow-xl transition-all duration-500 hover:scale-105 hover:bg-opacity-100 animate-bounce-in animation-delay-${(index + 2) * 100}`}>
+                <div className="w-3 h-3 bg-yellow-600 rounded-full mt-1 mr-4 flex-shrink-0 group-hover:bg-yellow-700 transition-colors animate-pulse-gentle"></div>
+                <span className="text-gray-900 font-medium leading-relaxed group-hover:text-gray-800 transition-colors">{learning}</span>
               </div>
             ))}
           </div>
@@ -354,28 +361,28 @@ export default function MercadoLibrePage() {
       {/* CTA Section */}
       <section className="py-16 bg-gray-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">
+          <h2 className="text-3xl font-bold mb-4 animate-fade-in-up">
             ¿Necesitas Consultoría en E-commerce?
           </h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto animate-fade-in-up animation-delay-200">
             Aplica mi experiencia en marketplaces para hacer crecer tu negocio digital.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <a
-              href="mailto:hola@welovecode.mx"
-              className="inline-flex items-center bg-yellow-500 text-white px-8 py-4 rounded-lg font-medium hover:bg-yellow-600 transition-colors"
+          <div className="flex flex-col sm:flex-row justify-center gap-4 animate-bounce-in animation-delay-400">
+            <button
+              onClick={() => setIsContactModalOpen(true)}
+              className="inline-flex items-center bg-yellow-500 text-white px-8 py-4 rounded-lg font-medium hover:bg-yellow-600 transition-all duration-300 hover:scale-105 hover:shadow-xl animate-glow-pulse"
             >
-              Consultoría personalizada
-            </a>
-            <a
-              href="mailto:hola@welovecode.mx"
-              className="inline-flex items-center border-2 border-white text-white px-8 py-4 rounded-lg font-medium hover:bg-white hover:text-gray-900 transition-colors"
-            >
-              Más información
-            </a>
+              Consultoría Personalizada
+            </button>
           </div>
         </div>
       </section>
+
+      {/* Contact Modal */}
+      <ContactModal 
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+      />
     </div>
   );
 }

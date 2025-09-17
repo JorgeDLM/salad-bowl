@@ -78,49 +78,59 @@ export default function WeLoveCodePage() {
     <div className="min-h-screen bg-white">
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-purple-50 to-white py-20">
+      <section className="bg-gradient-to-br from-purple-50 to-white py-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>           
-              <div className="relative mb-4">
-                <div className="text-5xl font-black bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]">
-                  WeLoveCode
+            <div className="animate-slide-in-bottom">           
+              <div className="flex items-center mb-6 animate-bounce-in animation-delay-200">
+                <Image
+                  src="/welovecode-logo.png"
+                  alt="WeLoveCode"
+                  width={80}
+                  height={80}
+                  className="mr-4 rounded-2xl animate-glow-pulse"
+                />
+                <div>
+                  <div className="relative mb-2">
+                    <div className="text-5xl font-black bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(168,85,247,0.5)] animate-fade-in-up animation-delay-400">
+                      WeLoveCode
+                    </div>
+                    {/* Additional glow effect */}
+                    <div className="absolute inset-0 text-5xl font-black bg-gradient-to-r from-purple-400/20 via-blue-400/20 to-purple-400/20 bg-clip-text text-transparent blur-sm animate-pulse">
+                      WeLoveCode
+                    </div>
+                  </div>
+                  <p className="text-xl text-purple-600 font-medium animate-fade-in-up animation-delay-600">
+                    Agencia de Desarrollo de Software
+                  </p>
                 </div>
-                {/* Additional glow effect */}
-                <div className="absolute inset-0 text-5xl font-black bg-gradient-to-r from-purple-400/20 via-blue-400/20 to-purple-400/20 bg-clip-text text-transparent blur-sm">
-                  WeLoveCode
-                </div>
-              </div>
-              <div>
-                <p className="text-xl text-purple-600 font-medium">
-                  Agencia de Desarrollo de Software
-                </p>
               </div>
               
-              <p className="text-lg text-gray-600 mb-8">
+              <p className="text-lg text-gray-600 mb-8 animate-fade-in-up animation-delay-800">
                 Especializados en crear productos digitales que generan ingresos reales. 
                 Transformamos ideas en aplicaciones web y móviles que impulsan el crecimiento de tu negocio.
               </p>
 
-              <div className="flex justify-center sm:justify-start">
+              <div className="flex justify-center sm:justify-start animate-bounce-in animation-delay-1000">
                 <button
                   onClick={() => setIsContactModalOpen(true)}
-                  className="inline-flex items-center bg-purple-600 text-white px-8 py-4 rounded-lg font-medium hover:bg-purple-700 transition-colors text-lg"
+                  className="inline-flex items-center bg-purple-600 text-white px-8 py-4 rounded-lg font-medium hover:bg-purple-700 transition-all duration-300 text-lg hover:scale-105 hover:shadow-xl animate-glow-pulse"
                 >
                   Contactar
                 </button>
               </div>
             </div>
 
-            <div className="flex justify-center">
-              <div className="relative w-80 h-80 bg-gradient-to-br from-purple-500 to-purple-600 rounded-3xl shadow-2xl flex items-center justify-center">
-
-                                <Image
-                                  src="/icono-welovecode.webp"
-                                  alt="Mercado a la Mano App"
-                                  width={250}
-                                  height={250}
-                                />
+            <div className="flex justify-center animate-bounce-in animation-delay-400">
+              <div className="relative w-80 h-80 bg-gradient-to-br from-purple-500 to-purple-600 rounded-3xl shadow-2xl flex items-center justify-center group hover:scale-105 transition-transform duration-500 animate-float">
+                <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000 animate-pulse"></div>
+                <Image
+                  src="/icono-welovecode.webp"
+                  alt="WeLoveCode Icon"
+                  width={250}
+                  height={250}
+                  className="relative z-10 transition-transform group-hover:scale-110 duration-500"
+                />
               </div>
             </div>
           </div>
@@ -160,7 +170,7 @@ export default function WeLoveCodePage() {
       {/* Projects */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 animate-fade-in-up">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
               Proyectos Destacados
             </h2>
@@ -171,17 +181,17 @@ export default function WeLoveCodePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {projects.map((project, index) => (
-              <div key={index} className="bg-purple-50 p-6 rounded-xl border border-purple-200 flex flex-col h-full">
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+              <div key={index} className={`bg-purple-50 p-6 rounded-xl border border-purple-200 flex flex-col h-full group hover:shadow-xl transition-all duration-500 hover:scale-105 animate-bounce-in animation-delay-${(index + 2) * 200}`}>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors">
                   {project.name}
                 </h3>
-                <p className="text-gray-600 mb-4 flex-grow">
+                <p className="text-gray-600 mb-4 flex-grow group-hover:text-gray-700 transition-colors">
                   {project.description}
                 </p>
                 <div className="mt-auto">
                   <Link
                     href={project.link}
-                    className="block w-full text-center bg-white border-2 border-purple-600 text-purple-600 px-4 py-2 rounded-lg font-medium hover:bg-purple-600 hover:text-white transition-colors"
+                    className="block w-full text-center bg-white border-2 border-purple-600 text-purple-600 px-4 py-2 rounded-lg font-medium hover:bg-purple-600 hover:text-white transition-all duration-300 hover:scale-105 hover:shadow-lg"
                   >
                     Ver proyecto
                   </Link>

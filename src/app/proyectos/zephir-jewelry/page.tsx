@@ -71,47 +71,47 @@ export default function ZephirJewelryPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-black text-white py-20">
+      <section className="bg-black text-white py-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+            <div className="animate-fade-in-left">
               <div className="mb-8">
-              <Image
-                  src="/zephir-logo.png"
-                  alt="Zephir Jewelry"
-                  width={300}
-                  height={80}
-                  className="mr-4"
-                />
-                <div className="w-20 h-0.5 bg-white mt-6"></div>
+                <h1 className="text-5xl lg:text-6xl font-light text-white mb-4 tracking-wide animate-fade-in-up">
+                  ZEPHIR
+                </h1>
+                <p className="text-2xl text-gray-300 font-light tracking-widest animate-fade-in-up animation-delay-200">
+                  JEWELRY
+                </p>
+                <div className="w-20 h-0.5 bg-white mt-6 animate-expand-width animation-delay-400"></div>
               </div>
               
-              <p className="text-lg text-gray-300 mb-8 leading-relaxed">
+              <p className="text-lg text-gray-300 mb-8 leading-relaxed animate-fade-in-up animation-delay-600">
                 Joyería con piedras de laboratorio sustentables. Moissanita, zafiro sintético, 
                 diamante lab, rubí sintético y esmeralda de laboratorio desde 2022.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up animation-delay-800">
                 <a
                   href="https://www.zephir.mx"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center bg-white text-black px-8 py-3 font-medium tracking-wide hover:bg-gray-100 transition-colors"
+                  className="inline-flex items-center bg-white text-black px-8 py-3 font-medium tracking-wide hover:bg-gray-100 transition-all duration-300 hover:scale-105 hover:shadow-lg"
                 >
                   EXPLORAR COLECCIÓN
-                  <ExternalLinkIcon className="ml-2 w-4 h-4" />
+                  <ExternalLinkIcon className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </a>
               </div>
             </div>
 
-            <div className="flex justify-center">
-              <div className="relative">
+            <div className="flex justify-center animate-fade-in-right">
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-white/20 to-gray-300/20 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
                 <Image
                   src="/zephir-1.webp"
                   alt="Zephir Jewelry Collection"
                   width={400}
                   height={400}
-                  className="rounded-lg shadow-2xl"
+                  className="relative rounded-lg shadow-2xl transition-transform duration-700 hover:scale-105 animate-float"
                 />
               </div>
             </div>
@@ -122,29 +122,29 @@ export default function ZephirJewelryPage() {
       {/* Features */}
       <section className="py-20 bg-black text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 animate-fade-in-up">
             <h2 className="text-4xl font-light mb-8 tracking-wide">
               LO QUE NOS DISTINGUE
             </h2>
-            <div className="w-20 h-0.5 bg-white mx-auto"></div>
+            <div className="w-20 h-0.5 bg-white mx-auto animate-expand-width animation-delay-200"></div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {features.map((feature, index) => (
-              <div key={index} className="group">
+              <div key={index} className={`group animate-fade-in-up animation-delay-${(index + 1) * 200}`}>
                 <div className="flex items-start space-x-6">
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center group-hover:bg-gray-100 transition-colors">
-                      <div className="text-black">
+                    <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center group-hover:bg-gray-100 transition-all duration-500 group-hover:scale-110 group-hover:rotate-12 animate-pulse-gentle">
+                      <div className="text-black transition-transform group-hover:scale-110">
                         {feature.icon}
                       </div>
                     </div>
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-2xl font-light text-white mb-4 tracking-wide">
+                    <h3 className="text-2xl font-light text-white mb-4 tracking-wide group-hover:text-gray-100 transition-colors">
                       {feature.title}
                     </h3>
-                    <p className="text-gray-300 leading-relaxed">
+                    <p className="text-gray-300 leading-relaxed group-hover:text-white transition-colors">
                       {feature.description}
                     </p>
                   </div>

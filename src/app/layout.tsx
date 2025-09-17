@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     description: "Emprendedor mexicano especializado en producto y operaciones. Fundador de Mercado a la Mano (+$1,000,000 MXN/mes), WeLoveCode y Zephir Jewelry.",
     images: [
       {
-        url: "/jorge-profile.jpg",
+        url: "/yoFoto.webp",
         width: 1200,
         height: 630,
         alt: "Jorge de la Mora Menéndez - Emprendedor y Fundador"
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Jorge de la Mora Menéndez | Emprendedor • Producto & Operaciones • Tech-driven",
     description: "Emprendedor mexicano especializado en producto y operaciones. Fundador de Mercado a la Mano (+$1,000,000 MXN/mes), WeLoveCode y Zephir Jewelry.",
-    images: ["/jorge-profile.jpg"]
+    images: ["/yoFoto.webp"]
   },
 };
 
@@ -63,7 +63,7 @@ export default function RootLayout({
               "jobTitle": "Emprendedor • Producto & Operaciones • Tech-driven",
               "description": "Emprendedor mexicano especializado en producto y operaciones. Fundador de Mercado a la Mano, WeLoveCode y Zephir Jewelry.",
               "url": "https://jorgedlm.com",
-              "image": "https://jorgedlm.com/jorge-profile.jpg",
+              "image": "https://jorgedlm.com/yoFoto.webp",
               "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Puebla",
