@@ -71,7 +71,7 @@ export default function ZephirJewelryPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-black text-white py-20 overflow-hidden">
+      <section className="bg-black text-white py-10 md:py-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in-left">
