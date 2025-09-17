@@ -173,7 +173,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             <div>
               <h4 className="font-bold mb-4">Contacto</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="mailto:hola@welovecode.mx" className="hover:text-white transition">hola@welovecode.mx</a></li>
+                <li><a href="mailto:hola@welovecode.mx" className="hover:text-white transition">palombaco@live.com</a></li>
                 <li><button onClick={() => openModal()} className="hover:text-white transition text-left">WhatsApp</button></li>
               </ul>
             </div>

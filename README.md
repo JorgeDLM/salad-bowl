@@ -33,7 +33,7 @@ Abre [http://localhost:3000](http://localhost:3000) para ver el sitio.
 
 ## 📧 Contacto
 
-- **Email**: hola@welovecode.dev
+- **Email**: palombaco@live.com
 - **WhatsApp**: Disponible en el sitio web
 - **Consulta Gratuita**: 30 minutos sin costo
 

@@ -1,6 +1,10 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import CounterAnimation from '@/components/CounterAnimation';
+import ContactModal from '@/components/ContactModal';
+import { useState } from 'react';
 
 // Custom SVG Icons
 const ArrowRightIcon = ({ className }: { className?: string }) => (
@@ -22,6 +26,8 @@ const MailIcon = ({ className }: { className?: string }) => (
 );
 
 export default function HomePage() {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
   const kpis = [
     {
       value: 30000000,
@@ -153,12 +159,12 @@ export default function HomePage() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <a 
-                  href="mailto:palombaco@live.com"
+                <button 
+                  onClick={() => setIsContactModalOpen(true)}
                   className="bg-gray-900 text-white px-8 py-4 rounded-lg font-semibold hover:bg-gray-800 transition-all duration-300 text-center shadow-lg hover:shadow-xl"
                 >
                   Contactar
-                </a>
+                </button>
                 <Link 
                   href="#proyectos"
                   className="border-2 border-gray-900 text-gray-900 px-8 py-4 rounded-lg font-semibold hover:bg-gray-900 hover:text-white transition-all duration-300 text-center"
@@ -397,15 +403,21 @@ export default function HomePage() {
           <p className="text-xl text-gray-300 mb-8">
             Estoy siempre abierto a nuevas oportunidades y proyectos innovadores
           </p>
-          <a 
-            href="mailto:palombaco@live.com"
+          <button 
+            onClick={() => setIsContactModalOpen(true)}
             className="inline-flex items-center bg-white text-gray-900 px-8 py-4 rounded-lg font-medium hover:bg-gray-100 transition-colors"
           >
             Enviar mensaje
             <MailIcon className="ml-2 w-5 h-5" />
-          </a>
+          </button>
         </div>
       </section>
+
+      {/* Contact Modal */}
+      <ContactModal 
+        isOpen={isContactModalOpen} 
+        onClose={() => setIsContactModalOpen(false)} 
+      />
     </div>
   );
 }

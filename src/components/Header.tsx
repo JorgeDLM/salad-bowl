@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import ContactModal from './ContactModal';
 
 interface HeaderProps {
   backgroundColor?: string;
@@ -177,17 +178,25 @@ export default function Header({
                 </div>
               </div>
               
-              <a 
-                href="mailto:hola@welovecode.mx" 
-                className={`block px-3 py-2 text-base font-medium ${textColor} ${hoverTextColor} hover:bg-gray-50 rounded-md transition-colors`}
-                onClick={() => setIsMenuOpen(false)}
+              <button 
+                onClick={() => {
+                  setIsContactModalOpen(true);
+                  setIsMenuOpen(false);
+                }}
+                className={`block w-full text-left px-3 py-2 text-base font-medium ${textColor} ${hoverTextColor} hover:bg-gray-50 rounded-md transition-colors`}
               >
                 Contacto
-              </a>
+              </button>
             </div>
           </div>
         )}
       </nav>
+
+      {/* Contact Modal */}
+      <ContactModal 
+        isOpen={isContactModalOpen} 
+        onClose={() => setIsContactModalOpen(false)} 
+      />
     </header>
   );
 }

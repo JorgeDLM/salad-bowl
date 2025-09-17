@@ -1,6 +1,11 @@
+'use client';
+
 import Link from 'next/link';
+import ContactModal from './ContactModal';
+import { useState } from 'react';
 
 export default function Footer() {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const currentYear = new Date().getFullYear();
 
   return (
@@ -12,13 +17,13 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Contacto</h3>
             <div className="space-y-2">
               <p className="text-gray-300">
-                <a 
-                  href="mailto:hola@welovecode.mx" 
-                  className="hover:text-white transition-colors"
-                  aria-label="Enviar email a Jorge de la Mora"
+                <button 
+                  onClick={() => setIsContactModalOpen(true)}
+                  className="hover:text-white transition-colors text-left"
+                  aria-label="Contactar a Jorge de la Mora"
                 >
-                  hola@welovecode.mx
-                </a>
+                  palombaco@live.com
+                </button>
               </p>
               <p className="text-gray-300">Puebla, México</p>
             </div>
@@ -82,12 +87,12 @@ export default function Footer() {
                 </Link>
               </p>
               <p>
-                <a 
-                  href="mailto:hola@welovecode.mx" 
-                  className="text-gray-300 hover:text-white transition-colors"
+                <button 
+                  onClick={() => setIsContactModalOpen(true)}
+                  className="text-gray-300 hover:text-white transition-colors text-left"
                 >
                   Contacto
-                </a>
+                </button>
               </p>
             </div>
           </div>
@@ -99,6 +104,12 @@ export default function Footer() {
           </p>
         </div>
       </div>
+
+      {/* Contact Modal */}
+      <ContactModal 
+        isOpen={isContactModalOpen} 
+        onClose={() => setIsContactModalOpen(false)} 
+      />
     </footer>
   );
 }

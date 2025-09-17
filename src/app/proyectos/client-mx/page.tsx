@@ -1,5 +1,9 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
+import ClientInfoModal from '@/components/ClientInfoModal';
 
 // Custom SVG Icons
 const ArrowLeftIcon = ({ className }: { className?: string }) => (
@@ -33,69 +37,54 @@ const UsersIcon = ({ className }: { className?: string }) => (
 );
 
 export default function ClientMXPage() {
+  const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
+
   const features = [
     {
-      title: "Gestión de Propiedades",
-      description: "Sistema completo para administrar inventario inmobiliario",
-      icon: <BuildingIcon className="w-8 h-8" />
-    },
-    {
-      title: "Analytics Avanzados",
-      description: "Reportes y métricas en tiempo real para toma de decisiones",
-      icon: <ChartIcon className="w-8 h-8" />
-    },
-    {
-      title: "CRM Integrado",
-      description: "Gestión completa de clientes y seguimiento de leads",
+      title: "Red de Inmobiliarios",
+      description: "App que conecta inmobiliarios entre sí para formar equipos colaborativos",
       icon: <UsersIcon className="w-8 h-8" />
     },
     {
-      title: "Automatización",
-      description: "Procesos automatizados que ahorran tiempo y recursos",
+      title: "Comisiones Compartidas",
+      description: "Sistema para establecer y compartir comisiones entre colaboradores",
       icon: <ChartIcon className="w-8 h-8" />
+    },
+    {
+      title: "Cartera Masiva",
+      description: "Plataforma que alcanzó 2,500 propiedades comisionables activas",
+      icon: <BuildingIcon className="w-8 h-8" />
+    },
+    {
+      title: "Distribución Multi-canal",
+      description: "Propiedades distribuidas en Platinum.mx e Inmuebles.store",
+      icon: <BuildingIcon className="w-8 h-8" />
     }
   ];
 
   const benefits = [
     {
-      metric: "80%",
-      label: "Reducción en tiempo administrativo",
-      description: "Automatización de procesos manuales"
+      metric: "2,500",
+      label: "Propiedades Comisionables",
+      description: "Cartera activa en la plataforma"
+    },
+    {
+      metric: "2,300",
+      label: "Corredores Contactados",
+      description: "Solo en la ciudad de Puebla"
+    },
+    {
+      metric: "6",
+      label: "Plataformas Integradas",
+      description: "Client.mx, Platinum.mx, Inmuebles.store + Apps móviles"
     },
     {
       metric: "100%",
-      label: "Digitalización de procesos",
-      description: "Eliminación completa del papel"
-    },
-    {
-      metric: "300%",
-      label: "Mejora en seguimiento",
-      description: "Tracking completo de leads y clientes"
-    },
-    {
-      metric: "24/7",
-      label: "Disponibilidad del sistema",
-      description: "Acceso desde cualquier dispositivo"
+      label: "Comisiones Transparentes",
+      description: "Sistema claro de participación"
     }
   ];
 
-  const modules = [
-    {
-      name: "Inventario",
-      description: "Gestión completa de propiedades disponibles",
-      features: ["Catálogo digital", "Fotos y videos", "Filtros avanzados", "Disponibilidad en tiempo real"]
-    },
-    {
-      name: "Clientes",
-      description: "CRM especializado para el sector inmobiliario",
-      features: ["Perfiles detallados", "Historial de interacciones", "Seguimiento automático", "Comunicación integrada"]
-    },
-    {
-      name: "Reportes",
-      description: "Analytics y métricas de negocio",
-      features: ["Dashboard ejecutivo", "Reportes personalizados", "Métricas de ventas", "Análisis de tendencias"]
-    }
-  ];
 
   return (
     <div className="min-h-screen bg-white">
@@ -115,29 +104,29 @@ export default function ClientMXPage() {
               </div>
                 <div>
                   <p className="text-xl text-green-600 font-medium">
-                    Plataforma de Gestión Inmobiliaria
+                    Red de Colaboración Inmobiliaria
                   </p>
                 </div>
               
               <p className="text-lg text-gray-600 mb-8">
-                Sistema integral de gestión inmobiliaria que automatiza procesos, 
-                optimiza la administración de propiedades y mejora la experiencia del cliente. 
-                Desarrollado específicamente para el mercado mexicano.
+                Red de sistemas que funcionan en unísono para conectar inmobiliarios entre sí. 
+                App donde todos pueden subir propiedades en venta y establecer comisiones compartidas, 
+                formando equipos para no perder ventas ante la gran oferta de propiedades disponibles.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
-                  href="mailto:hola@welovecode.mx"
+                  href="#resultados"
                   className="inline-flex items-center bg-green-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700 transition-colors"
                 >
-                  Solicitar demo
+                  Logros del proyecto
                 </a>
-                <a
-                  href="mailto:hola@welovecode.mx"
+                <button
+                  onClick={() => setIsInfoModalOpen(true)}
                   className="inline-flex items-center border border-green-600 text-green-600 px-6 py-3 rounded-lg font-medium hover:bg-green-50 transition-colors"
                 >
                   Más información
-                </a>
+                </button>
               </div>
             </div>
 
@@ -181,7 +170,7 @@ export default function ClientMXPage() {
       </section>
 
       {/* Benefits */}
-      <section className="py-16 bg-white">
+      <section id="resultados" className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
@@ -210,111 +199,74 @@ export default function ClientMXPage() {
         </div>
       </section>
 
-      {/* Modules */}
-      <section className="py-16 bg-gray-50">
+
+
+      {/* Project Status Section */}
+      <section className="py-16 bg-gradient-to-br from-yellow-50 to-orange-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Módulos del Sistema
+              Estado del Proyecto
             </h2>
-            <p className="text-lg text-gray-600">
-              Funcionalidades integradas para una gestión completa
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Un proyecto ambicioso que demostró el potencial de conectar el ecosistema inmobiliario
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {modules.map((module, index) => (
-              <div key={index} className="bg-white p-8 rounded-xl shadow-lg">
-                <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-                  {module.name}
-                </h3>
-                <p className="text-gray-600 mb-6">
-                  {module.description}
-                </p>
-                <ul className="space-y-2">
-                  {module.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center text-gray-700">
-                      <div className="w-2 h-2 bg-green-600 rounded-full mr-3"></div>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Lo que se logró:</h3>
+              <div className="space-y-4">
+                <div className="flex items-start">
+                  <div className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-4 flex-shrink-0"></div>
+                  <p className="text-gray-700"><strong>2,500 propiedades</strong> comisionables en la plataforma</p>
+                </div>
+                <div className="flex items-start">
+                  <div className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-4 flex-shrink-0"></div>
+                  <p className="text-gray-700"><strong>2,300 corredores</strong> contactados en Puebla</p>
+                </div>
+                <div className="flex items-start">
+                  <div className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-4 flex-shrink-0"></div>
+                  <p className="text-gray-700"><strong>6 plataformas</strong> integradas funcionando</p>
+                </div>
+                <div className="flex items-start">
+                  <div className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-4 flex-shrink-0"></div>
+                  <p className="text-gray-700"><strong>Apps móviles</strong> en App Store y Play Store</p>
+                </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </div>
 
-      {/* Technology */}
-      <section className="py-16 bg-green-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">
-              Tecnología de Vanguardia
-            </h2>
-            <p className="text-xl text-green-100 max-w-3xl mx-auto">
-              Desarrollado con las últimas tecnologías para garantizar rendimiento, 
-              seguridad y escalabilidad en tu negocio inmobiliario.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="text-4xl font-bold mb-2">Cloud</div>
-              <div className="text-green-200">Infraestructura en la nube</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold mb-2">API</div>
-              <div className="text-green-200">Integraciones flexibles</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold mb-2">Mobile</div>
-              <div className="text-green-200">Acceso desde cualquier dispositivo</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Proceso de Implementación
-            </h2>
-            <p className="text-lg text-gray-600">
-              De la consulta inicial a la operación completa
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-                1
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Análisis y lecciones:</h3>
+              <div className="bg-white p-6 rounded-xl shadow-lg space-y-4">
+                <div>
+                  <p className="text-gray-700 mb-2">
+                    <strong>Aceptación excelente:</strong> La respuesta de los corredores inmobiliarios fue muy positiva, 
+                    validando completamente el concepto y la necesidad del mercado.
+                  </p>
+                </div>
+                
+                <div>
+                  <p className="text-gray-700 mb-2">
+                    <strong>Punto crítico identificado:</strong> El buscador de propiedades no estaba optimizado, 
+                    dificultando encontrar inmuebles específicos. Esta herramienta era clave para el éxito del proyecto.
+                  </p>
+                </div>
+                
+                <div>
+                  <p className="text-gray-700 mb-2">
+                    <strong>Momento decisivo:</strong> Fue precisamente en el desarrollo de los algoritmos de búsqueda 
+                    donde el programador líder abandonó el proyecto, dejándolo incompleto.
+                  </p>
+                </div>
+                
+                <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-400">
+                  <p className="text-gray-700">
+                    <strong>Capacidad actual:</strong> Hoy cuento con el equipo y conocimientos necesarios 
+                    para crear los algoritmos de búsqueda optimizados que el proyecto requiere para triunfar.
+                  </p>
+                </div>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Análisis</h3>
-              <p className="text-gray-600">Evaluamos tus necesidades específicas</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-                2
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Configuración</h3>
-              <p className="text-gray-600">Personalizamos la plataforma</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-                3
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Capacitación</h3>
-              <p className="text-gray-600">Entrenamos a tu equipo</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-                4
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Lanzamiento</h3>
-              <p className="text-gray-600">Puesta en marcha y soporte</p>
             </div>
           </div>
         </div>
@@ -324,28 +276,37 @@ export default function ClientMXPage() {
       <section className="py-16 bg-gray-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">
-            Transforma tu Negocio Inmobiliario
+            ¿Interesado en el Concepto?
           </h2>
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Descubre cómo Client MX puede automatizar tus procesos y 
-            mejorar la eficiencia de tu empresa inmobiliaria.
+            Client MX demostró el potencial de revolucionar la colaboración inmobiliaria. 
+            Hablemos sobre cómo aplicar estos aprendizajes a nuevos proyectos.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <a
-              href="mailto:hola@welovecode.mx"
+              href="mailto:palombaco@live.com"
               className="inline-flex items-center bg-green-600 text-white px-8 py-4 rounded-lg font-medium hover:bg-green-700 transition-colors"
             >
-              Solicitar demo gratuita
+              Discutir el proyecto
             </a>
             <a
-              href="mailto:hola@welovecode.mx"
+              href="https://www.client.mx"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center border-2 border-white text-white px-8 py-4 rounded-lg font-medium hover:bg-white hover:text-gray-900 transition-colors"
             >
-              Consulta personalizada
+              Ver www.client.mx
+              <ExternalLinkIcon className="ml-2 w-4 h-4" />
             </a>
           </div>
         </div>
       </section>
+
+      {/* Client Info Modal */}
+      <ClientInfoModal 
+        isOpen={isInfoModalOpen} 
+        onClose={() => setIsInfoModalOpen(false)} 
+      />
     </div>
   );
 }
