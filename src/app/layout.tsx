@@ -37,9 +37,9 @@ export const metadata: Metadata = {
       "Ejecución y estrategia de producto/ops para crecer con márgenes sanos.",
     images: [
       // JPG fallback primero (WhatsApp-friendly)
-      { url: "/yoFoto.webp.jpg", width: 1200, height: 630, alt: "Jorge de la Mora - cover" },
+      { url: "/yoFoto.jpg", width: 1200, height: 630, alt: "Jorge de la Mora - cover" },
       // Opcional: versión WebP
-      { url: "/yoFoto.webp.webp", width: 1200, height: 630, alt: "Jorge de la Mora - cover", type: "image/webp" },
+      { url: "/yoFoto.webp", width: 1200, height: 630, alt: "Jorge de la Mora - cover", type: "image/webp" },
     ],
   },
   twitter: {
