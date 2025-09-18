@@ -58,9 +58,9 @@ export default function MercadoLibrePage() {
       description: "Ingresos constantes y sostenibles"
     },
     {
-      metric: "4.9★",
-      label: "Calificación promedio",
-      description: "Excelencia en servicio al cliente"
+      metric: "8,000+",
+      label: "Productos en inventario",
+      description: "Gestión de stock diversificado"
     },
     {
       metric: "Top 1%",

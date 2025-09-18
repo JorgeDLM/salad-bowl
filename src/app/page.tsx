@@ -25,6 +25,24 @@ const MailIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
+const PurposeIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+  </svg>
+);
+
+const MotivationIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+  </svg>
+);
+
+const PassionIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+  </svg>
+);
+
 export default function HomePage() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
@@ -172,6 +190,80 @@ export default function HomePage() {
                   Ver Proyectos
                 </Link>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Personal Section */}
+      <section className="py-20 bg-gradient-to-br from-slate-50 via-blue-50/30 to-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              Quién Soy
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-slate-600 via-gray-600 to-zinc-600 mx-auto mb-6"></div>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Más allá de los números y proyectos, estas son las motivaciones que impulsan todo lo que hago
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            <div className="group hover:scale-105 transition-all duration-300">
+              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 h-full hover:shadow-xl transition-shadow">
+                <div className="w-14 h-14 bg-gradient-to-br from-slate-700 to-slate-800 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <PurposeIcon className="w-7 h-7 text-slate-100" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  Mi Propósito
+                </h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Soy un hombre al que le llena <strong>impulsar a otros a dar su mejor versión</strong>, 
+                  ya sea en negocios, emocional o espiritual. En ello encuentro yo igual impulso y 
+                  construyo mi mejor versión.
+                </p>
+              </div>
+            </div>
+
+            <div className="group hover:scale-105 transition-all duration-300">
+              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 h-full hover:shadow-xl transition-shadow">
+                <div className="w-14 h-14 bg-gradient-to-br from-gray-700 to-gray-800 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <MotivationIcon className="w-7 h-7 text-gray-100" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  Lo Que Me Mueve
+                </h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Me gusta <strong>desarrollar ideas, crear productos y generar impacto positivo</strong> en la sociedad. 
+                  La programación me permite desarrollar tecnología para hacer más eficientes mis problemas del día a día.
+                </p>
+              </div>
+            </div>
+
+            <div className="group hover:scale-105 transition-all duration-300">
+              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 h-full hover:shadow-xl transition-shadow">
+                <div className="w-14 h-14 bg-gradient-to-br from-zinc-700 to-zinc-800 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <PassionIcon className="w-7 h-7 text-zinc-100" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  Mis Pasiones
+                </h3>
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  Encontré pasión en la <strong>joyería</strong> - las piedras y piezas que transmiten belleza.
+                </p>
+                <p className="text-gray-700 leading-relaxed">
+                  Me encanta la <strong>naturaleza, la disciplina, el ejercicio</strong>, compartir y debatir ideas, 
+                  y explorar las emociones y la psique.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 p-10 rounded-3xl shadow-2xl text-center">
+              <blockquote className="text-2xl lg:text-xl font-medium text-white italic leading-relaxed">
+                "En cada proyecto busco crear valor real que transforme vidas y genere impacto positivo duradero."
+              </blockquote>
             </div>
           </div>
         </div>
