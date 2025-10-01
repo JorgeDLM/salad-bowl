@@ -45,9 +45,9 @@ export default function Header({
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   const projects = [
-    { name: 'BluCactus MX', href: '/#proyectos' },
+    { name: 'BluCactus MX', href: '/proyectos/blucactus-mx' },
     { name: 'Kraken Videos', href: '/proyectos/kraken-videos' },
-    { name: 'Kadabra Productions', href: '/#proyectos' },
+    { name: 'Kadabra Productions', href: '/proyectos/kadabra-productions' },
     { name: 'Somos Volt', href: '/proyectos/somos-volt' },
   ];
 

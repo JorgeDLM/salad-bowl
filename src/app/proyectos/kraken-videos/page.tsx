@@ -95,7 +95,7 @@ export default function KrakenVideosPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-cyan-900">
+    <div className="min-h-screen bg-black">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Animated Background */}
@@ -108,7 +108,7 @@ export default function KrakenVideosPage() {
         <div className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <div className="mb-12">
             <Image
-              src="/kraken-logo.jpg"
+              src="/kraken-logo.webp"
               alt="Kraken Videos Logo"
               width={300}
               height={120}
