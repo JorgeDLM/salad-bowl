@@ -9,7 +9,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-black text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Contact Info */}
@@ -20,9 +20,9 @@ export default function Footer() {
                 <button 
                   onClick={() => setIsContactModalOpen(true)}
                   className="hover:text-white transition-colors text-left"
-                  aria-label="Contactar a Jorge de la Mora"
+                  aria-label="Contactar a Adriana Mejía"
                 >
-                  palombaco@live.com
+                  adriana.mejiarivera@gmail.com
                 </button>
               </p>
               <p className="text-gray-300">Puebla, México</p>
@@ -31,37 +31,19 @@ export default function Footer() {
 
           {/* Projects */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Proyectos</h3>
+            <h3 className="text-lg font-semibold mb-4">Experiencia</h3>
             <div className="space-y-2">
-              <p>
-                <a 
-                  href="https://www.mercadoalamano.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
-                  Mercado a la Mano
-                </a>
+              <p className="text-gray-300">
+                BluCactus MX
               </p>
-              <p>
-                <a 
-                  href="https://www.welovecode.mx" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
-                  WeLoveCode
-                </a>
+              <p className="text-gray-300">
+                Kraken Videos
               </p>
-              <p>
-                <a 
-                  href="https://www.zephir.mx" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
-                  Zephir Jewelry
-                </a>
+              <p className="text-gray-300">
+                Kadabra Productions
+              </p>
+              <p className="text-gray-300">
+                Somos Volt
               </p>
             </div>
           </div>
@@ -80,10 +62,10 @@ export default function Footer() {
               </p>
               <p>
                 <Link 
-                  href="/proyectos/mercado-a-la-mano" 
+                  href="/#proyectos" 
                   className="text-gray-300 hover:text-white transition-colors"
                 >
-                  Proyectos
+                  Experiencia
                 </Link>
               </p>
               <p>
@@ -100,7 +82,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © {currentYear} Jorge de la Mora Menéndez. Todos los derechos reservados.
+            © {currentYear} Marcela Adriana Mejía Rivera. Todos los derechos reservados.
           </p>
         </div>
       </div>

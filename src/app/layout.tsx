@@ -10,45 +10,47 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   metadataBase: new URL("https://jorge-de-la-mora-cv.netlify.app/"),
   title:
-    "Producto & Operaciones para escalar negocios | Jorge de la Mora",
+    "Creative Project Manager & Marketing Strategist | Adriana Mejía Rivera",
   description:
-    "Ayudo a escalar operaciones y producto con enfoque en métricas, procesos y tecnología. Fundador de Mercado a la Mano, WeLoveCode y Zephir Jewelry.",
+    "Creative y data-driven Project Manager con 8+ años en marketing y liderazgo creativo. Especialista en campañas multi-canal, gestión de equipos internacionales y estrategias de performance digital.",
   keywords: [
-    "producto",
-    "operaciones",
-    "estrategia",
-    "tecnología",
-    "marketplace",
+    "project manager",
+    "marketing",
+    "creative",
+    "digital marketing",
+    "meta ads",
+    "scrum",
+    "kanban",
     "México",
     "Puebla",
   ],
-  authors: [{ name: "Jorge de la Mora Menéndez", url: "https://jorge-de-la-mora-cv.netlify.app/" }],
-  creator: "Jorge de la Mora Menéndez",
-  publisher: "Jorge de la Mora Menéndez",
+  authors: [{ name: "Marcela Adriana Mejía Rivera", url: "https://jorge-de-la-mora-cv.netlify.app/" }],
+  creator: "Marcela Adriana Mejía Rivera",
+  publisher: "Marcela Adriana Mejía Rivera",
   robots: "index, follow",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "es_MX",
     url: "https://jorge-de-la-mora-cv.netlify.app/",
-    siteName: "Jorge de la Mora",
-    title: "Producto & Operaciones para escalar negocios",
+    siteName: "Adriana Mejía Rivera",
+    title: "Creative Project Manager & Marketing Strategist",
     description:
-      "Ejecución y estrategia de producto/ops para crecer con márgenes sanos.",
+      "Creative y data-driven Project Manager con 8+ años transformando el rendimiento de marketing con ROI medible.",
     images: [
       // JPG fallback primero (WhatsApp-friendly)
-      { url: "/yoFoto.jpg", width: 1200, height: 630, alt: "Jorge de la Mora - cover" },
+      { url: "/adriana-foto.jpg", width: 1200, height: 630, alt: "Adriana Mejía Rivera - cover" },
       // Opcional: versión WebP
-      { url: "/yoFoto.webp", width: 1200, height: 630, alt: "Jorge de la Mora - cover", type: "image/webp" },
+      { url: "/adriana-foto.webp", width: 1200, height: 630, alt: "Adriana Mejía Rivera - cover", type: "image/webp" },
     ],
   },
   twitter: {
     card: "summary_large_image",
     site: "@", // si tienes usuario, colócalo
-    title: "Producto & Operaciones | Jorge de la Mora",
+    title: "Creative Project Manager | Adriana Mejía Rivera",
     description:
-      "Estrategia y ejecución para escalar con tecnología y procesos.",
-    images: ["/og.jpg"],
+      "Creative y data-driven Project Manager especializada en marketing digital y liderazgo de equipos internacionales.",
+    images: ["/adriana-foto.jpg"],
   },
 };
 
@@ -70,15 +72,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "@context": "https://schema.org",
               "@type": "Person",
               "@id": "https://jorge-de-la-mora-cv.netlify.app//#person",
-              name: "Jorge de la Mora Menéndez",
-              jobTitle: "Producto & Operaciones",
+              name: "Marcela Adriana Mejía Rivera",
+              jobTitle: "Creative Project Manager & Marketing Strategist",
               url: "https://jorge-de-la-mora-cv.netlify.app/",
-              image: "https://jorge-de-la-mora-cv.netlify.app//og.jpg",
+              image: "https://jorge-de-la-mora-cv.netlify.app//adriana-foto.jpg",
               alumniOf: {
                 "@type": "EducationalOrganization",
-                name: "Universidad Iberoamericana Puebla",
+                name: "UPAEP, Puebla, México",
               },
-              knowsLanguage: ["es", "en", "fr", "it"],
+              knowsLanguage: ["es", "en", "fr"],
               sameAs: [
                 // agrega redes si quieres
               ],

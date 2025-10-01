@@ -45,11 +45,10 @@ export default function Header({
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   const projects = [
-    { name: 'Mercado a la Mano', href: '/proyectos/mercado-a-la-mano' },
-    { name: 'Client MX', href: '/proyectos/client-mx' },
-    { name: 'WeLoveCode', href: '/proyectos/welovecode' },
-    { name: 'Zephir Jewelry', href: '/proyectos/zephir-jewelry' },
-    { name: 'Mercado Libre', href: '/proyectos/mercado-libre' },
+    { name: 'BluCactus MX', href: '/#proyectos' },
+    { name: 'Kraken Videos', href: '/proyectos/kraken-videos' },
+    { name: 'Kadabra Productions', href: '/#proyectos' },
+    { name: 'Somos Volt', href: '/proyectos/somos-volt' },
   ];
 
   const textColor = backgroundColor.includes('white') || backgroundColor.includes('slate') || backgroundColor.includes('blue') ? 'text-gray-900' : 'text-white';
@@ -76,7 +75,7 @@ export default function Header({
                 className={`text-xl font-bold ${textColor} ${hoverTextColor} transition-colors`}
                 aria-label="Ir al inicio"
               >
-                Jorge de la Mora
+                Adriana Mejía
               </Link>
             )}
           </div>

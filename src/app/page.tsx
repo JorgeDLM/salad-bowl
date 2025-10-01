@@ -2,9 +2,12 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import CounterAnimation from '@/components/CounterAnimation';
-import ContactModal from '@/components/ContactModal';
 import { useState } from 'react';
+import ContactModal from '@/components/ContactModal';
+import CounterAnimation from '@/components/CounterAnimation';
+import ScrollAnimation from '@/components/ScrollAnimation';
+import ScrollProgress from '@/components/ScrollProgress';
+import { useParallax } from '@/hooks/useScrollAnimation';
 
 // Custom SVG Icons
 const ArrowRightIcon = ({ className }: { className?: string }) => (
@@ -45,115 +48,172 @@ const PassionIcon = ({ className }: { className?: string }) => (
 
 export default function HomePage() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const scrollY = useParallax();
 
   const kpis = [
     {
-      value: 30000000,
-      prefix: '+$',
-      suffix: '',
-      label: 'Vendidos online',
-      description: 'Todos mis emprendimientos',
-      duration: 50000
-    },
-    {
-      value: 3,
+      value: 100,
       prefix: '',
-      suffix: '',
-      label: 'Emprendimientos exitosos',
-      description: 'Activos y rentables',
-      duration: 1500
+      suffix: 'M+',
+      label: 'Seguidores gestionados',
+      description: 'Cuentas de redes sociales',
+      duration: 3000
     },
     {
-      value: 5,
+      value: 50,
       prefix: '',
-      suffix: '',
-      label: 'Empleados',
-      description: 'Equipo actual',
-      duration: 1000
+      suffix: '+',
+      label: 'Personas lideradas',
+      description: 'Equipos multidisciplinarios',
+      duration: 2000
     },
     {
-      value: 9,
+      value: 30,
+      prefix: '',
+      suffix: '%',
+      label: 'Reducción costos',
+      description: 'Adquisición de leads',
+      duration: 2500
+    },
+    {
+      value: 8,
       prefix: '',
       suffix: ' años',
       label: 'Experiencia',
-      description: 'Como emprendedor',
+      description: 'Marketing digital',
       duration: 2000
     }
   ];
 
   const projects = [
     {
-      title: 'Mercado a la Mano',
-      description: 'Marketplace que conecta productores con compradores finales, eliminando intermediarios y pagando justo al campesino.',
-      href: '/proyectos/mercado-a-la-mano',
-      status: 'Activo',
-      revenue: '+$1,000,000 MXN/mes',
-      category: 'Marketplace'
+      title: 'BluCactus MX',
+      role: 'Paid Media Team Manager',
+      impact: '30% reducción CPL',
+      description: 'Lideré 15 especialistas gestionando $500K+ mensuales',
+      href: '#',
+      period: '2023-2025',
+      logo: '/bluecactus-logo.png'
     },
     {
-      title: 'Zephir Jewelry',
-      description: 'Marca de joyería premium sustentable con enfoque en diseño exclusivo y experiencia de cliente.',
-      href: '/proyectos/zephir-jewelry',
-      status: 'Activo',
-      revenue: null,
-      category: 'E-commerce'
+      title: 'Kraken Videos',
+      role: 'Marketing Manager', 
+      impact: '100M+ seguidores',
+      description: 'Gestión de equipos de 50+ personas y audiencias masivas',
+      href: '/proyectos/kraken-videos',
+      period: '2024',
+      logo: '/kraken-logo.jpg'
     },
     {
-      title: 'WeLoveCode',
-      description: 'Agencia de desarrollo de software especializada en crear productos digitales que generan ingresos.',
-      href: '/proyectos/welovecode',
-      status: 'Activo',
-      revenue: null,
-      category: 'Desarrollo'
+      title: 'Somos Volt',
+      role: 'Creative Project Manager',
+      impact: '9+ proyectos simultáneos',
+      description: 'Metodologías ágiles y gestión de clientes premium',
+      href: '/proyectos/somos-volt',
+      period: '2025',
+      logo: '/somosvolt-logo.webp'
     },
+    {
+      title: 'Kadabra Productions',
+      role: 'Social Media Manager',
+      impact: '50% crecimiento',
+      description: 'Marketing intercultural en Marruecos',
+      href: '#',
+      period: '2018-2020',
+      logo: '/kadabra-logo2.jpg'
+    }
   ];
 
   const education = [
     {
-      title: 'TuMejorYo',
-      description: 'Diplomado especializado en impulsar emprendimientos con base a las emociones positivas y bienestar subjetivo.',
-      href: 'https://www.tumejoryo.mx/',
-      type: 'Diplomado',
-      focus: 'Emprendimiento & Emociones Positivas'
+      title: 'Bachelor of Design & Advertising Production',
+      description: 'Formación integral en diseño creativo y producción publicitaria, combinando fundamentos artísticos con estrategias de comunicación efectiva.',
+      href: '#',
+      type: '2010 - 2016',
+      focus: 'UPAEP, Puebla, México'
+    },
+    {
+      title: 'Community Manager & Content Marketing',
+      description: 'Especialización en gestión de comunidades digitales y estrategias de marketing de contenidos para maximizar engagement y conversión.',
+      href: '#',
+      type: '2015',
+      focus: 'Aula CM, Madrid, España'
     }
   ];
 
   return (
     <div className="min-h-screen">
+      <ScrollProgress />
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-50 via-blue-50 to-white py-20 lg:py-32">
+      <section className="bg-gradient-to-br from-gray-50 via-neutral-50 to-stone-50 py-20 lg:py-32 relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-amber-200/10 to-orange-200/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-neutral-200/10 to-gray-200/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Profile Image - First on mobile, second on desktop */}
-            <div className="flex justify-center lg:justify-end order-1 lg:order-2">
+            <ScrollAnimation animation="scaleIn" delay={200} className="flex justify-center lg:justify-end order-1 lg:order-2">
               <div className="relative">
                 <div className="w-72 h-72 lg:w-96 lg:h-96 relative">
                   <Image
-                    src="/yoFoto.webp"
-                    alt="Jorge de la Mora Menéndez"
+                    src="/adriana-foto.webp"
+                    alt="Marcela Adriana Mejía Rivera"
                     fill
                     className="rounded-2xl object-cover shadow-2xl"
                     priority
                   />
                 </div>
-                {/* Decorative elements */}
-                <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-100 rounded-full opacity-60 -z-10"></div>
-                <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-slate-100 rounded-full opacity-60 -z-10"></div>
+                {/* Decorative elements with parallax */}
+                <div 
+                  className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-amber-400 to-orange-400 rounded-full opacity-30 -z-10 animate-bounce"
+                  style={{ transform: `translateY(${scrollY * 0.1}px)` }}
+                ></div>
+                <div 
+                  className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-br from-neutral-400 to-gray-400 rounded-full opacity-30 -z-10 animate-pulse"
+                  style={{ transform: `translateY(${scrollY * -0.1}px)` }}
+                ></div>
+                <div 
+                  className="absolute top-1/2 -right-8 w-16 h-16 bg-gradient-to-br from-orange-400 to-amber-400 rounded-full opacity-25 -z-10 animate-ping"
+                  style={{ transform: `translateY(${scrollY * 0.05}px)` }}
+                ></div>
               </div>
-            </div>
+            </ScrollAnimation>
 
             {/* Profile Content - Second on mobile, first on desktop */}
             <div className="space-y-8 order-2 lg:order-1">
-              <div>
+              <ScrollAnimation animation="fadeInLeft" delay={0}>
                 <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-4 leading-tight">
-                  Jorge de la Mora Menéndez
+                  Adriana Mejía
                 </h1>
-                <p className="text-xl lg:text-2xl text-gray-600 font-medium">
-                  Emprendedor • Producto & Operaciones • Tech-driven
-                </p>
-              </div>
+                <ScrollAnimation animation="fadeInUp" delay={100}>
+                  <div className="flex flex-wrap gap-3 justify-center lg:justify-start mb-4">
+                    <span className="px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-full text-sm font-semibold shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/>
+                        <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/>
+                      </svg>
+                      Marketing Strategist
+                    </span>
+                    <span className="px-4 py-2 bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-full text-sm font-semibold shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                      </svg>
+                      Team Leadership
+                    </span>
+                    <span className="px-4 py-2 bg-gradient-to-r from-neutral-700 to-gray-800 text-white rounded-full text-sm font-semibold shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd"/>
+                      </svg>
+                      Digital Performance
+                    </span>
+                  </div>
+                </ScrollAnimation>
+              </ScrollAnimation>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 py-6">
+              <ScrollAnimation animation="fadeInUp" delay={200}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 py-6">
                 <div className="space-y-3">
                   <div className="flex flex-col">
                     <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Ubicación</span>
@@ -161,347 +221,428 @@ export default function HomePage() {
                   </div>
                   <div className="flex flex-col">
                     <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Educación</span>
-                    <span className="text-gray-900 font-medium">Lic. en Economía y Finanzas</span>
-                    <span className="text-sm text-gray-600">Universidad Iberoamericana Puebla</span>
+                    <span className="text-gray-900 font-medium">Bachelor of Design & Advertising Production</span>
+                    <span className="text-sm text-gray-600">UPAEP, Puebla, México</span>
                   </div>
                 </div>
                 <div className="flex flex-col">
                   <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Idiomas</span>
                   <div className="space-y-1">
                     <span className="block text-gray-900 font-medium">- Español (nativo)</span>
-                    <span className="block text-gray-900 font-medium">- Inglés (fluido)</span>
-                    <span className="block text-gray-900 font-medium">- Francés (fluido)</span>
-                    <span className="block text-gray-900 font-medium">- Italiano (básico)</span>
+                    <span className="block text-gray-900 font-medium">- Inglés (profesional)</span>
+                    <span className="block text-gray-900 font-medium">- Francés (básico)</span>
                   </div>
                 </div>
-              </div>
+                </div>
+              </ScrollAnimation>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <ScrollAnimation animation="fadeInUp" delay={300}>
+                <div className="flex flex-col sm:flex-row gap-4">
                 <button 
                   onClick={() => setIsContactModalOpen(true)}
-                  className="bg-gray-900 text-white px-8 py-4 rounded-lg font-semibold hover:bg-gray-800 transition-all duration-300 text-center shadow-lg hover:shadow-xl"
+                  className="bg-gradient-to-r from-gray-900 to-black text-white px-8 py-4 rounded-full font-semibold hover:from-gray-800 hover:to-gray-900 transition-all duration-300 text-center shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-1 flex items-center gap-2 justify-center"
                 >
-                  Contactar
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd"/>
+                  </svg>
+                  ¡Contáctame!
                 </button>
                 <Link 
                   href="#proyectos"
-                  className="border-2 border-gray-900 text-gray-900 px-8 py-4 rounded-lg font-semibold hover:bg-gray-900 hover:text-white transition-all duration-300 text-center"
+                  className="border-2 border-amber-600 text-amber-600 px-8 py-4 rounded-full font-semibold hover:bg-amber-600 hover:text-white transition-all duration-300 text-center transform hover:scale-105 hover:-translate-y-1 flex items-center gap-2 justify-center"
                 >
-                  Ver Proyectos
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"/>
+                  </svg>
+                  Ver Experiencia
                 </Link>
-              </div>
+                </div>
+              </ScrollAnimation>
             </div>
           </div>
         </div>
       </section>
 
       {/* Personal Section */}
-      <section className="py-20 bg-gradient-to-br from-slate-50 via-blue-50/30 to-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-              Quién Soy
+      <section className="py-20 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollAnimation animation="fadeInUp" className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-900 bg-clip-text text-transparent mb-6">
+              Más allá del trabajo
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-slate-600 via-gray-600 to-zinc-600 mx-auto mb-6"></div>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Más allá de los números y proyectos, estas son las motivaciones que impulsan todo lo que hago
+              Lo que realmente me mueve es <strong>conectar con personas</strong> y crear en espacios donde la creatividad cobra vida
             </p>
-          </div>
+          </ScrollAnimation>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-            <div className="group hover:scale-105 transition-all duration-300">
-              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 h-full hover:shadow-xl transition-shadow">
-                <div className="w-14 h-14 bg-gradient-to-br from-slate-700 to-slate-800 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <PurposeIcon className="w-7 h-7 text-slate-100" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Personal Values */}
+            <ScrollAnimation animation="fadeInLeft" delay={200}>
+              <div className="space-y-6">
+                <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 border border-amber-100">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                    <div className="w-3 h-3 bg-amber-500 rounded-full"></div>
+                    Lo que me llena
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    <strong>Conocer y conectar con gente nueva</strong> es lo que más disfruto. Me energiza desenvolverme en <strong>espacios creativos</strong> donde puedo desarrollar campañas de marketing y publicidad que realmente impacten.
+                  </p>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                  Mi Propósito
-                </h3>
-                <p className="text-gray-700 leading-relaxed">
-                  Soy un hombre al que le llena <strong>impulsar a otros a dar su mejor versión</strong>, 
-                  ya sea en negocios, emocional o espiritual. En ello encuentro yo igual impulso y 
-                  construyo mi mejor versión.
-                </p>
-              </div>
-            </div>
 
-            <div className="group hover:scale-105 transition-all duration-300">
-              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 h-full hover:shadow-xl transition-shadow">
-                <div className="w-14 h-14 bg-gradient-to-br from-gray-700 to-gray-800 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <MotivationIcon className="w-7 h-7 text-gray-100" />
+                <div className="bg-gradient-to-br from-gray-50 to-neutral-50 rounded-2xl p-6 border border-gray-100">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                    <div className="w-3 h-3 bg-gray-600 rounded-full"></div>
+                    Mis valores
+                  </h3>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="bg-white px-3 py-2 rounded-lg text-sm font-medium text-gray-700 text-center border border-gray-200">
+                      Responsabilidad
+                    </div>
+                    <div className="bg-white px-3 py-2 rounded-lg text-sm font-medium text-gray-700 text-center border border-gray-200">
+                      Liderazgo
+                    </div>
+                    <div className="bg-white px-3 py-2 rounded-lg text-sm font-medium text-gray-700 text-center border border-gray-200">
+                      Perseverancia
+                    </div>
+                    <div className="bg-white px-3 py-2 rounded-lg text-sm font-medium text-gray-700 text-center border border-gray-200">
+                      Disciplina
+                    </div>
+                    <div className="bg-white px-3 py-2 rounded-lg text-sm font-medium text-gray-700 text-center border border-gray-200">
+                      Empatía
+                    </div>
+                    <div className="bg-white px-3 py-2 rounded-lg text-sm font-medium text-gray-700 text-center border border-gray-200">
+                      Orden
+                    </div>
+                    <div className="bg-white px-3 py-2 rounded-lg text-sm font-medium text-gray-700 text-center border border-gray-200">
+                      Armonía
+                    </div>
+                    <div className="bg-white px-3 py-2 rounded-lg text-sm font-medium text-gray-700 text-center border border-gray-200">
+                      Respeto
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                  Lo Que Me Mueve
-                </h3>
-                <p className="text-gray-700 leading-relaxed">
-                  Me gusta <strong>desarrollar ideas, crear productos y generar impacto positivo</strong> en la sociedad. 
-                  La programación me permite desarrollar tecnología para hacer más eficientes mis problemas del día a día.
-                </p>
               </div>
-            </div>
+            </ScrollAnimation>
 
-            <div className="group hover:scale-105 transition-all duration-300">
-              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 h-full hover:shadow-xl transition-shadow">
-                <div className="w-14 h-14 bg-gradient-to-br from-zinc-700 to-zinc-800 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <PassionIcon className="w-7 h-7 text-zinc-100" />
+            {/* Personal Interests */}
+            <ScrollAnimation animation="fadeInRight" delay={400}>
+              <div className="space-y-6">
+                <div className="bg-gradient-to-br from-neutral-50 to-stone-50 rounded-2xl p-6 border border-neutral-100">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                    <div className="w-3 h-3 bg-neutral-600 rounded-full"></div>
+                    Mis pasiones
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-200">
+                      <span className="text-2xl">🧗‍♀️</span>
+                      <div>
+                        <p className="font-semibold text-gray-900">Escalada</p>
+                        <p className="text-sm text-gray-600">Desafíos que requieren estrategia y perseverancia</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-200">
+                      <span className="text-2xl">✈️</span>
+                      <div>
+                        <p className="font-semibold text-gray-900">Viajar</p>
+                        <p className="text-sm text-gray-600">Conocer culturas y conectar con personas</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-200">
+                      <span className="text-2xl">🧘‍♀️</span>
+                      <div>
+                        <p className="font-semibold text-gray-900">Bienestar holístico</p>
+                        <p className="text-sm text-gray-600">Equilibrio entre mente, cuerpo y espíritu</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                  Mis Pasiones
-                </h3>
-                <p className="text-gray-700 leading-relaxed mb-4">
-                  Encontré pasión en la <strong>joyería</strong> - las piedras y piezas que transmiten belleza.
-                </p>
-                <p className="text-gray-700 leading-relaxed">
-                  Me encanta la <strong>naturaleza, la disciplina, el ejercicio</strong>, compartir y debatir ideas, 
-                  y explorar las emociones y la psique.
-                </p>
-              </div>
-            </div>
-          </div>
 
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 p-10 rounded-3xl shadow-2xl text-center">
-              <blockquote className="text-2xl lg:text-xl font-medium text-white italic leading-relaxed">
-                "En cada proyecto busco crear valor real que transforme vidas y genere impacto positivo duradero."
-              </blockquote>
-            </div>
+                <div className="bg-gradient-to-br from-stone-50 to-gray-50 rounded-2xl p-6 border border-stone-100">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                    <div className="w-3 h-3 bg-stone-600 rounded-full"></div>
+                    Mi esencia
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    Soy una persona <strong>tranquila y hogareña</strong>, que valora profundamente la familia. Vivo sin vicios, buscando siempre la <strong>paz interior</strong> y el equilibrio en todo lo que hago.
+                  </p>
+                </div>
+              </div>
+            </ScrollAnimation>
           </div>
         </div>
       </section>
 
       {/* KPIs Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Métricas de Impacto
+      <section className="py-20 bg-gradient-to-br from-gray-900 via-neutral-900 to-black relative overflow-hidden">
+        {/* Animated background */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-amber-500/10 to-orange-500/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-gradient-to-br from-neutral-500/10 to-gray-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <ScrollAnimation animation="fadeInUp" className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4 flex items-center justify-center gap-4">
+              <svg className="w-12 h-12 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/>
+                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/>
+              </svg>
+              ¡Mis Números Hablan!
             </h2>
-            <p className="text-lg text-gray-600">
-              Resultados medibles en mis proyectos emprendedores
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Resultados que cualquier empresa querría tener
             </p>
-          </div>
+          </ScrollAnimation>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {kpis.map((kpi, index) => (
-              <div key={index} className="text-center p-6 bg-gray-50 rounded-xl">
-                <div className="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
-                  <CounterAnimation
-                    end={kpi.value}
-                    prefix={kpi.prefix}
-                    suffix={kpi.suffix}
-                    duration={kpi.duration}
-                  />
-                </div>
-                <div className="text-sm font-medium text-gray-900 mb-1">
-                  {kpi.label}
-                </div>
-                <div className="text-sm text-gray-600">
-                  {kpi.description}
-                </div>
-              </div>
-            ))}
+            {kpis.map((kpi, index) => {
+              const gradients = [
+                'from-amber-500 to-orange-500',
+                'from-gray-400 to-gray-600', 
+                'from-orange-500 to-amber-600',
+                'from-neutral-400 to-gray-500'
+              ];
+              const bgGradients = [
+                'from-amber-500/10 to-orange-500/10',
+                'from-gray-500/10 to-neutral-500/10',
+                'from-orange-500/10 to-amber-600/10', 
+                'from-neutral-500/10 to-gray-500/10'
+              ];
+              return (
+                <ScrollAnimation key={index} animation="slideInUp" delay={index * 100}>
+                  <div className={`group text-center p-8 bg-gradient-to-br ${bgGradients[index]} backdrop-blur-sm rounded-3xl border border-white/20 hover:border-white/40 transition-all duration-500 hover:scale-105 hover:-translate-y-2 shadow-2xl hover:shadow-purple-500/25`}>
+                  <div className={`text-5xl lg:text-6xl font-black bg-gradient-to-r ${gradients[index]} bg-clip-text text-transparent mb-4 group-hover:scale-110 transition-transform duration-500`}>
+                    <CounterAnimation
+                      end={kpi.value}
+                      prefix={kpi.prefix}
+                      suffix={kpi.suffix}
+                      duration={kpi.duration}
+                    />
+                  </div>
+                  <div className="text-lg font-bold text-white mb-2 group-hover:text-gray-100 transition-colors">
+                    {kpi.label}
+                  </div>
+                  <div className="text-sm text-gray-300 group-hover:text-gray-200 transition-colors">
+                    {kpi.description}
+                  </div>
+                  {/* Decorative element */}
+                    <div className={`w-12 h-1 bg-gradient-to-r ${gradients[index]} mx-auto mt-4 rounded-full group-hover:w-16 transition-all duration-500`}></div>
+                  </div>
+                </ScrollAnimation>
+              );
+            })}
           </div>
+          
+          {/* Call to action in KPIs section */}
+          <ScrollAnimation animation="scaleIn" delay={500} className="text-center mt-16">
+            <p className="text-2xl text-white font-semibold mb-6 flex items-center justify-center gap-3">
+              <svg className="w-8 h-8 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd"/>
+              </svg>
+              ¿Impresionante, verdad?
+            </p>
+            <button 
+              onClick={() => setIsContactModalOpen(true)}
+              className="bg-gradient-to-r from-amber-600 to-orange-600 text-white px-10 py-4 rounded-full font-bold text-lg hover:from-amber-500 hover:to-orange-500 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 shadow-2xl hover:shadow-amber-500/50 flex items-center gap-3 mx-auto"
+            >
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd"/>
+              </svg>
+              ¡Hablemos de tu proyecto!
+            </button>
+          </ScrollAnimation>
         </div>
       </section>
 
       {/* Projects Section */}
-      <section id="proyectos" className="py-20 bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="proyectos" className="py-20 bg-gradient-to-br from-stone-50 via-neutral-50 to-gray-50 relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-10 left-10 w-72 h-72 bg-gradient-to-br from-amber-200/10 to-orange-200/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-10 right-10 w-64 h-64 bg-gradient-to-br from-neutral-200/10 to-gray-200/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Emprendimientos Destacados
+            <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-900 bg-clip-text text-transparent mb-4">
+              Experiencia Destacada
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Empresas que he fundado y desarrollado, cada una con un enfoque único en su industria
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Proyectos que demuestran mi capacidad de generar resultados
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {projects.map((project, index) => (
-              <div key={index} className="group bg-white rounded-2xl shadow-lg border border-gray-100 p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                <div className="flex items-start justify-between mb-6">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-2xl font-bold text-gray-900 group-hover:text-gray-700 transition-colors">
-                        {project.title}
-                      </h3>
-                      <span className="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-medium">
-                        {project.status}
-                      </span>
+              <ScrollAnimation key={index} animation="fadeInUp" delay={index * 100}>
+                <div className="group bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl hover:border-amber-300 transition-all duration-300 hover:-translate-y-1">
+                  {/* Header with Logo */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className={`relative flex-shrink-0 ${project.title === 'Somos Volt' ? 'w-16 h-12' : 'w-12 h-12'}`}>
+                        <Image
+                          src={project.logo}
+                          alt={`${project.title} logo`}
+                          fill
+                          className="object-contain rounded-lg"
+                        />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-900">{project.title}</h3>
+                        <p className="text-sm text-amber-600 font-medium">{project.role}</p>
+                      </div>
                     </div>
-                    <span className="inline-block text-sm bg-gray-100 text-gray-600 px-3 py-1 rounded-full font-medium">
-                      {project.category}
+                    <span className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full font-semibold">
+                      {project.period}
                     </span>
                   </div>
-                </div>
-                
-                {project.revenue && (
-                  <div className="mb-4 p-3 bg-green-50 rounded-lg border-l-4 border-green-400">
-                    <div className="flex items-center">
-                      <svg className="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
-                      </svg>
-                      <span className="text-green-800 font-semibold">{project.revenue}</span>
-                    </div>
+                  
+                  {/* Impact Metric */}
+                  <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-3 mb-4">
+                    <div className="text-2xl font-black text-amber-600 mb-1">{project.impact}</div>
+                    <p className="text-sm text-gray-600">{project.description}</p>
                   </div>
-                )}
-                
-                <p className="text-gray-600 mb-8 leading-relaxed">
-                  {project.description}
-                </p>
-                
-                <div className="flex items-center justify-between">
-                  {project.href.startsWith('http') ? (
-                    <a 
-                      href={project.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center text-gray-900 font-semibold hover:text-gray-700 transition-colors group"
-                    >
-                      Visitar sitio web
-                      <svg className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    </a>
-                  ) : (
+                  
+                  {/* CTA */}
+                  {project.href !== '#' ? (
                     <Link 
                       href={project.href}
-                      className="inline-flex items-center text-gray-900 font-semibold hover:text-gray-700 transition-colors group"
+                      className="inline-flex items-center text-amber-600 font-semibold hover:text-amber-700 transition-colors group"
                     >
-                      Ver detalles
-                      <ArrowRightIcon className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      Ver caso completo
+                      <svg className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
                     </Link>
+                  ) : (
+                    <span className="text-gray-400 text-sm">Caso de estudio próximamente</span>
                   )}
                 </div>
-              </div>
+              </ScrollAnimation>
             ))}
           </div>
         </div>
       </section>
 
       {/* Education Section */}
-      <section className="py-16 bg-gradient-to-br from-purple-50 via-indigo-50 to-blue-50">
+      <section className="py-16 bg-gradient-to-br from-neutral-100 via-gray-100 to-stone-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Formación Especializada
+          <ScrollAnimation animation="fadeInUp" className="text-center mb-12">
+            <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-900 bg-clip-text text-transparent mb-4">
+              Formación Académica
             </h2>
-            <p className="text-lg text-gray-600">
-              Diplomados y cursos especializados que complementan mi experiencia emprendedora
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Educación que respalda mi expertise
             </p>
-          </div>
+          </ScrollAnimation>
 
-          <div className="max-w-2xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {education.map((course, index) => (
-              <div key={index} className="bg-white rounded-2xl shadow-lg border border-purple-100 p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-2xl font-bold text-gray-900">
+              <ScrollAnimation key={index} animation="fadeInUp" delay={index * 100}>
+                <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl hover:border-amber-300 transition-all duration-300 hover:-translate-y-1">
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-900 mb-1">
                         {course.title}
                       </h3>
-                      <span className="text-xs bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-medium">
-                        {course.type}
-                      </span>
+                      <p className="text-sm text-amber-600 font-medium">{course.focus}</p>
                     </div>
-                    <span className="inline-block text-sm bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full font-medium">
-                      {course.focus}
+                    <span className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full font-semibold">
+                      {course.type}
                     </span>
                   </div>
+                  
+                  <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-3">
+                    <p className="text-sm text-gray-600">{course.description}</p>
+                  </div>
                 </div>
-                
-                <p className="text-gray-600 mb-6 leading-relaxed">
-                  {course.description}
-                </p>
-                
-                <div className="flex items-center">
-                  <a 
-                    href={course.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center text-purple-600 font-semibold hover:text-purple-700 transition-colors group"
-                  >
-                    Conocer más sobre el diplomado
-                    <svg className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
+              </ScrollAnimation>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Links Section */}
-      <section className="py-16 bg-white">
+      {/* Skills Section */}
+      <section className="py-16 bg-gradient-to-br from-gray-50 via-neutral-50 to-stone-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Enlaces de Interés
+          <ScrollAnimation animation="fadeInUp" className="text-center mb-12">
+            <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-900 bg-clip-text text-transparent mb-4">
+              Herramientas & Competencias
             </h2>
-            <p className="text-lg text-gray-600">
-              Visita mis proyectos activos
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Stack tecnológico que domino
             </p>
-          </div>
+          </ScrollAnimation>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
-            <a 
-              href="https://www.mercadoalamano.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center justify-center px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
-            >
-              mercadoalamano.com
-              <ExternalLinkIcon className="ml-2 w-4 h-4" />
-            </a>
-            <a 
-              href="https://www.welovecode.mx" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-            >
-              welovecode.mx
-              <ExternalLinkIcon className="ml-2 w-4 h-4" />
-            </a>
-            <a 
-              href="https://www.zephir.mx" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-            >
-              zephir.mx
-              <ExternalLinkIcon className="ml-2 w-4 h-4" />
-            </a>
-            <a 
-              href="https://www.client.mx" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-            >
-              client.mx
-              <ExternalLinkIcon className="ml-2 w-4 h-4" />
-            </a>
-          </div>
-        </div>
-      </section>
+          <div className="max-w-5xl mx-auto">
+            {/* Categorías de herramientas */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Marketing & Analytics */}
+              <ScrollAnimation animation="fadeInUp" delay={0}>
+                <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 border border-amber-100">
+                  <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
+                    Marketing & Analytics
+                  </h3>
+                  <div className="space-y-2">
+                    <div className="bg-gray-900 text-white px-3 py-2 rounded-lg text-sm font-medium text-center">
+                      Meta Ads
+                    </div>
+                    <div className="bg-white border border-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
+                      Google Analytics
+                    </div>
+                    <div className="bg-white border border-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
+                      Looker Studio
+                    </div>
+                  </div>
+                </div>
+              </ScrollAnimation>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">
-            ¿Interesado en colaborar?
-          </h2>
-          <p className="text-xl text-gray-300 mb-8">
-            Estoy siempre abierto a nuevas oportunidades y proyectos innovadores
-          </p>
-          <button 
-            onClick={() => setIsContactModalOpen(true)}
-            className="inline-flex items-center bg-white text-gray-900 px-8 py-4 rounded-lg font-medium hover:bg-gray-100 transition-colors"
-          >
-            Enviar mensaje
-            <MailIcon className="ml-2 w-5 h-5" />
-          </button>
+              {/* Design & Creative */}
+              <ScrollAnimation animation="fadeInUp" delay={100}>
+                <div className="bg-gradient-to-br from-gray-50 to-neutral-50 rounded-2xl p-6 border border-gray-100">
+                  <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-gray-600 rounded-full"></span>
+                    Design & Creative
+                  </h3>
+                  <div className="space-y-2">
+                    <div className="bg-white border border-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
+                      Figma
+                    </div>
+                    <div className="bg-white border border-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
+                      Adobe Creative
+                    </div>
+                  </div>
+                </div>
+              </ScrollAnimation>
+
+              {/* Project Management */}
+              <ScrollAnimation animation="fadeInUp" delay={200}>
+                <div className="bg-gradient-to-br from-neutral-50 to-stone-50 rounded-2xl p-6 border border-neutral-100">
+                  <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-neutral-600 rounded-full"></span>
+                    Project Management
+                  </h3>
+                  <div className="space-y-2">
+                    <div className="bg-white border border-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
+                      Scrum & Kanban
+                    </div>
+                    <div className="bg-white border border-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
+                      Asana
+                    </div>
+                    <div className="bg-white border border-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
+                      Monday.com
+                    </div>
+                    <div className="bg-white border border-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
+                      Slack
+                    </div>
+                    <div className="bg-white border border-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
+                      Notion
+                    </div>
+                  </div>
+                </div>
+              </ScrollAnimation>
+            </div>
+          </div>
         </div>
       </section>
 
