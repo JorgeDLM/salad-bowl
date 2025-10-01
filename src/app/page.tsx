@@ -91,7 +91,7 @@ export default function HomePage() {
       role: 'Paid Media Team Manager',
       impact: '30% reducción CPL',
       description: 'Lideré 15 especialistas gestionando $500K+ mensuales',
-      href: '#',
+      href: '/proyectos/blucactus-mx',
       period: '2023-2025',
       logo: '/bluecactus-logo.png'
     },
@@ -118,7 +118,7 @@ export default function HomePage() {
       role: 'Social Media Manager',
       impact: '50% crecimiento',
       description: 'Marketing intercultural en Marruecos',
-      href: '#',
+      href: '/proyectos/kadabra-productions',
       period: '2018-2020',
       logo: '/kadabra-logo2.jpg'
     }
