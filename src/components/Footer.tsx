@@ -3,10 +3,13 @@
 import Link from 'next/link';
 import ContactModal from './ContactModal';
 import { useState } from 'react';
+import { useT } from '@/hooks/useTranslation';
+import LinkWithLang from './LinkWithLang';
 
 export default function Footer() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const currentYear = new Date().getFullYear();
+  const t = useT();
 
   return (
     <footer className="bg-black text-white">
@@ -14,13 +17,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Contacto</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('footer.contactTitle')}</h3>
             <div className="space-y-2">
               <p className="text-gray-300">
                 <button 
                   onClick={() => setIsContactModalOpen(true)}
                   className="hover:text-white transition-colors text-left"
-                  aria-label="Contactar a Adriana Mejía"
+                  aria-label={t('footer.contactAria')}
                 >
                   adriana.mejiarivera@gmail.com
                 </button>
@@ -31,7 +34,7 @@ export default function Footer() {
 
           {/* Projects */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Experiencia</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('footer.experienceTitle')}</h3>
             <div className="space-y-2">
               <p className="text-gray-300">
                 BluCactus MX
@@ -50,30 +53,30 @@ export default function Footer() {
 
           {/* Navigation */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Navegación</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('footer.navigationTitle')}</h3>
             <div className="space-y-2">
               <p>
-                <Link 
+                <LinkWithLang 
                   href="/" 
                   className="text-gray-300 hover:text-white transition-colors"
                 >
-                  Inicio
-                </Link>
+                  {t('ui.home')}
+                </LinkWithLang>
               </p>
               <p>
-                <Link 
+                <LinkWithLang 
                   href="/#proyectos" 
                   className="text-gray-300 hover:text-white transition-colors"
                 >
-                  Experiencia
-                </Link>
+                  {t('footer.experienceTitle')}
+                </LinkWithLang>
               </p>
               <p>
                 <button 
                   onClick={() => setIsContactModalOpen(true)}
                   className="text-gray-300 hover:text-white transition-colors text-left"
                 >
-                  Contacto
+                  {t('contact')}
                 </button>
               </p>
             </div>
@@ -82,7 +85,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © {currentYear} Marcela Adriana Mejía Rivera. Todos los derechos reservados.
+            © {currentYear} Marcela Adriana Mejía Rivera. {t('footer.allRightsReserved')}
           </p>
         </div>
       </div>

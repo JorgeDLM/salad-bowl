@@ -1,13 +1,14 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { useState } from 'react';
 import ContactModal from '@/components/ContactModal';
 import CounterAnimation from '@/components/CounterAnimation';
 import ScrollAnimation from '@/components/ScrollAnimation';
 import ScrollProgress from '@/components/ScrollProgress';
+import LinkWithLang from '@/components/LinkWithLang';
 import { useParallax } from '@/hooks/useScrollAnimation';
+import { useT } from '@/hooks/useTranslation';
 
 // Custom SVG Icons
 const ArrowRightIcon = ({ className }: { className?: string }) => (
@@ -48,6 +49,7 @@ const PassionIcon = ({ className }: { className?: string }) => (
 
 export default function HomePage() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const t = useT();
   const scrollY = useParallax();
 
   const kpis = [
@@ -55,32 +57,32 @@ export default function HomePage() {
       value: 100,
       prefix: '',
       suffix: 'M+',
-      label: 'Seguidores gestionados',
-      description: 'Cuentas de redes sociales',
+      labelKey: 'kpis.followersManaged',
+      descriptionKey: 'kpis.socialAccounts',
       duration: 3000
     },
     {
       value: 50,
       prefix: '',
       suffix: '+',
-      label: 'Personas lideradas',
-      description: 'Equipos multidisciplinarios',
+      labelKey: 'kpis.peopleLed',
+      descriptionKey: 'kpis.multidisciplinaryTeams',
       duration: 2000
     },
     {
       value: 30,
       prefix: '',
       suffix: '%',
-      label: 'Reducción costos',
-      description: 'Adquisición de leads',
+      labelKey: 'kpis.costReduction',
+      descriptionKey: 'kpis.leadAcquisition',
       duration: 2500
     },
     {
       value: 8,
       prefix: '',
-      suffix: ' años',
-      label: 'Experiencia',
-      description: 'Marketing digital',
+      suffixKey: 'kpis.years',
+      labelKey: 'kpis.experience',
+      descriptionKey: 'kpis.digitalMarketing',
       duration: 2000
     }
   ];
@@ -89,8 +91,8 @@ export default function HomePage() {
     {
       title: 'BluCactus MX',
       role: 'Paid Media Team Manager',
-      impact: '30% reducción CPL',
-      description: 'Lideré 15 especialistas gestionando $500K+ mensuales',
+      impactKey: 'projects.blucactusImpact',
+      descriptionKey: 'projects.blucactusDesc',
       href: '/proyectos/blucactus-mx',
       period: '2023-2025',
       logo: '/bluecactus-logo.png'
@@ -98,8 +100,8 @@ export default function HomePage() {
     {
       title: 'Kraken Videos',
       role: 'Marketing Manager', 
-      impact: '100M+ seguidores',
-      description: 'Gestión de equipos de 50+ personas y audiencias masivas',
+      impactKey: 'projects.krakenImpact',
+      descriptionKey: 'projects.krakenDesc',
       href: '/proyectos/kraken-videos',
       period: '2024',
       logo: '/kraken-logo.jpg'
@@ -107,8 +109,8 @@ export default function HomePage() {
     {
       title: 'Somos Volt',
       role: 'Creative Project Manager',
-      impact: '9+ proyectos simultáneos',
-      description: 'Metodologías ágiles y gestión de clientes premium',
+      impactKey: 'projects.voltImpact',
+      descriptionKey: 'projects.voltDesc',
       href: '/proyectos/somos-volt',
       period: '2025',
       logo: '/somosvolt-logo.webp'
@@ -116,8 +118,8 @@ export default function HomePage() {
     {
       title: 'Kadabra Productions',
       role: 'Social Media Manager',
-      impact: '50% crecimiento',
-      description: 'Marketing intercultural en Marruecos',
+      impactKey: 'projects.kadabraImpact',
+      descriptionKey: 'projects.kadabraDesc',
       href: '/proyectos/kadabra-productions',
       period: '2018-2020',
       logo: '/kadabra-logo2.jpg'
@@ -127,14 +129,14 @@ export default function HomePage() {
   const education = [
     {
       title: 'Bachelor of Design & Advertising Production',
-      description: 'Formación integral en diseño creativo y producción publicitaria, combinando fundamentos artísticos con estrategias de comunicación efectiva.',
+      descriptionKey: 'education.bachelorDesc',
       href: '#',
       type: '2010 - 2016',
       focus: 'UPAEP, Puebla, México'
     },
     {
       title: 'Community Manager & Content Marketing',
-      description: 'Especialización en gestión de comunidades digitales y estrategias de marketing de contenidos para maximizar engagement y conversión.',
+      descriptionKey: 'education.communityManagerDesc',
       href: '#',
       type: '2015',
       focus: 'Aula CM, Madrid, España'
@@ -145,11 +147,11 @@ export default function HomePage() {
     <div className="min-h-screen">
       <ScrollProgress />
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-gray-50 via-neutral-50 to-stone-50 py-20 lg:py-32 relative overflow-hidden">
+      <section className="bg-gradient-to-br from-stone-50 via-amber-50 to-white py-20 lg:py-32 relative overflow-hidden">
         {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-amber-200/10 to-orange-200/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-neutral-200/10 to-gray-200/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-stone-200/20 to-amber-200/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-green-200/15 to-stone-300/15 rounded-full blur-3xl animate-pulse delay-1000"></div>
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -167,11 +169,11 @@ export default function HomePage() {
                 </div>
                 {/* Decorative elements with parallax */}
                 <div 
-                  className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-amber-400 to-orange-400 rounded-full opacity-30 -z-10 animate-bounce"
+                  className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-amber-400 to-amber-500 rounded-full opacity-30 -z-10 animate-bounce"
                   style={{ transform: `translateY(${scrollY * 0.1}px)` }}
                 ></div>
                 <div 
-                  className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-br from-neutral-400 to-gray-400 rounded-full opacity-30 -z-10 animate-pulse"
+                  className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-br from-green-400 to-green-500 rounded-full opacity-30 -z-10 animate-pulse"
                   style={{ transform: `translateY(${scrollY * -0.1}px)` }}
                 ></div>
                 <div 
@@ -189,24 +191,30 @@ export default function HomePage() {
                 </h1>
                 <ScrollAnimation animation="fadeInUp" delay={100}>
                   <div className="flex flex-wrap gap-3 justify-center lg:justify-start mb-4">
-                    <span className="px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-full text-sm font-semibold shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                    <span className="px-4 py-2 bg-gradient-to-r from-stone-800 to-stone-900 text-white rounded-full text-sm font-semibold shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
                       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/>
                         <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/>
                       </svg>
-                      Marketing Strategist
+                      {t('home.roles.marketingStrategist')}
                     </span>
-                    <span className="px-4 py-2 bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-full text-sm font-semibold shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                    <span className="px-4 py-2 bg-gradient-to-r from-amber-700 to-amber-800 text-white rounded-full text-sm font-semibold shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
                       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
                       </svg>
-                      Team Leadership
+                      {t('home.roles.teamLeadership')}
                     </span>
-                    <span className="px-4 py-2 bg-gradient-to-r from-neutral-700 to-gray-800 text-white rounded-full text-sm font-semibold shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                    <span className="px-4 py-2 bg-gradient-to-r from-green-700 to-green-800 text-white rounded-full text-sm font-semibold shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
                       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd"/>
                       </svg>
-                      Digital Performance
+                      {t('home.roles.digitalPerformance')}
+                    </span>
+                    <span className="px-4 py-2 bg-gradient-to-r from-stone-600 to-stone-700 text-white rounded-full text-sm font-semibold shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                      </svg>
+                      {t('home.roles.projectManager')}
                     </span>
                   </div>
                 </ScrollAnimation>
@@ -216,21 +224,21 @@ export default function HomePage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 py-6">
                 <div className="space-y-3">
                   <div className="flex flex-col">
-                    <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Ubicación</span>
-                    <span className="text-gray-900 font-medium">Puebla, México</span>
+                    <span className="text-sm font-semibold text-stone-500 uppercase tracking-wide">{t('home.location')}</span>
+                    <span className="text-stone-900 font-medium">{t('home.locationValue')}</span>
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Educación</span>
-                    <span className="text-gray-900 font-medium">Bachelor of Design & Advertising Production</span>
-                    <span className="text-sm text-gray-600">UPAEP, Puebla, México</span>
+                    <span className="text-sm font-semibold text-stone-500 uppercase tracking-wide">{t('home.educationLabel')}</span>
+                    <span className="text-stone-900 font-medium">Bachelor of Design & Advertising Production</span>
+                    <span className="text-sm text-stone-600">UPAEP, Puebla, México</span>
                   </div>
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Idiomas</span>
+                  <span className="text-sm font-semibold text-stone-500 uppercase tracking-wide">{t('home.languagesLabel')}</span>
                   <div className="space-y-1">
-                    <span className="block text-gray-900 font-medium">- Español (nativo)</span>
-                    <span className="block text-gray-900 font-medium">- Inglés (profesional)</span>
-                    <span className="block text-gray-900 font-medium">- Francés (básico)</span>
+                    <span className="block text-stone-900 font-medium">- {t('home.languages.spanish')}</span>
+                    <span className="block text-stone-900 font-medium">- {t('home.languages.english')}</span>
+                    <span className="block text-stone-900 font-medium">- {t('home.languages.french')}</span>
                   </div>
                 </div>
                 </div>
@@ -245,17 +253,17 @@ export default function HomePage() {
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd"/>
                   </svg>
-                  ¡Contáctame!
+                  {t('ui.contactMe')}
                 </button>
-                <Link 
+                <LinkWithLang 
                   href="#proyectos"
                   className="border-2 border-amber-600 text-amber-600 px-8 py-4 rounded-full font-semibold hover:bg-amber-600 hover:text-white transition-all duration-300 text-center transform hover:scale-105 hover:-translate-y-1 flex items-center gap-2 justify-center"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"/>
                   </svg>
-                  Ver Experiencia
-                </Link>
+                  {t('ui.viewExperience')}
+                </LinkWithLang>
                 </div>
               </ScrollAnimation>
             </div>
@@ -268,10 +276,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollAnimation animation="fadeInUp" className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-900 bg-clip-text text-transparent mb-6">
-              Más allá del trabajo
+              {t('personal.title')}
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Lo que realmente me mueve es <strong>conectar con personas</strong> y crear en espacios donde la creatividad cobra vida
+              {t('personal.subtitle')}
             </p>
           </ScrollAnimation>
 
@@ -282,42 +290,42 @@ export default function HomePage() {
                 <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 border border-amber-100">
                   <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-3">
                     <div className="w-3 h-3 bg-amber-500 rounded-full"></div>
-                    Lo que me llena
+                    {t('personal.whatFillsMe')}
                   </h3>
                   <p className="text-gray-700 leading-relaxed">
-                    <strong>Conocer y conectar con gente nueva</strong> es lo que más disfruto. Me energiza desenvolverme en <strong>espacios creativos</strong> donde puedo desarrollar campañas de marketing y publicidad que realmente impacten.
+                    {t('personal.whatFillsMeDesc')}
                   </p>
                 </div>
 
                 <div className="bg-gradient-to-br from-gray-50 to-neutral-50 rounded-2xl p-6 border border-gray-100">
                   <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-3">
                     <div className="w-3 h-3 bg-gray-600 rounded-full"></div>
-                    Mis valores
+                    {t('personal.myValues')}
                   </h3>
                   <div className="grid grid-cols-2 gap-3">
                     <div className="bg-white px-3 py-2 rounded-lg text-sm font-medium text-gray-700 text-center border border-gray-200">
-                      Responsabilidad
+                      {t('personal.responsibility')}
                     </div>
                     <div className="bg-white px-3 py-2 rounded-lg text-sm font-medium text-gray-700 text-center border border-gray-200">
-                      Liderazgo
+                      {t('personal.leadership')}
                     </div>
                     <div className="bg-white px-3 py-2 rounded-lg text-sm font-medium text-gray-700 text-center border border-gray-200">
-                      Perseverancia
+                      {t('personal.perseverance')}
                     </div>
                     <div className="bg-white px-3 py-2 rounded-lg text-sm font-medium text-gray-700 text-center border border-gray-200">
-                      Disciplina
+                      {t('personal.discipline')}
                     </div>
                     <div className="bg-white px-3 py-2 rounded-lg text-sm font-medium text-gray-700 text-center border border-gray-200">
-                      Empatía
+                      {t('personal.empathy')}
                     </div>
                     <div className="bg-white px-3 py-2 rounded-lg text-sm font-medium text-gray-700 text-center border border-gray-200">
-                      Orden
+                      {t('personal.order')}
                     </div>
                     <div className="bg-white px-3 py-2 rounded-lg text-sm font-medium text-gray-700 text-center border border-gray-200">
-                      Armonía
+                      {t('personal.harmony')}
                     </div>
                     <div className="bg-white px-3 py-2 rounded-lg text-sm font-medium text-gray-700 text-center border border-gray-200">
-                      Respeto
+                      {t('personal.respect')}
                     </div>
                   </div>
                 </div>
@@ -330,28 +338,28 @@ export default function HomePage() {
                 <div className="bg-gradient-to-br from-neutral-50 to-stone-50 rounded-2xl p-6 border border-neutral-100">
                   <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-3">
                     <div className="w-3 h-3 bg-neutral-600 rounded-full"></div>
-                    Mis pasiones
+                    {t('personal.myPassions')}
                   </h3>
                   <div className="space-y-4">
                     <div className="flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-200">
                       <span className="text-2xl">🧗‍♀️</span>
                       <div>
-                        <p className="font-semibold text-gray-900">Escalada</p>
-                        <p className="text-sm text-gray-600">Desafíos que requieren estrategia y perseverancia</p>
+                        <p className="font-semibold text-gray-900">{t('personal.climbing')}</p>
+                        <p className="text-sm text-gray-600">{t('personal.climbingDesc')}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-200">
                       <span className="text-2xl">✈️</span>
                       <div>
-                        <p className="font-semibold text-gray-900">Viajar</p>
-                        <p className="text-sm text-gray-600">Conocer culturas y conectar con personas</p>
+                        <p className="font-semibold text-gray-900">{t('personal.traveling')}</p>
+                        <p className="text-sm text-gray-600">{t('personal.travelingDesc')}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-200">
                       <span className="text-2xl">🧘‍♀️</span>
                       <div>
-                        <p className="font-semibold text-gray-900">Bienestar holístico</p>
-                        <p className="text-sm text-gray-600">Equilibrio entre mente, cuerpo y espíritu</p>
+                        <p className="font-semibold text-gray-900">{t('personal.holisticWellness')}</p>
+                        <p className="text-sm text-gray-600">{t('personal.holisticWellnessDesc')}</p>
                       </div>
                     </div>
                   </div>
@@ -360,10 +368,10 @@ export default function HomePage() {
                 <div className="bg-gradient-to-br from-stone-50 to-gray-50 rounded-2xl p-6 border border-stone-100">
                   <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-3">
                     <div className="w-3 h-3 bg-stone-600 rounded-full"></div>
-                    Mi esencia
+                    {t('personal.myEssence')}
                   </h3>
                   <p className="text-gray-700 leading-relaxed">
-                    Soy una persona <strong>tranquila y hogareña</strong>, que valora profundamente la familia. Vivo sin vicios, buscando siempre la <strong>paz interior</strong> y el equilibrio en todo lo que hago.
+                    {t('personal.myEssenceDesc')}
                   </p>
                 </div>
               </div>
@@ -387,10 +395,10 @@ export default function HomePage() {
                 <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/>
                 <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/>
               </svg>
-              ¡Mis Números Hablan!
+              {t('kpis.title')}
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Resultados que cualquier empresa querría tener
+              {t('kpis.subtitle')}
             </p>
           </ScrollAnimation>
 
@@ -415,15 +423,15 @@ export default function HomePage() {
                     <CounterAnimation
                       end={kpi.value}
                       prefix={kpi.prefix}
-                      suffix={kpi.suffix}
+                      suffix={kpi.suffixKey ? t(kpi.suffixKey) : kpi.suffix}
                       duration={kpi.duration}
                     />
                   </div>
                   <div className="text-lg font-bold text-white mb-2 group-hover:text-gray-100 transition-colors">
-                    {kpi.label}
+                    {t(kpi.labelKey)}
                   </div>
                   <div className="text-sm text-gray-300 group-hover:text-gray-200 transition-colors">
-                    {kpi.description}
+                    {t(kpi.descriptionKey)}
                   </div>
                   {/* Decorative element */}
                     <div className={`w-12 h-1 bg-gradient-to-r ${gradients[index]} mx-auto mt-4 rounded-full group-hover:w-16 transition-all duration-500`}></div>
@@ -439,7 +447,7 @@ export default function HomePage() {
               <svg className="w-8 h-8 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd"/>
               </svg>
-              ¿Impresionante, verdad?
+              {t('kpis.impressive')}
             </p>
             <button 
               onClick={() => setIsContactModalOpen(true)}
@@ -448,33 +456,33 @@ export default function HomePage() {
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd"/>
               </svg>
-              ¡Hablemos de tu proyecto!
+              {t('kpis.talkProject')}
             </button>
           </ScrollAnimation>
         </div>
       </section>
 
       {/* Projects Section */}
-      <section id="proyectos" className="py-20 bg-gradient-to-br from-stone-50 via-neutral-50 to-gray-50 relative overflow-hidden">
+      <section id="proyectos" className="py-20 bg-gradient-to-br from-amber-50 via-stone-50 to-white relative overflow-hidden">
         {/* Background decoration */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-10 left-10 w-72 h-72 bg-gradient-to-br from-amber-200/10 to-orange-200/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-10 right-10 w-64 h-64 bg-gradient-to-br from-neutral-200/10 to-gray-200/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-10 left-10 w-72 h-72 bg-gradient-to-br from-stone-200/15 to-amber-200/15 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-10 right-10 w-64 h-64 bg-gradient-to-br from-green-200/10 to-stone-300/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-900 bg-clip-text text-transparent mb-4">
-              Experiencia Destacada
+            <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-stone-800 to-stone-900 bg-clip-text text-transparent mb-4">
+              {t('home.experience')}
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Proyectos que demuestran mi capacidad de generar resultados
+            <p className="text-xl text-stone-600 max-w-2xl mx-auto">
+              {t('home.experienceDesc')}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {projects.map((project, index) => (
               <ScrollAnimation key={index} animation="fadeInUp" delay={index * 100}>
-                <div className="group bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl hover:border-amber-300 transition-all duration-300 hover:-translate-y-1">
+                <div className="group bg-white rounded-2xl shadow-lg border border-stone-100 p-6 hover:shadow-xl hover:border-amber-400 transition-all duration-300 hover:-translate-y-1">
                   {/* Header with Logo */}
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
@@ -487,34 +495,34 @@ export default function HomePage() {
                         />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-gray-900">{project.title}</h3>
-                        <p className="text-sm text-amber-600 font-medium">{project.role}</p>
+                        <h3 className="text-xl font-bold text-stone-900">{project.title}</h3>
+                        <p className="text-sm text-amber-700 font-medium">{project.role}</p>
                       </div>
                     </div>
-                    <span className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full font-semibold">
+                    <span className="text-xs bg-stone-100 text-stone-700 px-2 py-1 rounded-full font-semibold">
                       {project.period}
                     </span>
                   </div>
                   
                   {/* Impact Metric */}
-                  <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-3 mb-4">
-                    <div className="text-2xl font-black text-amber-600 mb-1">{project.impact}</div>
-                    <p className="text-sm text-gray-600">{project.description}</p>
+                  <div className="bg-gradient-to-r from-stone-50 to-amber-50 rounded-lg p-3 mb-4">
+                    <div className="text-2xl font-black text-amber-700 mb-1">{t(project.impactKey)}</div>
+                    <p className="text-sm text-stone-600">{t(project.descriptionKey)}</p>
                   </div>
                   
                   {/* CTA */}
                   {project.href !== '#' ? (
-                    <Link 
+                    <LinkWithLang 
                       href={project.href}
-                      className="inline-flex items-center text-amber-600 font-semibold hover:text-amber-700 transition-colors group"
+                      className="inline-flex items-center text-amber-700 font-semibold hover:text-amber-800 transition-colors group"
                     >
-                      Ver caso completo
+                      {t('viewFullCase')}
                       <svg className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
-                    </Link>
+                    </LinkWithLang>
                   ) : (
-                    <span className="text-gray-400 text-sm">Caso de estudio próximamente</span>
+                    <span className="text-gray-400 text-sm">{t('projects.caseStudySoon')}</span>
                   )}
                 </div>
               </ScrollAnimation>
@@ -524,35 +532,35 @@ export default function HomePage() {
       </section>
 
       {/* Education Section */}
-      <section className="py-16 bg-gradient-to-br from-neutral-100 via-gray-100 to-stone-100">
+      <section className="py-16 bg-gradient-to-br from-stone-100 via-amber-100 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollAnimation animation="fadeInUp" className="text-center mb-12">
-            <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-900 bg-clip-text text-transparent mb-4">
-              Formación Académica
+            <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-stone-800 to-stone-900 bg-clip-text text-transparent mb-4">
+              {t('home.education')}
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Educación que respalda mi expertise
+            <p className="text-xl text-stone-600 max-w-2xl mx-auto">
+              {t('education.subtitle')}
             </p>
           </ScrollAnimation>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {education.map((course, index) => (
               <ScrollAnimation key={index} animation="fadeInUp" delay={index * 100}>
-                <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl hover:border-amber-300 transition-all duration-300 hover:-translate-y-1">
+                <div className="bg-white rounded-2xl shadow-lg border border-stone-100 p-6 hover:shadow-xl hover:border-amber-400 transition-all duration-300 hover:-translate-y-1">
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-1">
+                      <h3 className="text-xl font-bold text-stone-900 mb-1">
                         {course.title}
                       </h3>
-                      <p className="text-sm text-amber-600 font-medium">{course.focus}</p>
+                      <p className="text-sm text-amber-700 font-medium">{course.focus}</p>
                     </div>
-                    <span className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full font-semibold">
+                    <span className="text-xs bg-stone-100 text-stone-700 px-2 py-1 rounded-full font-semibold">
                       {course.type}
                     </span>
                   </div>
                   
-                  <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-3">
-                    <p className="text-sm text-gray-600">{course.description}</p>
+                  <div className="bg-gradient-to-r from-stone-50 to-amber-50 rounded-lg p-3">
+                    <p className="text-sm text-stone-600">{t(course.descriptionKey)}</p>
                   </div>
                 </div>
               </ScrollAnimation>
@@ -562,35 +570,35 @@ export default function HomePage() {
       </section>
 
       {/* Skills Section */}
-      <section className="py-16 bg-gradient-to-br from-gray-50 via-neutral-50 to-stone-50">
+      <section className="py-16 bg-gradient-to-br from-white via-stone-50 to-amber-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollAnimation animation="fadeInUp" className="text-center mb-12">
-            <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-900 bg-clip-text text-transparent mb-4">
-              Herramientas & Competencias
+            <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-stone-800 to-stone-900 bg-clip-text text-transparent mb-4">
+              {t('home.skills')}
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Stack tecnológico que domino
+            <p className="text-xl text-stone-600 max-w-2xl mx-auto">
+              {t('skills.subtitle')}
             </p>
           </ScrollAnimation>
 
           <div className="max-w-5xl mx-auto">
-            {/* Categorías de herramientas */}
+            {/* {t('skills.toolCategories')} */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Marketing & Analytics */}
               <ScrollAnimation animation="fadeInUp" delay={0}>
-                <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 border border-amber-100">
-                  <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                    <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
-                    Marketing & Analytics
+                <div className="bg-gradient-to-br from-stone-50 to-amber-50 rounded-2xl p-6 border border-stone-100">
+                  <h3 className="text-lg font-bold text-stone-900 mb-4 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-amber-600 rounded-full"></span>
+                    {t('skills.marketingAnalytics')}
                   </h3>
                   <div className="space-y-2">
-                    <div className="bg-gray-900 text-white px-3 py-2 rounded-lg text-sm font-medium text-center">
+                    <div className="bg-stone-900 text-white px-3 py-2 rounded-lg text-sm font-medium text-center">
                       Meta Ads
                     </div>
-                    <div className="bg-white border border-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
+                    <div className="bg-white border border-stone-200 text-stone-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
                       Google Analytics
                     </div>
-                    <div className="bg-white border border-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
+                    <div className="bg-white border border-stone-200 text-stone-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
                       Looker Studio
                     </div>
                   </div>
@@ -599,16 +607,16 @@ export default function HomePage() {
 
               {/* Design & Creative */}
               <ScrollAnimation animation="fadeInUp" delay={100}>
-                <div className="bg-gradient-to-br from-gray-50 to-neutral-50 rounded-2xl p-6 border border-gray-100">
-                  <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                    <span className="w-2 h-2 bg-gray-600 rounded-full"></span>
-                    Design & Creative
+                <div className="bg-gradient-to-br from-green-50 to-stone-50 rounded-2xl p-6 border border-green-100">
+                  <h3 className="text-lg font-bold text-stone-900 mb-4 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-green-600 rounded-full"></span>
+                    {t('skills.designCreative')}
                   </h3>
                   <div className="space-y-2">
-                    <div className="bg-white border border-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
+                    <div className="bg-white border border-stone-200 text-stone-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
                       Figma
                     </div>
-                    <div className="bg-white border border-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
+                    <div className="bg-white border border-stone-200 text-stone-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
                       Adobe Creative
                     </div>
                   </div>
@@ -617,25 +625,25 @@ export default function HomePage() {
 
               {/* Project Management */}
               <ScrollAnimation animation="fadeInUp" delay={200}>
-                <div className="bg-gradient-to-br from-neutral-50 to-stone-50 rounded-2xl p-6 border border-neutral-100">
-                  <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                    <span className="w-2 h-2 bg-neutral-600 rounded-full"></span>
-                    Project Management
+                <div className="bg-gradient-to-br from-stone-50 to-white rounded-2xl p-6 border border-stone-100">
+                  <h3 className="text-lg font-bold text-stone-900 mb-4 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-stone-600 rounded-full"></span>
+                    {t('skills.projectManagement')}
                   </h3>
                   <div className="space-y-2">
-                    <div className="bg-white border border-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
+                    <div className="bg-white border border-stone-200 text-stone-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
                       Scrum & Kanban
                     </div>
-                    <div className="bg-white border border-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
+                    <div className="bg-white border border-stone-200 text-stone-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
                       Asana
                     </div>
-                    <div className="bg-white border border-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
+                    <div className="bg-white border border-stone-200 text-stone-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
                       Monday.com
                     </div>
-                    <div className="bg-white border border-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
+                    <div className="bg-white border border-stone-200 text-stone-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
                       Slack
                     </div>
-                    <div className="bg-white border border-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
+                    <div className="bg-white border border-stone-200 text-stone-700 px-3 py-2 rounded-lg text-sm font-medium text-center">
                       Notion
                     </div>
                   </div>

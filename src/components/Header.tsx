@@ -1,8 +1,10 @@
 'use client';
 
-import Link from 'next/link';
 import { useState } from 'react';
 import ContactModal from './ContactModal';
+import LanguageToggle from './LanguageToggle';
+import LinkWithLang from './LinkWithLang';
+import { useT } from '@/hooks/useTranslation';
 
 interface HeaderProps {
   backgroundColor?: string;
@@ -38,11 +40,12 @@ const ArrowLeftIcon = ({ className }: { className?: string }) => (
 export default function Header({ 
   backgroundColor = 'bg-gradient-to-r from-slate-50 to-blue-50', 
   showBackButton = false, 
-  backButtonText = 'Volver al inicio' 
+  backButtonText 
 }: HeaderProps = {}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const t = useT();
 
   const projects = [
     { name: 'BluCactus MX', href: '/proyectos/blucactus-mx' },
@@ -57,38 +60,39 @@ export default function Header({
 
   return (
     <header className={`${backgroundColor} shadow-sm border-b ${borderColor} sticky top-0 z-50`}>
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Navegación principal">
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label={t('ui.mainNavigation')}>
         <div className="flex justify-between items-center h-16">
           {/* Back Button or Logo */}
           <div className="flex-shrink-0 flex items-center">
             {showBackButton ? (
-              <Link 
+              <LinkWithLang 
                 href="/" 
                 className={`inline-flex items-center ${textColor} ${hoverTextColor} transition-colors mr-4`}
               >
                 <ArrowLeftIcon className="w-5 h-5 mr-2" />
-                {backButtonText}
-              </Link>
+                {backButtonText || t('ui.backToHome')}
+              </LinkWithLang>
             ) : (
-              <Link 
+              <LinkWithLang 
                 href="/" 
                 className={`text-xl font-bold ${textColor} ${hoverTextColor} transition-colors`}
-                aria-label="Ir al inicio"
               >
                 Adriana Mejía
-              </Link>
+              </LinkWithLang>
             )}
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
+            {/* Language Toggle */}
+            <LanguageToggle />
             {!showBackButton && (
-              <Link 
+              <LinkWithLang 
                 href="/" 
                 className={`${textColor} ${hoverTextColor} px-3 py-2 rounded-md text-sm font-medium transition-colors`}
               >
-                Inicio
-              </Link>
+                {t('ui.home')}
+              </LinkWithLang>
             )}
             
             {/* Projects Dropdown */}
@@ -99,7 +103,7 @@ export default function Header({
                 aria-expanded={isProjectsOpen}
                 aria-haspopup="true"
               >
-                Proyectos
+                {t('ui.projects')}
                 <ChevronDownIcon className={`ml-1 h-4 w-4 transition-transform ${isProjectsOpen ? 'rotate-180' : ''}`} />
               </button>
               
@@ -107,15 +111,14 @@ export default function Header({
                 <div className="absolute left-0 mt-2 w-56 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-[60]">
                   <div className="py-1" role="menu">
                     {projects.map((project) => (
-                      <Link
+                      <LinkWithLang
                         key={project.href}
                         href={project.href}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors"
-                        role="menuitem"
                         onClick={() => setIsProjectsOpen(false)}
                       >
                         {project.name}
-                      </Link>
+                      </LinkWithLang>
                     ))}
                   </div>
                 </div>
@@ -126,17 +129,18 @@ export default function Header({
               onClick={() => setIsContactModalOpen(true)}
               className={`${backgroundColor.includes('white') || backgroundColor.includes('slate') || backgroundColor.includes('blue') ? 'bg-gray-900 text-white hover:bg-gray-800' : 'bg-white text-gray-900 hover:bg-gray-100'} px-4 py-2 rounded-md text-sm font-medium transition-colors`}
             >
-              Contacto
+              {t('contact')}
             </button>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+          {/* Mobile Language Toggle & Menu */}
+          <div className="md:hidden flex items-center gap-3">
+            <LanguageToggle />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className={`${textColor} ${hoverTextColor} p-2 rounded-md`}
               aria-expanded={isMenuOpen}
-              aria-label="Abrir menú de navegación"
+              aria-label={t('ui.openNavigationMenu')}
             >
               {isMenuOpen ? (
                 <XMarkIcon className="h-6 w-6" />
@@ -152,27 +156,27 @@ export default function Header({
           <div className={`md:hidden border-t ${borderColor} py-4`}>
             <div className="space-y-1">
               {!showBackButton && (
-                <Link 
+                <LinkWithLang 
                   href="/" 
                   className={`block px-3 py-2 text-base font-medium ${textColor} ${hoverTextColor} hover:bg-gray-50 rounded-md transition-colors`}
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Inicio
-                </Link>
+                  {t('ui.home')}
+                </LinkWithLang>
               )}
               
               <div className="px-3 py-2">
-                <div className={`text-base font-medium ${textColor} mb-2`}>Proyectos</div>
+                <div className={`text-base font-medium ${textColor} mb-2`}>{t('ui.projects')}</div>
                 <div className="space-y-1 ml-4">
                   {projects.map((project) => (
-                    <Link
+                    <LinkWithLang
                       key={project.href}
                       href={project.href}
                       className={`block py-1 text-sm ${backgroundColor.includes('white') ? 'text-gray-600 hover:text-gray-900' : 'text-gray-300 hover:text-white'} transition-colors`}
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {project.name}
-                    </Link>
+                    </LinkWithLang>
                   ))}
                 </div>
               </div>
@@ -184,7 +188,7 @@ export default function Header({
                 }}
                 className={`block w-full text-left px-3 py-2 text-base font-medium ${textColor} ${hoverTextColor} hover:bg-gray-50 rounded-md transition-colors`}
               >
-                Contacto
+                {t('contact')}
               </button>
             </div>
           </div>

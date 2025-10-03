@@ -1,28 +1,30 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { useState } from 'react';
 import ContactModal from '@/components/ContactModal';
+import LinkWithLang from '@/components/LinkWithLang';
+import { useT } from '@/hooks/useTranslation';
 
 export default function SomosVoltPage() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const t = useT();
 
   const projects = [
     {
-      title: 'Premium Brand Photography & Identity',
-      description: 'Lideré proyectos para marcas de prestigio como Vessel Brand, coordinando sesiones fotográficas profesionales y desarrollo de identidad visual que reflejan valores premium.',
-      impact: '15+ marcas de prestigio'
+      titleKey: 'volt.premiumBrandTitle',
+      descriptionKey: 'volt.premiumBrandDesc',
+      impactKey: 'volt.premiumBrandImpact'
     },
     {
-      title: 'Creative Campaign Management',
-      description: 'Coordiné campañas creativas multi-canal aplicando metodologías ágiles para garantizar entregas puntuales y calidad excepcional.',
-      impact: '9+ proyectos simultáneos'
+      titleKey: 'volt.creativeCampaignTitle',
+      descriptionKey: 'volt.creativeCampaignDesc',
+      impactKey: 'volt.creativeCampaignImpact'
     },
     {
-      title: 'Client Relationship Excellence',
-      description: 'Construí relaciones sólidas con clientes a través de comunicación transparente y entrega consistente de resultados.',
-      impact: '95% retención de clientes'
+      titleKey: 'volt.clientRelationshipTitle',
+      descriptionKey: 'volt.clientRelationshipDesc',
+      impactKey: 'volt.clientRelationshipImpact'
     }
   ];
 
@@ -73,17 +75,17 @@ export default function SomosVoltPage() {
           </div> */}
           
           <h1 className="text-5xl lg:text-7xl font-black mb-6 tracking-widest text-stone-300 drop-shadow-2xl opacity-50">
-            SOMOS VOLT
+            {t('volt.title')}
           </h1>
           
           <p className="text-2xl lg:text-3xl font-light mb-4 text-stone-200 drop-shadow-lg">
-            WE FRAME YOUR BRAND'S BEST ANGLE
+            {t('volt.tagline')}
           </p>
           
           <div className="w-24 h-1 bg-stone-300 mx-auto mb-8 shadow-lg"></div>
           
           <p className="text-xl text-stone-200 max-w-3xl mx-auto mb-12 leading-relaxed drop-shadow-md">
-            Mi experiencia como <strong className="text-white">Creative Project Manager</strong> en esta agencia de branding y diseño creativo con sede en San Diego, CA.
+            {t('volt.heroDescription')}
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-8">
@@ -91,13 +93,13 @@ export default function SomosVoltPage() {
               onClick={() => setIsContactModalOpen(true)}
               className="bg-stone-200 text-stone-900 px-8 py-4 rounded-none font-bold text-lg hover:bg-stone-100 transition-colors uppercase tracking-wide shadow-lg"
             >
-              CONTACTAR
+              {t('contact')}
             </button>
             <a 
               href="/#proyectos"
               className="border-2 border-stone-200 text-stone-200 px-8 py-4 rounded-none font-bold text-lg hover:bg-stone-200 hover:text-stone-900 transition-colors uppercase tracking-wide"
             >
-              VER MÁS PROYECTOS
+              {t('ui.viewExperience')}
             </a>
           </div>
           
@@ -127,28 +129,25 @@ export default function SomosVoltPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-4xl lg:text-5xl font-black mb-8 text-stone-200">
-                MI ROL EN VOLT
+                {t('volt.roleTitle')}
               </h2>
               <div className="space-y-6">
                 <div className="border-l-4 border-stone-400 pl-6">
-                  <h3 className="text-2xl font-bold mb-3 text-stone-200">Creative Project Manager</h3>
+                  <h3 className="text-2xl font-bold mb-3 text-stone-200">{t('volt.role')}</h3>
                   <p className="text-stone-300 text-lg leading-relaxed">
-                    Responsable de coordinar y ejecutar proyectos creativos para marcas emergentes y de prestigio, 
-                    incluyendo sesiones fotográficas profesionales y desarrollo de identidad visual, 
-                    aplicando metodologías ágiles para garantizar entregas de alta calidad.
+                    {t('volt.roleDesc')}
                   </p>
                 </div>
                 
                 <div className="border-l-4 border-stone-300 pl-6">
-                  <h3 className="text-2xl font-bold mb-3 text-stone-200">Período</h3>
-                  <p className="text-stone-300 text-lg">Febrero 2025 - Septiembre 2025</p>
+                  <h3 className="text-2xl font-bold mb-3 text-stone-200">{t('volt.period')}</h3>
+                  <p className="text-stone-300 text-lg">{t('volt.periodValue')}</p>
                 </div>
                 
                 <div className="border-l-4 border-stone-400 pl-6">
-                  <h3 className="text-2xl font-bold mb-3 text-stone-200">Metodología</h3>
+                  <h3 className="text-2xl font-bold mb-3 text-stone-200">{t('volt.methodology')}</h3>
                   <p className="text-stone-300 text-lg leading-relaxed">
-                    Implementé frameworks de <strong>Scrum y Kanban</strong> para optimizar flujos de trabajo 
-                    y mantener comunicación transparente con clientes.
+                    {t('volt.methodologyDesc')}
                   </p>
                 </div>
               </div>
@@ -156,22 +155,22 @@ export default function SomosVoltPage() {
             
             <div className="space-y-8">
               <div className="bg-stone-900 p-8 border border-stone-400">
-                <h3 className="text-3xl font-black text-stone-200 mb-4">IMPACTO CLAVE</h3>
+                <h3 className="text-3xl font-black text-stone-200 mb-4">{t('volt.keyImpact')}</h3>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center border-b border-stone-600 pb-2">
-                    <span className="text-stone-300">Proyectos Simultáneos</span>
+                    <span className="text-stone-300">{t('volt.simultaneousProjects')}</span>
                     <span className="text-2xl font-bold text-stone-200">9+</span>
                   </div>
                   <div className="flex justify-between items-center border-b border-stone-600 pb-2">
-                    <span className="text-stone-300">Retención de Clientes</span>
+                    <span className="text-stone-300">{t('volt.clientSatisfaction')}</span>
                     <span className="text-2xl font-bold text-stone-200">95%</span>
                   </div>
                   <div className="flex justify-between items-center border-b border-stone-600 pb-2">
-                    <span className="text-stone-300">Marcas Trabajadas</span>
+                    <span className="text-stone-300">{t('volt.premiumBrands')}</span>
                     <span className="text-2xl font-bold text-stone-200">15+</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-stone-300">Entregas a Tiempo</span>
+                    <span className="text-stone-300">{t('volt.onTimeDelivery')}</span>
                     <span className="text-2xl font-bold text-stone-200">100%</span>
                   </div>
                 </div>
@@ -185,7 +184,7 @@ export default function SomosVoltPage() {
       <section className="py-20 bg-stone-900">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl lg:text-5xl font-black text-center mb-16 text-stone-200">
-            PROYECTOS DESTACADOS
+            {t('volt.projectsTitle')}
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -193,13 +192,13 @@ export default function SomosVoltPage() {
               <div key={index} className="bg-stone-800 border border-stone-600 hover:border-stone-400 transition-colors group">
                 <div className="p-8">
                   <h3 className="text-xl font-bold mb-4 text-stone-200 group-hover:text-stone-100 transition-colors">
-                    {project.title}
+                    {t(project.titleKey)}
                   </h3>
                   <p className="text-stone-300 mb-6 leading-relaxed">
-                    {project.description}
+                    {t(project.descriptionKey)}
                   </p>
                   <div className="border-t border-stone-600 pt-4">
-                    <span className="text-stone-200 font-bold text-lg">{project.impact}</span>
+                    <span className="text-stone-200 font-bold text-lg">{t(project.impactKey)}</span>
                   </div>
                 </div>
               </div>
@@ -213,11 +212,10 @@ export default function SomosVoltPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-black mb-6 text-stone-200">
-              MARCAS DE PRESTIGIO
+              {t('volt.brandsTitle')}
             </h2>
             <p className="text-xl text-stone-300 max-w-3xl mx-auto">
-              Colaboraciones con marcas reconocidas que confían en nuestra experiencia 
-              para sesiones fotográficas profesionales y diseño de identidad visual.
+              {t('volt.brandsDescription')}
             </p>
           </div>
 
@@ -242,23 +240,21 @@ export default function SomosVoltPage() {
                   </h3>
                   
                   <p className="text-stone-300 text-lg mb-6 leading-relaxed">
-                    Marca de lifestyle premium que confió en nuestro equipo para desarrollar 
-                    su identidad visual y ejecutar sesiones fotográficas de alta calidad 
-                    que capturan la esencia de su propuesta de valor.
+                    {t('volt.vesselBrandDesc')}
                   </p>
                   
                   <div className="space-y-3">
                     <div className="flex items-center gap-3">
                       <div className="w-2 h-2 bg-stone-400 rounded-full"></div>
-                      <span className="text-stone-300">Sesiones fotográficas profesionales</span>
+                      <span className="text-stone-300">{t('volt.professionalSessions')}</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="w-2 h-2 bg-stone-400 rounded-full"></div>
-                      <span className="text-stone-300">Diseño de identidad visual</span>
+                      <span className="text-stone-300">{t('volt.visualIdentityDesign')}</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="w-2 h-2 bg-stone-400 rounded-full"></div>
-                      <span className="text-stone-300">Estrategia de marca premium</span>
+                      <span className="text-stone-300">{t('volt.premiumBrandStrategy')}</span>
                     </div>
                   </div>
                   
@@ -324,8 +320,8 @@ export default function SomosVoltPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
               </div>
-              <h4 className="text-xl font-bold mb-3 text-stone-200">Fotografía Premium</h4>
-              <p className="text-stone-300">Sesiones profesionales que capturan la esencia y valores de marcas de prestigio.</p>
+              <h4 className="text-xl font-bold mb-3 text-stone-200">{t('volt.premiumPhotography')}</h4>
+              <p className="text-stone-300">{t('volt.premiumPhotographyDesc')}</p>
             </div>
             
             <div className="text-center p-8 bg-stone-900 border border-stone-600 hover:border-stone-400 transition-colors">
@@ -334,8 +330,8 @@ export default function SomosVoltPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z" />
                 </svg>
               </div>
-              <h4 className="text-xl font-bold mb-3 text-stone-200">Identidad Visual</h4>
-              <p className="text-stone-300">Desarrollo de identidades visuales coherentes que reflejan la personalidad de cada marca.</p>
+              <h4 className="text-xl font-bold mb-3 text-stone-200">{t('volt.visualIdentity')}</h4>
+              <p className="text-stone-300">{t('volt.visualIdentityDesc')}</p>
             </div>
             
             <div className="text-center p-8 bg-stone-900 border border-stone-600 hover:border-stone-400 transition-colors">
@@ -344,8 +340,8 @@ export default function SomosVoltPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h4 className="text-xl font-bold mb-3 text-stone-200">Estrategia de Marca</h4>
-              <p className="text-stone-300">Consultoría estratégica para posicionar marcas en segmentos premium del mercado.</p>
+              <h4 className="text-xl font-bold mb-3 text-stone-200">{t('volt.brandStrategy')}</h4>
+              <p className="text-stone-300">{t('volt.brandStrategyDesc')}</p>
             </div>
           </div>
         </div>
@@ -420,7 +416,7 @@ export default function SomosVoltPage() {
       <section className="py-20 bg-stone-800">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl lg:text-5xl font-black text-center mb-16 text-stone-200">
-            HABILIDADES DESARROLLADAS
+            {t('volt.skillsDeveloped')}
           </h2>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -439,14 +435,12 @@ export default function SomosVoltPage() {
       <section className="py-20 bg-stone-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl lg:text-5xl font-black mb-12 text-stone-200">
-            LO QUE APRENDÍ
+            {t('volt.whatILearned')}
           </h2>
           
           <div className="bg-stone-800 border-l-8 border-stone-400 p-12">
             <blockquote className="text-2xl lg:text-3xl font-light text-stone-300 italic leading-relaxed">
-              "Perfeccioné la gestión de múltiples proyectos creativos y el manejo de expectativas de clientes exigentes. 
-              Aprendí que la clave del éxito en proyectos creativos es la <span className="text-stone-200 font-bold">comunicación transparente</span> 
-              y la <span className="text-stone-200 font-bold">entrega consistente</span> de resultados que superen las expectativas."
+              "{t('volt.learningQuote')}"
             </blockquote>
           </div>
         </div>
@@ -456,16 +450,16 @@ export default function SomosVoltPage() {
       <section className="py-20 bg-stone-200 text-stone-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl lg:text-5xl font-black mb-8">
-            ¿LISTO PARA TRABAJAR JUNTOS?
+            {t('volt.finalCtaTitle')}
           </h2>
           <p className="text-xl mb-12 max-w-2xl mx-auto">
-            Si buscas una project manager que entienda el mundo creativo y sepa entregar resultados, hablemos.
+            {t('volt.finalCtaDesc')}
           </p>
           <button 
             onClick={() => setIsContactModalOpen(true)}
             className="bg-stone-900 text-stone-200 px-12 py-6 rounded-none font-bold text-xl hover:bg-stone-800 transition-colors uppercase tracking-wide"
           >
-            CONTACTAR AHORA
+            {t('volt.finalCtaButton')}
           </button>
         </div>
       </section>

@@ -4,68 +4,61 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import ContactModal from '@/components/ContactModal';
+import LinkWithLang from '@/components/LinkWithLang';
+import { useT } from '@/hooks/useTranslation';
 
 export default function KrakenVideosPage() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const t = useT();
 
   const accounts = [
     {
       name: 'Luanpalomera',
-      username: 'luanpalomera',
-      description: 'Música y entretenimiento',
+      username: '@luanpalomera',
+      descriptionKey: 'kraken.luanpalomeraDesc',
       followers: '18M+',
       platform: 'Instagram & YouTube',
-      content: 'Contenido musical y colaboraciones artísticas',
+      contentKey: 'kraken.luanpalomeraContent',
       instagramUrl: 'https://www.instagram.com/luanpalomera/?hl=es-la',
       profileImage: '/profiles/luanpalomera.jpg'
     },
     {
       name: 'Curiosoben',
-      username: 'curiosoben',
-      description: 'Contenido educativo y curiosidades',
+      username: '@curiosoben',
+      descriptionKey: 'kraken.curiosobenDesc',
       followers: '12M+',
       platform: 'Instagram & YouTube',
-      content: 'Videos educativos que generan engagement masivo',
+      contentKey: 'kraken.curiosobenContent',
       instagramUrl: 'https://www.instagram.com/curiosoben/?hl=es-la',
       profileImage: '/profiles/curiosoben.jpg'
     },
     {
       name: 'Wefere',
-      username: 'wefere',
-      description: 'Canal de entretenimiento y lifestyle',
+      username: '@wefere',
+      descriptionKey: 'kraken.wefereDesc',
       followers: '15M+',
       platform: 'Instagram & TikTok',
-      content: 'Videos virales de comedia y tendencias',
+      contentKey: 'kraken.wefereContent',
       instagramUrl: 'https://www.instagram.com/wefere/?hl=es-la',
       profileImage: '/profiles/wefere.jpg'
     },
     {
       name: 'Rayito',
-      username: 'rayito',
-      description: 'Influencer de lifestyle y moda',
+      username: '@rayito',
+      descriptionKey: 'kraken.rayitoDesc',
       followers: '8M+',
       platform: 'Instagram & TikTok',
-      content: 'Contenido de moda y estilo de vida',
+      contentKey: 'kraken.rayitoContent',
       instagramUrl: 'https://www.instagram.com/rayito/',
       profileImage: '/profiles/rayito.jpg'
     },
     {
-      name: 'Wereverwero',
-      username: 'wereverwero',
-      description: 'Entretenimiento y gaming',
-      followers: '20M+',
-      platform: 'YouTube & Twitch',
-      content: 'Gaming content y entretenimiento digital',
-      instagramUrl: 'https://www.instagram.com/wereverwero/',
-      profileImage: '/profiles/wereverwero.jpg'
-    },
-    {
       name: 'Lafoka',
-      username: 'lafoka',
-      description: 'Comedia y entretenimiento',
+      username: '@lafoka',
+      descriptionKey: 'kraken.lafokaDesc',
       followers: '25M+',
       platform: 'TikTok & Instagram',
-      content: 'Videos de comedia que se vuelven virales',
+      contentKey: 'kraken.lafokaContent',
       instagramUrl: 'https://www.instagram.com/lafoka/',
       profileImage: '/profiles/lafoka.jpg'
     }
@@ -74,23 +67,23 @@ export default function KrakenVideosPage() {
   const achievements = [
     {
       metric: '100M+',
-      description: 'Seguidores Gestionados',
-      detail: 'Audiencia combinada de todas las cuentas'
+      descriptionKey: 'kraken.followersManaged',
+      detailKey: 'kraken.combinedAudience'
     },
     {
       metric: '50+',
-      description: 'Personas en el Equipo',
-      detail: 'Coordinación de equipos multidisciplinarios'
+      descriptionKey: 'kraken.teamMembers',
+      detailKey: 'kraken.teamCoordinationDesc'
     },
     {
       metric: '500M+',
-      description: 'Views Mensuales',
-      detail: 'Alcance promedio de contenido producido'
+      descriptionKey: 'kraken.monthlyViews',
+      detailKey: 'kraken.contentReach'
     },
     {
       metric: '85%',
-      description: 'Engagement Rate',
-      detail: 'Promedio de interacción en contenido viral'
+      descriptionKey: 'kraken.engagementRate',
+      detailKey: 'kraken.viralContentInteraction'
     }
   ];
 
@@ -121,15 +114,13 @@ export default function KrakenVideosPage() {
           </h1>
           
           <p className="text-2xl lg:text-3xl font-light mb-6 text-cyan-200">
-            Marketing Manager & Content Strategist
+            {t('kraken.roleSubtitle')}
           </p>
           
           <div className="w-32 h-1 bg-gradient-to-r from-cyan-400 to-purple-400 mx-auto mb-8 rounded-full"></div>
           
           <p className="text-xl text-gray-300 max-w-4xl mx-auto mb-12 leading-relaxed">
-            Lideré la estrategia de marketing para las cuentas más grandes de contenido digital en Latinoamérica, 
-            gestionando equipos de <strong className="text-cyan-400">50+ personas</strong> y audiencias de 
-            <strong className="text-purple-400"> 100M+ seguidores</strong> combinados.
+            {t('kraken.heroDescription')}
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
@@ -137,13 +128,13 @@ export default function KrakenVideosPage() {
               onClick={() => setIsContactModalOpen(true)}
               className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-10 py-5 rounded-full font-bold text-lg hover:from-cyan-400 hover:to-blue-400 transition-all duration-300 transform hover:scale-105 shadow-2xl"
             >
-              Contactar
+              {t('contact')}
             </button>
             <Link 
               href="/"
               className="border-2 border-cyan-400 text-cyan-400 px-10 py-5 rounded-full font-bold text-lg hover:bg-cyan-400 hover:text-slate-900 transition-all duration-300 transform hover:scale-105"
             >
-              Volver al CV
+              {t('backToCV')}
             </Link>
           </div>
         </div>
@@ -154,33 +145,33 @@ export default function KrakenVideosPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-black text-white mb-6">
-              Mi Rol en Kraken
+              {t('kraken.myRole')}
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Período: <strong className="text-cyan-400">Marzo - Mayo 2024</strong>
+              {t('kraken.period')}
             </p>
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div className="space-y-8">
               <div className="bg-gradient-to-r from-purple-600/20 to-blue-600/20 backdrop-blur-sm rounded-3xl p-8 border border-purple-400/30">
-                <h3 className="text-2xl font-bold text-cyan-400 mb-4">Responsabilidades Clave</h3>
+                <h3 className="text-2xl font-bold text-cyan-400 mb-4">{t('kraken.keyResponsibilities')}</h3>
                 <ul className="space-y-3 text-gray-300">
                   <li className="flex items-start">
                     <span className="text-cyan-400 mr-3">•</span>
-                    Coordinación de equipos multidisciplinarios de 50+ personas
+                    {t('kraken.teamCoordination')}
                   </li>
                   <li className="flex items-start">
                     <span className="text-cyan-400 mr-3">•</span>
-                    Estrategia de contenido para cuentas con 100M+ seguidores
+                    {t('kraken.contentStrategy')}
                   </li>
                   <li className="flex items-start">
                     <span className="text-cyan-400 mr-3">•</span>
-                    Análisis de performance y optimización de engagement
+                    {t('kraken.performanceAnalysis')}
                   </li>
                   <li className="flex items-start">
                     <span className="text-cyan-400 mr-3">•</span>
-                    Gestión de calendarios editoriales y campañas virales
+                    {t('kraken.editorialManagement')}
                   </li>
                 </ul>
               </div>
@@ -193,10 +184,10 @@ export default function KrakenVideosPage() {
                     {achievement.metric}
                   </div>
                   <div className="text-white font-semibold mb-1">
-                    {achievement.description}
+                    {t(achievement.descriptionKey)}
                   </div>
                   <div className="text-sm text-gray-400">
-                    {achievement.detail}
+                    {t(achievement.detailKey)}
                   </div>
                 </div>
               ))}
@@ -210,10 +201,10 @@ export default function KrakenVideosPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-black text-white mb-6">
-              Cuentas Gestionadas
+              {t('kraken.managedAccounts')}
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Los creadores de contenido más influyentes de Latinoamérica bajo mi coordinación estratégica
+              {t('kraken.managedAccountsDesc')}
             </p>
           </div>
           
@@ -248,21 +239,21 @@ export default function KrakenVideosPage() {
                   <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-cyan-400 transition-colors">
                     {account.name}
                   </h3>
-                  <p className="text-cyan-400 text-sm mb-3 font-mono">@{account.username}</p>
-                  <p className="text-gray-400 text-sm mb-4">{account.description}</p>
+                  <p className="text-cyan-400 text-sm mb-3 font-mono">{account.username}</p>
+                  <p className="text-gray-400 text-sm mb-4">{t(account.descriptionKey)}</p>
                 </div>
                 
                 <div className="space-y-3">
                   <div className="flex justify-between items-center border-b border-gray-700 pb-2">
-                    <span className="text-gray-400">Seguidores</span>
+                    <span className="text-gray-400">{t('kraken.followers')}</span>
                     <span className="text-cyan-400 font-bold">{account.followers}</span>
                   </div>
                   <div className="flex justify-between items-center border-b border-gray-700 pb-2">
-                    <span className="text-gray-400">Plataforma</span>
+                    <span className="text-gray-400">{t('kraken.platform')}</span>
                     <span className="text-purple-400 font-semibold text-sm">{account.platform}</span>
                   </div>
                   <div className="pt-2">
-                    <p className="text-gray-300 text-sm leading-relaxed">{account.content}</p>
+                    <p className="text-gray-300 text-sm leading-relaxed">{t(account.contentKey)}</p>
                   </div>
                 </div>
                 
@@ -271,7 +262,7 @@ export default function KrakenVideosPage() {
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                     </svg>
-                    Ver perfil
+                    {t('kraken.viewProfile')}
                   </div>
                 </div>
               </a>
@@ -286,30 +277,27 @@ export default function KrakenVideosPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-4xl lg:text-5xl font-black text-white mb-8">
-                Lo Que Aprendí
+                {t('kraken.whatILearned')}
               </h2>
               <div className="space-y-6">
                 <div className="bg-gradient-to-r from-cyan-600/20 to-purple-600/20 backdrop-blur-sm rounded-2xl p-6 border-l-4 border-cyan-400">
-                  <h3 className="text-xl font-bold text-cyan-400 mb-3">Gestión de Audiencias Masivas</h3>
+                  <h3 className="text-xl font-bold text-cyan-400 mb-3">{t('kraken.massiveAudienceManagement')}</h3>
                   <p className="text-gray-300 leading-relaxed">
-                    Desarrollé expertise en coordinar estrategias de contenido para audiencias de más de 100 millones 
-                    de seguidores, manteniendo engagement alto y crecimiento sostenible.
+                    {t('kraken.massiveAudienceDesc')}
                   </p>
                 </div>
                 
                 <div className="bg-gradient-to-r from-purple-600/20 to-blue-600/20 backdrop-blur-sm rounded-2xl p-6 border-l-4 border-purple-400">
-                  <h3 className="text-xl font-bold text-purple-400 mb-3">Coordinación de Equipos Grandes</h3>
+                  <h3 className="text-xl font-bold text-purple-400 mb-3">{t('kraken.largeTeamCoordination')}</h3>
                   <p className="text-gray-300 leading-relaxed">
-                    Perfeccioné la habilidad de liderar equipos multidisciplinarios de 50+ personas, 
-                    coordinando desde creativos hasta analistas de datos para maximizar el impacto del contenido.
+                    {t('kraken.largeTeamDesc')}
                   </p>
                 </div>
                 
                 <div className="bg-gradient-to-r from-blue-600/20 to-indigo-600/20 backdrop-blur-sm rounded-2xl p-6 border-l-4 border-blue-400">
-                  <h3 className="text-xl font-bold text-blue-400 mb-3">Análisis de Performance Viral</h3>
+                  <h3 className="text-xl font-bold text-blue-400 mb-3">{t('kraken.viralPerformanceAnalysis')}</h3>
                   <p className="text-gray-300 leading-relaxed">
-                    Aprendí a identificar patrones en contenido viral y optimizar estrategias en tiempo real 
-                    para maximizar alcance y engagement en múltiples plataformas simultáneamente.
+                    {t('kraken.viralPerformanceDesc')}
                   </p>
                 </div>
               </div>
@@ -317,9 +305,7 @@ export default function KrakenVideosPage() {
             
             <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-12 border border-gray-700">
               <blockquote className="text-2xl lg:text-3xl font-light text-gray-300 italic leading-relaxed text-center">
-                "Gestionar audiencias de 100M+ seguidores me enseñó que el éxito en marketing digital no solo viene de la creatividad, 
-                sino de la <span className="text-cyan-400 font-bold">coordinación perfecta</span> entre equipos grandes y la 
-                <span className="text-purple-400 font-bold">adaptación constante</span> a las tendencias."
+                "{t('kraken.managementQuote')}"
               </blockquote>
             </div>
           </div>
@@ -330,24 +316,23 @@ export default function KrakenVideosPage() {
       <section className="py-20 bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <h2 className="text-4xl lg:text-5xl font-black mb-8">
-            ¿Necesitas Gestionar Audiencias Masivas?
+            {t('kraken.ctaTitle') || '¿Necesitas Gestionar Audiencias Masivas?'}
           </h2>
           <p className="text-xl mb-12 max-w-3xl mx-auto leading-relaxed">
-            Si tu empresa maneja cuentas grandes o busca escalar su presencia digital, 
-            mi experiencia con 100M+ seguidores puede ser exactamente lo que necesitas.
+            {t('kraken.ctaDescription') || 'Si tu empresa maneja cuentas grandes o busca escalar su presencia digital, mi experiencia con 100M+ seguidores puede ser exactamente lo que necesitas.'}
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <button 
               onClick={() => setIsContactModalOpen(true)}
               className="bg-white text-blue-600 px-12 py-6 rounded-full font-bold text-xl hover:bg-gray-100 transition-colors transform hover:scale-105 shadow-2xl"
             >
-              Hablemos de tu Proyecto
+              {t('kraken.ctaButton') || 'Hablemos de tu Proyecto'}
             </button>
             <Link 
               href="/"
               className="border-2 border-white text-white px-12 py-6 rounded-full font-bold text-xl hover:bg-white hover:text-blue-600 transition-colors transform hover:scale-105"
             >
-              Ver CV Completo
+              {t('backToCV')}
             </Link>
           </div>
         </div>
