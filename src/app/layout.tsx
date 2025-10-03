@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import DynamicHeader from "@/components/DynamicHeader";
 import Footer from "@/components/Footer";
+import TranslationProvider from "@/components/TranslationProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -90,9 +91,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={`${inter.className} bg-white min-h-screen antialiased`}>
         <div className="select-none">
-          <DynamicHeader />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
+          <TranslationProvider>
+            <DynamicHeader />
+            <main className="min-h-screen">{children}</main>
+            <Footer />
+          </TranslationProvider>
         </div>
       </body>
     </html>

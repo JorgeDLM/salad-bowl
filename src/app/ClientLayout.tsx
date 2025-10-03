@@ -3,17 +3,14 @@
 import { useState } from "react";
 import Image from "next/image";
 import WhatsAppModal from "../components/WhatsAppModal";
+import { Package } from "../data/packages";
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [selectedPackage, setSelectedPackage] = useState<{
-    name: string;
-    price: string;
-    description: string;
-  } | undefined>(undefined);
+  const [selectedPackage, setSelectedPackage] = useState<Package | undefined>(undefined);
 
-  const openModal = (packageInfo?: { name: string; price: string; description: string }) => {
+  const openModal = (packageInfo?: Package) => {
     setSelectedPackage(packageInfo);
     setIsModalOpen(true);
   };

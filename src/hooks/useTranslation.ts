@@ -1,15 +1,23 @@
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
-import { useCallback } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 
 export type Language = 'es' | 'en';
-
 export const useTranslation = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
   
-  const currentLang = (searchParams.get('lang') as Language) || 'es';
-  
+  const [currentLang, setCurrentLang] = useState<'es' | 'en'>('es');
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+    const langFromUrl = searchParams.get('lang') as 'es' | 'en';
+    if (langFromUrl && (langFromUrl === 'es' || langFromUrl === 'en')) {
+      setCurrentLang(langFromUrl);
+    }
+  }, [searchParams]);
+
   const setLanguage = useCallback((lang: Language) => {
     const params = new URLSearchParams(searchParams);
     if (lang === 'es') {
@@ -1230,12 +1238,15 @@ export const translations = {
 export const useT = () => {
   const { currentLang } = useTranslation();
   
-  const t = useCallback((key: string, obj?: any): any => {
+  const t = useCallback((key: string): string => {
+    if (!key) return '';
+    
     const keys = key.split('.');
-    let value = obj || translations;
+    let value: any = translations;
     
     for (const k of keys) {
       value = value?.[k];
+      if (!value) break;
     }
     
     return value?.[currentLang] || value?.es || key;
