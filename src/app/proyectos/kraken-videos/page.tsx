@@ -61,6 +61,16 @@ export default function KrakenVideosPage() {
       contentKey: 'kraken.lafokaContent',
       instagramUrl: 'https://www.instagram.com/lafoka/',
       profileImage: '/profiles/lafoka.jpg'
+    },
+    {
+      name: 'Wereverwero',
+      username: '@wereverwero',
+      descriptionKey: 'kraken.wefereDesc',
+      followers: '1.3M+',
+      platform: 'TikTok & Instagram',
+      contentKey: 'kraken.wefereContent',
+      instagramUrl: 'https://www.instagram.com/wereverwero/',
+      profileImage: '/profiles/wereverwero.jpg'
     }
   ];
 
