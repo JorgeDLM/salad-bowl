@@ -30,6 +30,29 @@
   --focus: #B65649;
 }
 
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brand-terracotta);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-wine);
+}
+
 /* Animaciones elegantes para Regalazo */
 @keyframes fadeInUp {
   from {
