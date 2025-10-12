@@ -1,6 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Regalazo Design Tokens */
+:root {
+  /* Background & Surface */
+  --bg-cream: #F7F1EA;
+  --paper: #F2E7DE;
+  --muted: #E8DCD1;
+  --border: #E5D3C5;
+  
+  /* Text */
+  --ink: #3C2C29;
+  
+  /* Brand Colors */
+  --brand-wine: #7A3D36;
+  --brand-terracotta: #C86B5B;
+  --brand-terracotta-600: #A25046;
+  
+  /* Chips */
+  --chip-peach: #EDD4C8;
+  --chip-ink: #6E433B;
+  
+  /* Accents */
+  --gold: #C2A27E;
+  --sage: #C9D4CC;
+  --focus: #B65649;
+}
 
 /* Animaciones elegantes para Zephir */
 @keyframes fadeInUp {
