@@ -90,7 +90,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={`${inter.className} bg-cream min-h-screen antialiased`}>
         <Navbar />
-        <main>{children}</main>
+        <main className="select-none">{children}</main>
       </body>
     </html>
   );
