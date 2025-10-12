@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/Button';
 
-interface StickyC TAProps {
+interface StickyCTAProps {
   onAction: () => void;
   label: string;
   price?: number;

@@ -10,12 +10,12 @@ interface PersonaSelectorProps {
 }
 
 const personaOptions: PersonaOption[] = [
-  { id: 'pareja', label: 'Pareja', image: '/img/avatars/pareja.webp' },
-  { id: 'mama', label: 'Mamá', image: '/img/avatars/mama.webp' },
-  { id: 'papa', label: 'Papá', image: '/img/avatars/papa.webp' },
-  { id: 'bebe', label: 'Bebé', image: '/img/avatars/bebe.webp' },
-  { id: 'amigo', label: 'Amigo/a', image: '/img/avatars/amigo.webp' },
-  { id: 'jefe_equipo', label: 'Jefe/Equipo', image: '/img/avatars/jefe-equipo.webp' },
+  { id: 'pareja', label: 'Pareja', image: '/img/avatars/pareja.png' },
+  { id: 'mama', label: 'Mamá', image: '/img/avatars/mama.png' },
+  { id: 'papa', label: 'Papá', image: '/img/avatars/papa.png' },
+  { id: 'bebe', label: 'Bebé', image: '/img/avatars/bebe.png' },
+  { id: 'amigo', label: 'Amigo/a', image: '/img/avatars/amigo.png' },
+  { id: 'jefe_equipo', label: 'Jefe/Equipo', image: '/img/avatars/jefe-equipo.png' },
 ];
 
 export function PersonaSelector({ selected, onChange }: PersonaSelectorProps) {
