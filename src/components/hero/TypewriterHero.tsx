@@ -61,7 +61,7 @@ export default function TypewriterHero() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % kitImages.length);
-    }, 3500);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
