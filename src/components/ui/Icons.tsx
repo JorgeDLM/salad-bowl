@@ -97,3 +97,33 @@ export const ArrowRightIcon = ({ className = "w-6 h-6" }: { className?: string }
     <path d="M5 12h14m-6-6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
+
+export const PaletteIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M12 2a10 10 0 0 1 10 10c0 2.5-1.5 4-3 4-1 0-1.5-.5-1.5-1.5 0-.3.1-.6.2-.9.4-1.1.8-2.3.8-3.6 0-4.4-3.6-8-8-8S2 5.6 2 10s3.6 8 8 8c1.5 0 2.9-.4 4.1-1.1" strokeLinecap="round" strokeLinejoin="round"/>
+    <circle cx="7.5" cy="10.5" r="1.5" fill="currentColor"/>
+    <circle cx="12" cy="7.5" r="1.5" fill="currentColor"/>
+    <circle cx="16.5" cy="10.5" r="1.5" fill="currentColor"/>
+  </svg>
+);
+
+export const LeafIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+export const TargetIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <circle cx="12" cy="12" r="10"/>
+    <circle cx="12" cy="12" r="6"/>
+    <circle cx="12" cy="12" r="2" fill="currentColor"/>
+  </svg>
+);
+
+export const PencilIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
