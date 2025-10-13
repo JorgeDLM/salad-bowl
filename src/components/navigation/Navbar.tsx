@@ -59,11 +59,11 @@ export default function Navbar() {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-sb-cream transition-colors"
+            className="md:hidden p-2 rounded-lg hover:bg-sb-cream/20 transition-colors"
             aria-label="Toggle menu"
           >
             <svg 
-              className="w-6 h-6 text-ink" 
+              className="w-6 h-6 text-sb-cream" 
               fill="none" 
               stroke="currentColor" 
               viewBox="0 0 24 24"
@@ -89,13 +89,13 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200">
+          <div className="md:hidden py-4 border-t border-sb-cream/20">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
                 <Link 
                   key={link.href}
                   href={link.href} 
-                  className="text-ink hover:text-sb-green-700 transition-colors font-medium py-2"
+                  className="text-sb-cream hover:text-white transition-colors font-medium py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.label}

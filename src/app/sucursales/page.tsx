@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import LocationCard from '@/components/LocationCard';
 import Footer from '@/components/Footer';
 import { LOCATIONS } from '@/config';
+import { ArrowRight } from '@/components/icons';
 
 export default function SucursalesPage() {
   return (
@@ -21,18 +22,20 @@ export default function SucursalesPage() {
             Sucursales
           </h1>
           <p className="text-lg text-ink/60">
-            Visítanos en nuestras dos ubicaciones en Puebla
+            Visítanos en nuestras tres ubicaciones en Puebla
           </p>
         </motion.div>
 
         {/* Locations */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {LOCATIONS.map((location, index) => (
             <LocationCard
               key={location.name}
               name={location.name}
               address={location.address}
               mapsUrl={location.mapsUrl}
+              phone={location.phone}
+              schedule={location.schedule}
               delay={index * 0.2}
             />
           ))}
@@ -44,21 +47,21 @@ export default function SucursalesPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="mt-16 bg-white rounded-3xl p-8 shadow-lg max-w-3xl mx-auto"
+          className="mt-16 bg-gradient-to-br from-sb-green-700 to-sb-green-500 rounded-3xl p-8 shadow-lg max-w-3xl mx-auto text-center"
         >
-          <h2 className="text-2xl font-bold text-ink mb-6 text-center">
-            Horarios
+          <h2 className="text-2xl font-bold text-white mb-4">
+            ¿Tienes preguntas?
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
-            <div>
-              <p className="font-semibold text-ink mb-2">Lunes a Viernes</p>
-              <p className="text-ink/70">9:00 AM - 9:00 PM</p>
-            </div>
-            <div>
-              <p className="font-semibold text-ink mb-2">Sábado y Domingo</p>
-              <p className="text-ink/70">10:00 AM - 8:00 PM</p>
-            </div>
-          </div>
+          <p className="text-white/90 mb-6">
+            Llámanos o visítanos en cualquiera de nuestras tres sucursales
+          </p>
+          <a
+            href="/contacto"
+            className="inline-flex items-center gap-2 bg-white text-sb-green-700 px-8 py-4 rounded-full font-bold hover:bg-sb-cream transition-all focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
+          >
+            Contáctanos
+            <ArrowRight className="w-5 h-5" />
+          </a>
         </motion.div>
       </div>
 

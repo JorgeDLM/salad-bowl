@@ -141,10 +141,10 @@ export default function BowlFlow() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => window.location.href = '/menu'}
+              onClick={() => window.location.href = '/sucursales'}
               className="bg-sb-green-700 text-white px-12 py-4 rounded-full text-lg font-semibold hover:bg-sb-green-700/90 transition-all shadow-xl hover:shadow-2xl inline-flex items-center gap-3"
             >
-              Ver menú completo
+              Ver ubicaciones
               <ArrowRight className="w-6 h-6" />
             </motion.button>
           </motion.div>
