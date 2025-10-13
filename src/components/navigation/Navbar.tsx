@@ -1,70 +1,65 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { Button } from '@/components/ui/Button';
+import Logo from '../Logo';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { href: '/', label: 'Inicio' },
+    { href: '/menu', label: 'Menú' },
+    { href: '/sucursales', label: 'Sucursales' },
+    { href: '/franquicias', label: 'Franquicias' },
+    { href: '/contacto', label: 'Contacto' },
+  ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-[color:var(--border)] shadow-sm">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      scrolled 
+        ? 'bg-sb-green-700/95 backdrop-blur-md shadow-md' 
+        : 'bg-sb-green-700/80 backdrop-blur-sm'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <Image 
-              src="/regalazo.svg" 
-              alt="Regalazo" 
-              width={120} 
-              height={40}
-              className="w-28 md:w-32 drop-shadow-sm"
-              priority
+            <Logo 
+              variant="light"
+              width={80}
+              height={46}
+              className="drop-shadow-sm"
             />
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            <Link 
-              href="/quiz" 
-              className="text-ink hover:text-brand-terra transition-all duration-300 font-medium relative group"
-            >
-              Arma tu kit
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-terra group-hover:w-full transition-all duration-300" />
-            </Link>
-            <Link 
-              href="/nosotros" 
-              className="text-ink hover:text-brand-terra transition-all duration-300 font-medium relative group"
-            >
-              Nosotros
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-terra group-hover:w-full transition-all duration-300" />
-            </Link>
-            <Link 
-              href="/proceso" 
-              className="text-ink hover:text-brand-terra transition-all duration-300 font-medium relative group"
-            >
-              Cómo funciona
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-terra group-hover:w-full transition-all duration-300" />
-            </Link>
-            <Link 
-              href="/contacto" 
-              className="text-ink hover:text-brand-terra transition-all duration-300 font-medium relative group"
-            >
-              Contacto
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-terra group-hover:w-full transition-all duration-300" />
-            </Link>
-            <Link href="/quiz">
-              <Button size="sm" className="hover:scale-105 hover:shadow-lg transition-all duration-300">
-                Crear regalo
-              </Button>
-            </Link>
+            {navLinks.map((link) => (
+              <Link 
+                key={link.href}
+                href={link.href} 
+                className="text-sb-cream hover:text-sb-cream transition-all duration-300 font-medium relative group"
+              >
+                {link.label}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-sb-cream group-hover:w-full transition-all duration-300" />
+              </Link>
+            ))}
           </div>
 
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-cream transition-colors"
+            className="md:hidden p-2 rounded-lg hover:bg-sb-cream transition-colors"
             aria-label="Toggle menu"
           >
             <svg 
@@ -94,41 +89,18 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-[color:var(--border)]">
+          <div className="md:hidden py-4 border-t border-gray-200">
             <div className="flex flex-col gap-4">
-              <Link 
-                href="/quiz" 
-                className="text-ink hover:text-brand-terra transition-colors font-medium py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Arma tu kit
-              </Link>
-              <Link 
-                href="/nosotros" 
-                className="text-ink hover:text-brand-terra transition-colors font-medium py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Nosotros
-              </Link>
-              <Link 
-                href="/proceso" 
-                className="text-ink hover:text-brand-terra transition-colors font-medium py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Cómo funciona
-              </Link>
-              <Link 
-                href="/contacto" 
-                className="text-ink hover:text-brand-terra transition-colors font-medium py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Contacto
-              </Link>
-              <Link href="/quiz" onClick={() => setIsMenuOpen(false)}>
-                <Button size="sm" className="w-full">
-                  Crear regalo
-                </Button>
-              </Link>
+              {navLinks.map((link) => (
+                <Link 
+                  key={link.href}
+                  href={link.href} 
+                  className="text-ink hover:text-sb-green-700 transition-colors font-medium py-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
           </div>
         )}

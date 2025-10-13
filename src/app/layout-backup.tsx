@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from 'next';
+import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/navigation/Navbar';
@@ -10,34 +10,38 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: 'Salad Bowl - Arma tu Ensalada Perfecta | Ensaladas Frescas en Puebla',
-    template: `%s | ${SITE.brand}`,
+    default: `${SITE.name} - Arma tu Bowl Perfecto | Ensaladas Frescas en Puebla`,
+    template: `%s | ${SITE.name}`,
   },
   description: 'Arma tu bowl perfecto con ingredientes frescos. Salad Bowl ofrece ensaladas, wraps, paninis y açaí en Puebla. Elige tu base, ingredientes y aderezo. ¡Ordena ahora!',
   keywords: [
+    // Palabras clave principales
     'arma tu ensalada',
     'restaurante de ensaladas puebla',
     'ensaladas a tu gusto',
     'bowl personalizado',
     'salad bowl puebla',
+    // Long-tail keywords
     'armar bowl ensalada puebla',
     'ensaladas frescas puebla',
     'comida saludable puebla',
     'restaurante saludable',
     'bowls personalizados',
     'ensaladas personalizadas',
+    // Productos
     'wraps saludables',
-    'paninos',
+    'paninis',
     'açaí bowl',
     'ensaladas gourmet',
+    // Localización
     'ensaladas angelópolis',
     'restaurantes saludables puebla',
     'comida fitness puebla',
     'healthy food puebla',
   ],
-  authors: [{ name: SITE.brand }],
-  creator: SITE.brand,
-  publisher: SITE.brand,
+  authors: [{ name: SITE.name }],
+  creator: SITE.name,
+  publisher: SITE.name,
   formatDetection: {
     email: false,
     address: false,
@@ -47,52 +51,36 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'es_MX',
     url: SITE.url,
-    siteName: SITE.brand,
+    siteName: SITE.name,
     title: 'Salad Bowl - Arma tu Ensalada Perfecta en Puebla',
     description: 'Ensaladas frescas personalizadas, wraps, paninis y açaí. Elige tu base, ingredientes de la barra y tu aderezo favorito. 2 ubicaciones en Puebla.',
+    siteName: SITE.brand,
+    title: "Salad Bowl | The destiny of the salad",
+    description: "Arma tu bowl perfecto en 3 pasos. Life is now.",
     images: [
       {
-        url: '/logo.png',
+        url: "/saladbowl/life-is-now.png",
         width: 1200,
         height: 630,
-        alt: 'Salad Bowl - Life is now',
+        alt: "Salad Bowl - Life is now",
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Salad Bowl Puebla - Arma tu Bowl Perfecto',
-    description: 'Ensaladas personalizadas con ingredientes frescos. Wraps, paninis y açaí. ¡Visítanos en Puebla!',
-    images: ['/logo.png'],
-    creator: '@saladbowl',
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  alternates: {
-    canonical: SITE.url,
+    card: "summary_large_image",
+    title: "Salad Bowl | The destiny of the salad",
+    description: "Arma tu bowl perfecto en 3 pasos. Life is now.",
+    images: ["/saladbowl/life-is-now.png"],
   },
 };
 
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
-  themeColor: '#0f4f44',
+  themeColor: "#0f4f44",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   // JSON-LD Structured Data para Rich Snippets de Google
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -195,17 +183,31 @@ export default function RootLayout({
           id="json-ld"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+              description:
+                "Salad Bowl - Arma tu bowl perfecto. Ensaladas frescas, wraps, paninis y açaí en Puebla.",
+              servesCuisine: "Healthy Food",
+              priceRange: "$$",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "Blvd. Atlixcáyotl 1504, local B5",
+                addressLocality: "Puebla",
+                addressCountry: "MX",
+              },
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: SITE.whatsapp,
+                contactType: "Customer Service",
+                areaServed: "MX",
+                availableLanguage: ["Spanish"],
+              },
+              sameAs: [SITE.instagram, SITE.facebook],
+            }),
+          }}
         />
-        
-        {/* Geo Tags para SEO Local */}
-        <meta name="geo.region" content="MX-PUE" />
-        <meta name="geo.placename" content="Puebla" />
-        <meta name="geo.position" content="19.0414398;-98.2062727" />
-        <meta name="ICBM" content="19.0414398, -98.2062727" />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} bg-sb-cream min-h-screen antialiased`}>
         <Navbar />
-        <main className='select-none'>{children}</main>
+        <main className="select-none">{children}</main>
       </body>
     </html>
   );

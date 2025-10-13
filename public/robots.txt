@@ -1,0 +1,7 @@
+# Robots.txt for Salad Bowl
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Sitemaps
+Sitemap: https://jorge-de-la-mora-cv.netlify.app/sitemap.xml

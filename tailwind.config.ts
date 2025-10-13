@@ -9,22 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        fraunces: ['Fraunces', 'serif'],
-        inter: ['Inter', 'sans-serif'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
       colors: {
-        brand: {
-          wine: '#7A3D36',
-          terra: '#C86B5B',
-          'terra-600': '#A25046',
-        },
-        paper: '#F2E7DE',
-        cream: '#F7F1EA',
-        ink: '#3C2C29',
-        muted: '#E8DCD1',
-        border: '#E5D3C5',
-        gold: '#C2A27E',
-        sage: '#C9D4CC',
+        'sb-green-700': '#0f4f44',   // forest/teal oscuro
+        'sb-green-500': '#BFD96A',   // verde lima del logo
+        'sb-teal-200': '#A9D8D4',    // teal claro de fondos
+        'sb-cream': '#F7F8F3',       // fondo neutral claro
+        ink: '#1a1a1a',              // texto principal
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

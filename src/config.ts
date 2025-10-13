@@ -1,19 +1,30 @@
 export const SITE = {
-  brand: 'Regalazo',
-  whatsapp: '5215512345678', // Update with real number
+  brand: 'Salad Bowl',
+  tagline: 'Life is now',
+  whatsapp: '5215512345678',
   timezone: 'America/Mexico_City',
-  sameDayCutoffHour: 12,
   url: 'https://jorge-de-la-mora-cv.netlify.app',
+  instagram: 'https://instagram.com/saladbowl',
+  facebook: 'https://facebook.com/saladbowl',
 } as const;
 
 export const ROUTES = {
   home: '/',
-  quiz: '/quiz',
-  paraQuien: (slug: string) => `/para-quien/${slug}`,
-  ocasion: (slug: string) => `/ocasion/${slug}`,
-  estilo: (slug: string) => `/estilo/${slug}`,
-  presupuesto: (tier: number) => `/presupuesto/${tier}`,
-  kit: (slug: string) => `/kit/${slug}`,
-  empresas: '/empresas',
+  menu: '/menu',
+  sucursales: '/sucursales',
+  franquicias: '/franquicias',
   contacto: '/contacto',
 } as const;
+
+export const LOCATIONS = [
+  {
+    name: 'Vía San Ángel',
+    address: 'Blvd. Atlixcáyotl 1504, local B5',
+    mapsUrl: 'https://maps.google.com/?q=Blvd.+Atlixcáyotl+1504,+local+B5',
+  },
+  {
+    name: 'Zavaleta',
+    address: 'Calz. de Zavaleta 3916, Plaza Office Depot',
+    mapsUrl: 'https://maps.google.com/?q=Calz.+de+Zavaleta+3916,+Plaza+Office+Depot',
+  },
+] as const;

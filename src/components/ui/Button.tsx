@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'ghost' | 'outline';
+  variant?: 'primary' | 'secondary' | 'outline';
   size?: 'sm' | 'md' | 'lg';
   children: React.ReactNode;
 }
@@ -13,18 +13,18 @@ export function Button({
   children, 
   ...props 
 }: ButtonProps) {
-  const baseClasses = 'rounded-full font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[color:var(--focus)] focus:ring-offset-2';
+  const baseClasses = 'rounded-full font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-sb-green-500 focus:ring-offset-2 min-h-[44px]';
   
   const variantClasses = {
-    primary: 'bg-[color:var(--brand-terracotta)] text-white hover:bg-[color:var(--brand-terracotta-600)] active:scale-95',
-    ghost: 'bg-transparent text-[color:var(--ink)] hover:bg-[color:var(--muted)]',
-    outline: 'border-2 border-[color:var(--brand-terracotta)] text-[color:var(--brand-terracotta)] hover:bg-[color:var(--brand-terracotta)] hover:text-white',
+    primary: 'bg-sb-green-700 text-white hover:bg-sb-green-700/90 active:scale-95 shadow-md hover:shadow-lg',
+    secondary: 'bg-white text-sb-green-700 border-2 border-sb-green-700 hover:bg-sb-green-700 hover:text-white active:scale-95',
+    outline: 'border-2 border-sb-green-700 text-sb-green-700 hover:bg-sb-green-700 hover:text-white active:scale-95',
   };
   
   const sizeClasses = {
-    sm: 'px-4 py-2 text-sm h-10',
-    md: 'px-6 py-3 text-base h-12',
-    lg: 'px-8 py-4 text-lg h-14',
+    sm: 'px-4 py-2 text-sm',
+    md: 'px-6 py-3 text-base',
+    lg: 'px-8 py-4 text-lg',
   };
   
   return (

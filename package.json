@@ -1,7 +1,8 @@
 {
-  "name": "welove-code",
+  "name": "salad-bowl",
   "version": "1.0.0",
   "private": true,
+  "description": "Salad Bowl - The destiny of the salad. Arma tu bowl perfecto en 3 pasos.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,8 +10,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@heroicons/react": "^2.0.18",
-    "cookie-parser": "^1.4.7",
     "framer-motion": "^12.23.14",
     "next": "14.2.3",
     "react": "^18",
