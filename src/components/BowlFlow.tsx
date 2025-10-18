@@ -4,11 +4,59 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Custom hook para el efecto typewriter
+function useTypewriter(phrases: string[], currentIndex: number, onComplete: () => void) {
+  const [currentText, setCurrentText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [typingSpeed, setTypingSpeed] = useState(100);
+
+  useEffect(() => {
+    const currentPhrase = phrases[currentIndex];
+
+    const handleTyping = () => {
+      if (!isDeleting) {
+        if (currentText.length < currentPhrase.length) {
+          setCurrentText(currentPhrase.substring(0, currentText.length + 1));
+          setTypingSpeed(100);
+        } else {
+          setTimeout(() => setIsDeleting(true), 1200);
+        }
+      } else {
+        if (currentText.length > 0) {
+          setCurrentText(currentPhrase.substring(0, currentText.length - 1));
+          setTypingSpeed(50);
+        } else {
+          setIsDeleting(false);
+          onComplete();
+          setTypingSpeed(200);
+        }
+      }
+    };
+
+    const timer = setTimeout(handleTyping, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [currentText, isDeleting, currentIndex, typingSpeed, phrases, onComplete]);
+
+  return { currentText, reset: () => { setCurrentText(''); setIsDeleting(false); setTypingSpeed(100); } };
+}
+
+// Custom hook para carousel simple
+function useCarousel(itemsCount: number, interval: number) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % itemsCount);
+    }, interval);
+    return () => clearInterval(timer);
+  }, [itemsCount, interval]);
+
+  return { currentIndex, setIndex: setCurrentIndex };
+}
+
 export default function BowlFlow() {
   const [hoveredStep, setHoveredStep] = useState<number | null>(null);
-  const [currentBase, setCurrentBase] = useState(0);
-  const [currentCategory, setCurrentCategory] = useState(0);
-
+  
   // Bases con imágenes
   const bases = [
     { name: 'Lechuga', image: '/img/bases/0.png' },
@@ -26,21 +74,21 @@ export default function BowlFlow() {
     { name: 'Toppings' },
   ];
 
-  // Ciclo automático del carousel de bases
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentBase((prev) => (prev + 1) % bases.length);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, [bases.length]);
+  // Hook para carousel de categorías
+  const categoryCarousel = useCarousel(categories.length, 2500);
 
-  // Ciclo automático del carousel de categorías
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentCategory((prev) => (prev + 1) % categories.length);
-    }, 2500);
-    return () => clearInterval(interval);
-  }, [categories.length]);
+  // Hook para bases con typewriter
+  const [currentBase, setCurrentBase] = useState(0);
+  const baseNames = bases.map(b => b.name);
+  const typewriter = useTypewriter(baseNames, currentBase, () => {
+    setCurrentBase((prev) => (prev + 1) % bases.length);
+  });
+
+  // Función para cambiar base manualmente
+  const handleBaseChange = (index: number) => {
+    setCurrentBase(index);
+    typewriter.reset();
+  };
 
   const steps = [
     { 
@@ -179,7 +227,7 @@ export default function BowlFlow() {
                   {step.hasCarousel && step.id === 1 ? (
                     <div className="relative">
                       {/* Carousel de imágenes */}
-                      <div className="relative h-72 mb-4 bg-gradient-to-br from-sb-green-50 to-white rounded-2xl overflow-hidden">
+                      <div className="relative h-60 mb-4 bg-gradient-to-br from-sb-green-50 to-white rounded-2xl overflow-hidden">
                         <AnimatePresence mode="wait">
                           <motion.div
                             key={currentBase}
@@ -203,32 +251,20 @@ export default function BowlFlow() {
                         </AnimatePresence>
                       </div>
 
-                      {/* Nombre del producto */}
-                      <AnimatePresence mode="wait">
-                        <motion.div
-                          key={currentBase}
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
-                          transition={{ 
-                            duration: 0.4,
-                            ease: [0.25, 0.1, 0.25, 1],
-                            delay: 0.1
-                          }}
-                          className="text-center mb-4"
-                        >
-                          <p className="text-2xl font-black text-sb-green-700">
-                            {bases[currentBase].name}
-                          </p>
-                        </motion.div>
-                      </AnimatePresence>
+                      {/* Nombre del producto con efecto typewriter */}
+                      <div className="text-center mb-4 h-10 flex items-center justify-center">
+                        <p className="text-2xl font-black text-sb-green-700">
+                          {typewriter.currentText}
+                          <span className="inline-block w-0.5 h-7 bg-sb-green-700 ml-1 animate-pulse"></span>
+                        </p>
+                      </div>
 
                       {/* Indicadores de puntos */}
                       <div className="flex justify-center gap-2">
                         {bases.map((_, i) => (
                           <button
                             key={i}
-                            onClick={() => setCurrentBase(i)}
+                            onClick={() => handleBaseChange(i)}
                             className={`w-2 h-2 rounded-full transition-all duration-300 ${
                               i === currentBase 
                                 ? 'bg-sb-green-700 w-6' 
@@ -242,7 +278,7 @@ export default function BowlFlow() {
                   ) : step.hasCarousel && step.id === 2 ? (
                     <div className="relative">
                       {/* Imagen de fondo de la barra */}
-                      <div className="relative h-72 mb-4 rounded-3xl overflow-hidden shadow-2xl">
+                      <div className="relative h-72 -mb-2 rounded-3xl overflow-hidden shadow-2xl">
                         <Image
                           src={step.backgroundImage || ''}
                           alt="Barra de ingredientes"
@@ -252,51 +288,12 @@ export default function BowlFlow() {
                         {/* Overlay gradiente aesthetic */}
                         <div className="absolute inset-0 bg-gradient-to-t from-sb-green-700/70 via-sb-green-700/30 to-transparent" />
                         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-transparent" />
-                        
-                        {/* Categoría actual con animación suave */}
-                        <div className="absolute inset-0 flex items-center justify-center z-10 p-6">
-                          <AnimatePresence mode="wait">
-                            <motion.div
-                              key={currentCategory}
-                              initial={{ opacity: 0, scale: 0.95, filter: 'blur(4px)' }}
-                              animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                              exit={{ opacity: 0, scale: 1.05, filter: 'blur(4px)' }}
-                              transition={{ 
-                                duration: 0.7,
-                                ease: [0.25, 0.1, 0.25, 1]
-                              }}
-                              className="text-center w-full"
-                            >
-                              <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-4 border-2 border-white/20 shadow-2xl">
-                                <p className="text-4xl font-black text-white drop-shadow-2xl tracking-tight">
-                                  {categories[currentCategory].name}
-                                </p>
-                              </div>
-                            </motion.div>
-                          </AnimatePresence>
-                        </div>
-                      </div>
-
-                      {/* Indicadores de puntos */}
-                      <div className="flex justify-center gap-2">
-                        {categories.map((_, i) => (
-                          <button
-                            key={i}
-                            onClick={() => setCurrentCategory(i)}
-                            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                              i === currentCategory 
-                                ? 'bg-sb-green-700 w-6' 
-                                : 'bg-sb-green-500 hover:bg-sb-green-500'
-                            }`}
-                            aria-label={`Ver ${categories[i].name}`}
-                          />
-                        ))}
                       </div>
                     </div>
                   ) : step.hasImage ? (
                     <div className="relative">
                       {/* Imagen vertical del producto terminado */}
-                      <div className="relative h-80 mb-4 rounded-2xl overflow-hidden bg-gradient-to-br from-sb-cream/50 to-white">
+                      <div className="relative h-60 mb-4 rounded-2xl overflow-hidden bg-gradient-to-br from-sb-cream/50 to-white">
                         <Image
                           src={step.image || ''}
                           alt="Bowl terminado"
