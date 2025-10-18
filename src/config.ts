@@ -1,6 +1,6 @@
 export const SITE = {
   brand: 'Salad Bowl',
-  tagline: 'Life is now',
+  tagline: 'El platillo perfecto lo creas Tú',
   whatsapp: '5215512345678',
   timezone: 'America/Mexico_City',
   url: 'https://jorge-de-la-mora-cv.netlify.app',

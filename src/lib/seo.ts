@@ -67,3 +67,63 @@ export function generateFAQJsonLd() {
     ],
   };
 }
+
+// Generate Menu Items JSON-LD para productos
+export function generateMenuItemJsonLd(item: {
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  category: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'MenuItem',
+    name: item.name,
+    description: item.description,
+    image: `${SITE.url}${item.image}`,
+    offers: {
+      '@type': 'Offer',
+      price: item.price,
+      priceCurrency: 'MXN',
+      availability: 'https://schema.org/InStock',
+    },
+    menuCategory: item.category,
+    suitableForDiet: ['VegetarianDiet', 'VeganDiet', 'LowCalorieDiet'],
+  };
+}
+
+// SEO Keywords generator para búsquedas locales
+export const SEO_KEYWORDS = {
+  primary: [
+    'restaurante de ensaladas',
+    'restaurante de ensaladas puebla',
+    'ensaladas frescas',
+    'ensaladas puebla',
+  ],
+  secondary: [
+    'bowl personalizado',
+    'arma tu ensalada',
+    'comida saludable puebla',
+    'restaurante saludable',
+  ],
+  location: [
+    'ensaladas angelópolis',
+    'ensaladas zavaleta',
+    'restaurante plaza vía',
+    'comida saludable angelópolis',
+  ],
+  product: [
+    'açaí bowl',
+    'wraps saludables',
+    'paninis',
+    'ensaladas gourmet',
+  ],
+};
+
+// Alt text generator para imágenes
+export function generateImageAlt(context: string, location?: string): string {
+  const base = `Salad Bowl ${context}`;
+  const locationSuffix = location ? ` en ${location}` : ' en Puebla';
+  return `${base} - Restaurante de ensaladas frescas${locationSuffix}`;
+}

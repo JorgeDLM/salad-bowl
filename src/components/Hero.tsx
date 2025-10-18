@@ -2,262 +2,205 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight } from './icons';
-import Logo from './Logo';
 
 interface HeroProps {
   onCTAClick: () => void;
 }
 
 export default function Hero({ onCTAClick }: HeroProps) {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const { scrollY } = useScroll();
-  
-  // Parallax effect based on scroll
-  const y = useTransform(scrollY, [0, 500], [0, 150]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const [currentIngredient, setCurrentIngredient] = useState(0);
 
-  // Mouse parallax effect
+  // Lista de ingredientes con direcciones de entrada y posición final
+  const ingredients = [
+    { src: '/img/aguacate.webp', alt: 'Aguacate', size: 240, startX: -200, startY: -400, endX: -110, endY: 100 },
+    { src: '/img/jitomate.webp', alt: 'Jitomate', size: 220, startX: -180, startY: -450, endX: -105, endY: 120 },
+    { src: '/img/brocoli.webp', alt: 'Brócoli', size: 260, startX: -100, startY: -500, endX: -115, endY: 95 },
+    { src: '/img/espinaca.webp', alt: 'Espinaca', size: 240, startX: -120, startY: -420, endX: -100, endY: 120 },
+    { src: '/img/col-morada.webp', alt: 'Col morada', size: 230, startX: -130, startY: -380, endX: -108, endY: 100 },
+    { src: '/img/pollo.webp', alt: 'Pollo', size: 280, startX: -150, startY: -460, endX: -112, endY: 90 },
+  ];
+
+  // Ciclo de ingredientes
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: (e.clientX - window.innerWidth / 2) / 50,
-        y: (e.clientY - window.innerHeight / 2) / 50,
-      });
-    };
-    
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+    const interval = setInterval(() => {
+      setCurrentIngredient((prev) => (prev + 1) % ingredients.length);
+    }, 1400);
+    return () => clearInterval(interval);
+  }, [ingredients.length]);
 
   return (
-    <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
+    <section className="relative h-[screen]-500 h-[screen]-300 min-h-[700px] lg:min-h-[800px] flex items-center justify-center overflow-hidden bg-gradient-to-br from-sb-green-700 via-sb-green-700 to-sb-green-500 pt-20 md:pt-0">
+      {/* Decorative circles */}
       <motion.div
-        initial={{ scale: 1.1, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1.2, ease: 'easeOut' }}
-        className="absolute inset-0 z-0"
-      >
-        <Image
-          src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1920&q=90"
-          alt="Fresh Salad Bowl"
-          fill
-          priority
-          className="object-cover brightness-100 saturate-125"
-          quality={90}
-        />
-        {/* Panel oscuro solo en el centro para texto */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="absolute w-full max-w-4xl h-[70%] bg-gradient-to-b from-black/40 via-black/50 to-black/40 blur-3xl" />
-        </div>
-        {/* Vignette muy sutil solo en extremos */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/20" />
-      </motion.div>
-
-      {/* Floating Elements */}
-      <motion.div
-        className="absolute top-20 left-10 w-32 h-32 bg-sb-green-500/20 rounded-full blur-3xl"
+        className="absolute top-20 left-10 w-64 h-64 bg-sb-green-400/20 rounded-full blur-3xl"
         animate={{
           y: [0, -30, 0],
-          scale: [1, 1.1, 1],
+          scale: [1, 1.2, 1],
         }}
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div
-        className="absolute bottom-20 right-10 w-40 h-40 bg-sb-teal-200/20 rounded-full blur-3xl"
+        className="absolute bottom-20 right-20 w-80 h-80 bg-sb-teal-200/15 rounded-full blur-3xl"
         animate={{
-          y: [0, 30, 0],
-          scale: [1, 1.2, 1],
+          y: [0, 40, 0],
+          scale: [1, 1.3, 1],
         }}
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
       />
 
-      {/* Content with Parallax */}
-      <motion.div 
-        className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
-        style={{ 
-          y,
-          opacity,
-          x: mousePosition.x,
-        }}
-      >
-        {/* Logo with Float Animation - Con backdrop para destacar */}
-        <motion.div
-          initial={{ y: 30, opacity: 0, scale: 0.9 }}
-          animate={{ y: 0, opacity: 1, scale: 1 }}
-          transition={{ 
-            delay: 0.2, 
-            duration: 1,
-            type: "spring",
-            stiffness: 100
-          }}
-        >
+      {/* Container principal con grid */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative grid lg:grid-cols-2 gap-12 lg:items-center items-start lg:pt-0">
+          {/* Columna izquierda - Texto */}
           <motion.div
-            animate={{ 
-              y: [0, -15, 0],
-              rotate: [0, 2, 0, -2, 0]
-            }}
-            transition={{ 
-              duration: 6, 
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="flex justify-center mb-8"
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+            className="text-left relative z-30 mx-auto lg:mx-0 max-w-2xl lg:max-w-none"
           >
-            {/* Logo completamente blanco */}
-            <div className="relative">
-              <Logo 
-                variant="white" 
-                width={300}
-                height={170}
-                className="drop-shadow-2xl relative z-10"
-              />
+
+            {/* Title */}
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black -mt-60 lg:mt-10 mb-6 md:mb-8 leading-[1.1] tracking-tight">
+              <motion.span 
+                className="block mb-2 text-white"
+                initial={{ opacity: 0, scale: 0.8, filter: 'blur(10px)' }}
+                animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: 0.2,
+                  ease: [0.25, 0.1, 0.25, 1]
+                }}
+              >
+                COME RICO,
+              </motion.span>
+              <motion.span 
+                className="block mb-2 text-sb-green-300"
+                initial={{ opacity: 0, x: -30, filter: 'blur(10px)' }}
+                animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: 0.5,
+                  ease: [0.25, 0.1, 0.25, 1]
+                }}
+              >
+                RÁPIDO Y
+              </motion.span>
+              <motion.span 
+                className="block text-sb-green-300"
+                initial={{ opacity: 0, x: -30, filter: 'blur(10px)' }}
+                animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: 0.8,
+                  ease: [0.25, 0.1, 0.25, 1]
+                }}
+              >
+                SALUDABLE
+              </motion.span>
+            </h1>
+          </motion.div>
+
+          {/* Columna derecha - Plato con ingredientes */}
+          <motion.div
+            initial={{ x: 100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
+            className="flex justify-center pt-20 lg:pt-10 items-center lg:relative absolute inset-0 lg:opacity-100 opacity-25 pointer-events-none lg:pointer-events-auto z-0 lg:z-10"
+          >
+            {/* Plato base */}
+            <div className="relative w-[500px] h-[500px]">
+              {/* Plato 2 - Capa de FONDO (detrás de todo) con glow animado */}
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0, filter: 'drop-shadow(0 0 20px rgba(191, 217, 106, 0.5)) drop-shadow(0 0 40px rgba(191, 217, 106, 0.3))' }}
+                animate={{ 
+                  scale: 1, 
+                  opacity: 1,
+                  filter: [
+                    'drop-shadow(0 0 20px rgba(0, 217, 106, 0.4)) drop-shadow(0 0 40px rgba(0, 217, 106, 0.2))',
+                    'drop-shadow(0 0 40px rgba(0, 217, 106, 0.6)) drop-shadow(0 0 60px rgba(0, 217, 106, 0.4))',
+                    'drop-shadow(0 0 20px rgba(0, 217, 106, 0.4)) drop-shadow(0 0 40px rgba(0, 217, 106, 0.2))'
+                  ]
+                }}
+                transition={{
+                  scale: { duration: 1, ease: 'easeOut' },
+                  opacity: { duration: 0.6, ease: 'easeOut' },
+                  filter: { duration: 3, repeat: Infinity, ease: 'easeInOut' }
+                }}
+                className="absolute inset-0 z-0"
+              >
+                <Image
+                  src="/img/plato2.webp"
+                  alt="Plato fondo"
+                  width={500}
+                  height={500}
+                  className="w-full h-full object-contain"
+                  priority
+                />
+              </motion.div>
+
+              {/* Ingrediente cayendo - CAPA MEDIA */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentIngredient}
+                  initial={{ 
+                    y: ingredients[currentIngredient].startY,
+                    x: ingredients[currentIngredient].startX,
+                    opacity: 1,
+                    scale: 1
+                  }}
+                  animate={{ 
+                    y: ingredients[currentIngredient].endY,
+                    x: ingredients[currentIngredient].endX,
+                    opacity: [1, 1, 1, 0],
+                    scale: [1, 1, 0.9, 0.5]
+                  }}
+                  transition={{ 
+                    duration: 1.6,
+                    ease: [0.25, 0.1, 0.25, 1],
+                    opacity: {
+                      duration: 1.6,
+                      times: [0, 0.7, 0.9, 1],
+                      ease: "easeIn"
+                    },
+                    scale: {
+                      duration: 1.6,
+                      times: [0, 0.7, 0.9, 1],
+                      ease: "easeIn"
+                    }
+                  }}
+                  className="absolute top-0 left-1/2 -translate-x-1/2 z-10"
+                >
+                  <Image
+                    src={ingredients[currentIngredient].src}
+                    alt={ingredients[currentIngredient].alt}
+                    width={ingredients[currentIngredient].size}
+                    height={ingredients[currentIngredient].size}
+                    className="object-contain drop-shadow-2xl"
+                  />
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Plato 3 - Capa FRONTAL (delante de todo) */}
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
+                className="absolute inset-0 z-20"
+              >
+                <Image
+                  src="/img/plato3.webp"
+                  alt="Plato frontal"
+                  width={500}
+                  height={500}
+                  className="w-full h-full object-contain"
+                />
+              </motion.div>
             </div>
           </motion.div>
-        </motion.div>
-
-        {/* Title with Stagger Animation - Blanco sobre fondo oscuro */}
-        <motion.h1
-          initial={{ y: 30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-          className="text-5xl md:text-7xl font-bold text-white mb-4 relative"
-        >
-          <motion.span
-            className="inline-block"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            style={{ 
-              textShadow: '0 4px 12px rgba(0,0,0,0.8), 0 2px 6px rgba(0,0,0,1)' 
-            }}
-          >
-            Life
-          </motion.span>
-          {' '}
-          <motion.span
-            className="inline-block"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
-            style={{ 
-              textShadow: '0 4px 12px rgba(0,0,0,0.8), 0 2px 6px rgba(0,0,0,1)' 
-            }}
-          >
-            is
-          </motion.span>
-          {' '}
-          <motion.span
-            className="inline-block font-black"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            style={{ 
-              color: '#BFD96A',
-              textShadow: '0 4px 12px rgba(0,0,0,0.8), 0 2px 6px rgba(0,0,0,1), 0 0 30px rgba(191, 217, 106, 0.4)' 
-            }}
-          >
-            now
-          </motion.span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ y: 30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 1, duration: 0.8 }}
-          className="text-xl md:text-2xl text-white mb-10 font-semibold"
-          style={{ 
-            textShadow: '0 3px 10px rgba(0,0,0,0.8), 0 1px 4px rgba(0,0,0,1)' 
-          }}
-        >
-          Arma tu bowl perfecto en 3 pasos
-        </motion.p>
-
-        {/* CTA Button - Blanco con verde */}
-        <motion.button
-          initial={{ y: 30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
-          whileHover={{ 
-            scale: 1.08,
-            boxShadow: "0 20px 70px rgba(255, 255, 255, 0.4)"
-          }}
-          whileTap={{ scale: 0.95 }}
-          onClick={onCTAClick}
-          className="group relative inline-flex items-center gap-3 bg-white text-sb-green-700 px-12 py-6 rounded-full text-xl font-black hover:bg-sb-green-500 hover:text-white transition-all shadow-2xl focus:outline-none focus:ring-4 focus:ring-white/50 focus:ring-offset-4 overflow-hidden"
-          style={{
-            boxShadow: '0 10px 40px rgba(0, 0, 0, 0.3)'
-          }}
-        >
-          {/* Button Glow Effect */}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-sb-green-500 to-sb-teal-200 opacity-0 group-hover:opacity-100 transition-opacity"
-            animate={{
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-            }}
-          />
-          
-          {/* Pulse effect ring */}
-          <motion.div
-            className="absolute inset-0 rounded-full border-4 border-white/50"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.5, 0, 0.5],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-            }}
-          />
-          
-          <span className="relative z-10">Armar ahora</span>
-          <motion.div
-            className="relative z-10"
-            animate={{ x: [0, 5, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          >
-            <ArrowRight className="w-6 h-6" />
-          </motion.div>
-        </motion.button>
-      </motion.div>
-
-      {/* Scroll Indicator with Bounce */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8, duration: 1 }}
-        className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-10 cursor-pointer"
-        onClick={onCTAClick}
-      >
-        <motion.div
-          animate={{ y: [0, 15, 0] }}
-          transition={{ 
-            repeat: Infinity, 
-            duration: 2,
-            ease: "easeInOut"
-          }}
-          className="flex flex-col items-center gap-2"
-        >
-          <span className="text-sm text-white font-semibold drop-shadow-lg">Descubre más</span>
-          <div className="w-6 h-10 border-2 border-white/60 rounded-full flex items-start justify-center p-2 bg-black/20 backdrop-blur-sm">
-            <motion.div 
-              className="w-1.5 h-1.5 bg-white rounded-full"
-              animate={{ y: [0, 12, 0] }}
-              transition={{ 
-                repeat: Infinity, 
-                duration: 2,
-                ease: "easeInOut"
-              }}
-            />
-          </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 }

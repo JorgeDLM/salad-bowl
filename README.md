@@ -56,7 +56,7 @@ Coloca las siguientes imágenes en `public/saladbowl/`:
 
 ### Logotipos y Brand
 - `logo-sb.png` - Logotipo principal (verde lima + blanco)
-- `life-is-now.png` - Arte de marca con claim "Life is now"
+- `life-is-now.png` - Arte de marca con claim "El platillo perfecto lo creas Tú"
 
 ### Hero y Fondos
 - `hero-bowl.jpg` - Foto hero principal (alta resolución)

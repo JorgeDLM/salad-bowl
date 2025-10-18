@@ -1,7 +1,27 @@
-# Robots.txt for Salad Bowl
+# Robots.txt for Salad Bowl - Restaurante de Ensaladas en Puebla
 User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /*.json$
+
+# Crawl-delay
+Crawl-delay: 10
+
+# Googlebot
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+
+# Bingbot
+User-agent: Bingbot
 Allow: /
 Disallow: /api/
 
 # Sitemaps
 Sitemap: https://jorge-de-la-mora-cv.netlify.app/sitemap.xml
+
+# Descripción del sitio para motores de búsqueda
+# Salad Bowl - Restaurante de ensaladas frescas y personalizadas en Puebla
+# Ensaladas, bowls, wraps, paninis y açaí
+# 3 sucursales: Angelópolis, Zavaleta, Plaza Vía San Ángel

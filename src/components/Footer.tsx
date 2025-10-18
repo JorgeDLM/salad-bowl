@@ -18,7 +18,7 @@ export default function Footer() {
               width={120}
               height={68}
             />
-            <p className="text-white/60 text-sm mt-2">Life is now</p>
+            <p className="text-white/60 text-sm mt-2">El platillo perfecto lo creas Tú</p>
           </div>
 
           {/* Links */}

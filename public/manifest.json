@@ -1,0 +1,39 @@
+{
+  "name": "Salad Bowl - Restaurante de Ensaladas en Puebla",
+  "short_name": "Salad Bowl",
+  "description": "Restaurante de ensaladas frescas y personalizadas en Puebla. Arma tu bowl perfecto con ingredientes frescos. 3 sucursales: Angelópolis, Zavaleta y Plaza Vía.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF5E9",
+  "theme_color": "#0f4f44",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": [
+    "food",
+    "restaurant",
+    "health",
+    "lifestyle"
+  ],
+  "lang": "es-MX",
+  "dir": "ltr",
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
+  "screenshots": [
+    {
+      "src": "/paso-1.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    }
+  ]
+}

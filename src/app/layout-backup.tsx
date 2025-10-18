@@ -56,20 +56,20 @@ export const metadata: Metadata = {
     description: 'Ensaladas frescas personalizadas, wraps, paninis y açaí. Elige tu base, ingredientes de la barra y tu aderezo favorito. 2 ubicaciones en Puebla.',
     siteName: SITE.brand,
     title: "Salad Bowl | The destiny of the salad",
-    description: "Arma tu bowl perfecto en 3 pasos. Life is now.",
+    description: "Arma tu bowl perfecto en 3 pasos. El platillo perfecto lo creas Tú.",
     images: [
       {
         url: "/saladbowl/life-is-now.png",
         width: 1200,
         height: 630,
-        alt: "Salad Bowl - Life is now",
+        alt: "Salad Bowl - El platillo perfecto lo creas Tú",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Salad Bowl | The destiny of the salad",
-    description: "Arma tu bowl perfecto en 3 pasos. Life is now.",
+    description: "Arma tu bowl perfecto en 3 pasos. El platillo perfecto lo creas Tú.",
     images: ["/saladbowl/life-is-now.png"],
   },
 };
