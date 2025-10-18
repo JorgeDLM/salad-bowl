@@ -76,7 +76,7 @@ export default function Hero({ onCTAClick }: HeroProps) {
                 COME RICO,
               </motion.span>
               <motion.span 
-                className="block mb-2 text-sb-green-300"
+                className="block mb-2 text-black"
                 initial={{ opacity: 0, x: -30, filter: 'blur(10px)' }}
                 animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
                 transition={{ 
@@ -88,7 +88,7 @@ export default function Hero({ onCTAClick }: HeroProps) {
                 RÁPIDO Y
               </motion.span>
               <motion.span 
-                className="block text-sb-green-300"
+                className="block text-black"
                 initial={{ opacity: 0, x: -30, filter: 'blur(10px)' }}
                 animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
                 transition={{ 

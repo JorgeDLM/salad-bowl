@@ -1,270 +1,218 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, ArrowLeft } from './icons';
+import { motion } from 'framer-motion';
 
 export default function BowlFlow() {
-  const [currentStep, setCurrentStep] = useState<number>(0);
-  const [direction, setDirection] = useState<number>(0);
   const [hoveredStep, setHoveredStep] = useState<number | null>(null);
 
   const steps = [
-    { id: 0, name: 'Start', image: '/paso-1.png', title: '¡Bienvenido!', subtitle: 'Comienza a armar tu bowl perfecto', step: 'Inicio' },
-    { id: 1, name: 'Base', image: '/paso-2.png', title: 'Elige tu base', subtitle: 'Bowl o Burrito', step: 'Paso 1' },
-    { id: 2, name: 'Ingredientes', image: '/paso-3.png', title: 'Ingredientes', subtitle: 'Elige tus secciones favoritas', step: 'Paso 2' },
-    { id: 3, name: '', image: '/paso-4.png', title: 'Complementos', subtitle: 'Dale el toque final', step: 'Complementos' },
-    { id: 4, name: '', image: '/paso-5.png', title: 'Bebidas', subtitle: 'Completa tu orden', step: 'Bebidas' },
+    { 
+      id: 1, 
+      title: 'Elige tu base', 
+      subtitle: 'Elige o combina entre:',
+      options: ['Lechuga', 'Pasta', 'Espinaca', 'Arroz', 'Arroz integral'],
+      color: 'from-sb-green-700 to-sb-green-600',
+      iconBg: 'bg-sb-green-700',
+      icon: (
+        <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M3 12c0-4.5 3-8 9-8s9 3.5 9 8-3 8-9 8-9-3.5-9-8z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M8 10c.5-1 1.5-2 4-2s3.5 1 4 2" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      )
+    },
+    { 
+      id: 2, 
+      title: 'Elige tus ingredientes', 
+      subtitle: 'Más de 50 ingredientes frescos',
+      options: ['Proteínas', 'Vegetales', 'Quesos', 'Toppings', 'Y mucho más...'],
+      color: 'from-sb-green-600 to-sb-green-500',
+      iconBg: 'bg-sb-green-600',
+      icon: (
+        <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M12 2c-1 2-2 3-4 4-1 .5-2 1-2 3 0 1.5.5 2 1 2.5M12 2c1 2 2 3 4 4 1 .5 2 1 2 3 0 1.5-.5 2-1 2.5M12 2v9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M8 14c.5 1 1 2 1.5 3 .5 1 1 2 1 3.5.5 0 1 .5 1.5.5s1-.5 1.5-.5c0-1.5.5-2.5 1-3.5s1-2 1.5-3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+        </svg>
+      )
+    },
+    { 
+      id: 3, 
+      title: 'Elige tus aderezos', 
+      subtitle: 'El toque final perfecto',
+      options: ['Vinagretas', 'Cremosos', 'Especiales', 'Sin gluten', 'Veganos'],
+      color: 'from-sb-green-500 to-sb-green-400',
+      iconBg: 'bg-sb-green-500',
+      icon: (
+        <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M12 2v6M9 4l3 2 3-2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <rect x="9" y="8" width="6" height="12" rx="1" strokeWidth="2" />
+          <path d="M10 14h4M10 17h4" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      )
+    },
   ];
 
-  const goToNextStep = () => {
-    if (currentStep < steps.length - 1) {
-      setDirection(1);
-      setCurrentStep(currentStep + 1);
-    }
-  };
-
-  const goToPrevStep = () => {
-    if (currentStep > 0) {
-      setDirection(-1);
-      setCurrentStep(currentStep - 1);
-    }
-  };
-
-  const variants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 300 : -300,
-      opacity: 0,
-    }),
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1,
-    },
-    exit: (direction: number) => ({
-      zIndex: 0,
-      x: direction < 0 ? 300 : -300,
-      opacity: 0,
-    }),
-  };
 
   return (
-    <section className="py-20 bg-gradient-to-b from-sb-cream to-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-24 bg-gradient-to-b from-white via-sb-cream/30 to-white overflow-hidden relative">
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-sb-green-300/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-sb-teal-300/10 rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-6xl font-bold text-ink mb-4">
-            Arma tu bowl perfecto
-          </h2>
-          <p className="text-xl text-ink/60 md:hidden">Desliza para descubrir cada paso</p>
-          <p className="text-xl text-ink/60 hidden md:block">Sigue estos simples pasos</p>
-        </motion.div>
-
-        {/* DESKTOP: Horizontal Timeline con todas las imágenes */}
-        <div className="hidden lg:block">
-          <div className="grid grid-cols-5 gap-6">
-            {steps.map((step, index) => (
-              <motion.div
-                key={step.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                onHoverStart={() => setHoveredStep(index)}
-                onHoverEnd={() => setHoveredStep(null)}
-                className="relative group"
-              >
-                {/* Número del paso */}
-                <motion.div 
-                  className="absolute -top-8 left-1/2 -translate-x-1/2 z-10"
-                  animate={{ scale: hoveredStep === index ? 1.1 : 1 }}
-                >
-                  <div className="bg-sb-green-700 text-white w-14 h-14 rounded-full flex items-center justify-center font-bold text-lg shadow-lg">
-                    {index === 0 ? '★' : index}
-                  </div>
-                </motion.div>
-
-                {/* Imagen del paso */}
-                <motion.div
-                  whileHover={{ y: -10 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="relative aspect-[9/16] rounded-2xl overflow-hidden shadow-xl group-hover:shadow-2xl transition-shadow bg-white"
-                >
-                  <Image
-                    src={step.image}
-                    alt={step.title}
-                    fill
-                    className="object-contain p-2"
-                  />
-                  
-                  {/* Overlay con info al hover */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: hoveredStep === index ? 1 : 0 }}
-                    className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-4"
-                  >
-                    <h3 className="text-white font-bold text-lg mb-1">{step.title}</h3>
-                    <p className="text-white/90 text-sm">{step.subtitle}</p>
-                  </motion.div>
-                </motion.div>
-
-                {/* Título debajo */}
-                <div className="mt-4 text-center">
-                  <p className="text-sm font-semibold text-sb-green-700">{step.step}</p>
-                  <p className="text-xs text-ink/60 mt-1">{step.name}</p>
-                </div>
-
-                {/* Flecha conectora (excepto el último) */}
-                {index < steps.length - 1 && (
-                  <div className="absolute top-1/3 -right-3 z-0">
-                    <ArrowRight className="w-6 h-6 text-sb-green-500" />
-                  </div>
-                )}
-              </motion.div>
-            ))}
-          </div>
-
-          {/* CTA Desktop */}
-          <motion.div
+          <motion.h2 
+            className="text-4xl md:text-6xl lg:text-7xl font-black text-sb-green-800 mb-4"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            El bowl perfecto
+          </motion.h2>
+          <motion.p 
+            className="text-3xl md:text-5xl font-black text-sb-green-300"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.6 }}
-            className="text-center mt-16"
+            transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => window.location.href = '/sucursales'}
-              className="bg-sb-green-700 text-white px-12 py-4 rounded-full text-lg font-semibold hover:bg-sb-green-700/90 transition-all shadow-xl hover:shadow-2xl inline-flex items-center gap-3"
-            >
-              Ver ubicaciones
-              <ArrowRight className="w-6 h-6" />
-            </motion.button>
-          </motion.div>
-        </div>
+            lo creas TÚ
+          </motion.p>
+        </motion.div>
 
-        {/* MOBILE/TABLET: Carousel (como estaba) */}
-        <div className="relative max-w-5xl mx-auto lg:hidden">
-          <AnimatePresence initial={false} custom={direction} mode="wait">
+        {/* Grid de 3 pasos */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 max-w-6xl mx-auto">
+          {steps.map((step, index) => (
             <motion.div
-              key={currentStep}
-              custom={direction}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{
-                x: { type: "tween", duration: 0.3, ease: "easeInOut" },
-                opacity: { duration: 0.3 },
+              key={step.id}
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ 
+                duration: 0.6, 
+                delay: index * 0.2,
+                ease: [0.25, 0.1, 0.25, 1]
               }}
-              className="bg-white rounded-3xl shadow-2xl overflow-hidden"
+              whileHover={{ y: -10, scale: 1.02 }}
+              onHoverStart={() => setHoveredStep(index)}
+              onHoverEnd={() => setHoveredStep(null)}
+              className="relative group"
             >
-              {/* Step Image Container with Arrows Inside */}
-              <div className="relative w-full bg-gradient-to-br from-sb-cream to-sb-teal-200/20">
-                {/* Image with Menu-like aspect ratio */}
-                <div className="relative w-full aspect-[4/5] md:aspect-[3/4] max-w-2xl mx-auto p-8">
-                  <Image
-                    src={steps[currentStep].image}
-                    alt={steps[currentStep].title}
-                    fill
-                    className="object-contain drop-shadow-2xl rounded-2xl"
-                    priority={currentStep === 0}
-                  />
+              {/* Card */}
+              <div className="relative bg-white rounded-3xl shadow-xl overflow-hidden h-full border-2 border-transparent hover:border-sb-green-300 transition-all duration-300">
+                {/* Número del paso */}
+                <div className="absolute -top-6 left-6 z-20">
+                  <motion.div
+                    className={`w-16 h-16 rounded-2xl ${step.iconBg} flex items-center justify-center shadow-2xl rotate-12 group-hover:rotate-0 transition-transform duration-300`}
+                    animate={{ 
+                      rotate: hoveredStep === index ? 0 : 12,
+                      scale: hoveredStep === index ? 1.1 : 1
+                    }}
+                  >
+                    <span className="text-3xl font-black text-white">{step.id}</span>
+                  </motion.div>
                 </div>
 
-                {/* Previous Arrow - INSIDE, with transparency */}
-                {currentStep > 0 && (
-                  <motion.button
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    whileHover={{ scale: 1.1, backgroundColor: 'rgba(0, 0, 0, 0.8)' }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={goToPrevStep}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/60 backdrop-blur-sm text-white w-12 h-12 md:w-14 md:h-14 rounded-full shadow-xl flex items-center justify-center transition-all"
-                    aria-label="Anterior"
+                {/* Contenido */}
+                <div className="pt-16 pb-8 px-8">
+                  {/* Icono decorativo */}
+                  <motion.div
+                    className="mb-6 text-center text-sb-green-700 flex justify-center"
+                    animate={{ 
+                      scale: hoveredStep === index ? [1, 1.1, 1] : 1,
+                      y: hoveredStep === index ? [0, -5, 0] : 0
+                    }}
+                    transition={{ duration: 0.5 }}
                   >
-                    <ArrowLeft className="w-5 h-5 md:w-6 md:h-6" />
-                  </motion.button>
-                )}
+                    {step.icon}
+                  </motion.div>
 
-                {/* Next Arrow - INSIDE, with transparency */}
-                {currentStep < steps.length - 1 && (
-                  <motion.button
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    whileHover={{ scale: 1.1, backgroundColor: 'rgba(0, 0, 0, 0.8)' }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={goToNextStep}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/60 backdrop-blur-sm text-white w-12 h-12 md:w-14 md:h-14 rounded-full shadow-xl flex items-center justify-center transition-all"
-                    aria-label="Siguiente"
-                  >
-                    <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
-                  </motion.button>
-                )}
-              </div>
+                  {/* Título */}
+                  <h3 className="text-2xl lg:text-3xl font-black text-sb-green-800 mb-3 text-center">
+                    {step.title}
+                  </h3>
 
-              {/* Step Info */}
-              <div className="p-8 md:p-12">
-                <div className="text-center">
-                  <motion.h3 
-                    className="text-2xl md:text-3xl font-bold text-ink mb-3"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1, duration: 0.3 }}
-                  >
-                    {steps[currentStep].title}
-                  </motion.h3>
-                  <motion.p 
-                    className="text-base md:text-lg text-ink/60 mb-8"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2, duration: 0.3 }}
-                  >
-                    {steps[currentStep].subtitle}
-                  </motion.p>
+                  {/* Subtítulo */}
+                  <p className="text-sm lg:text-base text-sb-green-600 font-semibold mb-6 text-center">
+                    {step.subtitle}
+                  </p>
 
-                  {currentStep === 0 && (
-                    <motion.button
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.3, duration: 0.3 }}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={goToNextStep}
-                      className="bg-sb-green-700 text-white px-10 py-4 rounded-full text-lg font-semibold hover:bg-sb-green-700/90 transition-all shadow-xl hover:shadow-2xl inline-flex items-center gap-3"
-                    >
-                      Comenzar ahora
-                      <ArrowRight className="w-6 h-6" />
-                    </motion.button>
-                  )}
-
-                  {currentStep === steps.length - 1 && (
-                    <motion.button
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.3, duration: 0.3 }}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => window.location.href = '/menu'}
-                      className="bg-sb-green-700 text-white px-10 py-4 rounded-full text-lg font-semibold hover:bg-sb-green-700/90 transition-all shadow-xl hover:shadow-2xl"
-                    >
-                      Ver menú completo
-                    </motion.button>
-                  )}
+                  {/* Opciones */}
+                  <ul className="space-y-3">
+                    {step.options.map((option, i) => (
+                      <motion.li
+                        key={i}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.2 + i * 0.1 }}
+                        className="flex items-center gap-3 text-ink/70"
+                      >
+                        <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${step.color}`} />
+                        <span className="text-sm lg:text-base">{option}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
                 </div>
+
+                {/* Decoración de fondo */}
+                <motion.div
+                  className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full bg-sb-green-300 opacity-10 blur-2xl"
+                  animate={{ 
+                    scale: hoveredStep === index ? 1.5 : 1,
+                    opacity: hoveredStep === index ? 0.15 : 0.08
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
               </div>
+
+              {/* Conector de flecha (solo entre pasos) */}
+              {index < steps.length - 1 && (
+                <div className="hidden md:block absolute top-1/2 -right-6 lg:-right-8 z-10">
+                  <motion.div
+                    animate={{ x: hoveredStep === index ? 5 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <svg className="w-8 h-8 text-sb-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </motion.div>
+                </div>
+              )}
             </motion.div>
-          </AnimatePresence>
+          ))}
         </div>
+
+        {/* CTA Final */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="text-center mt-16"
+        >
+          <motion.a
+            href="/menu"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-3 bg-gradient-to-r from-sb-green-600 to-sb-green-700 text-white px-12 py-5 rounded-full text-lg font-black shadow-2xl hover:shadow-3xl transition-all"
+          >
+            <span>Arma tu bowl ahora</span>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </motion.a>
+        </motion.div>
       </div>
     </section>
   );
