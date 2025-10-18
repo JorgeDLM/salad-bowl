@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     description: 'El mejor restaurante de ensaladas frescas y personalizadas en Puebla. Bowls, wraps, paninis y açaí. 3 sucursales en Angelópolis, Zavaleta y Plaza Vía. ¡Arma tu ensalada perfecta!',
     images: [
       {
-        url: '/logo.png',
+        url: '/empleado-sirviendo.JPG',
         width: 1200,
         height: 630,
         alt: 'Salad Bowl - Restaurante de Ensaladas Frescas en Puebla',
@@ -91,8 +91,8 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Restaurante de Ensaladas Puebla | Salad Bowl',
     description: 'Restaurante de ensaladas frescas y personalizadas en Puebla. Bowls, wraps, paninis y açaí. 3 sucursales. ¡Ordena ahora!',
-    images: ['/logo.png'],
-    creator: '@saladbowl',
+    images: ['/empleado-sirviendo.JPG'],
+    creator: '@saladbowlmx',
   },
   robots: {
     index: true,
