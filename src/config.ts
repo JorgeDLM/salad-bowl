@@ -1,11 +1,11 @@
 export const SITE = {
   brand: 'Salad Bowl',
   tagline: 'El platillo perfecto lo creas Tú',
-  whatsapp: '5215512345678',
+  whatsapp: '5212222996191',
   timezone: 'America/Mexico_City',
   url: 'https://jorge-de-la-mora-cv.netlify.app',
-  instagram: 'https://instagram.com/saladbowl',
-  facebook: 'https://facebook.com/saladbowl',
+  instagram: 'https://instagram.com/saladbowlmx',
+  facebook: 'https://facebook.com/saladbowlpuebla',
 } as const;
 
 export const ROUTES = {

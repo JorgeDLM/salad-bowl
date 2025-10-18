@@ -2,6 +2,7 @@
 
 import React, { useRef } from 'react';
 import Image from 'next/image';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Hero from '@/components/Hero';
 import BowlFlow from '@/components/BowlFlow';
 import WhyUs from '@/components/WhyUs';
@@ -13,6 +14,11 @@ import { LOCATIONS } from '@/config';
 
 export default function SaladBowlHome() {
   const bowlFlowRef = useRef<HTMLDivElement>(null);
+  const sucursalesRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll();
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
 
   const scrollToBowlFlow = () => {
     bowlFlowRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -23,38 +29,65 @@ export default function SaladBowlHome() {
       {/* Hero Section */}
       <Hero onCTAClick={scrollToBowlFlow} />
 
-      {/* Bowl Flow Builder */}
-      <div ref={bowlFlowRef}>
+      {/* Bowl Flow Builder con animación */}
+      <motion.div 
+        ref={bowlFlowRef}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
         <BowlFlow />
-      </div>
+      </motion.div>
 
-      {/* Sucursales Section */}
-      <section className="relative py-24 overflow-hidden">
+      {/* Sucursales Section con animación */}
+      <motion.section 
+        ref={sucursalesRef}
+        className="relative py-24 overflow-hidden"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-150px" }}
+        transition={{ duration: 1 }}
+      >
         {/* Imagen de fondo */}
         <div className="absolute inset-0">
           <Image
             src="/sucursal.JPG"
             alt="Sucursal Salad Bowl"
             fill
-            className="object-cover brightness-40"
+            className="object-cover"
           />
-          {/* Overlay con gradiente para más contraste */}
-          <div className="absolute inset-0 " />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="text-center mb-20">
+          {/* Header con animación */}
+          <motion.div 
+            className="text-center mb-20"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             <h2 className="text-5xl md:text-7xl font-black text-white mb-4 drop-shadow-2xl tracking-tight">
               NUESTRAS SUCURSALES
             </h2>
-            <div className="w-24 h-1 bg-white mx-auto rounded-full"></div>
-          </div>
+            <motion.div 
+              className="w-24 h-1 bg-white mx-auto rounded-full"
+              initial={{ width: 0 }}
+              whileInView={{ width: 96 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            />
+          </motion.div>
 
-          {/* Grid de sucursales */}
+          {/* Grid de sucursales con stagger animation */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Sucursal 1 */}
-            <a
+            <motion.a
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
               href={LOCATIONS[0].mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -74,10 +107,14 @@ export default function SaladBowlHome() {
                 <p className="text-ink/80 text-center mb-1 font-medium">Centro Comercial Vía San Ángel</p>
                 <p className="text-ink/60 text-center text-sm">Blvd. Atlixcáyotl 1504 L. B5</p>
               </div>
-            </a>
+            </motion.a>
 
             {/* Sucursal 2 */}
-            <a
+            <motion.a
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.5 }}
               href={LOCATIONS[1].mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -97,10 +134,14 @@ export default function SaladBowlHome() {
                 <p className="text-ink/80 text-center mb-1 font-medium">Calzada de Zavaleta 3916</p>
                 <p className="text-ink/60 text-center text-sm">Plaza Office Depot</p>
               </div>
-            </a>
+            </motion.a>
 
             {/* Sucursal 3 */}
-            <a
+            <motion.a
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.7 }}
               href={LOCATIONS[2].mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -120,19 +161,32 @@ export default function SaladBowlHome() {
                 <p className="text-ink/80 text-center mb-1 font-medium">Plaza Elysee</p>
                 <p className="text-ink/60 text-center text-sm">Lomas de Angelópolis</p>
               </div>
-            </a>
+            </motion.a>
           </div>
         </div>
-      </section>
-      {/* Why Us Section con imágenes */}
-      <WhyUs />
+      </motion.section>
+      {/* Why Us Section con imágenes y animación */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
+        <WhyUs />
+      </motion.div>
 
       {/* Product Grid */}
       {/* <ProductGrid /> */}
 
-
-      {/* Franchise CTA */}
-      <FranchiseCTA />
+      {/* Franchise CTA con animación */}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
+        <FranchiseCTA />
+      </motion.div>
 
       {/* Footer */}
       <Footer />
