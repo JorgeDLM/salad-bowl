@@ -81,7 +81,7 @@ export default function WhyUs() {
             <div className="absolute bottom-0 left-0 right-0  px-8 pb-12 pt-2 text-white backdrop-blur-sm bg-gradient-to-t from-black/40 to-transparent">
               <h3 className="text-3xl font-black mb-3 drop-shadow-lg">Variedad Premium</h3>
               <p className="text-white/95 leading-relaxed text-base drop-shadow-md">
-                Además de bowls, ofrecemos paninos artesanales con ingredientes de calidad
+                Además de bowls, ofrecemos paninos y burritos artesanales con ingredientes de calidad
               </p>
             </div>
           </motion.div>

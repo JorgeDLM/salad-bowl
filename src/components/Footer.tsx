@@ -32,12 +32,6 @@ export default function Footer() {
                 Inicio
               </Link>
               <Link
-                href="/menu"
-                className="text-white/70 hover:text-white transition-colors text-sm"
-              >
-                Menú
-              </Link>
-              <Link
                 href="/sucursales"
                 className="text-white/70 hover:text-white transition-colors text-sm"
               >

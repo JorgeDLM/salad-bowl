@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Check } from '@/components/icons';
 import Footer from '@/components/Footer';
@@ -26,113 +27,120 @@ export default function FranquiciasPage() {
   };
 
   const benefits = [
-    'Modelo de negocio probado',
-    'Capacitación completa',
-    'Soporte continuo',
-    'Marketing y branding',
-    'Recetas y proveedores',
-    'Sistema POS incluido',
-  ];
-
-  const requirements = [
-    'Inversión inicial desde $500,000 MXN',
-    'Espacio de 40-60 m²',
-    'Ubicación estratégica',
-    'Pasión por comida saludable',
+    {
+      title: 'Inversión inteligente',
+      desc: 'ROI comprobado con modelo de negocio rentable'
+    },
+    {
+      title: 'Soporte total',
+      desc: 'Capacitación, marketing y sistema POS incluido'
+    },
+    {
+      title: 'Marca establecida',
+      desc: 'Aprovecha el prestigio de Salad Bowl en Puebla'
+    },
   ];
 
   return (
-    <div className="min-h-screen bg-sb-cream pt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Header */}
+    <div className="min-h-screen relative pt-20">
+      {/* Imagen de fondo */}
+      <div className="fixed inset-0 -z-10">
+        <Image
+          src="/panino.JPG"
+          alt="Panino Salad Bowl"
+          fill
+          className="object-cover object-center"
+        />
+        {/* Overlay para legibilidad */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/90 to-white/95 backdrop-blur-sm" />
+      </div>
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {/* Header impactante */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <div className="inline-block bg-sb-green-500/20 rounded-2xl px-4 py-2 mb-6">
-            <span className="text-sb-green-700 font-semibold text-sm uppercase tracking-wider">
-              Únete a la familia
-            </span>
-          </div>
-          <h1 className="text-4xl md:text-6xl font-bold text-ink mb-4">
-            Franquicias Salad Bowl
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="inline-block bg-sb-green-700 text-white px-6 py-2 rounded-full text-sm font-bold mb-6"
+          >
+            OPORTUNIDAD DE NEGOCIO
+          </motion.div>
+          <h1 className="text-5xl md:text-7xl font-black text-sb-green-700 mb-6">
+            Abre tu Salad Bowl
           </h1>
-          <p className="text-lg text-ink/60 max-w-2xl mx-auto">
-            Sé parte de la revolución saludable. Lleva Salad Bowl a tu ciudad.
+          <p className="text-2xl text-ink font-semibold mb-4">
+            La franquicia de comida saludable #1 en Puebla
+          </p>
+          <p className="text-lg text-ink/70 max-w-2xl mx-auto">
+            Únete al negocio más rentable del sector saludable con inversión accesible y retorno garantizado
           </p>
         </motion.div>
 
-        {/* Benefits */}
+        {/* Beneficios destacados */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          {benefits.map((benefit, index) => (
+            <motion.div
+              key={benefit.title}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
+              className="bg-white/80 backdrop-blur-md rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+            >
+              <div className="w-12 h-12 bg-sb-green-500 rounded-full flex items-center justify-center mb-4">
+                <Check className="w-7 h-7 text-white" />
+              </div>
+              <h3 className="text-xl font-black text-sb-green-700 mb-2">
+                {benefit.title}
+              </h3>
+              <p className="text-ink/70">
+                {benefit.desc}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Datos clave */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="bg-white rounded-3xl p-8 md:p-12 shadow-lg mb-12"
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 0.6 }}
+          className="bg-sb-green-700 rounded-3xl p-8 md:p-12 mb-16 shadow-2xl"
         >
-          <h2 className="text-3xl font-bold text-ink mb-8 text-center">
-            Beneficios
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={benefit}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="flex items-center gap-3"
-              >
-                <div className="w-8 h-8 bg-sb-green-500/20 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Check className="w-5 h-5 text-sb-green-700" />
-                </div>
-                <span className="text-ink font-medium">{benefit}</span>
-              </motion.div>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div>
+              <div className="text-4xl md:text-5xl font-black text-sb-green-500 mb-2">$500K</div>
+              <div className="text-white/90">Inversión inicial desde</div>
+            </div>
+            <div>
+              <div className="text-4xl md:text-5xl font-black text-sb-green-500 mb-2">40-60m²</div>
+              <div className="text-white/90">Espacio requerido</div>
+            </div>
+            <div>
+              <div className="text-4xl md:text-5xl font-black text-sb-green-500 mb-2">12-18</div>
+              <div className="text-white/90">Meses de recuperación</div>
+            </div>
           </div>
         </motion.div>
 
-        {/* Requirements */}
+        {/* Form con CTA fuerte */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="bg-gradient-to-br from-sb-teal-200/30 to-sb-green-500/10 rounded-3xl p-8 md:p-12 mb-12"
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.9, duration: 0.6 }}
+          className="bg-white/90 backdrop-blur-md rounded-3xl p-10 md:p-12 shadow-2xl max-w-2xl mx-auto"
         >
-          <h2 className="text-3xl font-bold text-ink mb-8 text-center">
-            Requisitos
+          <h2 className="text-3xl font-black text-ink mb-3 text-center">
+            ¿Listo para empezar?
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            {requirements.map((requirement, index) => (
-              <motion.div
-                key={requirement}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="flex items-start gap-3"
-              >
-                <div className="w-2 h-2 bg-sb-green-700 rounded-full mt-2 flex-shrink-0" />
-                <span className="text-ink">{requirement}</span>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Form */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          className="bg-white rounded-3xl p-8 md:p-12 shadow-lg max-w-2xl mx-auto"
-        >
-          <h2 className="text-3xl font-bold text-ink mb-6 text-center">
-            Solicita información
-          </h2>
+          <p className="text-center text-ink/70 mb-8">
+            Déjanos tus datos y te contactaremos para brindarte toda la información
+          </p>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="nombre" className="block text-sm font-medium text-ink mb-2">

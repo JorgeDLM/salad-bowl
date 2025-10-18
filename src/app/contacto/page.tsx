@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Phone, Mail, Instagram, Check } from '@/components/icons';
 import Footer from '@/components/Footer';
@@ -27,7 +28,19 @@ export default function ContactoPage() {
   };
 
   return (
-    <div className="min-h-screen bg-sb-cream pt-20">
+    <div className="min-h-screen relative pt-20">
+      {/* Imagen de fondo */}
+      <div className="fixed inset-0 -z-10">
+        <Image
+          src="/img/barra.JPG"
+          alt="Barra Salad Bowl"
+          fill
+          className="object-cover"
+        />
+        {/* Overlay para legibilidad */}
+        <div className="absolute inset-0 bg-white/85 backdrop-blur-sm" />
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

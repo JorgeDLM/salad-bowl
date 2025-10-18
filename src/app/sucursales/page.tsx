@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import LocationCard from '@/components/LocationCard';
 import Footer from '@/components/Footer';
@@ -9,7 +10,19 @@ import { ArrowRight } from '@/components/icons';
 
 export default function SucursalesPage() {
   return (
-    <div className="min-h-screen bg-sb-cream pt-20">
+    <div className="min-h-screen relative pt-20">
+      {/* Imagen de fondo */}
+      <div className="fixed inset-0 -z-10">
+        <Image
+          src="/sucursal.JPG"
+          alt="Sucursal Salad Bowl"
+          fill
+          className="object-cover"
+        />
+        {/* Overlay muy sutil */}
+        <div className="absolute inset-0 bg-white/70 backdrop-blur-sm" />
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Header */}
         <motion.div

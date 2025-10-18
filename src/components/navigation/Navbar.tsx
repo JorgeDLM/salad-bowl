@@ -18,7 +18,6 @@ export default function Navbar() {
 
   const navLinks = [
     { href: '/', label: 'Inicio' },
-    { href: '/menu', label: 'Menú' },
     { href: '/sucursales', label: 'Sucursales' },
     { href: '/franquicias', label: 'Franquicias' },
     { href: '/contacto', label: 'Contacto' },
