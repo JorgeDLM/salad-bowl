@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 export default function BowlFlow() {
   const [hoveredStep, setHoveredStep] = useState<number | null>(null);
   const [currentBase, setCurrentBase] = useState(0);
+  const [currentCategory, setCurrentCategory] = useState(0);
 
   // Bases con imágenes
   const bases = [
@@ -17,13 +18,29 @@ export default function BowlFlow() {
     { name: 'Pasta', image: '/img/bases/4.png' },
   ];
 
+  // Categorías de ingredientes
+  const categories = [
+    { name: 'Vegetales' },
+    { name: 'Proteínas' },
+    { name: 'Quesos' },
+    { name: 'Toppings' },
+  ];
+
   // Ciclo automático del carousel de bases
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentBase((prev) => (prev + 1) % bases.length);
-    }, 2000); // Cambia cada 2 segundos
+    }, 2000);
     return () => clearInterval(interval);
   }, [bases.length]);
+
+  // Ciclo automático del carousel de categorías
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentCategory((prev) => (prev + 1) % categories.length);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, [categories.length]);
 
   const steps = [
     { 
@@ -32,7 +49,7 @@ export default function BowlFlow() {
       subtitle: 'Elige o combina entre:',
       hasCarousel: true, // Indicador de que este paso tiene carousel
       color: 'from-sb-green-700 to-sb-green-700',
-      iconBg: 'bg-sb-green-700',
+      iconBg: 'bg-sb-green-500',
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M3 12c0-4.5 3-8 9-8s9 3.5 9 8-3 8-9 8-9-3.5-9-8z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -44,9 +61,11 @@ export default function BowlFlow() {
       id: 2, 
       title: 'Elige tus ingredientes', 
       subtitle: 'Más de 50 ingredientes frescos',
-      options: ['Proteínas', 'Vegetales', 'Quesos', 'Toppings', 'Y mucho más...'],
-      color: 'from-sb-green-600 to-sb-green-500',
-      iconBg: 'bg-sb-green-500',
+      hasCarousel: true,
+      hasBackgroundImage: true,
+      backgroundImage: '/img/barra.JPG',
+      color: 'from-sb-green-500 to-sb-green-500',
+      iconBg: 'bg-sb-green-700',
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M12 2c-1 2-2 3-4 4-1 .5-2 1-2 3 0 1.5.5 2 1 2.5M12 2c1 2 2 3 4 4 1 .5 2 1 2 3 0 1.5-.5 2-1 2.5M12 2v9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -59,9 +78,10 @@ export default function BowlFlow() {
       id: 3, 
       title: 'Elige tus aderezos', 
       subtitle: 'El toque final perfecto',
-      options: ['Vinagretas', 'Cremosos', 'Especiales', 'Sin gluten', 'Veganos'],
+      hasImage: true,
+      image: '/img/terminado.JPG',
       color: 'from-sb-green-500 to-sb-green-400',
-      iconBg: 'bg-sb-green-700',
+      iconBg: 'bg-sb-green-500',
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M12 2v6M9 4l3 2 3-2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -128,9 +148,9 @@ export default function BowlFlow() {
               className="relative group"
             >
               {/* Card */}
-              <div className="relative bg-white rounded-3xl shadow-xl overflow-hidden h-full border-2 border-transparent hover:border-sb-green-300 transition-all duration-300">
+              <div className="relative bg-white rounded-3xl shadow-xl overflow-visible h-full border-2 border-transparent hover:border-sb-green-500 transition-all duration-300">
                 {/* Número del paso */}
-                <div className="absolute -top-6 left-6 z-20">
+                <div className="absolute -top-6 left-6 z-30">
                   <motion.div
                     className={`w-16 h-16 rounded-2xl ${step.iconBg} flex items-center justify-center shadow-2xl rotate-12 group-hover:rotate-0 transition-transform duration-300`}
                     animate={{ 
@@ -144,17 +164,6 @@ export default function BowlFlow() {
 
                 {/* Contenido */}
                 <div className="pt-16 pb-8 px-8">
-                  {/* Icono decorativo */}
-                  <motion.div
-                    className="mb-6 text-center text-sb-green-700 flex justify-center"
-                    animate={{ 
-                      scale: hoveredStep === index ? [1, 1.1, 1] : 1,
-                      y: hoveredStep === index ? [0, -5, 0] : 0
-                    }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    {step.icon}
-                  </motion.div>
 
                   {/* Título */}
                   <h3 className="text-2xl lg:text-3xl font-black text-sb-green-800 mb-3 text-center">
@@ -162,30 +171,33 @@ export default function BowlFlow() {
                   </h3>
 
                   {/* Subtítulo */}
-                  <p className="text-sm lg:text-base text-sb-green-600 font-semibold mb-6 text-center">
+                  <p className="text-sm lg:text-base text-sb-green-700 font-semibold mb-6 text-center">
                     {step.subtitle}
                   </p>
 
-                  {/* Carousel de bases o lista de opciones */}
-                  {step.hasCarousel ? (
+                  {/* Carousel de bases, categorías de ingredientes con imagen de fondo, imagen vertical o lista de opciones */}
+                  {step.hasCarousel && step.id === 1 ? (
                     <div className="relative">
                       {/* Carousel de imágenes */}
-                      <div className="relative h-48 mb-4 bg-gradient-to-br from-sb-cream/50 to-white rounded-2xl overflow-hidden">
+                      <div className="relative h-72 mb-4 bg-gradient-to-br from-sb-green-50 to-white rounded-2xl overflow-hidden">
                         <AnimatePresence mode="wait">
                           <motion.div
                             key={currentBase}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.8 }}
-                            transition={{ duration: 0.5 }}
+                            initial={{ opacity: 0, x: 100 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -100 }}
+                            transition={{ 
+                              duration: 0.6,
+                              ease: [0.25, 0.1, 0.25, 1]
+                            }}
                             className="absolute inset-0 flex items-center justify-center"
                           >
                             <Image
                               src={bases[currentBase].image}
                               alt={bases[currentBase].name}
-                              width={200}
-                              height={200}
-                              className="object-contain drop-shadow-lg"
+                              width={350}
+                              height={350}
+                              className="object-cover drop-shadow-2xl rounded-2xl"
                             />
                           </motion.div>
                         </AnimatePresence>
@@ -198,10 +210,14 @@ export default function BowlFlow() {
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -10 }}
-                          transition={{ duration: 0.3 }}
+                          transition={{ 
+                            duration: 0.4,
+                            ease: [0.25, 0.1, 0.25, 1],
+                            delay: 0.1
+                          }}
                           className="text-center mb-4"
                         >
-                          <p className="text-xl font-black text-sb-green-500">
+                          <p className="text-2xl font-black text-sb-green-700">
                             {bases[currentBase].name}
                           </p>
                         </motion.div>
@@ -216,12 +232,81 @@ export default function BowlFlow() {
                             className={`w-2 h-2 rounded-full transition-all duration-300 ${
                               i === currentBase 
                                 ? 'bg-sb-green-700 w-6' 
-                                : 'bg-sb-green-300 hover:bg-sb-green-500'
+                                : 'bg-sb-green-500 hover:bg-sb-green-500'
                             }`}
                             aria-label={`Ver ${bases[i].name}`}
                           />
                         ))}
                       </div>
+                    </div>
+                  ) : step.hasCarousel && step.id === 2 ? (
+                    <div className="relative">
+                      {/* Imagen de fondo de la barra */}
+                      <div className="relative h-72 mb-4 rounded-3xl overflow-hidden shadow-2xl">
+                        <Image
+                          src={step.backgroundImage || ''}
+                          alt="Barra de ingredientes"
+                          fill
+                          className="object-cover brightness-90"
+                        />
+                        {/* Overlay gradiente aesthetic */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-sb-green-700/70 via-sb-green-700/30 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-transparent" />
+                        
+                        {/* Categoría actual con animación suave */}
+                        <div className="absolute inset-0 flex items-center justify-center z-10 p-6">
+                          <AnimatePresence mode="wait">
+                            <motion.div
+                              key={currentCategory}
+                              initial={{ opacity: 0, scale: 0.95, filter: 'blur(4px)' }}
+                              animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                              exit={{ opacity: 0, scale: 1.05, filter: 'blur(4px)' }}
+                              transition={{ 
+                                duration: 0.7,
+                                ease: [0.25, 0.1, 0.25, 1]
+                              }}
+                              className="text-center w-full"
+                            >
+                              <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-4 border-2 border-white/20 shadow-2xl">
+                                <p className="text-4xl font-black text-white drop-shadow-2xl tracking-tight">
+                                  {categories[currentCategory].name}
+                                </p>
+                              </div>
+                            </motion.div>
+                          </AnimatePresence>
+                        </div>
+                      </div>
+
+                      {/* Indicadores de puntos */}
+                      <div className="flex justify-center gap-2">
+                        {categories.map((_, i) => (
+                          <button
+                            key={i}
+                            onClick={() => setCurrentCategory(i)}
+                            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                              i === currentCategory 
+                                ? 'bg-sb-green-700 w-6' 
+                                : 'bg-sb-green-500 hover:bg-sb-green-500'
+                            }`}
+                            aria-label={`Ver ${categories[i].name}`}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  ) : step.hasImage ? (
+                    <div className="relative">
+                      {/* Imagen vertical del producto terminado */}
+                      <div className="relative h-80 mb-4 rounded-2xl overflow-hidden bg-gradient-to-br from-sb-cream/50 to-white">
+                        <Image
+                          src={step.image || ''}
+                          alt="Bowl terminado"
+                          fill
+                          className="object-cover rounded-2xl"
+                        />
+                      </div>
+                      <p className="text-center text-lg font-bold text-sb-green-700">
+                        ¡Tu bowl perfecto está listo!
+                      </p>
                     </div>
                   ) : (
                     <ul className="space-y-3">
@@ -244,7 +329,7 @@ export default function BowlFlow() {
 
                 {/* Decoración de fondo */}
                 <motion.div
-                  className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full bg-sb-green-300 opacity-10 blur-2xl"
+                  className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full bg-sb-green-500 opacity-10 blur-2xl"
                   animate={{ 
                     scale: hoveredStep === index ? 1.5 : 1,
                     opacity: hoveredStep === index ? 0.15 : 0.08
@@ -279,12 +364,12 @@ export default function BowlFlow() {
           className="text-center mt-16"
         >
           <motion.a
-            href="/menu"
+            href="/sucursales"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-3 bg-gradient-to-r from-sb-green-600 to-sb-green-700 text-white px-12 py-5 rounded-full text-lg font-black shadow-2xl hover:shadow-3xl transition-all"
+            className="inline-flex items-center gap-3 bg-gradient-to-r from-sb-green-700 to-sb-green-700 text-white px-12 py-5 rounded-full text-lg font-black shadow-2xl hover:shadow-3xl transition-all"
           >
-            <span>Arma tu bowl ahora</span>
+            <span>Encuentra tu sucursal</span>
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
