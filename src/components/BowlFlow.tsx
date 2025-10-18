@@ -1,18 +1,37 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function BowlFlow() {
   const [hoveredStep, setHoveredStep] = useState<number | null>(null);
+  const [currentBase, setCurrentBase] = useState(0);
+
+  // Bases con imágenes
+  const bases = [
+    { name: 'Lechuga', image: '/img/bases/0.png' },
+    { name: 'Espinaca', image: '/img/bases/1.png' },
+    { name: 'Arroz integral', image: '/img/bases/2.png' },
+    { name: 'Arroz', image: '/img/bases/3.png' },
+    { name: 'Pasta', image: '/img/bases/4.png' },
+  ];
+
+  // Ciclo automático del carousel de bases
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBase((prev) => (prev + 1) % bases.length);
+    }, 2000); // Cambia cada 2 segundos
+    return () => clearInterval(interval);
+  }, [bases.length]);
 
   const steps = [
     { 
       id: 1, 
       title: 'Elige tu base', 
       subtitle: 'Elige o combina entre:',
-      options: ['Lechuga', 'Pasta', 'Espinaca', 'Arroz', 'Arroz integral'],
-      color: 'from-sb-green-700 to-sb-green-600',
+      hasCarousel: true, // Indicador de que este paso tiene carousel
+      color: 'from-sb-green-700 to-sb-green-700',
       iconBg: 'bg-sb-green-700',
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -27,7 +46,7 @@ export default function BowlFlow() {
       subtitle: 'Más de 50 ingredientes frescos',
       options: ['Proteínas', 'Vegetales', 'Quesos', 'Toppings', 'Y mucho más...'],
       color: 'from-sb-green-600 to-sb-green-500',
-      iconBg: 'bg-sb-green-600',
+      iconBg: 'bg-sb-green-500',
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M12 2c-1 2-2 3-4 4-1 .5-2 1-2 3 0 1.5.5 2 1 2.5M12 2c1 2 2 3 4 4 1 .5 2 1 2 3 0 1.5-.5 2-1 2.5M12 2v9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -42,7 +61,7 @@ export default function BowlFlow() {
       subtitle: 'El toque final perfecto',
       options: ['Vinagretas', 'Cremosos', 'Especiales', 'Sin gluten', 'Veganos'],
       color: 'from-sb-green-500 to-sb-green-400',
-      iconBg: 'bg-sb-green-500',
+      iconBg: 'bg-sb-green-700',
       icon: (
         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M12 2v6M9 4l3 2 3-2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -58,8 +77,8 @@ export default function BowlFlow() {
     <section className="py-24 bg-gradient-to-b from-white via-sb-cream/30 to-white overflow-hidden relative">
       {/* Decorative background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-sb-green-300/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-sb-teal-300/10 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-sb-green-700/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-sb-teal-700/10 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -71,7 +90,7 @@ export default function BowlFlow() {
           className="text-center mb-20"
         >
           <motion.h2 
-            className="text-4xl md:text-6xl lg:text-7xl font-black text-sb-green-800 mb-4"
+            className="text-4xl md:text-6xl lg:text-7xl font-black text-sb-green-700 mb-4"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -80,7 +99,7 @@ export default function BowlFlow() {
             El bowl perfecto
           </motion.h2>
           <motion.p 
-            className="text-3xl md:text-5xl font-black text-sb-green-300"
+            className="text-3xl md:text-5xl font-black text-sb-green-500"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -147,22 +166,80 @@ export default function BowlFlow() {
                     {step.subtitle}
                   </p>
 
-                  {/* Opciones */}
-                  <ul className="space-y-3">
-                    {step.options.map((option, i) => (
-                      <motion.li
-                        key={i}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.2 + i * 0.1 }}
-                        className="flex items-center gap-3 text-ink/70"
-                      >
-                        <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${step.color}`} />
-                        <span className="text-sm lg:text-base">{option}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
+                  {/* Carousel de bases o lista de opciones */}
+                  {step.hasCarousel ? (
+                    <div className="relative">
+                      {/* Carousel de imágenes */}
+                      <div className="relative h-48 mb-4 bg-gradient-to-br from-sb-cream/50 to-white rounded-2xl overflow-hidden">
+                        <AnimatePresence mode="wait">
+                          <motion.div
+                            key={currentBase}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.8 }}
+                            transition={{ duration: 0.5 }}
+                            className="absolute inset-0 flex items-center justify-center"
+                          >
+                            <Image
+                              src={bases[currentBase].image}
+                              alt={bases[currentBase].name}
+                              width={200}
+                              height={200}
+                              className="object-contain drop-shadow-lg"
+                            />
+                          </motion.div>
+                        </AnimatePresence>
+                      </div>
+
+                      {/* Nombre del producto */}
+                      <AnimatePresence mode="wait">
+                        <motion.div
+                          key={currentBase}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.3 }}
+                          className="text-center mb-4"
+                        >
+                          <p className="text-xl font-black text-sb-green-500">
+                            {bases[currentBase].name}
+                          </p>
+                        </motion.div>
+                      </AnimatePresence>
+
+                      {/* Indicadores de puntos */}
+                      <div className="flex justify-center gap-2">
+                        {bases.map((_, i) => (
+                          <button
+                            key={i}
+                            onClick={() => setCurrentBase(i)}
+                            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                              i === currentBase 
+                                ? 'bg-sb-green-700 w-6' 
+                                : 'bg-sb-green-300 hover:bg-sb-green-500'
+                            }`}
+                            aria-label={`Ver ${bases[i].name}`}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <ul className="space-y-3">
+                      {step.options?.map((option, i) => (
+                        <motion.li
+                          key={i}
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: index * 0.2 + i * 0.1 }}
+                          className="flex items-center gap-3 text-ink/70"
+                        >
+                          <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${step.color}`} />
+                          <span className="text-sm lg:text-base">{option}</span>
+                        </motion.li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
 
                 {/* Decoración de fondo */}
