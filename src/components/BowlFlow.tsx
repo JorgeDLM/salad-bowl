@@ -19,7 +19,8 @@ function useTypewriter(phrases: string[], currentIndex: number, onComplete: () =
           setCurrentText(currentPhrase.substring(0, currentText.length + 1));
           setTypingSpeed(100);
         } else {
-          setTimeout(() => setIsDeleting(true), 1200);
+          // Pausa más larga para que todas las bases duren tiempo similar
+          setTimeout(() => setIsDeleting(true), 2500);
         }
       } else {
         if (currentText.length > 0) {
@@ -62,7 +63,7 @@ export default function BowlFlow() {
     { name: 'Lechuga', image: '/img/bases/0.png' },
     { name: 'Espinaca', image: '/img/bases/1.png' },
     { name: 'Arroz integral', image: '/img/bases/2.png' },
-    { name: 'Arroz', image: '/img/bases/3.png' },
+    { name: 'Arroz blanco', image: '/img/bases/3.png' },
     { name: 'Pasta', image: '/img/bases/4.png' },
   ];
 
@@ -286,8 +287,6 @@ export default function BowlFlow() {
                           className="object-cover brightness-90"
                         />
                         {/* Overlay gradiente aesthetic */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-sb-green-700/70 via-sb-green-700/30 to-transparent" />
-                        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-transparent" />
                       </div>
                     </div>
                   ) : step.hasImage ? (

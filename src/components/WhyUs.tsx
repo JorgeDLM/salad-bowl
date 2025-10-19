@@ -14,7 +14,7 @@ export default function WhyUs() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
           <h2 className="text-4xl md:text-6xl font-black text-sb-green-700 mb-4">
             ¿Por qué Salad Bowl?
@@ -116,32 +116,6 @@ export default function WhyUs() {
             </div>
           </motion.div>
         </div>
-
-        {/* Stats Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8"
-        >
-          <div className="text-center">
-            <div className="text-4xl md:text-5xl font-black text-sb-green-700 mb-2">50+</div>
-            <div className="text-sm md:text-base text-sb-green-600 font-semibold">Ingredientes Frescos</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl md:text-5xl font-black text-sb-green-700 mb-2">3</div>
-            <div className="text-sm md:text-base text-sb-green-600 font-semibold">Sucursales en Puebla</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl md:text-5xl font-black text-sb-green-700 mb-2">100%</div>
-            <div className="text-sm md:text-base text-sb-green-600 font-semibold">Natural y Fresco</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl md:text-5xl font-black text-sb-green-700 mb-2">∞</div>
-            <div className="text-sm md:text-base text-sb-green-600 font-semibold">Combinaciones Posibles</div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
