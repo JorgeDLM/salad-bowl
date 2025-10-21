@@ -74,7 +74,7 @@ export default async function BranchesPage() {
                     {branch.name}
                   </h3>
                   <p className="text-sm text-sb-green-700 font-medium">
-                    {branch.franchisee.name}
+                    {branch.franchisee ? branch.franchisee.name : 'Corporativa (Admin)'}
                   </p>
                 </div>
                 {branch.isActive ? (
@@ -115,11 +115,8 @@ export default async function BranchesPage() {
                   href={`/admin/dashboard/branches/${branch.id}`}
                   className="flex-1 px-4 py-2 bg-sb-green-700 text-white text-center rounded-lg font-medium hover:bg-sb-green-600 transition-colors text-sm"
                 >
-                  Ver Detalles
+                  Ver Detalles / Editar
                 </Link>
-                <button className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors text-sm">
-                  Editar
-                </button>
               </div>
             </div>
           ))}

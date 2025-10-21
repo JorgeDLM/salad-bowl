@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -24,6 +24,7 @@ function SubmitButton() {
 export default function LoginPage() {
   const router = useRouter();
   const [state, formAction] = useFormState(loginAction, null);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (state?.success && state?.redirectPath) {
@@ -48,10 +49,10 @@ export default function LoginPage() {
         {/* Card de Login */}
         <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-10">
           {/* Logo */}
-          <div className="flex justify-center mb-8">
-            <div className="relative w-32 h-20">
+          <div className="flex justify-center mb-3">
+            <div className="relative w-[130px] h-[130px]">
               <Image
-                src="/logo.png"
+                src="/icono-salad-sf.png"
                 alt="Salad Bowl"
                 fill
                 className="object-contain"
@@ -63,10 +64,10 @@ export default function LoginPage() {
           {/* Título */}
           <div className="text-center mb-8">
             <h1 className="text-3xl font-black text-sb-green-700 mb-2">
-              Panel de Administración
+              Inicia sesión
             </h1>
             <p className="text-ink/60">
-              Ingresa tus credenciales para continuar
+              ¡Hola de nuevo!
             </p>
           </div>
 
@@ -104,15 +105,36 @@ export default function LoginPage() {
               <label htmlFor="password" className="block text-sm font-semibold text-ink mb-2">
                 Contraseña
               </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                required
-                autoComplete="current-password"
-                className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-sb-green-700 focus:outline-none transition-colors text-base"
-                placeholder="••••••••"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  name="password"
+                  required
+                  autoComplete="current-password"
+                  className="w-full px-4 py-3 pr-12 rounded-xl border-2 border-gray-200 focus:border-sb-green-700 focus:outline-none transition-colors text-base"
+                  placeholder="••••••••"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-gray-500 hover:text-sb-green-700 transition-colors"
+                  aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                >
+                  {showPassword ? (
+                    // Icono de ojo cerrado
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                    </svg>
+                  ) : (
+                    // Icono de ojo abierto
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                  )}
+                </button>
+              </div>
             </div>
 
             <SubmitButton />

@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import Navbar from '@/components/navigation/Navbar';
+import ConditionalNavbar from '@/components/navigation/ConditionalNavbar';
 import { SITE } from '@/config';
 import Script from 'next/script';
 
@@ -368,7 +368,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
       </head>
       <body className={inter.className}>
-        <Navbar />
+        <ConditionalNavbar />
         <main className='select-none'>{children}</main>
       </body>
     </html>

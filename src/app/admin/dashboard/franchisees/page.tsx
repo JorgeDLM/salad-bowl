@@ -121,11 +121,8 @@ export default async function FranchiseesPage() {
                   href={`/admin/dashboard/franchisees/${franchisee.id}`}
                   className="flex-1 px-4 py-2 bg-sb-green-700 text-white text-center rounded-lg font-medium hover:bg-sb-green-600 transition-colors text-sm"
                 >
-                  Ver Detalles
+                  Ver Detalles / Editar
                 </Link>
-                <button className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors text-sm">
-                  Editar
-                </button>
               </div>
             </div>
           ))}

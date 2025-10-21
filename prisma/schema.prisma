@@ -70,7 +70,7 @@ model Franchisee { // "franquiciatario"
 
 model Branch { // sucursal
   id            Int       @id @default(autoincrement())
-  franchiseeId  Int
+  franchiseeId  Int?      // null = sucursal corporativa (admin), con valor = franquiciatario
   name          String
   managerName   String?
   contactPhone  String?
@@ -80,7 +80,7 @@ model Branch { // sucursal
   // horario semanal simple; para granularidad por día usa BranchBusinessHour
   openingHours  Json?     // {mon:{open:"09:00",close:"21:00"}, ...}
   isActive      Boolean   @default(true)
-  franchisee    Franchisee @relation(fields: [franchiseeId], references: [id])
+  franchisee    Franchisee? @relation(fields: [franchiseeId], references: [id])
   employees     User[]
   businessHours BranchBusinessHour[]
   createdAt     DateTime  @default(now())

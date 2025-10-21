@@ -25,7 +25,80 @@ async function main() {
   });
   console.log('✅ Admin creado:', admin.email);
 
-  // Crear Franquiciatario
+  // Crear Sucursales Corporativas (pertenecen al admin)
+  const plazaVia = await prisma.branch.upsert({
+    where: { id: 1 },
+    update: {},
+    create: {
+      franchiseeId: null, // Corporativa
+      name: 'Plaza Vía San Ángel',
+      contactPhone: '2222252125',
+      address: 'Blvd. Atlixcáyotl 1405, Local B 5, Reserva Territorial Atlixcáyotl, 72192 San Bernardino Tlaxcalancingo, Pue.',
+      latitude: 19.0414398,
+      longitude: -98.2062727,
+      isActive: true,
+      openingHours: {
+        mon: { open: '09:00', close: '20:30' },
+        tue: { open: '09:00', close: '20:30' },
+        wed: { open: '09:00', close: '20:30' },
+        thu: { open: '09:00', close: '20:30' },
+        fri: { open: '09:00', close: '20:30' },
+        sat: { open: '09:00', close: '20:30' },
+        sun: { open: '09:00', close: '20:30' },
+      },
+    },
+  });
+  console.log('✅ Sucursal creada:', plazaVia.name);
+
+  const zavaleta = await prisma.branch.upsert({
+    where: { id: 2 },
+    update: {},
+    create: {
+      franchiseeId: null, // Corporativa
+      name: 'Zavaleta',
+      contactPhone: '2221695444',
+      address: 'Calz Zavaleta 3916, Sta Cruz Buenavista, 72150 Heroica Puebla de Zaragoza, Pue.',
+      latitude: 19.0252,
+      longitude: -98.2435,
+      isActive: true,
+      openingHours: {
+        mon: { open: '11:00', close: '20:00' },
+        tue: { open: '11:00', close: '20:00' },
+        wed: { open: '11:00', close: '20:00' },
+        thu: { open: '11:00', close: '20:00' },
+        fri: { open: '11:00', close: '20:00' },
+        sat: { open: '11:00', close: '20:00' },
+        sun: { open: '11:00', close: '20:00' },
+      },
+    },
+  });
+  console.log('✅ Sucursal creada:', zavaleta.name);
+
+  const lomas = await prisma.branch.upsert({
+    where: { id: 3 },
+    update: {},
+    create: {
+      franchiseeId: null, // Corporativa
+      name: 'Lomas de Angelópolis',
+      contactPhone: null, // Sin teléfono
+      address: 'Blvd. los Reyes 6201, Lomas de Angelópolis, 72830 San Bernardino Tlaxcalancingo, Pue.',
+      latitude: 19.0589,
+      longitude: -98.2837,
+      isActive: true,
+      openingHours: {
+        mon: { open: '09:00', close: '20:30' },
+        tue: { open: '09:00', close: '20:30' },
+        wed: { open: '09:00', close: '20:30' },
+        thu: { open: '09:00', close: '20:30' },
+        fri: { open: '09:00', close: '20:30' },
+        sat: { open: '12:00', close: '20:30' },
+        sun: { open: '12:00', close: '20:30' },
+      },
+    },
+  });
+  console.log('✅ Sucursal creada:', lomas.name);
+
+  // Crear Franquiciatario de Ejemplo
   const franchisee = await prisma.franchisee.upsert({
     where: { id: 1 },
     update: {},
@@ -38,32 +111,6 @@ async function main() {
     },
   });
   console.log('✅ Franquiciatario creado:', franchisee.name);
-
-  // Crear Sucursal
-  const branch = await prisma.branch.upsert({
-    where: { id: 1 },
-    update: {},
-    create: {
-      franchiseeId: franchisee.id,
-      name: 'Sucursal Centro',
-      managerName: 'María García',
-      contactPhone: '2227654321',
-      address: 'Av. Juárez 123, Centro, Puebla',
-      latitude: 19.0414,
-      longitude: -98.2063,
-      isActive: true,
-      openingHours: {
-        mon: { open: '09:00', close: '21:00' },
-        tue: { open: '09:00', close: '21:00' },
-        wed: { open: '09:00', close: '21:00' },
-        thu: { open: '09:00', close: '21:00' },
-        fri: { open: '09:00', close: '22:00' },
-        sat: { open: '10:00', close: '22:00' },
-        sun: { open: '10:00', close: '20:00' },
-      },
-    },
-  });
-  console.log('✅ Sucursal creada:', branch.name);
 
   // Crear Usuario Franquiciatario
   const franchiseeUser = await prisma.user.upsert({
@@ -80,21 +127,48 @@ async function main() {
   });
   console.log('✅ Usuario Franquiciatario creado:', franchiseeUser.email);
 
-  // Crear Usuario Empleado
-  const employeeUser = await prisma.user.upsert({
-    where: { email: 'employee@saladbowl.mx' },
+  // Crear Empleados para cada sucursal
+  const employeePlazaVia = await prisma.user.upsert({
+    where: { email: 'employee.plazavia@saladbowl.mx' },
     update: {},
     create: {
-      email: 'employee@saladbowl.mx',
-      username: 'employee',
+      email: 'employee.plazavia@saladbowl.mx',
+      username: 'employee_plazavia',
       passwordHash: employeePassword,
       role: 'EMPLOYEE',
-      franchiseeId: franchisee.id,
-      branchId: branch.id,
+      branchId: plazaVia.id,
       isActive: true,
     },
   });
-  console.log('✅ Usuario Empleado creado:', employeeUser.email);
+  console.log('✅ Empleado Plaza Vía creado:', employeePlazaVia.email);
+
+  const employeeZavaleta = await prisma.user.upsert({
+    where: { email: 'employee.zavaleta@saladbowl.mx' },
+    update: {},
+    create: {
+      email: 'employee.zavaleta@saladbowl.mx',
+      username: 'employee_zavaleta',
+      passwordHash: employeePassword,
+      role: 'EMPLOYEE',
+      branchId: zavaleta.id,
+      isActive: true,
+    },
+  });
+  console.log('✅ Empleado Zavaleta creado:', employeeZavaleta.email);
+
+  const employeeLomas = await prisma.user.upsert({
+    where: { email: 'employee.lomas@saladbowl.mx' },
+    update: {},
+    create: {
+      email: 'employee.lomas@saladbowl.mx',
+      username: 'employee_lomas',
+      passwordHash: employeePassword,
+      role: 'EMPLOYEE',
+      branchId: lomas.id,
+      isActive: true,
+    },
+  });
+  console.log('✅ Empleado Lomas creado:', employeeLomas.email);
 
   // Crear Categorías de Guías
   const categories = [
@@ -122,9 +196,10 @@ async function main() {
   console.log('\nFRANQUICIATARIO:');
   console.log('  Email: franchisee@saladbowl.mx');
   console.log('  Password: franchisee123');
-  console.log('\nEMPLEADO:');
-  console.log('  Email: employee@saladbowl.mx');
-  console.log('  Password: employee123');
+  console.log('\nEMPLEADOS (password: employee123):');
+  console.log('  Plaza Vía: employee.plazavia@saladbowl.mx');
+  console.log('  Zavaleta: employee.zavaleta@saladbowl.mx');
+  console.log('  Lomas: employee.lomas@saladbowl.mx');
   console.log('----------------------------------------\n');
 }
 
