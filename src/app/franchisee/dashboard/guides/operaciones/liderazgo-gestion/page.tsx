@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import { getCurrentUser } from '@/lib/session';
 import DashboardLayout from '@/components/admin/DashboardLayout';
-import Link from 'next/link';
+import GuideBreadcrumb from '@/components/GuideBreadcrumb';
 
 export default async function LiderazgoGestionPage() {
   const user = await getCurrentUser();
@@ -13,11 +13,11 @@ export default async function LiderazgoGestionPage() {
   return (
     <DashboardLayout userEmail={user.email} userRole={user.role}>
       <div className="max-w-6xl mx-auto pb-12">
-        <div className="mb-6">
-          <Link href="/franchisee/dashboard/guides/operaciones" className="text-sb-green-700 hover:text-sb-green-600 font-medium">
-            ← Volver a Manual de Operaciones
-          </Link>
-        </div>
+        <GuideBreadcrumb items={[
+          { label: 'Guías', href: '/franchisee/dashboard/guides' },
+          { label: 'Operaciones', href: '/franchisee/dashboard/guides/operaciones' },
+          { label: 'Liderazgo y Gestión', href: '/franchisee/dashboard/guides/operaciones/liderazgo-gestion' }
+        ]} />
 
         <div className="mb-12 text-center">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-sb-teal-600 to-sb-teal-500 rounded-3xl mb-6 shadow-lg">
@@ -31,20 +31,35 @@ export default async function LiderazgoGestionPage() {
 
         <div className="space-y-8">
           {/* Intro con imagen */}
-          <div className="bg-white rounded-3xl shadow-lg overflow-hidden border border-gray-200">
-            <div className="grid md:grid-cols-2 gap-0">
-              <div className="p-8 flex flex-col justify-center">
-                <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                  Trabajar como Líder de Turno en SALAD BOWL no es fácil. Es una responsabilidad seria: enfrentar retos, resolver dificultades y manejar múltiples dependencias.
-                </p>
-                <p className="text-gray-700 leading-relaxed">
-                  Nos importan nuestros clientes y buscamos crear <strong className="text-sb-teal-700">"Conexiones Significativas"</strong> con cada uno de ellos. Queremos brindar la mejor experiencia para que regresen a nuestras sucursales.
-                </p>
+          <div className="bg-gradient-to-br from-sb-green-50 to-white rounded-3xl shadow-xl overflow-hidden border-2 border-sb-green-200">
+            <div className="flex flex-col md:grid md:grid-cols-5 gap-0">
+              {/* Imagen primero en móvil */}
+              <div className="md:col-span-3 md:order-2 relative h-[500px] md:h-[600px] overflow-hidden">
+                <img 
+                  src="/franquicias/operaciones/empleada.PNG" 
+                  alt="Empleada de Salad Bowl" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent"></div>
               </div>
-              <div className="relative h-64 md:h-auto bg-gradient-to-br from-sb-teal-600 to-sb-green-600 flex items-center justify-center">
-                <svg className="w-32 h-32 text-white/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
+              
+              {/* Texto después en móvil */}
+              <div className="md:col-span-2 md:order-1 p-6 md:p-10 flex flex-col justify-center bg-white/80 backdrop-blur-sm">
+                <div className="mb-4 md:mb-6">
+                  <div className="inline-block p-2 md:p-3 bg-sb-teal-100 rounded-xl mb-3 md:mb-4">
+                    <svg className="w-6 h-6 md:w-8 md:h-8 text-sb-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                </div>
+                <p className="text-lg md:text-xl text-gray-800 leading-relaxed mb-4 md:mb-6 font-medium">
+                  Trabajar como <span className="text-sb-green-700 font-bold">Líder de Turno</span> en SALAD BOWL no es fácil. Es una responsabilidad seria: enfrentar retos, resolver dificultades y manejar múltiples dependencias.
+                </p>
+                <div className="pl-3 md:pl-4 border-l-4 border-sb-teal-600">
+                  <p className="text-base md:text-lg text-gray-700 leading-relaxed italic">
+                    Nos importan nuestros clientes y buscamos crear <strong className="text-sb-teal-700">"Conexiones Significativas"</strong> con cada uno de ellos. Queremos brindar la mejor experiencia para que regresen a nuestras sucursales.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -153,19 +168,28 @@ export default async function LiderazgoGestionPage() {
 
           {/* El Arte de Delegar */}
           <div className="bg-white rounded-3xl shadow-lg overflow-hidden border border-gray-100">
-            <div className="bg-gradient-to-r from-gray-700 to-gray-600 p-8 text-white relative overflow-hidden">
+            <div className="bg-gradient-to-r from-sb-teal-700 to-sb-green-700 p-8 text-white relative overflow-hidden">
               <svg className="absolute right-8 top-4 w-32 h-32 opacity-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
               </svg>
               <h2 className="text-3xl font-bold mb-2 relative z-10">El Arte de Delegar</h2>
-              <p className="text-gray-100 relative z-10">Habilidad esencial del Líder de Turno</p>
+              <p className="text-sb-teal-50 relative z-10">Habilidad esencial del Líder de Turno</p>
             </div>
             
             <div className="p-8 space-y-6">
-              <div className="bg-gradient-to-r from-sb-teal-50 to-sb-green-50 rounded-2xl p-6 border-l-4 border-sb-teal-600">
-                <p className="text-lg text-gray-800 leading-relaxed">
-                  <strong className="text-sb-teal-700">Delegar</strong> es confiar una tarea a otra persona del equipo. Un líder que no delega termina tarde, con horas extra y más errores. Bien hecho, desarrolla al equipo, los hace más autónomos, involucrados y motivados.
-                </p>
+              <div className="grid md:grid-cols-3 gap-6 items-center">
+                <div className="md:col-span-2 bg-gradient-to-r from-sb-teal-50 to-sb-green-50 rounded-2xl p-6 border-l-4 border-sb-teal-600">
+                  <p className="text-lg text-gray-800 leading-relaxed">
+                    <strong className="text-sb-teal-700">Delegar</strong> es confiar una tarea a otra persona del equipo. Un líder que no delega termina tarde, con horas extra y más errores. Bien hecho, desarrolla al equipo, los hace más autónomos, involucrados y motivados.
+                  </p>
+                </div>
+                <div className="rounded-2xl overflow-hidden shadow-lg">
+                  <img 
+                    src="/franquicias/operaciones/empleado-con-barra.JPG" 
+                    alt="Empleado en Salad Bowl" 
+                    className="w-full h-48 object-cover"
+                  />
+                </div>
               </div>
 
               <div className="bg-white rounded-2xl p-6 border-2 border-sb-teal-200">
@@ -178,11 +202,12 @@ export default async function LiderazgoGestionPage() {
                     { step: 'Cómo', desc: 'Especifica el método', icon: <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>, color: 'sb-green' },
                     { step: 'Cuándo', desc: 'Fija el plazo', icon: <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>, color: 'sb-teal' }
                   ].map((item, i) => (
-                    <div key={i} className={`text-center p-4 rounded-xl bg-${item.color === 'sb-teal' ? 'sb-teal-50' : 'sb-green-50'} border-2 border-${item.color === 'sb-teal' ? 'sb-teal-200' : 'sb-green-200'} hover:shadow-lg transition-shadow`}>
-                      <div className={`${item.color === 'sb-teal' ? 'text-sb-teal-700' : 'text-sb-green-700'} flex justify-center mb-2`}>{item.icon}</div>
-                      <div className={`w-8 h-8 ${item.color === 'sb-teal' ? 'bg-sb-teal-700' : 'bg-sb-green-700'} rounded-full flex items-center justify-center text-white font-bold mx-auto mb-2 text-sm`}>
+                    <div key={i} className={`relative text-center p-4 pt-6 rounded-xl bg-${item.color === 'sb-teal' ? 'sb-teal-50' : 'sb-green-50'} border-2 border-${item.color === 'sb-teal' ? 'sb-teal-200' : 'sb-green-200'} hover:shadow-lg transition-all overflow-visible`}>
+                      {/* Número en esquina superior derecha */}
+                      <div className={`absolute -top-3 -right-3 w-10 h-10 ${item.color === 'sb-teal' ? 'bg-sb-teal-700' : 'bg-sb-green-700'} rounded-full flex items-center justify-center text-white font-black text-lg shadow-lg z-10`}>
                         {i + 1}
                       </div>
+                      <div className={`${item.color === 'sb-teal' ? 'text-sb-teal-700' : 'text-sb-green-700'} flex justify-center mb-3`}>{item.icon}</div>
                       <h4 className="font-bold text-gray-900 mb-1">{item.step}</h4>
                       <p className="text-xs text-gray-600">{item.desc}</p>
                     </div>
@@ -214,70 +239,108 @@ export default async function LiderazgoGestionPage() {
             </div>
           </div>
 
-          {/* 3 C's - Versión mejorada con diagrama circular */}
-          <div className="bg-gradient-to-br from-sb-teal-600 to-sb-green-600 rounded-3xl shadow-xl p-10 text-white overflow-hidden relative">
+          {/* 3 C's - Optimizado para móvil */}
+          <div className="bg-gradient-to-br from-sb-teal-600 to-sb-green-600 rounded-3xl shadow-xl p-6 md:p-10 text-white overflow-hidden relative">
             <div className="relative z-10">
-              <h2 className="text-4xl font-bold text-center mb-4">Receta para un turno fluido</h2>
-              <p className="text-center text-sb-teal-50 mb-12 text-lg">Las 3 C's del éxito operativo</p>
+              <h2 className="text-2xl md:text-4xl font-bold text-center mb-2 md:mb-4">Receta para un turno fluido</h2>
+              <p className="text-center text-sb-teal-50 mb-8 md:mb-12 text-base md:text-lg">Las 3 C's del éxito operativo</p>
               
-              {/* Diagrama circular central */}
-              <div className="relative max-w-4xl mx-auto mb-12">
-                <div className="flex items-center justify-center">
-                  {/* Centro */}
-                  <div className="absolute w-32 h-32 bg-white rounded-full flex items-center justify-center z-20 shadow-2xl mt-8">
-                    <div className="text-center">
-                      <div className="text-3xl font-black text-sb-teal-700">3C's</div>
-                      <div className="text-xs text-gray-600 font-semibold">Éxito</div>
-                    </div>
-                  </div>
-                  
-                  {/* Círculo exterior con las 3 C's */}
-                  <div className="relative w-full max-w-md aspect-square">
-                    {/* Coordinación - Top */}
-                    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-4">
-                      <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 w-48 border-2 border-white/30">
-                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-3">
-                          <svg className="w-7 h-7 text-sb-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                        </div>
-                        <h3 className="text-xl font-bold text-center mb-2">Coordinación</h3>
-                        <p className="text-sm text-center">Personas, productos y equipos</p>
+              {/* Layout móvil: vertical, Desktop: circular */}
+              <div className="hidden md:block">
+                {/* Diagrama circular para desktop */}
+                <div className="relative max-w-4xl mx-auto mb-12">
+                  <div className="flex items-center justify-center">
+                    <div className="absolute w-32 h-32 bg-white rounded-full flex items-center justify-center z-20 shadow-2xl mt-8">
+                      <div className="text-center">
+                        <div className="text-3xl font-black text-sb-teal-700">3C's</div>
+                        <div className="text-xs text-gray-600 font-semibold">Éxito</div>
                       </div>
                     </div>
-
-                    {/* Comunicación - Bottom Left */}
-                    <div className="absolute bottom-0 left-0 transform translate-y-4">
-                      <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 w-48 border-2 border-white/30">
-                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-3">
-                          <svg className="w-7 h-7 text-sb-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                          </svg>
+                    
+                    <div className="relative w-full max-w-md aspect-square">
+                      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-4">
+                        <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 w-48 border-2 border-white/30">
+                          <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg className="w-7 h-7 text-sb-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                          </div>
+                          <h3 className="text-xl font-bold text-center mb-2">Coordinación</h3>
+                          <p className="text-sm text-center">Personas, productos y equipos</p>
                         </div>
-                        <h3 className="text-xl font-bold text-center mb-2">Comunicación</h3>
-                        <p className="text-sm text-center">Líder ↔ equipo</p>
                       </div>
-                    </div>
 
-                    {/* Cooperación - Bottom Right */}
-                    <div className="absolute bottom-0 right-0 transform translate-y-4">
-                      <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 w-48 border-2 border-white/30">
-                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-3">
-                          <svg className="w-7 h-7 text-sb-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                          </svg>
+                      <div className="absolute bottom-0 left-0 transform translate-y-4">
+                        <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 w-48 border-2 border-white/30">
+                          <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg className="w-7 h-7 text-sb-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                            </svg>
+                          </div>
+                          <h3 className="text-xl font-bold text-center mb-2">Comunicación</h3>
+                          <p className="text-sm text-center">Líder ↔ equipo</p>
                         </div>
-                        <h3 className="text-xl font-bold text-center mb-2">Cooperación</h3>
-                        <p className="text-sm text-center">Todos son clave</p>
+                      </div>
+
+                      <div className="absolute bottom-0 right-0 transform translate-y-4">
+                        <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 w-48 border-2 border-white/30">
+                          <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg className="w-7 h-7 text-sb-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                          </div>
+                          <h3 className="text-xl font-bold text-center mb-2">Cooperación</h3>
+                          <p className="text-sm text-center">Todos son clave</p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
+              {/* Layout vertical para móvil */}
+              <div className="md:hidden space-y-4 mb-8">
+                <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto shadow-2xl mb-6">
+                  <div className="text-center">
+                    <div className="text-2xl font-black text-sb-teal-700">3C's</div>
+                    <div className="text-xs text-gray-600 font-semibold">Éxito</div>
+                  </div>
+                </div>
+
+                {[
+                  { 
+                    title: 'Coordinación', 
+                    desc: 'Personas, productos y equipos',
+                    icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  },
+                  { 
+                    title: 'Comunicación', 
+                    desc: 'Líder ↔ equipo',
+                    icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+                  },
+                  { 
+                    title: 'Cooperación', 
+                    desc: 'Todos son clave',
+                    icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                  }
+                ].map((item, i) => (
+                  <div key={i} className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border-2 border-white/30">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center flex-shrink-0 text-sb-teal-700">
+                        {item.icon}
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold mb-1">{item.title}</h3>
+                        <p className="text-sm opacity-90">{item.desc}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
               {/* Quote destacado */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 max-w-3xl mx-auto border border-white/20">
-                <p className="text-center text-xl italic">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 md:p-6 max-w-3xl mx-auto border border-white/20">
+                <p className="text-center text-base md:text-xl italic">
                   "Un turno exitoso es el que dirige el Líder, no el que 'corre solo'"
                 </p>
               </div>
@@ -424,10 +487,23 @@ export default async function LiderazgoGestionPage() {
             </div>
             
             <div className="p-8 space-y-8">
+              {/* Imagen + Intro */}
+              <div className="grid md:grid-cols-2 gap-6 items-center">
+                <div>
+                  <p className="text-lg text-gray-700 mb-4">
+                    Gestionar el desempeño es definir qué queremos que logre el equipo, ayudar en el día a día, revisar resultados y asegurar que desarrollen habilidades y conocimientos.
+                  </p>
+                </div>
+                <div className="rounded-2xl overflow-hidden shadow-lg">
+                  <img 
+                    src="/franquicias/operaciones/empleados-trabajando.JPG" 
+                    alt="Empleados trabajando en Salad Bowl" 
+                    className="w-full h-64 object-cover"
+                  />
+                </div>
+              </div>
+
               <div className="text-center mb-8">
-                <p className="text-lg text-gray-700 mb-6">
-                  Gestionar el desempeño es definir qué queremos que logre el equipo, ayudar en el día a día, revisar resultados y asegurar que desarrollen habilidades y conocimientos.
-                </p>
                 
                 {/* Los 4 pilares - Visual */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-8">

@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation';
 import { getCurrentUser } from '@/lib/session';
 import DashboardLayout from '@/components/admin/DashboardLayout';
 import Link from 'next/link';
+import GuideBreadcrumb from '@/components/GuideBreadcrumb';
 
 export default async function SeguridadAlimentariaPage() {
   const user = await getCurrentUser();
@@ -13,11 +14,11 @@ export default async function SeguridadAlimentariaPage() {
   return (
     <DashboardLayout userEmail={user.email} userRole={user.role}>
       <div className="max-w-6xl mx-auto pb-12">
-        <div className="mb-6">
-          <Link href="/franchisee/dashboard/guides/operaciones" className="text-sb-green-700 hover:text-sb-green-600 font-medium">
-            ← Volver a Manual de Operaciones
-          </Link>
-        </div>
+        <GuideBreadcrumb items={[
+          { label: 'Guías', href: '/franchisee/dashboard/guides' },
+          { label: 'Operaciones', href: '/franchisee/dashboard/guides/operaciones' },
+          { label: 'Seguridad Alimentaria', href: '/franchisee/dashboard/guides/operaciones/seguridad-alimentaria' }
+        ]} />
 
         <div className="mb-12 text-center">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-sb-green-700 to-sb-green-600 rounded-3xl mb-6 shadow-lg">

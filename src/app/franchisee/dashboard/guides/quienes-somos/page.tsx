@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import { getCurrentUser } from '@/lib/session';
 import DashboardLayout from '@/components/admin/DashboardLayout';
-import Link from 'next/link';
+import GuideBreadcrumb from '@/components/GuideBreadcrumb';
 
 export default async function QuienesSomosPage() {
   const user = await getCurrentUser();
@@ -13,12 +13,10 @@ export default async function QuienesSomosPage() {
   return (
     <DashboardLayout userEmail={user.email} userRole={user.role}>
       <div className="max-w-5xl mx-auto">
-        {/* Breadcrumb */}
-        <div className="mb-6">
-          <Link href="/franchisee/dashboard/guides" className="text-sb-green-700 hover:text-sb-green-600 font-medium">
-            ← Volver a Guías
-          </Link>
-        </div>
+        <GuideBreadcrumb items={[
+          { label: 'Guías', href: '/franchisee/dashboard/guides' },
+          { label: 'Quiénes Somos', href: '/franchisee/dashboard/guides/quienes-somos' }
+        ]} />
 
         {/* Header */}
         <div className="mb-10 text-center">

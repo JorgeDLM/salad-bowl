@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import { getCurrentUser } from '@/lib/session';
 import DashboardLayout from '@/components/admin/DashboardLayout';
-import Link from 'next/link';
+import GuideBreadcrumb from '@/components/GuideBreadcrumb';
 import Image from 'next/image';
 
 export default async function ManualImagenPage() {
@@ -14,12 +14,10 @@ export default async function ManualImagenPage() {
   return (
     <DashboardLayout userEmail={user.email} userRole={user.role}>
       <div className="max-w-6xl mx-auto">
-        {/* Breadcrumb */}
-        <div className="mb-6">
-          <Link href="/franchisee/dashboard/guides" className="text-sb-green-700 hover:text-sb-green-600 font-medium">
-            ← Volver a Guías
-          </Link>
-        </div>
+        <GuideBreadcrumb items={[
+          { label: 'Guías', href: '/franchisee/dashboard/guides' },
+          { label: 'Manual de Imagen', href: '/franchisee/dashboard/guides/manual-imagen' }
+        ]} />
 
         {/* Header */}
         <div className="mb-12 text-center">

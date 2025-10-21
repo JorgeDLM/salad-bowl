@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation';
 import { getCurrentUser } from '@/lib/session';
 import DashboardLayout from '@/components/admin/DashboardLayout';
 import Link from 'next/link';
+import GuideBreadcrumb from '@/components/GuideBreadcrumb';
 
 export default async function OperacionesPage() {
   const user = await getCurrentUser();
@@ -52,7 +53,7 @@ export default async function OperacionesPage() {
     },
     {
       id: 4,
-      title: 'Almacenamiento',
+      title: 'Proveedores y Almacenamiento',
       description: 'Proveedores, recepción, almacenaje y PEPS',
       href: '/franchisee/dashboard/guides/operaciones/almacenamiento',
       icon: (
@@ -65,41 +66,52 @@ export default async function OperacionesPage() {
     },
     {
       id: 5,
-      title: 'Servicio al Cliente',
-      description: 'Velocidad, alertas operativas y manejo de reclamos',
-      href: '/franchisee/dashboard/guides/operaciones/servicio-cliente',
+      title: 'Velocidad en el Servicio',
+      description: 'Eficiencia, tiempos y mejores prácticas',
+      href: '/franchisee/dashboard/guides/operaciones/velocidad-servicio',
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
         </svg>
       ),
-      gradient: 'from-sb-teal-700 to-sb-teal-600',
-      bgLight: 'bg-sb-teal-100',
+      gradient: 'from-sb-green-600 to-sb-teal-600',
+      bgLight: 'bg-sb-green-100',
     },
     {
       id: 6,
-      title: 'Registros y Controles',
-      description: 'Registros diarios de control y documentación',
-      href: '/franchisee/dashboard/guides/operaciones/registros-controles',
+      title: 'Reclamos de Clientes',
+      description: 'Manejo de quejas y resolución de problemas',
+      href: '/franchisee/dashboard/guides/operaciones/reclamos-clientes',
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
         </svg>
       ),
-      gradient: 'from-sb-green-700 to-sb-teal-600',
-      bgLight: 'bg-sb-green-100',
+      gradient: 'from-orange-600 to-red-600',
+      bgLight: 'bg-orange-100',
+    },
+    {
+      id: 7,
+      title: 'Registros Diarios de Control',
+      description: 'DCL, documentación y trazabilidad',
+      href: '/franchisee/dashboard/guides/operaciones/registros-control',
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+        </svg>
+      ),
+      gradient: 'from-blue-700 to-blue-600',
+      bgLight: 'bg-blue-100',
     },
   ];
 
   return (
     <DashboardLayout userEmail={user.email} userRole={user.role}>
       <div className="max-w-7xl mx-auto">
-        {/* Breadcrumb */}
-        <div className="mb-6">
-          <Link href="/franchisee/dashboard/guides" className="text-sb-green-700 hover:text-sb-green-600 font-medium">
-            ← Volver a Guías
-          </Link>
-        </div>
+        <GuideBreadcrumb items={[
+          { label: 'Guías', href: '/franchisee/dashboard/guides' },
+          { label: 'Operaciones', href: '/franchisee/dashboard/guides/operaciones' }
+        ]} />
 
         {/* Header */}
         <div className="mb-12 text-center">
