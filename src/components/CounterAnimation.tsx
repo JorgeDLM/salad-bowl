@@ -12,7 +12,7 @@ interface CounterAnimationProps {
 
 export default function CounterAnimation({ 
   end, 
-  duration = 2000, 
+  duration = 1100, 
   suffix = '', 
   prefix = '', 
   className = '' 

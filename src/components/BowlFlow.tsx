@@ -176,84 +176,21 @@ export default function BowlFlow() {
 
 
   return (
-    <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-b from-white via-sb-cream/30 to-white overflow-hidden relative">
-      {/* Partículas flotantes animadas */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Partículas grandes */}
-        <motion.div
-          className="absolute top-20 left-10 w-20 h-20 rounded-full bg-sb-green-400/20"
-          animate={{
-            y: [0, -30, 0],
-            x: [0, 20, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+    <section className="py-12 md:py-16 lg:py-20 overflow-hidden relative">
+      {/* Imagen de fondo */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/bg-bowl-3.png"
+          alt="Fondo Bowl"
+          fill
+          className="object-cover"
+          priority
         />
-        <motion.div
-          className="absolute top-40 right-20 w-16 h-16 rounded-full bg-sb-green-500/15"
-          animate={{
-            y: [0, 40, 0],
-            x: [0, -15, 0],
-            scale: [1, 0.9, 1],
-          }}
-          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-        />
-        <motion.div
-          className="absolute bottom-32 left-32 w-24 h-24 rounded-full bg-sb-teal-700/10"
-          animate={{
-            y: [0, -25, 0],
-            x: [0, 15, 0],
-          }}
-          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-        />
-        <motion.div
-          className="absolute bottom-40 right-40 w-14 h-14 rounded-full bg-sb-green-400/25"
-          animate={{
-            y: [0, 30, 0],
-            x: [0, -20, 0],
-          }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-        />
-
-        {/* Partículas pequeñas */}
-        <motion.div
-          className="absolute top-60 left-60 w-3 h-3 rounded-full bg-sb-green-500/40"
-          animate={{
-            y: [0, -50, 0],
-            opacity: [0.4, 1, 0.4],
-          }}
-          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div
-          className="absolute top-32 right-48 w-4 h-4 rounded-full bg-sb-green-700/30"
-          animate={{
-            y: [0, 45, 0],
-            opacity: [0.3, 0.8, 0.3],
-          }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
-        />
-        <motion.div
-          className="absolute bottom-60 left-96 w-2 h-2 rounded-full bg-sb-teal-700/50"
-          animate={{
-            y: [0, -35, 0],
-            opacity: [0.5, 1, 0.5],
-          }}
-          transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 2.5 }}
-        />
-        <motion.div
-          className="absolute top-96 right-80 w-3 h-3 rounded-full bg-sb-green-400/35"
-          animate={{
-            y: [0, 40, 0],
-            x: [0, -10, 0],
-            opacity: [0.35, 0.9, 0.35],
-          }}
-          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
-        />
-
-        {/* Círculos blur de fondo */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-sb-green-700/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-sb-teal-700/10 rounded-full blur-3xl" />
       </div>
+      
+      {/* Overlay gradiente */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-white/10 to-sb-cream/10 z-0" />
+
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -264,7 +201,7 @@ export default function BowlFlow() {
           className="text-center mb-8 md:mb-12"
         >
           <motion.h2 
-            className="text-3xl md:text-5xl lg:text-6xl font-black text-sb-green-700 mb-2"
+            className="text-4xl md:text-5xl lg:text-6xl font-black text-sb-green-700 mb-2"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -273,7 +210,7 @@ export default function BowlFlow() {
             El bowl perfecto
           </motion.h2>
           <motion.p 
-            className="text-2xl md:text-4xl font-black text-sb-green-500"
+            className="text-3xl md:text-4xl font-black text-sb-green-500"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

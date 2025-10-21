@@ -19,8 +19,8 @@ export default function SucursalesPage() {
           fill
           className="object-cover"
         />
-        {/* Overlay muy sutil */}
-        <div className="absolute inset-0 bg-white/70 backdrop-blur-sm" />
+        {/* Overlay para mejor contraste */}
+        <div className="absolute inset-0 bg-white/80 backdrop-blur-sm" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -31,10 +31,10 @@ export default function SucursalesPage() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-6xl font-bold text-ink mb-4">
+          <h1 className="text-5xl md:text-7xl font-black text-sb-green-700 mb-4 drop-shadow-sm">
             Sucursales
           </h1>
-          <p className="text-lg text-ink/60">
+          <p className="text-xl text-sb-green-600 font-medium">
             Visítanos en nuestras tres ubicaciones en Puebla
           </p>
         </motion.div>
@@ -60,12 +60,12 @@ export default function SucursalesPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="mt-16 bg-gradient-to-br from-sb-green-700 to-sb-green-500 rounded-3xl p-8 shadow-lg max-w-3xl mx-auto text-center"
+          className="mt-16 bg-sb-green-700 rounded-3xl p-8 md:p-10 shadow-xl max-w-3xl mx-auto text-center"
         >
-          <h2 className="text-2xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             ¿Tienes preguntas?
           </h2>
-          <p className="text-white/90 mb-6">
+          <p className="text-lg md:text-xl text-white/95 mb-8">
             Llámanos o visítanos en cualquiera de nuestras tres sucursales
           </p>
           <a

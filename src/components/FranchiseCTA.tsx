@@ -2,13 +2,28 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight } from './icons';
 
 export default function FranchiseCTA() {
   return (
-    <section className="pt-20 pb-32 bg-gradient-to-br from-sb-green-700 to-sb-green-700">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="pt-20 pb-32 relative overflow-hidden">
+      {/* Imagen de fondo */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/bg-saladbowl.webp"
+          alt="Fondo Salad Bowl"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+      
+      {/* Overlay verde */}
+      <div className="absolute inset-0 bg-gradient-to-br from-sb-green-700/90 to-sb-green-700/85 z-0" />
+      
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

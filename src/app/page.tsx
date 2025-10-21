@@ -57,6 +57,7 @@ export default function SaladBowlHome() {
               <CounterAnimation
                 end={50}
                 suffix="+"
+                duration={3000}
                 className="text-4xl md:text-5xl font-black text-sb-green-700 mb-2"
               />
               <p className="text-xs md:text-sm text-ink/70 font-medium">Ingredientes Frescos</p>
@@ -72,6 +73,7 @@ export default function SaladBowlHome() {
             >
               <CounterAnimation
                 end={3}
+                duration={500}
                 className="text-4xl md:text-5xl font-black text-sb-green-700 mb-2"
               />
               <p className="text-xs md:text-sm text-ink/70 font-medium">Sucursales en Puebla</p>

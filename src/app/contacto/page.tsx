@@ -38,7 +38,7 @@ export default function ContactoPage() {
           className="object-cover"
         />
         {/* Overlay para legibilidad */}
-        <div className="absolute inset-0 bg-white/85 backdrop-blur-sm" />
+        <div className="absolute inset-0 bg-white/80 backdrop-blur-sm" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -48,10 +48,10 @@ export default function ContactoPage() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-6xl font-bold text-ink mb-4">
+          <h1 className="text-5xl md:text-7xl font-black text-sb-green-700 mb-4 drop-shadow-sm">
             Contacto
           </h1>
-          <p className="text-lg text-ink/60">
+          <p className="text-xl text-sb-green-600 font-medium">
             Estamos aquí para ayudarte
           </p>
         </motion.div>
@@ -63,46 +63,46 @@ export default function ContactoPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            <h2 className="text-2xl font-bold text-ink mb-6">
+            <h2 className="text-3xl font-bold text-sb-green-700 mb-6">
               Información de contacto
             </h2>
             
             <div className="space-y-6">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-sb-green-500/20 rounded-2xl flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-6 h-6 text-sb-green-700" />
+                <div className="w-14 h-14 bg-sb-green-500/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <Phone className="w-7 h-7 text-sb-green-700" />
                 </div>
                 <div>
-                  <p className="font-semibold text-ink mb-1">Teléfono</p>
-                  <a href={`tel:${SITE.whatsapp}`} className="text-ink/70 hover:text-sb-green-700 transition-colors">
+                  <p className="text-lg font-semibold text-ink mb-1">Teléfono</p>
+                  <a href={`tel:${SITE.whatsapp}`} className="text-lg text-ink/80 hover:text-sb-green-700 transition-colors">
                     (222) - 299 - 6191
                   </a>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-sb-green-500/20 rounded-2xl flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-6 h-6 text-sb-green-700" />
+                <div className="w-14 h-14 bg-sb-green-500/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-7 h-7 text-sb-green-700" />
                 </div>
                 <div>
-                  <p className="font-semibold text-ink mb-1">Email</p>
-                  <a href="mailto:hola@saladbowl.com" className="text-ink/70 hover:text-sb-green-700 transition-colors">
+                  <p className="text-lg font-semibold text-ink mb-1">Email</p>
+                  <a href="mailto:hola@saladbowl.com" className="text-lg text-ink/80 hover:text-sb-green-700 transition-colors">
                     hola@saladbowl.mx
                   </a>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-sb-green-500/20 rounded-2xl flex items-center justify-center flex-shrink-0">
-                  <Instagram className="w-6 h-6 text-sb-green-700" />
+                <div className="w-14 h-14 bg-sb-green-500/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <Instagram className="w-7 h-7 text-sb-green-700" />
                 </div>
                 <div>
-                  <p className="font-semibold text-ink mb-1">Instagram</p>
+                  <p className="text-lg font-semibold text-ink mb-1">Instagram</p>
                   <a 
                     href={SITE.instagram} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-ink/70 hover:text-sb-green-700 transition-colors"
+                    className="text-lg text-ink/80 hover:text-sb-green-700 transition-colors"
                   >
                     @saladbowlmx
                   </a>
@@ -118,13 +118,13 @@ export default function ContactoPage() {
             transition={{ delay: 0.4, duration: 0.6 }}
             className="bg-white rounded-3xl p-8 shadow-lg"
           >
-            <h2 className="text-2xl font-bold text-ink mb-6">
+            <h2 className="text-3xl font-bold text-sb-green-700 mb-6">
               Envíanos un mensaje
             </h2>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="nombre" className="block text-sm font-medium text-ink mb-2">
+                <label htmlFor="nombre" className="block text-base font-semibold text-ink mb-2">
                   Nombre completo
                 </label>
                 <input
@@ -133,13 +133,13 @@ export default function ContactoPage() {
                   required
                   value={formData.nombre}
                   onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-sb-green-700 focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 text-base rounded-xl border-2 border-gray-200 focus:border-sb-green-700 focus:outline-none transition-colors"
                   placeholder="Tu nombre"
                 />
               </div>
 
               <div>
-                <label htmlFor="mensaje" className="block text-sm font-medium text-ink mb-2">
+                <label htmlFor="mensaje" className="block text-base font-semibold text-ink mb-2">
                   Mensaje
                 </label>
                 <textarea
@@ -148,7 +148,7 @@ export default function ContactoPage() {
                   required
                   value={formData.mensaje}
                   onChange={(e) => setFormData({ ...formData, mensaje: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-sb-green-700 focus:outline-none transition-colors resize-none"
+                  className="w-full px-4 py-3 text-base rounded-xl border-2 border-gray-200 focus:border-sb-green-700 focus:outline-none transition-colors resize-none"
                   placeholder="¿En qué podemos ayudarte?"
                 />
               </div>
