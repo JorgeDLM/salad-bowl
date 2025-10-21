@@ -8,7 +8,7 @@ import Logo from './Logo';
 
 export default function Footer() {
   return (
-    <footer className="bg-ink py-12">
+    <footer className="bg-ink pt-12 pb-7">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Logo */}

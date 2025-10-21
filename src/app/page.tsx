@@ -11,6 +11,7 @@ import ProductGrid from '@/components/ProductGrid';
 import LocationCard from '@/components/LocationCard';
 import FranchiseCTA from '@/components/FranchiseCTA';
 import Footer from '@/components/Footer';
+import WhatsAppButton from '@/components/WhatsAppButton';
 import { LOCATIONS } from '@/config';
 
 export default function SaladBowlHome() {
@@ -269,18 +270,52 @@ export default function SaladBowlHome() {
       {/* Product Grid */}
       {/* <ProductGrid /> */}
 
-      {/* Franchise CTA con animación */}
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8 }}
-      >
-        <FranchiseCTA />
-      </motion.div>
+      {/* Franchise CTA */}
+      <FranchiseCTA />
+
+      {/* Banner Bottom - Simple y directo */}
+      <div className="w-full bg-gradient-to-b from-sb-green-700/5 to-white">
+        {/* Desktop */}
+        <div className="hidden md:block relative w-full h-56 lg:h-64 -mt-16 lg:-mt-24">
+          <Image
+            src="/banner-bottom.png"
+            alt="Banner Salad Bowl"
+            fill
+            className="object-cover object-top"
+            priority
+          />
+        </div>
+        
+        {/* Móvil con animación */}
+        <div className="block md:hidden relative w-full h-48 overflow-hidden -mt-16">
+          <motion.div
+            className="absolute inset-0"
+            style={{ width: '200%' }}
+            animate={{
+              x: ['-50%', '0%', '-50%'],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: 'linear',
+            }}
+          >
+            <Image
+              src="/banner-bottom.png"
+              alt="Banner Salad Bowl"
+              fill
+              className="object-cover object-top"
+              priority
+            />
+          </motion.div>
+        </div>
+      </div>
 
       {/* Footer */}
       <Footer />
+
+      {/* WhatsApp Floating Button */}
+      <WhatsAppButton />
     </div>
   );
 }

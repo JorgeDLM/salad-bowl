@@ -8,37 +8,62 @@ import { motion, AnimatePresence } from 'framer-motion';
 function useTypewriter(phrases: string[], currentIndex: number, onComplete: () => void) {
   const [currentText, setCurrentText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
-  const [typingSpeed, setTypingSpeed] = useState(100);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Resetear cuando cambia el índice
+  useEffect(() => {
+    setCurrentText('');
+    setIsDeleting(false);
+    setIsPaused(false);
+  }, [currentIndex]);
 
   useEffect(() => {
     const currentPhrase = phrases[currentIndex];
 
-    const handleTyping = () => {
-      if (!isDeleting) {
-        if (currentText.length < currentPhrase.length) {
-          setCurrentText(currentPhrase.substring(0, currentText.length + 1));
-          setTypingSpeed(100);
-        } else {
-          // Pausa más larga para que todas las bases duren tiempo similar
-          setTimeout(() => setIsDeleting(true), 2500);
-        }
-      } else {
-        if (currentText.length > 0) {
+    // Si está en pausa, esperar antes de empezar a borrar
+    if (isPaused) {
+      const pauseTimer = setTimeout(() => {
+        setIsPaused(false);
+        setIsDeleting(true);
+      }, 1000); // Pausa de 1 segundo para ver el texto completo
+      return () => clearTimeout(pauseTimer);
+    }
+
+    // Si está borrando
+    if (isDeleting) {
+      if (currentText.length > 0) {
+        const deleteTimer = setTimeout(() => {
           setCurrentText(currentPhrase.substring(0, currentText.length - 1));
-          setTypingSpeed(50);
-        } else {
-          setIsDeleting(false);
-          onComplete();
-          setTypingSpeed(200);
-        }
+        }, 25); // Borrar muy rápido
+        return () => clearTimeout(deleteTimer);
+      } else {
+        // Terminó de borrar, pasar al siguiente
+        setIsDeleting(false);
+        onComplete();
+        return;
       }
-    };
+    }
 
-    const timer = setTimeout(handleTyping, typingSpeed);
-    return () => clearTimeout(timer);
-  }, [currentText, isDeleting, currentIndex, typingSpeed, phrases, onComplete]);
+    // Si está escribiendo
+    if (currentText.length < currentPhrase.length) {
+      const typeTimer = setTimeout(() => {
+        setCurrentText(currentPhrase.substring(0, currentText.length + 1));
+      }, 50); // Velocidad de escritura rápida
+      return () => clearTimeout(typeTimer);
+    } else {
+      // Terminó de escribir, iniciar pausa
+      setIsPaused(true);
+    }
+  }, [currentText, isDeleting, isPaused, currentIndex, phrases, onComplete]);
 
-  return { currentText, reset: () => { setCurrentText(''); setIsDeleting(false); setTypingSpeed(100); } };
+  return { 
+    currentText, 
+    reset: () => { 
+      setCurrentText(''); 
+      setIsDeleting(false); 
+      setIsPaused(false);
+    } 
+  };
 }
 
 // Custom hook para carousel simple
@@ -78,17 +103,25 @@ export default function BowlFlow() {
   // Hook para carousel de categorías
   const categoryCarousel = useCarousel(categories.length, 2500);
 
-  // Hook para bases con typewriter
+  // Hook para bases con typewriter y cambio automático
   const [currentBase, setCurrentBase] = useState(0);
   const baseNames = bases.map(b => b.name);
+  
+  // Cambio automático cada 2 segundos
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBase((prev) => (prev + 1) % bases.length);
+    }, 2000); // Cambia cada 2 segundos
+    return () => clearInterval(interval);
+  }, [bases.length]);
+
   const typewriter = useTypewriter(baseNames, currentBase, () => {
-    setCurrentBase((prev) => (prev + 1) % bases.length);
+    // Ya no controla el cambio, solo muestra el texto
   });
 
-  // Función para cambiar base manualmente
+  // Función para cambiar base manualmente (también resetea el intervalo)
   const handleBaseChange = (index: number) => {
     setCurrentBase(index);
-    typewriter.reset();
   };
 
   const steps = [
@@ -143,9 +176,81 @@ export default function BowlFlow() {
 
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white via-sb-cream/30 to-white overflow-hidden relative">
-      {/* Decorative background elements */}
+    <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-b from-white via-sb-cream/30 to-white overflow-hidden relative">
+      {/* Partículas flotantes animadas */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Partículas grandes */}
+        <motion.div
+          className="absolute top-20 left-10 w-20 h-20 rounded-full bg-sb-green-400/20"
+          animate={{
+            y: [0, -30, 0],
+            x: [0, 20, 0],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute top-40 right-20 w-16 h-16 rounded-full bg-sb-green-500/15"
+          animate={{
+            y: [0, 40, 0],
+            x: [0, -15, 0],
+            scale: [1, 0.9, 1],
+          }}
+          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+        />
+        <motion.div
+          className="absolute bottom-32 left-32 w-24 h-24 rounded-full bg-sb-teal-700/10"
+          animate={{
+            y: [0, -25, 0],
+            x: [0, 15, 0],
+          }}
+          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+        />
+        <motion.div
+          className="absolute bottom-40 right-40 w-14 h-14 rounded-full bg-sb-green-400/25"
+          animate={{
+            y: [0, 30, 0],
+            x: [0, -20, 0],
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+        />
+
+        {/* Partículas pequeñas */}
+        <motion.div
+          className="absolute top-60 left-60 w-3 h-3 rounded-full bg-sb-green-500/40"
+          animate={{
+            y: [0, -50, 0],
+            opacity: [0.4, 1, 0.4],
+          }}
+          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute top-32 right-48 w-4 h-4 rounded-full bg-sb-green-700/30"
+          animate={{
+            y: [0, 45, 0],
+            opacity: [0.3, 0.8, 0.3],
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
+        />
+        <motion.div
+          className="absolute bottom-60 left-96 w-2 h-2 rounded-full bg-sb-teal-700/50"
+          animate={{
+            y: [0, -35, 0],
+            opacity: [0.5, 1, 0.5],
+          }}
+          transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 2.5 }}
+        />
+        <motion.div
+          className="absolute top-96 right-80 w-3 h-3 rounded-full bg-sb-green-400/35"
+          animate={{
+            y: [0, 40, 0],
+            x: [0, -10, 0],
+            opacity: [0.35, 0.9, 0.35],
+          }}
+          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
+        />
+
+        {/* Círculos blur de fondo */}
         <div className="absolute top-20 left-10 w-72 h-72 bg-sb-green-700/10 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-sb-teal-700/10 rounded-full blur-3xl" />
       </div>
@@ -156,10 +261,10 @@ export default function BowlFlow() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          className="text-center mb-8 md:mb-12"
         >
           <motion.h2 
-            className="text-4xl md:text-6xl lg:text-7xl font-black text-sb-green-700 mb-4"
+            className="text-3xl md:text-5xl lg:text-6xl font-black text-sb-green-700 mb-2"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -168,7 +273,7 @@ export default function BowlFlow() {
             El bowl perfecto
           </motion.h2>
           <motion.p 
-            className="text-3xl md:text-5xl font-black text-sb-green-500"
+            className="text-2xl md:text-4xl font-black text-sb-green-500"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -232,12 +337,12 @@ export default function BowlFlow() {
                         <AnimatePresence mode="wait">
                           <motion.div
                             key={currentBase}
-                            initial={{ opacity: 0, x: 100 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -100 }}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
                             transition={{ 
-                              duration: 0.6,
-                              ease: [0.25, 0.1, 0.25, 1]
+                              duration: 0.5,
+                              ease: "easeInOut"
                             }}
                             className="absolute inset-0 flex items-center justify-center"
                           >
@@ -304,23 +409,7 @@ export default function BowlFlow() {
                         ¡Tu bowl perfecto está listo!
                       </p>
                     </div>
-                  ) : (
-                    <ul className="space-y-3">
-                      {step.options?.map((option, i) => (
-                        <motion.li
-                          key={i}
-                          initial={{ opacity: 0, x: -20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: index * 0.2 + i * 0.1 }}
-                          className="flex items-center gap-3 text-ink/70"
-                        >
-                          <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${step.color}`} />
-                          <span className="text-sm lg:text-base">{option}</span>
-                        </motion.li>
-                      ))}
-                    </ul>
-                  )}
+                  ) : null}
                 </div>
 
                 {/* Decoración de fondo */}

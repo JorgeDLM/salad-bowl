@@ -31,10 +31,99 @@ export default function Hero({ onCTAClick }: HeroProps) {
   }, [ingredients.length]);
 
   return (
-    <section className="relative h-[screen]-500 h-[screen]-300 min-h-[700px] lg:min-h-[800px] flex items-center justify-center overflow-hidden bg-gradient-to-br from-sb-green-700 via-sb-green-700 to-sb-green-500 pt-20 md:pt-0">
+    <section className="relative h-[screen]-500 h-[screen]-300 min-h-[700px] lg:min-h-[800px] flex items-center justify-center overflow-hidden pt-20 md:pt-0">
+      {/* Imagen de fondo */}
+      <div className="absolute inset-0">
+        <Image
+          src="/bg-image-1.png"
+          alt="Fondo Salad Bowl"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+
+      {/* Overlay verde semitransparente */}
+      <div className="absolute inset-0 bg-gradient-to-br from-sb-green-700/15 via-sb-green-700/10 to-sb-green-500/15" />
+
+      {/* Elementos decorativos flotantes - Aesthetic */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Círculos decorativos grandes */}
+        <motion.div
+          className="absolute top-10 right-20 w-32 h-32 rounded-full bg-sb-green-400/20 backdrop-blur-sm hidden md:block"
+          animate={{
+            y: [0, -20, 0],
+            x: [0, 10, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute top-40 right-60 w-20 h-20 rounded-full bg-white/10 backdrop-blur-sm hidden md:block"
+          animate={{
+            y: [0, 30, 0],
+            x: [0, -15, 0],
+            scale: [1, 0.9, 1],
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+        />
+        <motion.div
+          className="absolute bottom-32 right-40 w-24 h-24 rounded-full bg-sb-green-500/15 backdrop-blur-sm hidden md:block"
+          animate={{
+            y: [0, -25, 0],
+            x: [0, 20, 0],
+          }}
+          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+        />
+
+        {/* Elementos pequeños flotantes */}
+        <motion.div
+          className="absolute top-24 right-96 w-3 h-3 rounded-full bg-white/40 hidden md:block"
+          animate={{
+            y: [0, -40, 0],
+            opacity: [0.4, 0.8, 0.4],
+          }}
+          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute top-60 right-28 w-4 h-4 rounded-full bg-sb-green-400/50 hidden md:block"
+          animate={{
+            y: [0, 35, 0],
+            opacity: [0.5, 1, 0.5],
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
+        />
+        <motion.div
+          className="absolute bottom-40 right-72 w-2 h-2 rounded-full bg-white/60 hidden md:block"
+          animate={{
+            y: [0, -30, 0],
+            opacity: [0.6, 1, 0.6],
+          }}
+          transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+        />
+
+        {/* Elementos izquierda */}
+        <motion.div
+          className="absolute top-32 left-40 w-16 h-16 rounded-full bg-white/10 backdrop-blur-sm hidden md:block"
+          animate={{
+            y: [0, 25, 0],
+            x: [0, -10, 0],
+          }}
+          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
+        />
+        <motion.div
+          className="absolute bottom-48 left-20 w-12 h-12 rounded-full bg-sb-green-400/15 backdrop-blur-sm hidden md:block"
+          animate={{
+            y: [0, -30, 0],
+            x: [0, 15, 0],
+          }}
+          transition={{ duration: 6.5, repeat: Infinity, ease: 'easeInOut', delay: 1.2 }}
+        />
+      </div>
+
       {/* Decorative circles */}
       <motion.div
-        className="absolute top-20 left-10 w-64 h-64 bg-sb-green-400/20 rounded-full blur-3xl"
+        className="absolute top-20 left-10 w-64 h-64 bg-sb-green-400/20 rounded-full blur-3xl hidden md:block"
         animate={{
           y: [0, -30, 0],
           scale: [1, 1.2, 1],
@@ -42,7 +131,7 @@ export default function Hero({ onCTAClick }: HeroProps) {
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div
-        className="absolute bottom-20 right-20 w-80 h-80 bg-sb-teal-200/15 rounded-full blur-3xl"
+        className="absolute bottom-20 right-20 w-80 h-80 bg-sb-teal-200/15 rounded-full blur-3xl hidden md:block"
         animate={{
           y: [0, 40, 0],
           scale: [1, 1.3, 1],
