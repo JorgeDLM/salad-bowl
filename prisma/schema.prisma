@@ -1,0 +1,179 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole { 
+  ADMIN 
+  EMPLOYEE 
+  FRANCHISEE 
+}
+
+enum GuidelineStatus { 
+  DRAFT 
+  PUBLISHED 
+  ARCHIVED 
+}
+
+enum VisibilityScope { 
+  ALL 
+  ADMIN 
+  EMPLOYEE 
+  FRANCHISEE 
+}
+
+model User {
+  id             Int       @id @default(autoincrement())
+  email          String    @unique
+  username       String?   @unique
+  passwordHash   String
+  role           UserRole
+  isActive       Boolean   @default(true)
+  // scoping
+  franchiseeId   Int?
+  branchId       Int?
+  franchisee     Franchisee? @relation(fields: [franchiseeId], references: [id])
+  branch         Branch?     @relation(fields: [branchId], references: [id])
+  acknowledgements Acknowledgement[]
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  deletedAt      DateTime?
+  deletedBy      Int?
+  
+  @@index([email])
+  @@index([role])
+  @@index([franchiseeId])
+}
+
+model Franchisee { // "franquiciatario"
+  id            Int       @id @default(autoincrement())
+  name          String
+  contactName   String?
+  contactPhone  String?
+  contactEmail  String?
+  notes         String?
+  isActive      Boolean   @default(true)
+  branches      Branch[]
+  users         User[]
+  documents     GuidelineDocument[]
+  announcements Announcement[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+  deletedBy     Int?
+}
+
+model Branch { // sucursal
+  id            Int       @id @default(autoincrement())
+  franchiseeId  Int
+  name          String
+  managerName   String?
+  contactPhone  String?
+  address       String
+  latitude      Decimal?  @db.Decimal(10,7)
+  longitude     Decimal?  @db.Decimal(10,7)
+  // horario semanal simple; para granularidad por día usa BranchBusinessHour
+  openingHours  Json?     // {mon:{open:"09:00",close:"21:00"}, ...}
+  isActive      Boolean   @default(true)
+  franchisee    Franchisee @relation(fields: [franchiseeId], references: [id])
+  employees     User[]
+  businessHours BranchBusinessHour[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+  deletedBy     Int?
+  
+  @@index([franchiseeId])
+}
+
+model BranchBusinessHour {
+  id        Int      @id @default(autoincrement())
+  branchId  Int
+  dayOfWeek Int      // 0=Sun..6=Sat
+  openTime  String   // "09:00"
+  closeTime String   // "21:00"
+  branch    Branch   @relation(fields: [branchId], references: [id])
+  
+  @@unique([branchId, dayOfWeek])
+}
+
+model GuidelineCategory { // jerárquica tipo el menú de tu screenshot
+  id        Int       @id @default(autoincrement())
+  name      String
+  slug      String    @unique
+  parentId  Int?
+  parent    GuidelineCategory? @relation("GC_PARENT", fields: [parentId], references: [id])
+  children  GuidelineCategory[] @relation("GC_PARENT")
+  documents GuidelineDocument[]
+  position  Int       @default(0)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  deletedBy Int?
+}
+
+model GuidelineDocument {
+  id           Int       @id @default(autoincrement())
+  categoryId   Int
+  franchiseeId Int?      // null = global (visible a todos según visibility)
+  title        String
+  version      String?   // "v1.2"
+  status       GuidelineStatus @default(DRAFT)
+  visibility   VisibilityScope @default(ALL)
+  isMandatory  Boolean   @default(false)
+  // contenido básico y adjuntos
+  summary      String?
+  contentMd    String?   // Markdown/MDX
+  coverImage   String?   // URL S3
+  category     GuidelineCategory @relation(fields: [categoryId], references: [id])
+  franchisee   Franchisee?       @relation(fields: [franchiseeId], references: [id])
+  assets       GuidelineAsset[]
+  acknowledgements Acknowledgement[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  deletedAt    DateTime?
+  deletedBy    Int?
+  
+  @@index([categoryId, status, visibility])
+  @@index([franchiseeId])
+}
+
+model GuidelineAsset {
+  id          Int      @id @default(autoincrement())
+  documentId  Int
+  fileName    String
+  fileType    String   // "application/pdf", "image/webp", etc.
+  fileSizeB   Int
+  s3Key       String   @unique
+  document    GuidelineDocument @relation(fields: [documentId], references: [id])
+  createdAt   DateTime @default(now())
+}
+
+model Acknowledgement { // lectura obligatoria
+  id          Int      @id @default(autoincrement())
+  documentId  Int
+  userId      Int
+  acknowledgedAt DateTime @default(now())
+  document    GuidelineDocument @relation(fields: [documentId], references: [id])
+  user        User              @relation(fields: [userId], references: [id])
+  
+  @@unique([documentId, userId])
+}
+
+model Announcement { // novedades globales
+  id          Int      @id @default(autoincrement())
+  franchiseeId Int?
+  title       String
+  bodyMd      String
+  visibleTo   VisibilityScope @default(ALL)
+  publishAt   DateTime @default(now())
+  expiresAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  franchisee  Franchisee? @relation(fields: [franchiseeId], references: [id])
+}
