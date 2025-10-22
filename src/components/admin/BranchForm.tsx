@@ -4,6 +4,7 @@ import { createBranch, updateBranch } from '@/app/actions/branch';
 import type { Branch, Franchisee } from '@/../../prisma/generated/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import BusinessHoursSelector from './BusinessHoursSelector';
 
 interface BranchFormProps {
   branch?: (Branch & { franchisee?: Franchisee | null }) | null;
@@ -188,6 +189,20 @@ export default function BranchForm({ branch, franchisees, mode }: BranchFormProp
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sb-green-500 focus:border-transparent"
             placeholder="2221234567"
           />
+        </div>
+
+        {/* Horario */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-3">
+            Horario de Atención
+          </label>
+          <BusinessHoursSelector 
+            name="openingHours" 
+            defaultValue={branch?.openingHours}
+          />
+          <p className="text-sm text-gray-500 mt-2">
+            Selecciona los días que la sucursal está abierta y define los horarios
+          </p>
         </div>
       </div>
 

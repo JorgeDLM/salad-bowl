@@ -86,7 +86,7 @@ async function main() {
     create: {
       franchiseeId: null, // Corporativa
       name: 'Lomas de Angelópolis',
-      plaza: null,
+      plaza: 'Plaza Elysee',
       contactPhone: null,
       address: 'Blvd. los Reyes 6201, Lomas de Angelópolis, 72830 San Bernardino Tlaxcalancingo, Pue.',
       mapsUrl: 'https://www.google.com/maps?q=Lomas+de+Angelopolis+Salad+Bowl',
@@ -113,7 +113,7 @@ async function main() {
     create: {
       franchiseeId: null, // Corporativa
       name: 'La Paz',
-      plaza: null,
+      plaza: 'Colonia la Paz',
       contactPhone: null,
       address: 'San Martin Texmelucan esquina con 3 poniente, La Paz, 72160 Heroica Puebla de Zaragoza, Pue.',
       mapsUrl: 'https://www.google.com/maps?q=La+Paz+Puebla',
@@ -132,7 +132,7 @@ async function main() {
     create: {
       franchiseeId: null, // Corporativa
       name: 'San Antonio',
-      plaza: null,
+      plaza: 'Plaza Arcata',
       contactPhone: null,
       address: '115 N Loop 1604 E #2100, San Antonio, TX 78232, Estados Unidos',
       mapsUrl: 'https://www.google.com/maps?q=115+N+Loop+1604+E+2100+San+Antonio+TX',

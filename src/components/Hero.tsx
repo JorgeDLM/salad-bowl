@@ -279,7 +279,7 @@ export default function Hero({ onCTAClick }: HeroProps) {
                 className="absolute inset-0 z-20"
               >
                 <Image
-                  src="/img/plato3.webp"
+                  src="/img/plato4.png"
                   alt="Plato frontal"
                   width={500}
                   height={500}

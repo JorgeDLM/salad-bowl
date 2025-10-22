@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Hero from '@/components/Hero';
@@ -8,19 +8,37 @@ import BowlFlow from '@/components/BowlFlow';
 import CounterAnimation from '@/components/CounterAnimation';
 import WhyUs from '@/components/WhyUs';
 import ProductGrid from '@/components/ProductGrid';
-import LocationCard from '@/components/LocationCard';
+import BranchCarousel from '@/components/BranchCarousel';
 import FranchiseCTA from '@/components/FranchiseCTA';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
-import { LOCATIONS } from '@/config';
+
+interface Branch {
+  id: number;
+  name: string;
+  plaza: string | null;
+  address: string;
+  mapsUrl: string | null;
+  contactPhone: string | null;
+  openingHours: any;
+  status: 'OPEN' | 'CLOSED' | 'COMING_SOON';
+}
 
 export default function SaladBowlHome() {
   const bowlFlowRef = useRef<HTMLDivElement>(null);
   const sucursalesRef = useRef<HTMLDivElement>(null);
+  const [branches, setBranches] = useState<Branch[]>([]);
   
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
+
+  useEffect(() => {
+    fetch('/api/branches/public')
+      .then((res) => res.json())
+      .then((data) => setBranches(data.branches.slice(0, 6)))
+      .catch((err) => console.error('Error al cargar sucursales:', err));
+  }, []);
 
   const scrollToBowlFlow = () => {
     bowlFlowRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -150,113 +168,8 @@ export default function SaladBowlHome() {
             />
           </motion.div>
 
-          {/* Grid de sucursales con stagger animation */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-            {/* Sucursal 1 */}
-            <motion.a
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              href={LOCATIONS[0].mapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group h-full block cursor-pointer"
-            >
-              <div className="bg-white/95 backdrop-blur-md rounded-3xl p-5 md:p-8 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-2 border-2 border-white/50 h-full flex flex-col">
-                <div className="flex justify-center mb-3 md:mb-6">
-                  <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-sb-green-500 flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg">
-                    <svg className="w-8 h-8 md:w-12 md:h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                    </svg>
-                  </div>
-                </div>
-                <h3 className="text-lg md:text-2xl font-black text-sb-green-700 mb-2 md:mb-3 text-center group-hover:text-sb-green-500 transition-colors">
-                  Suc. Vía San Ángel
-                </h3>
-                <p className="text-ink/80 text-center mb-1 font-medium text-sm md:text-base">Centro Comercial Vía San Ángel</p>
-                <p className="text-ink/60 text-center text-xs md:text-sm mb-4">Blvd. Atlixcáyotl 1504 L. B5</p>
-                
-                {/* Indicador de navegación */}
-                <div className="mt-auto flex items-center justify-center gap-2 text-sb-green-700 group-hover:text-sb-green-500 transition-all text-sm font-semibold group-hover:gap-3">
-                  <span>Cómo llegar</span>
-                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </div>
-              </div>
-            </motion.a>
-
-            {/* Sucursal 2 */}
-            <motion.a
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              href={LOCATIONS[1].mapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group h-full block cursor-pointer"
-            >
-              <div className="bg-white/95 backdrop-blur-md rounded-3xl p-5 md:p-8 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-2 border-2 border-white/50 h-full flex flex-col">
-                <div className="flex justify-center mb-3 md:mb-6">
-                  <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-sb-green-500 flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg">
-                    <svg className="w-8 h-8 md:w-12 md:h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                    </svg>
-                  </div>
-                </div>
-                <h3 className="text-lg md:text-2xl font-black text-sb-green-700 mb-2 md:mb-3 text-center group-hover:text-sb-green-500 transition-colors">
-                  Suc. Zavaleta
-                </h3>
-                <p className="text-ink/80 text-center mb-1 font-medium text-sm md:text-base">Calzada de Zavaleta 3916</p>
-                <p className="text-ink/60 text-center text-xs md:text-sm mb-4">Plaza Office Depot</p>
-                
-                {/* Indicador de navegación */}
-                <div className="mt-auto flex items-center justify-center gap-2 text-sb-green-700 group-hover:text-sb-green-500 transition-all text-sm font-semibold group-hover:gap-3">
-                  <span>Cómo llegar</span>
-                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </div>
-              </div>
-            </motion.a>
-
-            {/* Sucursal 3 */}
-            <motion.a
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              href={LOCATIONS[2].mapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group h-full block cursor-pointer"
-            >
-              <div className="bg-white/95 backdrop-blur-md rounded-3xl p-5 md:p-8 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-2 border-2 border-white/50 h-full flex flex-col">
-                <div className="flex justify-center mb-3 md:mb-6">
-                  <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-sb-green-500 flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg">
-                    <svg className="w-8 h-8 md:w-12 md:h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                    </svg>
-                  </div>
-                </div>
-                <h3 className="text-lg md:text-2xl font-black text-sb-green-700 mb-2 md:mb-3 text-center group-hover:text-sb-green-500 transition-colors">
-                  Suc. Elysee
-                </h3>
-                <p className="text-ink/80 text-center mb-1 font-medium text-sm md:text-base">Plaza Elysee</p>
-                <p className="text-ink/60 text-center text-xs md:text-sm mb-4">Lomas de Angelópolis</p>
-                
-                {/* Indicador de navegación */}
-                <div className="mt-auto flex items-center justify-center gap-2 text-sb-green-700 group-hover:text-sb-green-500 transition-all text-sm font-semibold group-hover:gap-3">
-                  <span>Cómo llegar</span>
-                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </div>
-              </div>
-            </motion.a>
-          </div>
+          {/* Carrusel de sucursales */}
+          <BranchCarousel branches={branches} />
         </div>
       </motion.section>
       {/* Why Us Section con imágenes y animación */}

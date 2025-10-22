@@ -22,6 +22,7 @@ export default function DashboardLayout({ children, userEmail, userRole }: Dashb
       { name: 'Usuarios', href: '/admin/dashboard/users', icon: 'users' },
       { name: 'Franquiciatarios', href: '/admin/dashboard/franchisees', icon: 'building' },
       { name: 'Sucursales', href: '/admin/dashboard/branches', icon: 'location' },
+      { name: 'Configuración', href: '/admin/dashboard/settings', icon: 'settings' },
       // { name: 'Documentos', href: '/admin/dashboard/documents', icon: 'document' },
       // { name: 'Anuncios', href: '/admin/dashboard/announcements', icon: 'megaphone' },
     ],

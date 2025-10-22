@@ -14,6 +14,17 @@ export async function createBranch(formData: FormData) {
     const address = formData.get('address') as string;
     const mapsUrl = formData.get('mapsUrl') as string;
     const status = formData.get('status') as string;
+    const openingHoursStr = formData.get('openingHours') as string;
+    
+    let openingHours = null;
+    if (openingHoursStr) {
+      try {
+        const parsed = JSON.parse(openingHoursStr);
+        openingHours = Object.keys(parsed).length > 0 ? parsed : null;
+      } catch (e) {
+        console.error('Error parsing openingHours:', e);
+      }
+    }
 
     await prisma.branch.create({
       data: {
@@ -25,6 +36,7 @@ export async function createBranch(formData: FormData) {
         address,
         mapsUrl: mapsUrl || null,
         status: (status as any) || 'OPEN',
+        openingHours,
         isActive: true,
       },
     });
@@ -48,6 +60,17 @@ export async function updateBranch(id: number, formData: FormData) {
     const address = formData.get('address') as string;
     const mapsUrl = formData.get('mapsUrl') as string;
     const status = formData.get('status') as string;
+    const openingHoursStr = formData.get('openingHours') as string;
+    
+    let openingHours = null;
+    if (openingHoursStr) {
+      try {
+        const parsed = JSON.parse(openingHoursStr);
+        openingHours = Object.keys(parsed).length > 0 ? parsed : null;
+      } catch (e) {
+        console.error('Error parsing openingHours:', e);
+      }
+    }
 
     console.log('📝 Actualizando sucursal:', {
       id,
@@ -55,6 +78,7 @@ export async function updateBranch(id: number, formData: FormData) {
       plaza,
       status,
       mapsUrl,
+      openingHours,
       address: address?.substring(0, 50),
     });
 
@@ -69,6 +93,7 @@ export async function updateBranch(id: number, formData: FormData) {
         address,
         mapsUrl: mapsUrl || null,
         status: (status as any) || 'OPEN',
+        openingHours,
       },
     });
 

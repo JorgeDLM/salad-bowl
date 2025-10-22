@@ -1,14 +1,43 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import LocationCard from '@/components/LocationCard';
+import BranchCard from '@/components/BranchCard';
 import Footer from '@/components/Footer';
-import { LOCATIONS } from '@/config';
 import { ArrowRight } from '@/components/icons';
 
+interface Branch {
+  id: number;
+  name: string;
+  plaza: string | null;
+  address: string;
+  mapsUrl: string | null;
+  contactPhone: string | null;
+  openingHours: any;
+  status: 'OPEN' | 'CLOSED' | 'COMING_SOON';
+}
+
 export default function SucursalesPage() {
+  const [branches, setBranches] = useState<Branch[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/api/branches/public')
+      .then((res) => res.json())
+      .then((data) => {
+        setBranches(data.branches);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('Error al cargar sucursales:', err);
+        setLoading(false);
+      });
+  }, []);
+
+  const openBranches = branches.filter((b) => b.status === 'OPEN');
+  const comingSoonBranches = branches.filter((b) => b.status === 'COMING_SOON');
+
   return (
     <div className="min-h-screen relative pt-20">
       {/* Imagen de fondo */}
@@ -35,24 +64,63 @@ export default function SucursalesPage() {
             Sucursales
           </h1>
           <p className="text-xl text-sb-green-600 font-medium">
-            Visítanos en nuestras tres ubicaciones en Puebla
+            Visítanos en nuestras ubicaciones
           </p>
         </motion.div>
 
-        {/* Locations */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {LOCATIONS.map((location, index) => (
-            <LocationCard
-              key={location.name}
-              name={location.name}
-              address={location.address}
-              mapsUrl={location.mapsUrl}
-              phone={location.phone}
-              schedule={location.schedule}
-              delay={index * 0.2}
-            />
-          ))}
-        </div>
+        {loading ? (
+          <div className="text-center py-12">
+            <div className="inline-block w-12 h-12 border-4 border-sb-green-700 border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        ) : (
+          <>
+            {/* Sucursales Abiertas */}
+            {openBranches.length > 0 && (
+              <div className="mb-16">
+                <h2 className="text-3xl font-black text-gray-900 mb-8 text-center">Nuestras Sucursales</h2>
+                <div className="flex flex-wrap justify-center gap-6 max-w-6xl mx-auto">
+                  {openBranches.map((branch, index) => (
+                    <div key={branch.id} className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
+                      <BranchCard
+                        name={branch.name}
+                        plaza={branch.plaza}
+                        address={branch.address}
+                        mapsUrl={branch.mapsUrl}
+                        phone={branch.contactPhone}
+                        schedule={branch.openingHours}
+                        status={branch.status}
+                        delay={index * 0.15}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Próximamente */}
+            {comingSoonBranches.length > 0 && (
+              <div>
+                <h2 className="text-3xl font-black text-sb-orange mb-8 text-center">¡Próximamente!</h2>
+                <div className="flex flex-wrap justify-center gap-6 max-w-6xl mx-auto">
+                  {comingSoonBranches.map((branch, index) => (
+                    <div key={branch.id} className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
+                      <BranchCard
+                        name={branch.name}
+                        plaza={branch.plaza}
+                        address={branch.address}
+                        mapsUrl={branch.mapsUrl}
+                        phone={branch.contactPhone}
+                        schedule={branch.openingHours}
+                        status={branch.status}
+                        delay={index * 0.15}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </>
+        )}
 
         {/* Additional Info */}
         <motion.div
@@ -66,7 +134,7 @@ export default function SucursalesPage() {
             ¿Tienes preguntas?
           </h2>
           <p className="text-lg md:text-xl text-white/95 mb-8">
-            Llámanos o visítanos en cualquiera de nuestras tres sucursales
+            Llámanos o visítanos en cualquiera de nuestras sucursales
           </p>
           <a
             href="/contacto"
