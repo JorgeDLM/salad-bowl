@@ -36,7 +36,13 @@ export default function SaladBowlHome() {
   useEffect(() => {
     fetch('/api/branches/public')
       .then((res) => res.json())
-      .then((data) => setBranches(data.branches.slice(0, 6)))
+      .then((data) => {
+        // Mostrar sucursales abiertas y próximas
+        const displayBranches = data.branches.filter((b: Branch) => 
+          b.status === 'OPEN' || b.status === 'COMING_SOON'
+        );
+        setBranches(displayBranches);
+      })
       .catch((err) => console.error('Error al cargar sucursales:', err));
   }, []);
 
@@ -147,29 +153,33 @@ export default function SaladBowlHome() {
           />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10">
           {/* Header con animación */}
-          <motion.div 
-            className="text-center mb-20"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <h2 className="text-5xl md:text-7xl font-black text-white mb-4 drop-shadow-2xl tracking-tight">
-              NUESTRAS SUCURSALES
-            </h2>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div 
-              className="w-24 h-1 bg-white mx-auto rounded-full"
-              initial={{ width: 0 }}
-              whileInView={{ width: 96 }}
+              className="text-center mb-20"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            />
-          </motion.div>
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <h2 className="text-5xl md:text-7xl font-black text-white mb-4 drop-shadow-2xl tracking-tight">
+                NUESTRAS SUCURSALES
+              </h2>
+              <motion.div 
+                className="w-24 h-1 bg-white mx-auto rounded-full"
+                initial={{ width: 0 }}
+                whileInView={{ width: 96 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              />
+            </motion.div>
+          </div>
 
-          {/* Carrusel de sucursales */}
-          <BranchCarousel branches={branches} />
+          {/* Carrusel de sucursales - sin padding en móvil */}
+          <div className="md:max-w-7xl md:mx-auto md:px-8">
+            <BranchCarousel branches={branches} />
+          </div>
         </div>
       </motion.section>
       {/* Why Us Section con imágenes y animación */}

@@ -3,6 +3,7 @@ import { getCurrentUser } from '@/lib/session';
 import { prisma } from '@/lib/prisma';
 import DashboardLayout from '@/components/admin/DashboardLayout';
 import Link from 'next/link';
+import UserActions from '@/components/admin/UserActions';
 
 export default async function UsersPage() {
   const user = await getCurrentUser();
@@ -130,12 +131,11 @@ export default async function UsersPage() {
                       )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <button className="text-sb-green-700 hover:text-sb-green-600 mr-4">
-                        Editar
-                      </button>
-                      <button className="text-red-600 hover:text-red-500">
-                        Eliminar
-                      </button>
+                      <UserActions
+                        userId={u.id}
+                        userEmail={u.email}
+                        isAdmin={u.role === 'ADMIN'}
+                      />
                     </td>
                   </tr>
                 ))}

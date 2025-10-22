@@ -4,25 +4,59 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 const searchableContent = [
+  // Quiénes Somos
+  { title: 'Quiénes Somos', section: 'Misión y Visión', href: '/franchisee/dashboard/guides/quienes-somos', keywords: 'misión visión valores salad bowl historia empresa quienes somos' },
+  
   // Manual de Imagen
-  { title: 'Manual de Imagen', section: 'Uso de Logotipo', href: '/franchisee/dashboard/guides/manual-imagen', keywords: 'logotipo logo imagen marca branding identidad visual' },
-  { title: 'Manual de Imagen', section: 'Paleta Cromática', href: '/franchisee/dashboard/guides/manual-imagen', keywords: 'colores paleta pantone corporativos visual' },
+  { title: 'Manual de Imagen', section: 'Identidad Visual', href: '/franchisee/dashboard/guides/manual-imagen', keywords: 'logotipo logo imagen marca branding identidad visual colores paleta pantone corporativos diseño gráfico' },
+  
+  // Recursos Humanos
+  { title: 'Recursos Humanos', section: 'Manual de RRHH', href: '/franchisee/dashboard/guides/recursos-humanos', keywords: 'recursos humanos contratación capacitación evaluación personal empleados rrhh equipo' },
   
   // Marketing y Promociones
-  { title: 'Marketing', section: 'Sistema de Lealtad', href: '/franchisee/dashboard/guides/marketing-promociones', keywords: 'lealtad puntos recompensas cashback' },
-  { title: 'Marketing', section: 'Promoción After Work', href: '/franchisee/dashboard/guides/marketing-promociones', keywords: 'promoción after work tardes descuento' },
+  { title: 'Marketing', section: 'Estrategias de Marketing', href: '/franchisee/dashboard/guides/marketing-promociones', keywords: 'marketing promociones ventas publicidad campaña lealtad puntos recompensas cashback after work descuento estrategia' },
+  
+  // Manual de Operaciones
+  { title: 'Manual de Operaciones', section: 'Índice General', href: '/franchisee/dashboard/guides/operaciones', keywords: 'operaciones procesos estándares diarios procedimientos manual' },
   
   // Seguridad Alimentaria
-  { title: 'Seguridad Alimentaria', section: 'Información General', href: '/franchisee/dashboard/guides/operaciones/seguridad-alimentaria', keywords: 'seguridad alimentaria intoxicación higiene' },
-  { title: 'Seguridad Alimentaria', section: 'Enfermedades', href: '/franchisee/dashboard/guides/operaciones/seguridad-alimentaria/enfermedades', keywords: 'enfermedades intoxicación síntomas bacterias virus' },
-  { title: 'Seguridad Alimentaria', section: 'Protocolos de Reclamo', href: '/franchisee/dashboard/guides/operaciones/seguridad-alimentaria/protocolos', keywords: 'protocolos reclamo queja intoxicación cliente' },
-  { title: 'Seguridad Alimentaria', section: '10 Factores Críticos', href: '/franchisee/dashboard/guides/operaciones/seguridad-alimentaria/factores-criticos', keywords: 'factores críticos lavado manos temperatura alérgenos plagas' },
+  { title: 'Seguridad Alimentaria', section: 'Información General', href: '/franchisee/dashboard/guides/operaciones/seguridad-alimentaria', keywords: 'seguridad alimentaria intoxicación higiene contaminación alimentos' },
+  { title: 'Seguridad Alimentaria', section: 'Enfermedades por Alimentos', href: '/franchisee/dashboard/guides/operaciones/seguridad-alimentaria/enfermedades', keywords: 'enfermedades intoxicación síntomas bacterias virus parásitos contaminantes físicos biológicos químicos náuseas vómito diarrea fiebre' },
+  { title: 'Seguridad Alimentaria', section: 'Protocolos de Reclamo', href: '/franchisee/dashboard/guides/operaciones/seguridad-alimentaria/protocolos', keywords: 'protocolos reclamo queja intoxicación cliente 5 pasos atención quejas' },
+  { title: 'Seguridad Alimentaria', section: '10 Factores Críticos', href: '/franchisee/dashboard/guides/operaciones/seguridad-alimentaria/factores-criticos', keywords: 'factores críticos lavado manos temperatura alérgenos plagas higiene seguridad' },
+  { title: 'Seguridad Alimentaria', section: 'Liderazgo en Seguridad', href: '/franchisee/dashboard/guides/operaciones/seguridad-alimentaria/liderazgo', keywords: 'liderazgo seguridad alimentaria responsabilidad gerente' },
   
   // Liderazgo y Gestión
-  { title: 'Liderazgo y Gestión', section: 'Liderazgo en Turno', href: '/franchisee/dashboard/guides/operaciones/liderazgo-gestion', keywords: 'liderazgo turno gestión delegación equipo coordinación comunicación' },
+  { title: 'Liderazgo y Gestión', section: 'Liderazgo en Turno', href: '/franchisee/dashboard/guides/operaciones/liderazgo-gestion', keywords: 'liderazgo turno gestión delegación equipo coordinación comunicación prioridades efectivo' },
   
-  // Operaciones
-  { title: 'Manual de Operaciones', section: 'Índice General', href: '/franchisee/dashboard/guides/operaciones', keywords: 'operaciones procesos estándares diarios' },
+  // Limpieza y Mantenimiento
+  { title: 'Limpieza y Mantenimiento', section: 'Procedimientos de Limpieza', href: '/franchisee/dashboard/guides/operaciones/limpieza-mantenimiento', keywords: 'limpieza mantenimiento zonas programas estándares reparaciones higiene sanitización' },
+  
+  // Proveedores y Almacenamiento
+  { title: 'Proveedores y Almacenamiento', section: 'Gestión de Inventario', href: '/franchisee/dashboard/guides/operaciones/almacenamiento', keywords: 'proveedores recepción almacenaje almacenamiento peps inventario stock bodega' },
+  
+  // Velocidad en el Servicio
+  { title: 'Velocidad en Servicio', section: 'Eficiencia Operativa', href: '/franchisee/dashboard/guides/operaciones/velocidad-servicio', keywords: 'velocidad servicio eficiencia tiempos rapidez atención cliente mejores prácticas' },
+  
+  // Reclamos de Clientes
+  { title: 'Reclamos de Clientes', section: 'Manejo de Quejas', href: '/franchisee/dashboard/guides/operaciones/reclamos-clientes', keywords: 'reclamos clientes quejas problemas resolución atención insatisfacción servicio cliente' },
+  
+  // Registros de Control
+  { title: 'Registros de Control', section: 'Documentación DCL', href: '/franchisee/dashboard/guides/operaciones/registros-control', keywords: 'registros control dcl documentación trazabilidad bitácoras formatos diarios' },
+  
+  // Logística y Proveedores
+  { title: 'Logística y Proveedores', section: 'Cadena de Suministro', href: '/franchisee/dashboard/guides/logistica-proveedores', keywords: 'logística proveedores cadena suministro abastecimiento distribución' },
+  
+  // Formatos y Procedimientos
+  { title: 'Formatos y Procedimientos', section: 'Plantillas y Formatos', href: '/franchisee/dashboard/guides/formatos-procedimientos', keywords: 'formatos procedimientos plantillas bitácoras documentos formularios' },
+  
+  // Contratos y Legal
+  { title: 'Contratos y Legal', section: 'Documentación Legal', href: '/franchisee/dashboard/guides/contratos-legal', keywords: 'contratos legal documentación jurídico abogado leyes' },
+  { title: 'Contratos y Legal', section: 'Contrato de Franquicia', href: '/franchisee/dashboard/guides/contratos-legal/contrato', keywords: 'contrato franquicia términos condiciones cláusulas declaraciones abundali franquiciante franquiciatario' },
+  { title: 'Contratos y Legal', section: 'Circular de Oferta', href: '/franchisee/dashboard/guides/contratos-legal/circular', keywords: 'circular oferta información franquicia cof profeco' },
+  
+  // Recetario
+  { title: 'Recetario', section: 'Recetas y Fichas Técnicas', href: '/franchisee/dashboard/guides/recetario', keywords: 'recetario recetas fichas técnicas ingredientes preparación cocina bowl ensaladas' },
 ];
 
 export default function GuidesSearch() {

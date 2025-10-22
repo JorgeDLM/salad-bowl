@@ -2,69 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
-
-// Custom hook para el efecto typewriter
-function useTypewriter(phrases: string[], currentIndex: number, onComplete: () => void) {
-  const [currentText, setCurrentText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
-
-  // Resetear cuando cambia el índice
-  useEffect(() => {
-    setCurrentText('');
-    setIsDeleting(false);
-    setIsPaused(false);
-  }, [currentIndex]);
-
-  useEffect(() => {
-    const currentPhrase = phrases[currentIndex];
-
-    // Si está en pausa, esperar antes de empezar a borrar
-    if (isPaused) {
-      const pauseTimer = setTimeout(() => {
-        setIsPaused(false);
-        setIsDeleting(true);
-      }, 1000); // Pausa de 1 segundo para ver el texto completo
-      return () => clearTimeout(pauseTimer);
-    }
-
-    // Si está borrando
-    if (isDeleting) {
-      if (currentText.length > 0) {
-        const deleteTimer = setTimeout(() => {
-          setCurrentText(currentPhrase.substring(0, currentText.length - 1));
-        }, 25); // Borrar muy rápido
-        return () => clearTimeout(deleteTimer);
-      } else {
-        // Terminó de borrar, pasar al siguiente
-        setIsDeleting(false);
-        onComplete();
-        return;
-      }
-    }
-
-    // Si está escribiendo
-    if (currentText.length < currentPhrase.length) {
-      const typeTimer = setTimeout(() => {
-        setCurrentText(currentPhrase.substring(0, currentText.length + 1));
-      }, 50); // Velocidad de escritura rápida
-      return () => clearTimeout(typeTimer);
-    } else {
-      // Terminó de escribir, iniciar pausa
-      setIsPaused(true);
-    }
-  }, [currentText, isDeleting, isPaused, currentIndex, phrases, onComplete]);
-
-  return { 
-    currentText, 
-    reset: () => { 
-      setCurrentText(''); 
-      setIsDeleting(false); 
-      setIsPaused(false);
-    } 
-  };
-}
+import { motion } from 'framer-motion';
 
 // Custom hook para carousel simple
 function useCarousel(itemsCount: number, interval: number) {
@@ -83,15 +21,6 @@ function useCarousel(itemsCount: number, interval: number) {
 export default function BowlFlow() {
   const [hoveredStep, setHoveredStep] = useState<number | null>(null);
   
-  // Bases con imágenes
-  const bases = [
-    { name: 'Lechuga', image: '/img/bases/0.png' },
-    { name: 'Espinaca', image: '/img/bases/1.png' },
-    { name: 'Arroz integral', image: '/img/bases/2.png' },
-    { name: 'Arroz blanco', image: '/img/bases/3.png' },
-    { name: 'Pasta', image: '/img/bases/4.png' },
-  ];
-
   // Categorías de ingredientes
   const categories = [
     { name: 'Vegetales' },
@@ -102,27 +31,6 @@ export default function BowlFlow() {
 
   // Hook para carousel de categorías
   const categoryCarousel = useCarousel(categories.length, 2500);
-
-  // Hook para bases con typewriter y cambio automático
-  const [currentBase, setCurrentBase] = useState(0);
-  const baseNames = bases.map(b => b.name);
-  
-  // Cambio automático cada 2 segundos
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentBase((prev) => (prev + 1) % bases.length);
-    }, 2000); // Cambia cada 2 segundos
-    return () => clearInterval(interval);
-  }, [bases.length]);
-
-  const typewriter = useTypewriter(baseNames, currentBase, () => {
-    // Ya no controla el cambio, solo muestra el texto
-  });
-
-  // Función para cambiar base manualmente (también resetea el intervalo)
-  const handleBaseChange = (index: number) => {
-    setCurrentBase(index);
-  };
 
   const steps = [
     { 
@@ -269,77 +177,45 @@ export default function BowlFlow() {
                   {/* Carousel de bases, categorías de ingredientes con imagen de fondo, imagen vertical o lista de opciones */}
                   {step.hasCarousel && step.id === 1 ? (
                     <div className="relative">
-                      {/* Carousel de imágenes */}
-                      <div className="relative h-60 mb-4 bg-gradient-to-br from-sb-green-50 to-white rounded-2xl overflow-hidden">
-                        <AnimatePresence mode="wait">
-                          <motion.div
-                            key={currentBase}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.9 }}
-                            transition={{ 
-                              duration: 0.5,
-                              ease: "easeInOut"
-                            }}
-                            className="absolute inset-0 flex items-center justify-center"
-                          >
-                            <Image
-                              src={bases[currentBase].image}
-                              alt={bases[currentBase].name}
-                              width={350}
-                              height={350}
-                              className="object-cover drop-shadow-2xl rounded-2xl"
-                            />
-                          </motion.div>
-                        </AnimatePresence>
-                      </div>
-
-                      {/* Nombre del producto con efecto typewriter */}
-                      <div className="text-center mb-4 h-10 flex items-center justify-center">
-                        <p className="text-2xl font-black text-sb-green-700">
-                          {typewriter.currentText}
-                          <span className="inline-block w-0.5 h-7 bg-sb-green-700 ml-1 animate-pulse"></span>
-                        </p>
-                      </div>
-
-                      {/* Indicadores de puntos */}
-                      <div className="flex justify-center gap-2">
-                        {bases.map((_, i) => (
-                          <button
-                            key={i}
-                            onClick={() => handleBaseChange(i)}
-                            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                              i === currentBase 
-                                ? 'bg-sb-green-700 w-6' 
-                                : 'bg-sb-green-500 hover:bg-sb-green-500'
-                            }`}
-                            aria-label={`Ver ${bases[i].name}`}
+                      {/* Imagen estática de todas las bases */}
+                      <div className="relative w-full aspect-square mb-4 bg-gradient-to-br from-sb-green-50 to-white rounded-2xl overflow-hidden">
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.6 }}
+                          className="relative w-full h-full"
+                        >
+                          <Image
+                            src="/img/bases/todos.png"
+                            alt="Todas las bases"
+                            fill
+                            className="object-cover drop-shadow-2xl"
                           />
-                        ))}
+                        </motion.div>
                       </div>
                     </div>
                   ) : step.hasCarousel && step.id === 2 ? (
                     <div className="relative">
                       {/* Imagen de fondo de la barra */}
-                      <div className="relative h-72 -mb-2 rounded-3xl overflow-hidden shadow-2xl">
+                      <div className="relative w-full aspect-square mb-4 rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-sb-green-50 to-white">
                         <Image
                           src={step.backgroundImage || ''}
                           alt="Barra de ingredientes"
                           fill
                           className="object-cover brightness-90"
                         />
-                        {/* Overlay gradiente aesthetic */}
                       </div>
                     </div>
                   ) : step.hasImage ? (
                     <div className="relative">
                       {/* Imagen vertical del producto terminado */}
-                      <div className="relative h-60 mb-4 rounded-2xl overflow-hidden bg-gradient-to-br from-sb-cream/50 to-white">
+                      <div className="relative w-full aspect-square mb-4 rounded-2xl overflow-hidden bg-gradient-to-br from-sb-cream/50 to-white">
                         <Image
                           src={step.image || ''}
                           alt="Bowl terminado"
                           fill
-                          className="object-cover rounded-2xl"
+                          className="object-cover"
                         />
                       </div>
                       <p className="text-center text-lg font-bold text-sb-green-700">
