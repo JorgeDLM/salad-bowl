@@ -207,7 +207,7 @@ export default function BowlFlow() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            El bowl perfecto
+            El platillo perfecto
           </motion.h2>
           <motion.p 
             className="text-3xl md:text-4xl font-black text-sb-green-500"

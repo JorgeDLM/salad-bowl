@@ -1,11 +1,18 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Phone, Mail, Instagram, Check } from '@/components/icons';
 import Footer from '@/components/Footer';
 import { SITE } from '@/config';
+
+interface ContactInfo {
+  email: string;
+  phone: string;
+  phoneFormatted: string;
+  phoneWhatsApp: string;
+}
 
 export default function ContactoPage() {
   const [formData, setFormData] = useState({
@@ -14,13 +21,24 @@ export default function ContactoPage() {
   });
 
   const [showToast, setShowToast] = useState(false);
+  const [contactInfo, setContactInfo] = useState<ContactInfo | null>(null);
+
+  useEffect(() => {
+    // Obtener contacto general
+    fetch('/api/contacts?type=GENERAL')
+      .then(res => res.json())
+      .then(data => setContactInfo(data.contact))
+      .catch(err => console.error('Error al cargar contacto:', err));
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Enviar por WhatsApp
+    if (!contactInfo) return;
+    
+    // Enviar por WhatsApp con URL correcta
     const mensaje = `Hola! Me gustaría contactar con Salad Bowl.\n\nNombre: ${formData.nombre}\nMensaje: ${formData.mensaje}`;
-    const whatsappUrl = `https://wa.me/5212222996191?text=${encodeURIComponent(mensaje)}`;
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${contactInfo.phoneWhatsApp}&text=${encodeURIComponent(mensaje)}`;
     window.open(whatsappUrl, '_blank');
     
     setShowToast(true);
@@ -74,8 +92,8 @@ export default function ContactoPage() {
                 </div>
                 <div>
                   <p className="text-lg font-semibold text-ink mb-1">Teléfono</p>
-                  <a href={`tel:${SITE.whatsapp}`} className="text-lg text-ink/80 hover:text-sb-green-700 transition-colors">
-                    (222) - 299 - 6191
+                  <a href={`tel:${contactInfo?.phone || ''}`} className="text-lg text-ink/80 hover:text-sb-green-700 transition-colors">
+                    {contactInfo?.phoneFormatted || 'Cargando...'}
                   </a>
                 </div>
               </div>
@@ -86,8 +104,8 @@ export default function ContactoPage() {
                 </div>
                 <div>
                   <p className="text-lg font-semibold text-ink mb-1">Email</p>
-                  <a href="mailto:hola@saladbowl.com" className="text-lg text-ink/80 hover:text-sb-green-700 transition-colors">
-                    hola@saladbowl.mx
+                  <a href={`mailto:${contactInfo?.email || ''}`} className="text-lg text-ink/80 hover:text-sb-green-700 transition-colors">
+                    {contactInfo?.email || 'Cargando...'}
                   </a>
                 </div>
               </div>

@@ -1,12 +1,25 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 export default function WhatsAppButton() {
-  const phoneNumber = '522222996191'; // Formato internacional sin espacios ni signos
+  const [phoneNumber, setPhoneNumber] = useState('522222996191');
+  
+  useEffect(() => {
+    // Obtener contacto general
+    fetch('/api/contacts?type=GENERAL')
+      .then(res => res.json())
+      .then(data => {
+        if (data.contact) {
+          setPhoneNumber(data.contact.phoneWhatsApp);
+        }
+      })
+      .catch(err => console.error('Error al cargar contacto:', err));
+  }, []);
+
   const message = encodeURIComponent('¡Hola Salad Bowl! Vi su página y quiero información.');
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+  const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`;
 
   return (
     <motion.a

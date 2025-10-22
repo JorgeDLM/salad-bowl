@@ -3,6 +3,7 @@
 import { createBranch, updateBranch } from '@/app/actions/branch';
 import type { Branch, Franchisee } from '@/../../prisma/generated/client';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 interface BranchFormProps {
   branch?: (Branch & { franchisee?: Franchisee | null }) | null;
@@ -13,17 +14,37 @@ interface BranchFormProps {
 export default function BranchForm({ branch, franchisees, mode }: BranchFormProps) {
   const router = useRouter();
   const isEdit = mode === 'edit' && branch;
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
 
   async function handleSubmit(formData: FormData) {
-    if (isEdit) {
-      await updateBranch(branch.id, formData);
-    } else {
-      await createBranch(formData);
+    setLoading(true);
+    setError(null);
+    
+    try {
+      if (isEdit) {
+        const result = await updateBranch(branch.id, formData);
+        if (result?.error) {
+          setError(result.error);
+          setLoading(false);
+        }
+      } else {
+        const result = await createBranch(formData);
+        if (result?.error) {
+          setError(result.error);
+          setLoading(false);
+        }
+      }
+    } catch (err) {
+      console.error('Error en submit:', err);
+      setError('Error al guardar los cambios');
+      setLoading(false);
     }
   }
 
   return (
-    <form action={handleSubmit} className="space-y-6 max-w-2xl">
+    <form action={handleSubmit} className="space-y-6 max-w-2xl" key={branch?.id || 'new'}>
       <div className="bg-white rounded-lg shadow p-6 space-y-6">
         <div>
           <h2 className="text-2xl font-bold text-gray-900 mb-6">
@@ -64,10 +85,28 @@ export default function BranchForm({ branch, franchisees, mode }: BranchFormProp
             id="name"
             name="name"
             required
-            defaultValue={branch?.name || ''}
+            defaultValue={branch?.name ?? ''}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sb-green-500 focus:border-transparent"
+            placeholder="Ej: Vía San Ángel"
+          />
+        </div>
+
+        {/* Plaza */}
+        <div>
+          <label htmlFor="plaza" className="block text-sm font-semibold text-gray-700 mb-2">
+            Plaza o Lugar
+          </label>
+          <input
+            type="text"
+            id="plaza"
+            name="plaza"
+            defaultValue={branch?.plaza ?? ''}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sb-green-500 focus:border-transparent"
             placeholder="Ej: Plaza Vía San Ángel"
           />
+          <p className="text-sm text-gray-500 mt-1">
+            Opcional. Centro comercial o plaza donde se encuentra
+          </p>
         </div>
 
         {/* Dirección */}
@@ -84,6 +123,41 @@ export default function BranchForm({ branch, franchisees, mode }: BranchFormProp
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sb-green-500 focus:border-transparent"
             placeholder="Dirección completa de la sucursal"
           />
+        </div>
+
+        {/* URL de Google Maps */}
+        <div>
+          <label htmlFor="mapsUrl" className="block text-sm font-semibold text-gray-700 mb-2">
+            URL de Google Maps
+          </label>
+          <input
+            type="url"
+            id="mapsUrl"
+            name="mapsUrl"
+            defaultValue={branch?.mapsUrl ?? ''}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sb-green-500 focus:border-transparent"
+            placeholder="https://www.google.com/maps?q=..."
+          />
+          <p className="text-sm text-gray-500 mt-1">
+            URL para el botón "Cómo llegar"
+          </p>
+        </div>
+
+        {/* Estado */}
+        <div>
+          <label htmlFor="status" className="block text-sm font-semibold text-gray-700 mb-2">
+            Estado
+          </label>
+          <select
+            id="status"
+            name="status"
+            defaultValue={branch?.status ?? 'OPEN'}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sb-green-500 focus:border-transparent"
+          >
+            <option value="OPEN">Abierta</option>
+            <option value="CLOSED">Cerrada</option>
+            <option value="COMING_SOON">Por abrir</option>
+          </select>
         </div>
 
         {/* Manager */}
@@ -115,52 +189,37 @@ export default function BranchForm({ branch, franchisees, mode }: BranchFormProp
             placeholder="2221234567"
           />
         </div>
+      </div>
 
-        {/* Coordenadas */}
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="latitude" className="block text-sm font-semibold text-gray-700 mb-2">
-              Latitud
-            </label>
-            <input
-              type="number"
-              step="0.0000001"
-              id="latitude"
-              name="latitude"
-              defaultValue={branch?.latitude?.toString() || ''}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sb-green-500 focus:border-transparent"
-              placeholder="19.0414398"
-            />
-          </div>
-          <div>
-            <label htmlFor="longitude" className="block text-sm font-semibold text-gray-700 mb-2">
-              Longitud
-            </label>
-            <input
-              type="number"
-              step="0.0000001"
-              id="longitude"
-              name="longitude"
-              defaultValue={branch?.longitude?.toString() || ''}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sb-green-500 focus:border-transparent"
-              placeholder="-98.2062727"
-            />
+      {/* Error Message */}
+      {error && (
+        <div className="bg-red-50 border-2 border-red-200 rounded-lg p-4">
+          <div className="flex items-center gap-2">
+            <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <p className="text-red-800 font-semibold">{error}</p>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Botones */}
       <div className="flex gap-4">
         <button
           type="submit"
-          className="px-6 py-2 bg-sb-green-700 text-white rounded-lg font-semibold hover:bg-sb-green-600 transition-colors"
+          disabled={loading}
+          className="px-6 py-2 bg-sb-green-700 text-white rounded-lg font-semibold hover:bg-sb-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
         >
-          {isEdit ? 'Guardar Cambios' : 'Crear Sucursal'}
+          {loading && (
+            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+          )}
+          {loading ? 'Guardando...' : (isEdit ? 'Guardar Cambios' : 'Crear Sucursal')}
         </button>
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
+          disabled={loading}
+          className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-colors disabled:opacity-50"
         >
           Cancelar
         </button>

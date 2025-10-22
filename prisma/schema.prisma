@@ -68,17 +68,26 @@ model Franchisee { // "franquiciatario"
   deletedBy     Int?
 }
 
+enum BranchStatus {
+  OPEN
+  CLOSED
+  COMING_SOON
+}
+
 model Branch { // sucursal
   id            Int       @id @default(autoincrement())
   franchiseeId  Int?      // null = sucursal corporativa (admin), con valor = franquiciatario
-  name          String
+  name          String    // nombre comercial: "Vía San Ángel"
+  plaza         String?   // plaza o lugar: "Plaza Vía San Ángel"
   managerName   String?
   contactPhone  String?
   address       String
+  mapsUrl       String?   // URL de Google Maps
   latitude      Decimal?  @db.Decimal(10,7)
   longitude     Decimal?  @db.Decimal(10,7)
   // horario semanal simple; para granularidad por día usa BranchBusinessHour
   openingHours  Json?     // {mon:{open:"09:00",close:"21:00"}, ...}
+  status        BranchStatus? @default(OPEN)
   isActive      Boolean   @default(true)
   franchisee    Franchisee? @relation(fields: [franchiseeId], references: [id])
   employees     User[]
@@ -176,4 +185,23 @@ model Announcement { // novedades globales
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   franchisee  Franchisee? @relation(fields: [franchiseeId], references: [id])
+}
+
+enum ContactType {
+  GENERAL
+  LEGAL
+  FRANCHISE
+  SALES
+}
+
+model ContactInfo {
+  id              Int         @id @default(autoincrement())
+  type            ContactType @unique
+  email           String
+  phone           String      // formato: 2222996191
+  phoneFormatted  String      // formato: (222) 299-6191
+  phoneWhatsApp   String      // formato: 522222996191
+  isActive        Boolean     @default(true)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
 }

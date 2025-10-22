@@ -20,7 +20,7 @@ export default async function AlmacenamientoPage() {
         ]} />
 
         <div className="mb-12 text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-sb-green-600 to-sb-green-500 rounded-3xl mb-6 shadow-lg">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-sb-green-700 rounded-3xl mb-6 shadow-lg">
             <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
             </svg>
@@ -37,7 +37,7 @@ export default async function AlmacenamientoPage() {
 
           {/* PEPS */}
           <div className="bg-white rounded-3xl shadow-lg overflow-hidden border border-gray-100">
-            <div className="bg-gradient-to-r from-sb-green-700 to-sb-green-600 p-8 text-white">
+            <div className="bg-sb-green-700 p-8 text-white">
               <h2 className="text-3xl font-black mb-2">PEPS: Primeras Entradas, Primeras Salidas</h2>
               <p className="text-sb-green-50">Sistema de rotación por fecha de caducidad</p>
             </div>
@@ -46,20 +46,32 @@ export default async function AlmacenamientoPage() {
               <p className="text-lg text-gray-700 mb-6">El método PEPS consiste en rotar los productos por fecha de caducidad. Los artículos con la fecha de vencimiento más próxima deben utilizarse primero. Este sistema ayuda a mantener la calidad, reducir el desperdicio y conservar el área de almacenamiento organizada.</p>
 
               <div className="grid md:grid-cols-3 gap-6 mb-6">
-                <div className="bg-sb-green-50 rounded-xl p-6 border-2 border-sb-green-200 text-center">
-                  <div className="text-4xl mb-3">📅</div>
-                  <h3 className="font-bold text-gray-900 mb-2">Fecha exacta</h3>
-                  <p className="text-sm text-gray-700">Día, mes y año del fabricante</p>
+                <div className="bg-sb-green-50 rounded-xl p-6 border-2 border-sb-green-200">
+                  <div className="flex justify-center mb-3">
+                    <svg className="w-10 h-10 text-sb-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <h3 className="font-bold text-gray-900 mb-2 text-center">Fecha exacta</h3>
+                  <p className="text-sm text-gray-700 text-center">Día, mes y año del fabricante</p>
                 </div>
-                <div className="bg-sb-teal-50 rounded-xl p-6 border-2 border-sb-teal-200 text-center">
-                  <div className="text-4xl mb-3">🥬</div>
-                  <h3 className="font-bold text-gray-900 mb-2">Sin fecha</h3>
-                  <p className="text-sm text-gray-700">Orden de recepción</p>
+                <div className="bg-sb-teal-50 rounded-xl p-6 border-2 border-sb-teal-200">
+                  <div className="flex justify-center mb-3">
+                    <svg className="w-10 h-10 text-sb-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+                    </svg>
+                  </div>
+                  <h3 className="font-bold text-gray-900 mb-2 text-center">Sin fecha</h3>
+                  <p className="text-sm text-gray-700 text-center">Orden de recepción</p>
                 </div>
-                <div className="bg-sb-green-50 rounded-xl p-6 border-2 border-sb-green-200 text-center">
-                  <div className="text-4xl mb-3">↔️</div>
-                  <h3 className="font-bold text-gray-900 mb-2">Al guardar</h3>
-                  <p className="text-sm text-gray-700">Antiguos al frente</p>
+                <div className="bg-sb-green-50 rounded-xl p-6 border-2 border-sb-green-200">
+                  <div className="flex justify-center mb-3">
+                    <svg className="w-10 h-10 text-sb-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                  </div>
+                  <h3 className="font-bold text-gray-900 mb-2 text-center">Al guardar</h3>
+                  <p className="text-sm text-gray-700 text-center">Antiguos al frente</p>
                 </div>
               </div>
             </div>
@@ -67,17 +79,16 @@ export default async function AlmacenamientoPage() {
 
           {/* Vida útil y cadena de frío */}
           <div className="bg-white rounded-3xl shadow-lg overflow-hidden">
-            <div className="bg-gradient-to-r from-sb-teal-600 to-sb-green-600 p-8 text-white">
+            <div className="bg-sb-teal-700 p-8 text-white">
               <h2 className="text-3xl font-bold">Vida Útil y Cadena de Frío</h2>
             </div>
             <div className="p-8 grid md:grid-cols-3 gap-6">
               {[
-                { title: 'Vida útil', desc: 'Tiempo durante el cual un producto sigue siendo seguro bajo condiciones específicas. Atención especial: verduras, frutas procesadas y lácteos.', icon: '⏰' },
-                { title: 'Vida útil secundaria', desc: 'Tiempo que un producto puede conservarse una vez abierto. Info del fabricante en tablas de cocina.', icon: '📋' },
-                { title: 'Cadena de frío', desc: 'Sistema continuo de refrigeración. Romperla afecta calidad, seguridad y duración.', icon: '❄️' }
+                { title: 'Vida útil', desc: 'Tiempo durante el cual un producto sigue siendo seguro bajo condiciones específicas. Atención especial: verduras, frutas procesadas y lácteos.' },
+                { title: 'Vida útil secundaria', desc: 'Tiempo que un producto puede conservarse una vez abierto. Info del fabricante en tablas de cocina.' },
+                { title: 'Cadena de frío', desc: 'Sistema continuo de refrigeración. Romperla afecta calidad, seguridad y duración.' }
               ].map((item, i) => (
-                <div key={i} className="bg-gray-50 rounded-xl p-6">
-                  <div className="text-4xl mb-3">{item.icon}</div>
+                <div key={i} className="bg-sb-green-50 rounded-xl p-6 border border-sb-green-200">
                   <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
                   <p className="text-sm text-gray-700">{item.desc}</p>
                 </div>
@@ -87,31 +98,30 @@ export default async function AlmacenamientoPage() {
 
           {/* Alimentos de alto riesgo */}
           <div className="bg-white rounded-3xl shadow-lg overflow-hidden">
-            <div className="bg-gradient-to-r from-red-600 to-orange-600 p-8 text-white">
+            <div className="bg-sb-green-700 p-8 text-white">
               <h2 className="text-3xl font-bold">Alimentos de Alto Riesgo</h2>
-              <p className="text-red-50">Deben mantenerse a temperatura para evitar bacterias o toxinas</p>
+              <p className="text-sb-green-50">Control estricto de temperatura y tiempo</p>
             </div>
             <div className="p-8">
               <div className="grid md:grid-cols-4 gap-4 mb-6">
                 {[
-                  { title: 'Carnes', items: 'Pavo, roast beef, pollo', color: 'red', icon: '🥩' },
-                  { title: 'Lácteos', items: 'Huevos, quesos, leche, yogurth', color: 'blue', icon: '🥛' },
-                  { title: 'Procesadas', items: 'Lechuga y espinaca picada', color: 'green', icon: '🥬' },
-                  { title: 'Dips', items: 'Aderezos, hummus, jocoque, sopas', color: 'orange', icon: '🥣' }
+                  { title: 'Carnes', items: 'Pavo, roast beef, pollo' },
+                  { title: 'Lácteos', items: 'Huevos, quesos, leche, yogurth' },
+                  { title: 'Procesadas', items: 'Lechuga y espinaca picada' },
+                  { title: 'Dips', items: 'Aderezos, hummus, jocoque, sopas' }
                 ].map((cat, i) => (
-                  <div key={i} className={`bg-${cat.color}-50 rounded-xl p-4 border-2 border-${cat.color}-200`}>
-                    <div className="text-3xl mb-2">{cat.icon}</div>
+                  <div key={i} className="bg-sb-teal-50 rounded-xl p-4 border-2 border-sb-teal-200">
                     <h4 className="font-bold text-gray-900 mb-1 text-sm">{cat.title}</h4>
                     <p className="text-xs text-gray-700">{cat.items}</p>
                   </div>
                 ))}
               </div>
               <div className="grid md:grid-cols-2 gap-4">
-                <div className="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-600">
-                  <strong className="text-blue-900">Temperatura objetivo:</strong> Temperatura óptima de almacenamiento
+                <div className="bg-sb-green-50 rounded-lg p-4 border-l-4 border-sb-green-700">
+                  <strong className="text-sb-green-900">Temperatura objetivo:</strong> Temperatura óptima de almacenamiento
                 </div>
-                <div className="bg-red-50 rounded-lg p-4 border-l-4 border-red-600">
-                  <strong className="text-red-900">Temperatura crítica:</strong> Requiere acciones inmediatas
+                <div className="bg-sb-teal-50 rounded-lg p-4 border-l-4 border-sb-teal-700">
+                  <strong className="text-sb-teal-900">Temperatura crítica:</strong> Requiere acciones inmediatas
                 </div>
               </div>
             </div>
@@ -119,26 +129,23 @@ export default async function AlmacenamientoPage() {
 
           {/* Recepción */}
           <div className="bg-white rounded-3xl shadow-lg overflow-hidden">
-            <div className="bg-gradient-to-r from-sb-green-600 to-sb-teal-600 p-8 text-white">
+            <div className="bg-sb-teal-700 p-8 text-white">
               <h2 className="text-3xl font-bold">Recepción de Productos</h2>
             </div>
             <div className="p-8">
-              <div className="bg-blue-600 rounded-2xl p-6 text-white mb-6">
+              <div className="bg-sb-green-700 rounded-2xl p-6 text-white mb-6">
                 <h3 className="text-xl font-bold mb-4">Estándares de Temperatura</h3>
                 <div className="grid md:grid-cols-3 gap-4">
-                  <div className="bg-white/20 rounded-lg p-4 text-center">
-                    <div className="text-2xl mb-2">🌡️</div>
-                    <p className="font-bold">Ambiente</p>
+                  <div className="bg-white/20 rounded-lg p-4">
+                    <p className="font-bold mb-1">Ambiente</p>
                     <p className="text-sm">18°C a 29°C</p>
                   </div>
-                  <div className="bg-white/20 rounded-lg p-4 text-center">
-                    <div className="text-2xl mb-2">❄️</div>
-                    <p className="font-bold">Refrigerados</p>
+                  <div className="bg-white/20 rounded-lg p-4">
+                    <p className="font-bold mb-1">Refrigerados</p>
                     <p className="text-sm">0°C a 5°C</p>
                   </div>
-                  <div className="bg-white/20 rounded-lg p-4 text-center">
-                    <div className="text-2xl mb-2">🧊</div>
-                    <p className="font-bold">Congelados</p>
+                  <div className="bg-white/20 rounded-lg p-4">
+                    <p className="font-bold mb-1">Congelados</p>
                     <p className="text-sm">-18°C a -23°C</p>
                   </div>
                 </div>
@@ -156,22 +163,22 @@ export default async function AlmacenamientoPage() {
 
               <h3 className="text-xl font-bold text-gray-900 mb-4">Durante y después de entrega:</h3>
               <div className="space-y-3 mb-6">
-                <div className="bg-sb-teal-50 rounded-lg p-4 border-l-4 border-sb-teal-600">
-                  <strong className="text-sb-teal-900">Factura:</strong> Verificar cantidades. Reportar discrepancias.
+                <div className="bg-sb-green-50 rounded-lg p-4 border-l-4 border-sb-green-700">
+                  <strong className="text-sb-green-900">Factura:</strong> Verificar cantidades. Reportar discrepancias.
                 </div>
-                <div className="bg-orange-50 rounded-lg p-4 border-l-4 border-orange-600">
-                  <strong className="text-orange-900">Empaque:</strong> Rechazar cajas rotas, sin sello o con plagas.
+                <div className="bg-sb-teal-50 rounded-lg p-4 border-l-4 border-sb-teal-700">
+                  <strong className="text-sb-teal-900">Empaque:</strong> Rechazar cajas rotas, sin sello o con plagas.
                 </div>
-                <div className="bg-purple-50 rounded-lg p-4 border-l-4 border-purple-600">
-                  <strong className="text-purple-900">Inspección visual:</strong> Congelados (sin cristales), Refrigerados (color, textura, olor), Ambiente (moho, plagas, latas dañadas).
+                <div className="bg-sb-green-50 rounded-lg p-4 border-l-4 border-sb-green-700">
+                  <strong className="text-sb-green-900">Inspección visual:</strong> Congelados (sin cristales), Refrigerados (color, textura, olor), Ambiente (moho, plagas, latas dañadas).
                 </div>
-                <div className="bg-red-50 rounded-lg p-4 border-l-4 border-red-600">
-                  <strong className="text-red-900">Fecha caducidad:</strong> Rechazar vencidos o con poca vida útil.
+                <div className="bg-sb-teal-50 rounded-lg p-4 border-l-4 border-sb-teal-700">
+                  <strong className="text-sb-teal-900">Fecha caducidad:</strong> Rechazar vencidos o con poca vida útil.
                 </div>
               </div>
 
-              <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-6 border-2 border-blue-300">
-                <h4 className="font-bold text-blue-900 mb-3">Control de temperatura en recepción:</h4>
+              <div className="bg-sb-teal-50 rounded-xl p-6 border-2 border-sb-teal-200">
+                <h4 className="font-bold text-sb-teal-900 mb-3">Control de temperatura en recepción:</h4>
                 <ul className="space-y-2 text-sm text-gray-800">
                   <li>• Refrigerados: recibirse entre 0°C y 5°C</li>
                   <li>• Congelados: recibirse entre -18°C y -23°C</li>
@@ -184,43 +191,43 @@ export default async function AlmacenamientoPage() {
 
           {/* Temperaturas críticas */}
           <div className="bg-white rounded-3xl shadow-lg overflow-hidden">
-            <div className="bg-gradient-to-r from-red-600 to-orange-600 p-8 text-white">
+            <div className="bg-sb-green-700 p-8 text-white">
               <h2 className="text-3xl font-bold">Temperaturas Críticas y Flujos de Aceptación</h2>
             </div>
             <div className="p-8">
               <div className="grid md:grid-cols-2 gap-6 mb-6">
-                <div className="bg-blue-50 rounded-xl p-6 border-2 border-blue-200">
-                  <h3 className="text-lg font-bold text-blue-900 mb-4">🧊 Congelados</h3>
+                <div className="bg-sb-green-50 rounded-xl p-6 border-2 border-sb-green-200">
+                  <h3 className="text-lg font-bold text-sb-green-900 mb-4">Congelados</h3>
                   <div className="space-y-2 text-sm">
                     <div className="bg-white rounded-lg p-3">
-                      <strong className="text-green-700">Estándar:</strong> -18°C a -23°C
+                      <strong className="text-sb-green-700">Éstandar:</strong> -18°C a -23°C
                     </div>
                     <div className="bg-white rounded-lg p-3">
-                      <strong className="text-orange-700">Aceptable:</strong> -15°C a -23°C
+                      <strong className="text-sb-teal-700">Aceptable:</strong> -15°C a -23°C
                     </div>
                     <div className="bg-white rounded-lg p-3">
-                      <strong className="text-red-700">Inaceptable:</strong> {'>'} -15°C
+                      <strong className="text-gray-700">Inaceptable:</strong> {'>'} -15°C
                     </div>
                   </div>
-                  <div className="mt-4 bg-blue-100 rounded-lg p-4 text-xs">
+                  <div className="mt-4 bg-sb-green-100 rounded-lg p-4 text-xs">
                     <strong>Flujo:</strong> Aceptar si temp entre bolsas: -18°C a -23°C. Si supera -15°C, abrir bolsa y medir directamente. Rechazar si {'>'} -15°C.
                   </div>
                 </div>
 
-                <div className="bg-green-50 rounded-xl p-6 border-2 border-green-200">
-                  <h3 className="text-lg font-bold text-green-900 mb-4">❄️ Refrigerados</h3>
+                <div className="bg-sb-teal-50 rounded-xl p-6 border-2 border-sb-teal-200">
+                  <h3 className="text-lg font-bold text-sb-teal-900 mb-4">Refrigerados</h3>
                   <div className="space-y-2 text-sm">
                     <div className="bg-white rounded-lg p-3">
-                      <strong className="text-green-700">Estándar:</strong> 0°C a 5°C
+                      <strong className="text-sb-green-700">Éstandar:</strong> 0°C a 5°C
                     </div>
                     <div className="bg-white rounded-lg p-3">
-                      <strong className="text-orange-700">Aceptable:</strong> 0°C a 7°C
+                      <strong className="text-sb-teal-700">Aceptable:</strong> 0°C a 7°C
                     </div>
                     <div className="bg-white rounded-lg p-3">
-                      <strong className="text-red-700">Inaceptable:</strong> {'>'} 7°C
+                      <strong className="text-gray-700">Inaceptable:</strong> {'>'} 7°C
                     </div>
                   </div>
-                  <div className="mt-4 bg-green-100 rounded-lg p-4 text-xs">
+                  <div className="mt-4 bg-sb-teal-100 rounded-lg p-4 text-xs">
                     <strong>Flujo:</strong> Aceptar si temp: 0°C a 5°C. Si supera 5°C, medir directamente. Aceptar si 0°C a 7°C. Rechazar si {'>'} 7°C.
                   </div>
                 </div>
@@ -230,7 +237,7 @@ export default async function AlmacenamientoPage() {
 
           {/* Almacenamiento */}
           <div className="bg-white rounded-3xl shadow-lg overflow-hidden">
-            <div className="bg-gradient-to-r from-sb-teal-700 to-sb-green-700 p-8 text-white">
+            <div className="bg-sb-teal-700 p-8 text-white">
               <h2 className="text-3xl font-bold">Almacenamiento</h2>
             </div>
             <div className="p-8">
@@ -244,7 +251,7 @@ export default async function AlmacenamientoPage() {
                 </ul>
               </div>
 
-              <div className="bg-blue-600 rounded-xl p-6 text-white mb-6">
+              <div className="bg-sb-green-700 rounded-xl p-6 text-white mb-6">
                 <h3 className="text-xl font-bold mb-3">Estándares de temperatura en almacenamiento:</h3>
                 <div className="grid md:grid-cols-3 gap-4">
                   <div className="bg-white/20 rounded-lg p-3 text-center">
@@ -264,8 +271,8 @@ export default async function AlmacenamientoPage() {
 
               <h3 className="text-xl font-bold text-gray-900 mb-4">Falla en equipos:</h3>
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-red-50 rounded-xl p-6 border-2 border-red-200">
-                  <h4 className="font-bold text-red-900 mb-3">🔴 Refrigerador</h4>
+                <div className="bg-sb-green-50 rounded-xl p-6 border-2 border-sb-green-200">
+                  <h4 className="font-bold text-sb-green-900 mb-3">Refrigerador</h4>
                   <div className="space-y-3 text-sm text-gray-800">
                     <p>Si aire {'>'} 4°C pero producto {'<'} 7°C: Mover alimentos de alto riesgo a otro refrigerador.</p>
                     <p><strong>Si alimentos {'>'} 7°C: DESECHAR</strong></p>
@@ -273,8 +280,8 @@ export default async function AlmacenamientoPage() {
                   </div>
                 </div>
 
-                <div className="bg-blue-50 rounded-xl p-6 border-2 border-blue-200">
-                  <h4 className="font-bold text-blue-900 mb-3">🔵 Congelador</h4>
+                <div className="bg-sb-teal-50 rounded-xl p-6 border-2 border-sb-teal-200">
+                  <h4 className="font-bold text-sb-teal-900 mb-3">Congelador</h4>
                   <div className="space-y-3 text-sm text-gray-800">
                     <p>Si aire {'>'} -18°C pero producto {'<'} -15°C: Trasladar a otro congelador.</p>
                     <p><strong>Si {'>'} -15°C: usar inmediatamente o desechar</strong></p>
@@ -287,7 +294,7 @@ export default async function AlmacenamientoPage() {
 
           {/* Reglas generales */}
           <div className="bg-white rounded-3xl shadow-lg overflow-hidden">
-            <div className="bg-gradient-to-r from-sb-green-700 to-sb-teal-700 p-8 text-white">
+            <div className="bg-sb-green-700 p-8 text-white">
               <h2 className="text-3xl font-bold">Reglas Generales de Almacenamiento</h2>
             </div>
             <div className="p-8">
@@ -316,7 +323,7 @@ export default async function AlmacenamientoPage() {
               </div>
 
               <h3 className="text-xl font-bold text-gray-900 mb-4">Reglas específicas para refrigeración y congelación:</h3>
-              <div className="bg-blue-50 rounded-xl p-6 border-2 border-blue-200">
+              <div className="bg-sb-teal-50 rounded-xl p-6 border-2 border-sb-teal-200">
                 <ul className="space-y-2 text-sm text-gray-800">
                   <li>• Productos a 5 cm de las paredes (circulación de aire)</li>
                   <li>• Al menos 5 cm entre productos (enfriamiento uniforme)</li>
@@ -333,12 +340,12 @@ export default async function AlmacenamientoPage() {
 
           {/* Alertas Operativas */}
           <div className="bg-white rounded-3xl shadow-lg overflow-hidden">
-            <div className="bg-gradient-to-r from-gray-700 to-gray-600 p-8 text-white">
+            <div className="bg-sb-teal-700 p-8 text-white">
               <h2 className="text-3xl font-bold">Alertas Operativas</h2>
-              <p className="text-gray-100">Documentación de procesos y procedimientos</p>
+              <p className="text-sb-teal-50">Documentación de procesos y procedimientos</p>
             </div>
             <div className="p-8">
-              <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-6 mb-6 border-l-4 border-gray-700">
+              <div className="bg-sb-green-50 rounded-xl p-6 mb-6 border-l-4 border-sb-green-700">
                 <p className="text-gray-800 text-lg mb-4">
                   Una <strong>Alerta Operativa</strong> es un documento creado para registrar procesos y procedimientos específicos dentro de las sucursales de SALAD BOWL. Es una hoja informativa que ofrece una visión rápida y clara sobre cómo realizar una tarea, utilizando texto, íconos e imágenes.
                 </p>
@@ -350,17 +357,16 @@ export default async function AlmacenamientoPage() {
               <h3 className="text-xl font-bold text-gray-900 mb-4">Elementos esenciales de toda Alerta Operativa:</h3>
               <div className="grid md:grid-cols-3 gap-4">
                 {[
-                  { num: '1', title: 'Información general', desc: 'Estándares clave', icon: '📋' },
-                  { num: '2', title: 'Herramientas', desc: 'Equipos requeridos (si aplica)', icon: '🔧' },
-                  { num: '3', title: 'Procedimiento', desc: 'Pasos detallados', icon: '📝' }
+                  { num: '1', title: 'Información general', desc: 'Estándares clave' },
+                  { num: '2', title: 'Herramientas', desc: 'Equipos requeridos (si aplica)' },
+                  { num: '3', title: 'Procedimiento', desc: 'Pasos detallados' }
                 ].map((item, i) => (
-                  <div key={i} className="bg-gray-50 rounded-xl p-6 border-2 border-gray-200 text-center">
-                    <div className="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-3 text-white font-black">
+                  <div key={i} className="bg-sb-green-50 rounded-xl p-6 border-2 border-sb-green-200">
+                    <div className="w-12 h-12 bg-sb-green-700 rounded-full flex items-center justify-center mx-auto mb-3 text-white font-black">
                       {item.num}
                     </div>
-                    <div className="text-3xl mb-2">{item.icon}</div>
-                    <h4 className="font-bold text-gray-900 mb-1">{item.title}</h4>
-                    <p className="text-sm text-gray-600">{item.desc}</p>
+                    <h4 className="font-bold text-gray-900 mb-2">{item.title}</h4>
+                    <p className="text-sm text-gray-700">{item.desc}</p>
                   </div>
                 ))}
               </div>

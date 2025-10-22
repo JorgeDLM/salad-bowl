@@ -14,12 +14,16 @@ export default function FranquiciasPage() {
 
   const [showToast, setShowToast] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Enviar por WhatsApp
+    const contactRes = await fetch('/api/contacts?type=FRANCHISE');
+    const contactData = await contactRes.json();
+    const phoneWhatsApp = contactData.contact?.phoneWhatsApp || '522222996191';
+    
     const mensaje = `Hola! Me interesa una franquicia de Salad Bowl.\n\nNombre: ${formData.nombre}\nMensaje: ${formData.mensaje}`;
-    const whatsappUrl = `https://wa.me/5212222996191?text=${encodeURIComponent(mensaje)}`;
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneWhatsApp}&text=${encodeURIComponent(mensaje)}`;
     window.open(whatsappUrl, '_blank');
     
     setShowToast(true);

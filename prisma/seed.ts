@@ -31,11 +31,14 @@ async function main() {
     update: {},
     create: {
       franchiseeId: null, // Corporativa
-      name: 'Plaza Vía San Ángel',
+      name: 'Vía San Ángel',
+      plaza: 'Plaza Vía San Ángel',
       contactPhone: '2222252125',
       address: 'Blvd. Atlixcáyotl 1405, Local B 5, Reserva Territorial Atlixcáyotl, 72192 San Bernardino Tlaxcalancingo, Pue.',
+      mapsUrl: 'https://www.google.com/maps?q=Plaza+Via+San+Angel+Puebla',
       latitude: 19.0414398,
       longitude: -98.2062727,
+      status: 'OPEN',
       isActive: true,
       openingHours: {
         mon: { open: '09:00', close: '20:30' },
@@ -56,10 +59,13 @@ async function main() {
     create: {
       franchiseeId: null, // Corporativa
       name: 'Zavaleta',
+      plaza: 'Plaza Office Depot',
       contactPhone: '2221695444',
       address: 'Calz Zavaleta 3916, Sta Cruz Buenavista, 72150 Heroica Puebla de Zaragoza, Pue.',
+      mapsUrl: 'https://www.google.com/maps?q=Zavaleta+Salad+Bowl+Puebla',
       latitude: 19.0252,
       longitude: -98.2435,
+      status: 'OPEN',
       isActive: true,
       openingHours: {
         mon: { open: '11:00', close: '20:00' },
@@ -80,10 +86,13 @@ async function main() {
     create: {
       franchiseeId: null, // Corporativa
       name: 'Lomas de Angelópolis',
-      contactPhone: null, // Sin teléfono
+      plaza: null,
+      contactPhone: null,
       address: 'Blvd. los Reyes 6201, Lomas de Angelópolis, 72830 San Bernardino Tlaxcalancingo, Pue.',
+      mapsUrl: 'https://www.google.com/maps?q=Lomas+de+Angelopolis+Salad+Bowl',
       latitude: 19.0589,
       longitude: -98.2837,
+      status: 'OPEN',
       isActive: true,
       openingHours: {
         mon: { open: '09:00', close: '20:30' },
@@ -97,6 +106,44 @@ async function main() {
     },
   });
   console.log('✅ Sucursal creada:', lomas.name);
+
+  const laPaz = await prisma.branch.upsert({
+    where: { id: 4 },
+    update: {},
+    create: {
+      franchiseeId: null, // Corporativa
+      name: 'La Paz',
+      plaza: null,
+      contactPhone: null,
+      address: 'San Martin Texmelucan esquina con 3 poniente, La Paz, 72160 Heroica Puebla de Zaragoza, Pue.',
+      mapsUrl: 'https://www.google.com/maps?q=La+Paz+Puebla',
+      latitude: null,
+      longitude: null,
+      status: 'COMING_SOON',
+      isActive: false,
+      openingHours: null,
+    },
+  });
+  console.log('✅ Sucursal creada:', laPaz.name);
+
+  const sanAntonio = await prisma.branch.upsert({
+    where: { id: 5 },
+    update: {},
+    create: {
+      franchiseeId: null, // Corporativa
+      name: 'San Antonio',
+      plaza: null,
+      contactPhone: null,
+      address: '115 N Loop 1604 E #2100, San Antonio, TX 78232, Estados Unidos',
+      mapsUrl: 'https://www.google.com/maps?q=115+N+Loop+1604+E+2100+San+Antonio+TX',
+      latitude: null,
+      longitude: null,
+      status: 'COMING_SOON',
+      isActive: false,
+      openingHours: null,
+    },
+  });
+  console.log('✅ Sucursal creada:', sanAntonio.name);
 
   // Crear Franquiciatario de Ejemplo
   const franchisee = await prisma.franchisee.upsert({
@@ -169,6 +216,23 @@ async function main() {
     },
   });
   console.log('✅ Empleado Lomas creado:', employeeLomas.email);
+
+  // Crear Contactos Globales
+  const contactTypes = [
+    { type: 'GENERAL', email: 'hola@saladbowl.mx', phone: '2222996191', phoneFormatted: '(222) 299-6191', phoneWhatsApp: '522222996191' },
+    { type: 'LEGAL', email: 'legal@saladbowl.mx', phone: '2222996191', phoneFormatted: '(222) 299-6191', phoneWhatsApp: '522222996191' },
+    { type: 'FRANCHISE', email: 'franquicias@saladbowl.mx', phone: '2222996191', phoneFormatted: '(222) 299-6191', phoneWhatsApp: '522222996191' },
+    { type: 'SALES', email: 'ventas@saladbowl.mx', phone: '2222996191', phoneFormatted: '(222) 299-6191', phoneWhatsApp: '522222996191' },
+  ];
+
+  for (const contact of contactTypes) {
+    await prisma.contactInfo.upsert({
+      where: { type: contact.type as any },
+      update: {},
+      create: contact as any,
+    });
+  }
+  console.log('✅ Contactos globales creados');
 
   // Crear Categorías de Guías
   const categories = [
