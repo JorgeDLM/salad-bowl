@@ -53,31 +53,31 @@ export async function PUT(
       }
     }
 
-    // Verificar que el email no esté en uso por otro usuario
-    if (email !== targetUser.email) {
-      const existingUser = await prisma.user.findUnique({
-        where: { email },
-      });
+    // Usar transacción para garantizar atomicidad
+    const updatedUser = await prisma.$transaction(async (tx) => {
+      // Verificar que el email no esté en uso por otro usuario
+      if (email !== targetUser.email) {
+        const existingUser = await tx.user.findUnique({
+          where: { email },
+        });
 
-      if (existingUser && existingUser.id !== userId) {
-        return NextResponse.json(
-          { error: 'El email ya está en uso' },
-          { status: 400 }
-        );
+        if (existingUser && existingUser.id !== userId) {
+          throw new Error('El email ya está en uso');
+        }
       }
-    }
 
-    // Actualizar usuario
-    const updatedUser = await prisma.user.update({
-      where: { id: userId },
-      data: {
-        email,
-        username: username || null,
-        role,
-        isActive,
-        franchiseeId: franchiseeId || null,
-        branchId: branchId || null,
-      },
+      // Actualizar usuario
+      return await tx.user.update({
+        where: { id: userId },
+        data: {
+          email,
+          username: username || null,
+          role,
+          isActive,
+          franchiseeId: franchiseeId || null,
+          branchId: branchId || null,
+        },
+      });
     });
 
     return NextResponse.json(
